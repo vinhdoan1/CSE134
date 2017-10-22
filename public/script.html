@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Script</title>
+</head>
+<body>
+  <h1>Counting Cats and Kittens</h1>
+  <p id="fullText"></p>
+  <canvas id="myCanvas" height="200" width="400">
+  Your browser does not support the canvas element.
+  </canvas>
+  <p id="catCount"></p>
+  <p id="kittenCount"></p>
+  <noscript>
+    No script enabled so you cannot count cats nor kittens :(
+  </noscript>
+
+  <script>
+    // Cat Count
+    var catCount = 0;
+    var kittenCount = 0;
+    var final = "";
+    for (var i = 0; i < 100; i++) {
+      if (Math.random() < .5) {
+        final += "CATS ";
+        catCount++;
+      } else {
+        final += "KITTENS "
+        kittenCount++;
+      }
+    }
+    document.getElementById("fullText").innerHTML = final;
+    document.getElementById("catCount").innerHTML = "Cats: " + catCount;
+    document.getElementById("kittenCount").innerHTML = "Kittens: " + kittenCount;
+
+    // Canvas
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#404040";
+    ctx.fillRect(75,40,200,100);
+    ctx.fillRect(75,140,20,30);
+    ctx.fillRect(225,140,20,30);
+    ctx.fillRect(105,140,20,20);
+    ctx.fillRect(255,140,20,20);
+    ctx.fillRect(275,45,50,20);
+    ctx.fillStyle = "#323232";
+    ctx.fillRect(0,20,150,80);
+    ctx.fillRect(0,0,20,20);
+    ctx.fillRect(130,0,20,20);
+    ctx.fillStyle = "#FFDC00";
+    ctx.fillRect(30,40,10,10);
+    ctx.fillRect(80,40,10,10);
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(55,60,10,10);
+    ctx.fillRect(70,60,30,2);
+    ctx.fillRect(70,70,30,2);
+    ctx.fillRect(20,60,30,2);
+    ctx.fillRect(20,70,30,2);
+  </script>
+</body>
+</html>
