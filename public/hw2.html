@@ -2,90 +2,105 @@
 <html lang="en">
 <head>
   <title>HW 2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/homepage.css">
 </head>
 <body>
-  <h1>CSE 134B: HW 2</h1>
-  <h3>Links</h3>
-  <ul>
-    <li><a href="./SectionsStyleMetadata.html">Sections, Style and Meta Data</a></li>
-    <li><a href="./GroupingElements.html">Grouping Elements</a></li>
-    <li><a href="./TextLevelElements.html">Text Level Elements</a></li>
-    <li><a href="./EditingElements.html">Editing Elements</a></li>
-    <li><a href="./EmbeddedContent.html">Embedded Content</a></li>
-    <li><a href="./Links.html">Links</a></li>
-    <li><a href="./Tables.html">Tables</a></li>
-    <li>Forms:
-      <ul>
-        <li><a href="./formsGET.html">Forms (GET)</a></li>
-        <li><a href="./formsPOST.html">Forms (POST)</a></li>
+  <h1>CSE 134B: Jeff Evans Fan Club</h1>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">LINKS:</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./index.html">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="">HW 2</a>
+        </li>
       </ul>
-    </li>
-    <li><a href="./script.html">Script</a></li>
-    <li><a href="./GlobalAttributes.html">Global Attributes</a></li>
-    <li><a href="./EventAttributes.html">Event Attributes</a></li>
-    <li><a href="./Other.html">Other Tags</a></li>
-    <li><a href="./">Team Page</a></li>
-  </ul>
-
-  <h3>10 Findings:</h3>
-  <ol>
-    <li>There are so many ways to embed a video. Before, using the &ltobject&gt tag was the way to embed videos. But now, using iframe is the more preferred way since it lets the browser determine what player to use instead of checking for a plugin (e.g. Flash)</li>
-    <li>The usage for the &lthr&gt tag changed between HTML 4 and HTML 5. In HTML 4, it was used as a generic horizonal rule. However, in HTML 5, it is mainly used to represent thematic breaks between paragraphs or sections of a chapter. </li>
-    <li>Many tags for formatting were deprecated in favor of using style sheets to achieve the same results since style sheets can offer more flexibility and functionality. Most of the "other tags" I found were these types of tags.</li>
-    <li>oninvalid is not supported on safari</li>
-    <li>onmousewheel is deprecated</li>
-    <li>onerror overrides the onsubmit on chrome</li>
-    <li>onmouseleave and onmouseout look like are consolidated into onmouseout</li>
-    <li>bdi element is not supported in all browsers</li>
-    <li>Firefox and Safari don't have added support for special form inputs such as Date and Time. Chrome give you a nice guide for them.</li>
-    <li>GET requests contain all data publically in the URL.</li>
-  </ol>
-
-  <h3>Validated Links:</h3>
-  <ul>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FSectionsStyleMetadata.html">Sections, Style and Meta Data</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FGroupingElements.html">Grouping Elements</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FTextLevelElements.html">Text Level Elements</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEditingElements.html">Editing Elements</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEmbeddedContent.html">Embedded Content</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FLinks.html">Links</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FTables.html">Tables</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FformsGET.html">Forms (GET)</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FformsPOST.html">Forms (POST)</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2Fscript.html">Scripts</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FGlobalAttributes.html">Global Attributes</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEventAttributes.html">Event Attributes</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FOther.html">Other Tags</a>
-    </li>
-    <li>
-      <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2F">Team Page</a>
-    </li>
-  </ul>
-
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>HW 2</h2>
+          <p>
+            In this homework we explore the HTML specification to get a sense of what is available to us. We will make simple valid tests and experiments with every tag we can find in the specification. While our testing cannot exercise every possible use case for tags adequate tests should exercise base function and give us a sense of what is possible.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Links</h2>
+          <ul>
+            <li><a href="./SectionsStyleMetadata.html">Sections, Style and Meta Data</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FSectionsStyleMetadata.html">Validator</a></li>
+            <li><a href="./GroupingElements.html">Grouping Elements</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FGroupingElements.html">Validator</a></li>
+            <li><a href="./TextLevelElements.html">Text Level Elements</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FTextLevelElements.html">Validator</a></li>
+            <li><a href="./EditingElements.html">Editing Elements</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEditingElements.html">Validator</a></li>
+            <li><a href="./EmbeddedContent.html">Embedded Content</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEmbeddedContent.html">Validator</a></li>
+            <li><a href="./Links.html">Links</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FLinks.html">Validator</a></li>
+            <li><a href="./Tables.html">Tables</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FTables.html">Validator</a></li>
+            <li>Forms:
+              <ul>
+                <li><a href="./formsGET.html">Forms (GET)</a> |
+                  <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FformsGET.html">Validator</a></li>
+                <li><a href="./formsPOST.html">Forms (POST)</a> |
+                  <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FformsPOST.html">Validator</a></li>
+              </ul>
+            </li>
+            <li><a href="./script.html">Script</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2Fscript.html">Validator</a></li>
+            <li><a href="./GlobalAttributes.html">Global Attributes</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FGlobalAttributes.html">Validator</a></li>
+            <li><a href="./EventAttributes.html">Event Attributes</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FEventAttributes.html">Validator</a></li>
+            <li><a href="./Other.html">Other Tags</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2FOther.html">Validator</a></li>
+            <li><a href="./">Team Page</a> |
+              <a class="validator-link" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse134-bfd99.firebaseapp.com%2F">Validator</a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>10 Findings:</h2>
+          <ol>
+            <li>There are so many ways to embed a video. Before, using the &ltobject&gt tag was the way to embed videos. But now, using iframe is the more preferred way since it lets the browser determine what player to use instead of checking for a plugin (e.g. Flash)</li>
+            <li>The usage for the &lthr&gt tag changed between HTML 4 and HTML 5. In HTML 4, it was used as a generic horizonal rule. However, in HTML 5, it is mainly used to represent thematic breaks between paragraphs or sections of a chapter. </li>
+            <li>Many tags for formatting were deprecated in favor of using style sheets to achieve the same results since style sheets can offer more flexibility and functionality. Most of the "other tags" I found were these types of tags.</li>
+            <li>oninvalid is not supported on safari</li>
+            <li>onmousewheel is deprecated</li>
+            <li>onerror overrides the onsubmit on chrome</li>
+            <li>onmouseleave and onmouseout look like are consolidated into onmouseout</li>
+            <li>bdi element is not supported in all browsers</li>
+            <li>Firefox and Safari don't have added support for special form inputs such as Date and Time. Chrome give you a nice guide for them.</li>
+            <li>GET requests contain all data publically in the URL.</li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
