@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Asap|Slabo+27px');
+
+body {
+    background-color: #74AFAD;
+    color: #ECECEA;
+    font-family: 'Asap', sans-serif;
+}
+
+h1 {
+  color: #ECECEA;
+  font-family: 'Slabo 27px', serif;
+  font-size: 60px;
+  text-align:center;
+  margin-top: 20px;
+}
+
+article {
+  background-color: #558C89;
+  height: 120px;
+  width: 300px;
+}
+article h2 {
+  border-bottom: 2px solid;
+  border-color: #ECECEA;
+  font-size: 30px;
+  margin-left: 15px;
+}
+
+nav {
+  background-color: #D9853B;
+  margin-bottom: 20px;
+}
+
+.face-picture img{
+  border-radius: 50px 50px 0px 0px;
+  height: 300px;
+  width: 300px;
+}
+
+.full-bio {
+  text-align: center;
+}
+
+.full-bio article {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
