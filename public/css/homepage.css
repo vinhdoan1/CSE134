@@ -40,6 +40,8 @@ color: #B26928;
 
 article {
   background-color: #558C89;
+  margin-bottom: 10px;
+  padding-bottom: 1px;
 }
 
 article h2 {
