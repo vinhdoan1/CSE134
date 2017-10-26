@@ -1,50 +1,62 @@
 /* Hint: use relative measurements you'll find them useful! */
 /* I may have removed a selector or two */
 
-@import url();  /* Set this for Monton a Google Font ...figure out their syntax */
+@import url('https://fonts.googleapis.com/css?family=Monoton');  /* Set this for Monton a Google Font ...figure out their syntax */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+  background-image: url("background.png");
 }
 
 main {
+  background-color: white;
+  border: 20px solid transparent;
+  padding: 3rem;
+  margin: 2.8rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  -webkit-border-image: url("border.gif") 20 round; /* Safari 3.1-5 */
+  -o-border-image: url("border.gif") 20 round; /* Opera 11-12.1 */
+  border-image: url("border.gif") 20 round;
 }
 header {
 }
 section {
 	/* color rgb(243,234,95) is used */
-
 }
 section > div {
     /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
-    
-    
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    text-transform: lowercase;
+
 }
-section > aNastyNthChildSelectorToWrite {
+section > div > div{
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
 	/* background color is  rgb(192,77,249) */
-	
-    
+  background-color: rgb(192,77,249);
+
 }
-section > aNastyNthChildSelectorToWrite {
+section > div > div {
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
     /* background color is  rgb(43,209,252) */
+    background-color: rgb(43,209,252);
 
 }
 section > div:nth-child(3):after {
 	/* gave you the nth child after selector for free to inspire you */
 	/* generated content in here ... a property can do that */
+  background-color: rgb(192,77,249)
 	}
-	
+
 	/* some free rules for fun */
 aside {
     background: rgb(255,63,63);
     color: white;
     border: 1rem solid black;
-    border-top-left-radius: 1rem;
+    border-radius: 1rem 2rem 1rem 2rem;
     /* rem units are your friend use them often */
 
     font-family: sans-serif;
@@ -53,9 +65,56 @@ aside {
     text-align: center;
 }
 
-
 /* Oh no! The file has been truncated I guess you have to fill it in */
 
+a.logo {
+   border-radius: 50%;
+  background-color: #EC4CC1;
+  color: black;
+  font-family: 'Monoton', cursive;
+  font-size: 5rem;
+  text-decoration: none;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-shadow: .2rem .2rem 1rem black;
+  margin-top: 2rem;
+}
+
+section#zap {
+  background-color: #F3E86A;
+  border: .5rem solid;
+  border-style: double;
+  border-radius: .5rem;
+  color: white;
+  text-shadow: 0 .05rem .1rem black;
+  height: 6rem;
+}
+
+section #zap h3 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+section#zap span{
+  font-size: 2.5rem;
+}
+
+section#zap img{
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+footer {
+  background-color: #EC4CC1;
+}
+
+footer img{
+  width: 6rem;
+  padding: 0;
+}
 /* Solution given should
    be below 250 lines, the solution we had was
    below 200 easily formatted */
