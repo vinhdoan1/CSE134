@@ -33,19 +33,19 @@ section > div {
     text-transform: lowercase;
 
 }
-section > div > div{
+section > div + div{
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
 	/* background color is  rgb(192,77,249) */
   background-color: rgb(192,77,249);
 
 }
-section > div > div {
+section > div + div + div {
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
     /* background color is  rgb(43,209,252) */
     background-color: rgb(43,209,252);
 
 }
-section > div:nth-child(3):after {
+section > div:nth-child(3):after{
 	/* gave you the nth child after selector for free to inspire you */
 	/* generated content in here ... a property can do that */
   background-color: rgb(192,77,249)
@@ -114,6 +114,15 @@ footer {
 footer img{
   width: 6rem;
   padding: 0;
+}
+
+.fun {
+  margin-top: 2rem;
+  font-size: 5rem;
+  text-shadow: 0 .1rem .3rem red, -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
 }
 /* Solution given should
    be below 250 lines, the solution we had was
