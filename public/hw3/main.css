@@ -14,7 +14,7 @@ body {
 main {
   background-color: white;
   border: 20px solid transparent;
-  margin: 4rem 2.8rem 4rem 2.8rem;
+  margin: 6rem 3em 6rem 3rem;
   -webkit-border-image: url("border.gif") 20 round; /* Safari 3.1-5 */
   -o-border-image: url("border.gif") 20 round; /* Opera 11-12.1 */
   border-image: url("border.gif") 20 round;
@@ -26,6 +26,18 @@ main {
 
 header {
   margin: 3rem 2rem 0 2rem;
+}
+
+header a.logo {
+  border-radius: 50%;
+  background-color: #f449bb;
+  color: black;
+  font-family: 'Monoton', cursive;
+  font-size: 3rem;
+  text-decoration: none;
+  padding: .8rem 1.5rem .8rem 1.5rem;
+  box-shadow: .2rem .2rem 1rem black;
+  margin: 2rem 0 0 0;
 }
 
 header .fun {
@@ -97,18 +109,6 @@ aside svg{
 
 /* Oh no! The file has been truncated I guess you have to fill it in */
 
-a.logo {
-  border-radius: 50%;
-  background-color: #EC4CC1;
-  color: black;
-  font-family: 'Monoton', cursive;
-  font-size: 3rem;
-  text-decoration: none;
-  padding: .8rem 1.5rem .8rem 1.5rem;
-  box-shadow: .2rem .2rem 1rem black;
-  margin: 2rem 0 0 0;
-}
-
 section#zap {
   text-align: center;
   background-color: #F3E86A;
@@ -118,7 +118,7 @@ section#zap {
   color: white;
   text-shadow: 0 .05rem .1rem black;
   margin: 1rem 2rem 1rem 2rem;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 1rem 0 1rem 0;
   font-size: 1.5rem;
 }
 
@@ -128,7 +128,7 @@ section#zap h3 {
 }
 
 section#zap span{
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 section#zap img{
@@ -148,7 +148,7 @@ footer {
 footer .wrapper span {
   border: 0.3rem solid black;
   border-radius: 0.4rem;
-  padding: .6rem .4rem .6rem .4rem;
+  padding: .4rem .3rem .4rem .3rem;
   margin: 0 0 0 0.5rem;
   display: inline-block;
   vertical-align: top;
