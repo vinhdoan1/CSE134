@@ -26,30 +26,35 @@ header {
 }
 section {
 	/* color rgb(243,234,95) is used */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 section > div {
-    /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    text-transform: lowercase;
-
+  /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  text-transform: lowercase;
+  background-color: rgb(192,77,249);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.5rem;
 }
 section > div + div{
-	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
-	/* background color is  rgb(192,77,249) */
-  background-color: rgb(192,77,249);
-
+  background-color: rgb(43,209,252);
+  order: -1;
 }
 section > div + div + div {
-	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
-    /* background color is  rgb(43,209,252) */
-    background-color: rgb(43,209,252);
-
+  background-color: rgb(192,77,249);
+  order: -2;
 }
 section > div:nth-child(3):after{
-	/* gave you the nth child after selector for free to inspire you */
-	/* generated content in here ... a property can do that */
-  background-color: rgb(192,77,249)
-	}
+  content: " ♥♥♥";
+}
+section > div:nth-child(4){
+  background-color: rgb(43,209,252);
+  order: -3;
+}
 
 	/* some free rules for fun */
 aside {
