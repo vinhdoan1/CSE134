@@ -1,1 +1,22 @@
-<!--FOR THE VANILLA VERSION-->
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta harset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+</head>
+<body>
+  <div id="logincontainer">
+      <h1 id="loginlogo">TeamWatch</h1> 
+      <img src="images/soccerball.png" alt="TeamWatch Logo">
+      <form id="loginform" name="loginform" action="dashboard.html">
+          <input type="text" id="username" class="logininput" placeholder="Username"/>
+          <input type="password" id="password" class="logininput" placeholder="Password"/>
+          <input type="button" class="loginbutton" value="Log In" onclick="window.location='dashboard.html';"/>
+          <input type="button" class="loginbutton" value="Sign Up" onclick="window.location='signup.html';"/>
+      </form>
+  </div>
+</body>
+</html>
