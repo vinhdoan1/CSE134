@@ -12,15 +12,14 @@
 <body>
   <div class="d-flex align-items-center" style="height:100%">
     <div class="mx-auto text-center">
-      <h1 class="roboto">TeamWatch</h1>
-      <img id="logoimg" class="my-2 img-responsive" src="images/soccerball.png" alt="TeamWatch Logo">
-      <form>
-        <input type="text" id="username" class="my-2 form-control logininput" placeholder="Username"/>
-        <input type="password" id="password" class="my-2 form-control logininput" placeholder="Password"/>
-        <button type="button" class="my-2 d-block btn btn-primary logininput" onclick="window.location='dashboard.html';">Login</button>
-        <button type="button" class="my-2 d-block btn btn-primary logininput" onclick="window.location='signup.html';">Sign Up </button>
-      </form>
+      <h1 class="roboto">Sign Up</h1>
+      <h4>Enter your team's name:</h4>
+      <input type="text" class="mx-auto form-control teaminput" placeholder="Team Name"/>
+      <input class="mx-auto py-2 form-control-file teaminput" type="file"/>
+      <div class="mx-auto border border-dark teamimgcontainer">
+        <img src="images/pig.png" class="img-responsive teamimg" alt="Team Logo">
+      </div>
     </div>
-  </div>  
+  </div> 
 </body>
 </html>

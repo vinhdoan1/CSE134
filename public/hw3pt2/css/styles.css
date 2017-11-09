@@ -100,6 +100,7 @@ input[type="email"]{
 
 #logoupload{
   margin: auto;
+  width: 15rem;
 }
 
 #hiddendiv{
@@ -121,14 +122,14 @@ input[type="email"]{
   width: 15rem;
 }
 
-#teamimgcontainer{
+.teamimgcontainer{
   width: 5rem;
   height: 5rem;
   border: 1px solid grey;
   margin: 0.2rem auto 1rem auto;
 }
 
-#teamimg{
+.teamimg{
   width: 5rem;
 }
 
