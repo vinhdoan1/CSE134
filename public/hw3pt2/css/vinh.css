@@ -1,0 +1,118 @@
+#addeventform input{
+  display: block;
+  width: 18rem;
+  height: 2rem;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#addeventform select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 18rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+#addeventform .addeventbutton {
+  width: 12rem;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #4286f4;
+  color: white;
+  margin: 1rem auto 1rem auto;
+}
+
+#addeventform .addeventbutton:hover{
+  background-color: #1b53ad;
+}
+
+#addeventform .addeventformfield{
+  border: 1px solid lightgray;
+  margin: 0.7rem auto 0 auto;
+  padding-left: 3px;
+}
+
+.eventfeedbutton {
+  width: 18rem;
+  display: block;
+  margin: 0.7rem auto 0 auto;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: rgb(240,240,240);
+}
+
+footer #logofooterimg{
+  display: inline;
+  width: 2rem;
+  height: 2rem;
+}
+
+footer #logofootertext{
+  margin-top: 0;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Roboto Slab', serif;
+}
+
+footer .footerlogo {
+  text-align: center;
+  height: 2rem;
+}
+
+footer .logofootertextcenter {
+  display: inline;
+  line-height: 2rem;
+  height: 2rem;
+}
+
+#addplayerbutton {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 20px;
+  width: 1.8rem;
+}
+
+#playersort select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 18rem;
+    height: 2rem;
+    border-radius: 5px;
+    margin: auto auto 0 auto;
+}
+
+.playerbutton {
+  text-align: left;
+  width: 18rem;
+  height: 6rem;
+  margin: .5rem auto 0 auto;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
+}
+
+.playerbutton img{
+  display: inline-block;
+  height: 5rem;
+  border-radius: 2px;
+  padding: .5rem
+
+}
+
+.playerbutton .playerdetails{
+  display: inline-block;
+  font-size: 14px;
+  line-height: .5;
+  position: absolute;
+}

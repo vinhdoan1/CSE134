@@ -9,5 +9,34 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 <body>
+  <div class="outercontainer2">
+    <h1>Sign Up</h1>
+    <h3>Enter your invite code:</h3>
+    <div id="teaminputcontainer">
+      <input type="text" id="inviteinput" placeholder="Invite Code"/>
+      <button id="checkbutton" type="button" onclick="show()">Check</button>
+      <script>
+          function show() {
+            document.getElementById('hiddendiv').hidden = false;
+            document.getElementById('check').hidden = false;
+          }
+        </script>
+      <img id="check" src="images/check.png" hidden>    
+    </div>
+    <div id="hiddendiv" hidden>
+        <p>You are signing up as a Fan of the</p>
+        <p><b>Philadelphia Pigs</b>!</p>
+        <div id="teamimgcontainer">
+          <img id="teamimg" src="images/pig.png" alt="Team Logo">
+        </div> 
+    </div>
+    <form id="signupform" name="signupform" action="dashboard.html">
+      <input type="email" class="forminput" placeholder="E-mail"/>
+      <input type="text" class="forminput" placeholder="Username"/>
+      <input type="password" class="forminput" placeholder="Password"/>
+      <input type="password" class="forminput" placeholder="Confirm Password"/>
+      <input type="submit" class="formbutton" value="Sign Up"/>
+    </form>
+  </div>
 </body>
 </html>
