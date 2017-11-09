@@ -1,0 +1,17 @@
+body{
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+}
+
+.logo{
+  font-family: 'Roboto Slab', serif;
+}
+
+#logoimg{
+  width: 8rem;
+}
+
+.logininput{
+  width: 15rem !important;
+}
+
