@@ -1,0 +1,65 @@
+body{
+  font-family: 'Lato', sans-serif;
+}
+
+.outercontainer{
+  text-align: center;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+h1, logo{
+  font-family: 'Roboto Slab', serif;
+}
+
+button{
+  border-radius: 5px;
+  border: 0px;
+  background-color: #4286f4;
+  color: white;
+}
+
+button:hover{
+  background-color: #1b53ad;
+}
+
+#logoimg{
+  width: 8rem;
+}
+
+#loginform input{
+  display: block;
+  width: 15rem;
+  height: 2rem;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;    
+}
+
+.logininput{
+  border: 1px solid lightgray;
+  margin: 0.7rem auto 0 auto;
+  padding-left: 3px;
+}
+
+.loginbutton{
+  border-radius: 5px;
+  border: 0px;
+  background-color: #4286f4;
+  color: white;
+  margin: 1rem auto 0 auto;
+}
+
+.loginbutton:hover{
+  background-color: #1b53ad;
+}
+
+.signupbutton{
+  display: block;
+  width: 17rem;
+  margin: .5rem auto .5rem auto;
+}
