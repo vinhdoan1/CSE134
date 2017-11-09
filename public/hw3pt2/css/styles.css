@@ -9,9 +9,11 @@ body{
   bottom: 0;
   left: 0;
   right: 0;
+  padding-bottom: 4rem;
+  overflow: auto;
 }
 
-h1, logo{
+h1, h2, logo{
   font-family: 'Roboto Slab', serif;
 }
 
@@ -37,7 +39,7 @@ button:hover{
   border-radius: 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;    
+  box-sizing: border-box;
 }
 
 .logininput{
