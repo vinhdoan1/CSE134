@@ -22,13 +22,14 @@ body{
 h1, h2, logo{
   font-family: 'Roboto Slab', serif;
   margin: 0 0 0 0.5rem;
+  text-align: center;
 }
 
 h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button{
+button, [type="button"], [type="submit"]{
   border-radius: 5px;
   border: 0px;
   background-color: #4286f4;
