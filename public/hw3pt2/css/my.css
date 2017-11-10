@@ -87,6 +87,7 @@ button:hover{
 }
 
 #teamimgcontainergame{
+  display: inline-block;
   width: 5rem;
   height: 5rem;
   background: lightgrey;
@@ -296,6 +297,40 @@ footer .logofootertextcenter {
     right: 1rem;
     font-size: 15px;
     width: 1.5rem;
+  }
+
+  #gamedetailcontainer div{
+
+    display: inline-block;
+    width: 45%;
+    font-size: .8rem;
+  }
+
+  #firstdiv #teamimgdetailfirst{
+    width: 3.5rem;
+    height: 3.5rem;
+    background: lightgrey;
+    -moz-border-radius: 4rem;
+    -webkit-border-radius: 4rem;
+    border-radius: 4rem;
+
+  }
+
+  #seconddiv #teamimgdetailsecond{
+    width: 3.5rem;
+    height: 3.5rem;
+    background: lightgrey;
+    -moz-border-radius: 4rem;
+    -webkit-border-radius: 4rem;
+    border-radius: 4rem;
+
+  }
+
+  #gamedetailwarpper{
+
+    width: 100%;
+    display: inline-block;
+    font-size: .8rem;
   }
 
 }
