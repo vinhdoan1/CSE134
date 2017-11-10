@@ -28,9 +28,6 @@ body{
   font-family: 'Roboto Slab', serif;
 }
 
-.teamimggame{
-
-}
 
 .teamimg{
   width: 5rem !important;
@@ -44,6 +41,26 @@ body{
 .gamedetailfirst{
 
   border-right: 1px solid grey;
+}
+
+.span{
+
+  margin: 10px;
+}
+
+#teamname {
+
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+.livegame{
+
+  font-size: .6rem;
+}
+
+.gamebutton{
+  width: 17rem !important;
 }
 
 footer {
