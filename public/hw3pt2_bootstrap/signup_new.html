@@ -15,10 +15,19 @@
       <h1 class="roboto">Sign Up</h1>
       <h4>Enter your team's name:</h4>
       <input type="text" class="mx-auto form-control teaminput" placeholder="Team Name"/>
-      <input class="mx-auto py-2 form-control-file teaminput" type="file"/>
+      <div class="py-3 fileuploadcontainer">
+          <span class="d-inline">Upload Logo:</span> <input class="d-inline form-control-file signupinput" type="file"/>
+      </div>
       <div class="mx-auto border border-dark teamimgcontainer">
         <img src="images/pig.png" class="img-responsive teamimg" alt="Team Logo">
       </div>
+      <form class="mt-4">
+        <input type="email" class="mx-auto my-2 form-control signupinput" placeholder="E-mail"/>
+        <input type="text" class="mx-auto my-2 form-control signupinput" placeholder="Username"/>
+        <input type="password" class="mx-auto my-2 form-control signupinput" placeholder="Password"/>
+        <input type="password" class="mx-auto my-2 form-control signupinput" placeholder="Confirm Password"/>
+        <button type="button" class="mx-auto my-2 d-block btn btn-primary signupinput" onclick="window.location='dashboard.html';">Sign Up</button>
+      </form>
     </div>
   </div> 
 </body>

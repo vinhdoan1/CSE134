@@ -1,5 +1,10 @@
-body{
+html{
   font-family: 'Lato', sans-serif !important;
+  font-size: 16px !important;
+}
+
+body{
+  
   height: 100vh;
 }
 
@@ -11,8 +16,17 @@ body{
   width: 8rem;
 }
 
-.logininput, .teaminput{
+.logininput, .teaminput, .signupinput{
   width: 15rem !important;
+}
+
+.inviteinput{
+  width: 9rem !important;
+}
+
+#check{
+  height: 2rem;
+  position: absolute;
 }
 
 .signupbutton{
@@ -27,5 +41,6 @@ body{
 .teamimg{
   width: 5rem !important;
 }
+
 
 

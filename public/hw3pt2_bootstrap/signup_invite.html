@@ -12,13 +12,34 @@
 <body>
   <div class="d-flex align-items-center" style="height:100%">
     <div class="mx-auto text-center">
-      <h1 class="logo">TeamWatch</h1>
-      <img id="logoimg" class="my-2 img-responsive" src="images/soccerball.png" alt="TeamWatch Logo">
+      <h1 class="roboto">Sign Up</h1>
+      <h4>Enter your invite code:</h4>
+
+      <div class="pb-2">
+        <input type="text" class="d-inline form-control inviteinput" placeholder="Invite Code"/>
+        <button class="d-inline btn btn-primary" id="checkbutton" type="button" data-toggle="collapse" data-target="#hidden" onclick="show()">Check</button>
+        <script>
+          function show() {
+            document.getElementById('check').hidden = false;
+            document.getElementById('hiddendiv').hidden = false;
+          }
+        </script>
+        <img class="pl-2 img-responsive" id="check" src="images/check.png" hidden>
+      </div>
+
+      <div id="hiddendiv" hidden>
+        <p class="my-0">You are signing up as a Fan of the</p>
+        <p class="my-0"><b>Philadelphia Pigs</b>!</p>
+        <div class="mx-auto teamimgcontainer">
+          <img class="mx-auto img-responsive teamimg" src="images/pig.png" alt="Team Logo">
+        </div> 
+      </div>
       <form>
-        <input type="text" id="username" class="my-2 form-control logininput" placeholder="Username"/>
-        <input type="password" id="password" class="my-2 form-control logininput" placeholder="Password"/>
-        <button type="submit" class="my-2 d-block btn btn-primary logininput">Login</button>
-        <button type="submit" class="my-2 d-block btn btn-primary logininput">Sign Up</button>
+        <input type="email" class="my-2 form-control signupinput" placeholder="E-mail"/>
+        <input type="text" class="my-2 form-control signupinput" placeholder="Username"/>
+        <input type="password" class="my-2 form-control signupinput" placeholder="Password"/>
+        <input type="password" class="my-2 form-control signupinput" placeholder="Confirm Password"/>
+        <button type="button" class="my-2 d-block btn btn-primary signupinput" onclick="window.location='dashboard.html';">Sign Up</button>
       </form>
     </div>
   </div> 
