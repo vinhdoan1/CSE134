@@ -63,6 +63,19 @@ body{
   width: 17rem !important;
 }
 
+.schedulecont{
+
+  overflow: auto;
+}
+
+#addgamebutton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 10px;
+  width: 1rem;
+}
+
 footer {
   position: fixed;
   bottom: 0;
