@@ -21,21 +21,21 @@
             document.getElementById('check').hidden = false;
           }
         </script>
-      <img id="check" src="images/check.png" hidden>    
+      <img id="check" src="images/check.png" hidden>
     </div>
     <div id="hiddendiv" hidden>
         <p>You are signing up as a Fan of the</p>
         <p><b>Philadelphia Pigs</b>!</p>
         <div class="teamimgcontainer">
           <img class="teamimg" src="images/pig.png" alt="Team Logo">
-        </div> 
+        </div>
     </div>
-    <form id="signupform" name="signupform" action="dashboard.html">
+    <form id="signupform" name="signupform" action="team.html">
       <input type="email" class="forminput" placeholder="E-mail"/>
       <input type="text" class="forminput" placeholder="Username"/>
       <input type="password" class="forminput" placeholder="Password"/>
       <input type="password" class="forminput" placeholder="Confirm Password"/>
-      <input type="submit" class="formbutton" value="Sign Up"/>
+      <input type="submit" class="formbutton" value="Sign Up" onclick="window.location='team.html';"/>
     </form>
   </div>
 </body>

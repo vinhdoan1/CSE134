@@ -76,6 +76,15 @@ body{
   width: 1rem;
 }
 
+#homebutton{
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 10px;
+  width: 3rem;
+}
+
 footer {
   position: fixed;
   bottom: 0;
