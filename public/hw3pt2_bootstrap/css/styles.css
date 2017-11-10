@@ -24,6 +24,10 @@ body{
   width: 9rem !important;
 }
 
+#checkbutton{
+  vertical-align: top !important;
+}
+
 #check{
   height: 2rem;
   position: absolute;
@@ -41,6 +45,5 @@ body{
 .teamimg{
   width: 5rem !important;
 }
-
 
 
