@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer2">
+    <div id="teamimgcontainerteam">
+      <img id="teamimg" src="images/pig.png" alt="Team Logo">
+    </div>
+    <h1 id="h1"></h1>
+    <div id="stats">
+      <p id="wins">
+        Wins:
+      </p>
+      <p id="loss">
+        Losses:
+      </p>
+    </div>
+    <div id="goals">
+      <p id="goalsfor">
+        Goals For:
+      </p>
+      <p id="goalsagainst">
+        Goals Against:
+      </p>
+    </div>
+    <hr />
+    <div id="liveGame">
+      <button id="corner">
+        <p>
+          Live Game:
+        </p>
+      </button>
+      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
+        <p class="gamebuttondetail">
+          11/10 - Pigs vs Turtles
+        </p>
+      </button>
+    </div>
+    <hr />
+    <div>
+      <button type="button" class="gamebutton" onclick="window.location='schedule.html';">
+        <p class="gamebuttondetail">
+          Schedule
+        </p>
+      </button>
+      <button type="button" class="gamebutton" onclick="window.location='players.html';">
+        <p class="gamebuttondetail">
+          Players
+        </p>
+      </button>
+    </div>
+  </div>
+  <script>
+    document.getElementById("h1").innerHTML = "Philadelphia Pigs";
+    document.getElementById("wins").innerHTML += "5";
+    document.getElementById("loss").innerHTML += "0";
+    document.getElementById("goalsfor").innerHTML += "14";
+    document.getElementById("goalsagainst").innerHTML += "4";
+  </script>
+
+  <footer>
+    <div class="footerlogo">
+      <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logofootertext">TeamWatch</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+html{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 16px !important;
+}
+
+body{
+
+  height: 100vh;
+}
+
+.roboto{
+  font-family: 'Roboto Slab', serif;
+}
+
+#logoimg{
+  width: 8rem;
+}
+
+.logininput, .teaminput, .signupinput{
+  width: 15rem !important;
+}
+
+.inviteinput{
+  width: 9rem !important;
+}
+
+#checkbutton{
+  vertical-align: top !important;
+}
+
+#check{
+  height: 2rem;
+  position: absolute;
+}
+
+.signupbutton{
+  width: 17rem !important;
+}
+
+.teamimggame{
+
+}
+
+.teamimg{
+  width: 5rem !important;
+  background-color: lightgrey;
+  -moz-border-radius: 4rem;
+  -webkit-border-radius: 4rem;
+  border-radius: 4rem;
+
+}
+
+.gamedetailfirst{
+
+  border-right: 1px solid grey;
+}
