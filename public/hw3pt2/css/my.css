@@ -28,7 +28,7 @@ h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button{
+button, [type="button"], [type="submit"]{
   border-radius: 5px;
   border: 0px;
   background-color: #4286f4;
@@ -39,6 +39,11 @@ button:hover{
   background-color: #1b53ad;
 }
 
+.outercontainer2 #h2{
+
+  text-align: left;
+  padding-top: 20px;
+}
 #logoimg{
   width: 8rem;
 }
@@ -81,37 +86,106 @@ button:hover{
   margin: 0.2rem auto 1rem auto;
 }
 
+#teamimgcontainergame{
+  display: table-row;
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+  margin: 0.2rem  1rem auto;
+}
+#funny{
+
+  display: table-cell;
+}
+
+#teamimggame{
+  width: 4.5rem;
+}
+
 #teamimg{
   width: 6.5rem;
+}
+
+#gamedetailsimg{
+
+  display: inline-table;
 }
 
 #stats p{
 
   display: inline;
-  padding-right: 1rem;
+  padding-right: .3rem;
+  padding-left: .3rem;
 }
 
 #goals p{
 
   display: inline;
-  padding-right: 1.5rem;
+  padding-right: .9rem;
+  padding-left: .9rem;
 }
 
-@media only screen and (max-width: 400px) {
+#addgamebutton {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 20px;
+  width: 1.8rem;
+}
 
-  .outercontainer2{
-    text-align: center;
-    padding-top: 1%;
-  }
+#schedulecontainer{
+  padding-top: 40px;
+  overflow-y: auto;
+  max-height: 28rem;
+}
 
-  h1{
-    font-size: 30px;
-  }
+#addgameform {
+  width: 18rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
-  #teaminput{
+#addgameform input{
+  display: block;
+  width: 18rem;
+  height: 2rem;
+  border-radius: 5px;
+  margin-top: .5rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#addgameform .addgamebutton {
+  width: 12rem;
+  margin: 1rem auto 1rem auto;
+}
+
+#addgameform select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 18rem;
     height: 2rem;
-  }
+    border-radius: 5px;
+}
 
+#addgameform .addgamebutton {
+  width: 12rem;
+  margin: 1rem auto 1rem auto;
+}
+
+#addgameform .addgamebutton:hover{
+  background-color: #1b53ad;
+}
+
+#addgameform .addgameformfield{
+  border: 1px solid lightgray;
+  margin: 0.7rem auto 0 auto;
+  padding-left: 3px;
 }
 
 footer {
@@ -146,4 +220,29 @@ footer .logofootertextcenter {
   display: inline;
   line-height: 2rem;
   height: 2rem;
+}
+
+@media only screen and (max-width: 400px) {
+
+  .outercontainer2{
+    text-align: center;
+    padding-top: 1%;
+  }
+
+  h1{
+    font-size: 30px;
+  }
+
+  #teaminput{
+    height: 2rem;
+  }
+
+  #addgamebutton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 15px;
+    width: 1.5rem;
+  }
+
 }
