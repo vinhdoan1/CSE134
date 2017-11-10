@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="d-flex align-items-center" style="height:100%">
+    <div class="mx-auto text-center">
+      <h1 class="roboto">Sign Up</h1>
+      <h4>Enter your invite code:</h4>
+
+      <div class="pb-2">
+        <input type="text" class="d-inline form-control inviteinput" placeholder="Invite Code"/>
+        <button class="d-inline btn btn-primary" id="checkbutton" type="button" data-toggle="collapse" data-target="#hidden" onclick="show()">Check</button>
+        <script>
+          function show() {
+            document.getElementById('check').hidden = false;
+            document.getElementById('hiddendiv').hidden = false;
+          }
+        </script>
+        <img class="pl-2 img-responsive" id="check" src="images/check.png" hidden>
+      </div>
+
+      <div id="hiddendiv" hidden>
+        <p class="my-0">You are signing up as a Fan of the</p>
+        <p class="my-0"><b>Philadelphia Pigs</b>!</p>
+        <div class="mx-auto teamimgcontainer">
+          <img class="mx-auto img-responsive teamimg" src="images/pig.png" alt="Team Logo">
+        </div> 
+      </div>
+      <form>
+        <input type="email" class="my-2 form-control signupinput" placeholder="E-mail"/>
+        <input type="text" class="my-2 form-control signupinput" placeholder="Username"/>
+        <input type="password" class="my-2 form-control signupinput" placeholder="Password"/>
+        <input type="password" class="my-2 form-control signupinput" placeholder="Confirm Password"/>
+        <button type="button" class="my-2 d-block btn btn-primary signupinput" onclick="window.location='dashboard.html';">Sign Up</button>
+      </form>
+    </div>
+  </div> 
+</body>
+</html>

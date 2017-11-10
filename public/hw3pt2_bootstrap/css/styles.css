@@ -1,9 +1,14 @@
+html{
+  font-family: 'Lato', sans-serif !important;
+  font-size: 16px !important;
+}
+
 body{
-  font-family: 'Lato', sans-serif;
+  
   height: 100vh;
 }
 
-.logo{
+.roboto{
   font-family: 'Roboto Slab', serif;
 }
 
@@ -11,7 +16,34 @@ body{
   width: 8rem;
 }
 
-.logininput{
+.logininput, .teaminput, .signupinput{
   width: 15rem !important;
 }
+
+.inviteinput{
+  width: 9rem !important;
+}
+
+#checkbutton{
+  vertical-align: top !important;
+}
+
+#check{
+  height: 2rem;
+  position: absolute;
+}
+
+.signupbutton{
+  width: 17rem !important;
+}
+
+.teamimgcontainer{
+  width: 5rem;
+  height: 5rem;
+}
+
+.teamimg{
+  width: 5rem !important;
+}
+
 

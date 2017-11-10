@@ -13,10 +13,11 @@
     <h1>Sign Up</h1>
     <h3>Enter your team's name:</h3>
     <input type="text" id="teaminput" placeholder="Team Name"/>
-    <h3>Upload logo:</h3>
-    <input id="logoupload" type="file"/>
-    <div id="teamimgcontainer">
-      <img id="teamimg" src="images/pig.png" alt="Team Logo">
+    <div class="fileuploadcontainer">
+      <span>Upload Logo:</span> <input id="logoupload" type="file"/>
+    </div>
+    <div class="teamimgcontainer">
+      <img class="teamimg" src="images/pig.png" alt="Team Logo">
     </div> 
     <form id="signupform" name="signupform" action="dashboard.html">
       <input type="email" class="forminput" placeholder="E-mail"/>

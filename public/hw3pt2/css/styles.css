@@ -22,13 +22,14 @@ body{
 h1, h2, logo{
   font-family: 'Roboto Slab', serif;
   margin: 0 0 0 0.5rem;
+  text-align: center;
 }
 
 h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button{
+button, [type="button"], [type="submit"]{
   border-radius: 5px;
   border: 0px;
   background-color: #4286f4;
@@ -110,8 +111,14 @@ input[type="email"]{
   position: absolute;
 }
 
+.fileuploadcontainer{
+  display: block;
+  margin: 0.5rem auto 0 auto;
+}
+
 #logoupload{
   margin: auto;
+  width: 10rem;
 }
 
 #hiddendiv{
@@ -133,14 +140,14 @@ input[type="email"]{
   width: 15rem;
 }
 
-#teamimgcontainer{
+.teamimgcontainer{
   width: 5rem;
   height: 5rem;
   border: 1px solid grey;
   margin: 0.2rem auto 1rem auto;
 }
 
-#teamimg{
+.teamimg{
   width: 5rem;
 }
 
