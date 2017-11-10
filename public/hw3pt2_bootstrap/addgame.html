@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+  integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+  integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container" style="height:100%">
+    <h2 class="roboto text-left">Add Game</h2>
+    <div class="mx-auto text-center">
+        <div class="mx-auto teamimgcontainer">
+        <img src="images/pig.png" class="img-responsive teamimg" alt="Team Logo">
+      </div>
+      <form class="mt-4" id="addgameform">
+         <select name="eventdetail" id="eventtypernames" class="form-control">
+          <option selected="true" disabled="disabled">Choose Oponent</option>
+          <option value="turtles">Turtles</option>
+          <option value="rhinos">Rhinos</option>
+          <option value="lions">Lions</option>
+          <option value="tigers">Tigers</option>
+          <option value="elephants">Elephants</option>
+        </select>
+        <input type="text" id="gamelocation" class="form-control" placeholder="Location">
+        <input type="date" id="gamedate" class="form-control" placeholder="Date">
+        <input type="time" id="gametime" class="form-control" placeholder="Time">
+        <input type="button" id="addgamebutton" class="btn btn-primary" value="Add Game" onclick="window.location='schedule.html';"/>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div class="footerlogo">
+      <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logofootertext">TeamWatch</p>
+    </div>
+  </footer>
+</body>
+</html>

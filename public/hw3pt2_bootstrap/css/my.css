@@ -8,6 +8,22 @@ body{
   height: 100vh;
 }
 
+#addgameform {
+  width: 18rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#addgameform input{
+  margin-top: .5rem;
+}
+
+#addgamebutton {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .roboto{
   font-family: 'Roboto Slab', serif;
 }
@@ -28,4 +44,38 @@ body{
 .gamedetailfirst{
 
   border-right: 1px solid grey;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: rgb(240,240,240);
+}
+
+footer #logofooterimg{
+  display: inline;
+  width: 2rem;
+  height: 2rem;
+}
+
+footer #logofootertext{
+  margin-top: 0;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Roboto Slab', serif;
+}
+
+footer .footerlogo {
+  text-align: center;
+  height: 2rem;
+}
+
+footer .logofootertextcenter {
+  display: inline;
+  line-height: 2rem;
+  height: 2rem;
 }
