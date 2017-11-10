@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="outercontainer">
+
+      <div class="playerpreview">
+        <h2 class="text-center roboto">Add Player</h2>
+        <p class="text-center">Upload a Picture:</p>
+        <form class="text-center">
+          <input type="file" name="playerpic" accept="image/*">
+          <input type="submit" class="btn btn-primary">
+        </form>
+        <img id="playerbuttonimg" src="images/jefffull.png" alt="Jeff Evans" class="img-circle">
+      </div>
+      <form id="addplayerform" name="addeventform">
+          <input type="text" id="playername" class="form-input" placeholder="Enter Player Name">
+          <input type="text" id="playernumber" class="form-input" placeholder="Enter Player Number">
+          <input type="text" id="playerposition" class="form-input" placeholder="Enter Player Position">
+          <input type="button" class="btn btn-primary" value="Add Player" onclick="window.location='players.html';"/>
+      </form>
+    </div>
+  </body>
+
+ <footer>
+   <div class="footerlogo">
+     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+     <p id="logofootertext">TeamWatch</p>
+   </div>
+ </footer>
+
+</body>
+</html>
