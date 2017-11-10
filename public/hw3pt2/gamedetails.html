@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html long="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer2">
+    <h3>November 10, 2017</h3>
+    <h4>Philadelphia Community Park (Home)</h4>
+      <div id="gamedetailcontainer">
+        <div id="firstdiv">
+          <img id="teamimgdetailfirst" src="images/pig.png" alt="Team Logo">
+          <p id="firstteam">
+            Philadelphia Pigs
+          </p>
+        </div>
+        <div id="seconddiv">
+          <img id="teamimgdetailsecond" src="images/rhino.png" alt="Team Logo">
+          <p id="secondteam">
+            Tallahasee Turtles
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div id="gamedetailwrapper">
+
+        <div id="gamedetailfirst">
+          <ul>
+            <li>
+              Goals: 3
+            </li>
+            <li>
+              Shots on Goal: 10
+            </li>
+            <li>
+              Corner Kicks: 2
+            </li>
+            <li>
+              Goal Kicks: 5
+            </li>
+          </ul>
+        </div>
+        <div id="gamedetailsecond">
+          <ul>
+            <li>
+              Goals: 3
+            </li>
+            <li>
+              Shots on Goal: 15
+            </li>
+            <li>
+              Corner Kicks: 1
+            </li>
+            <li>
+              Goal Kicks: 3
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  <script>
+    document.getElementById("h1").innerHTML = "Philadelphia Pigs";
+    document.getElementById("wins").innerHTML += "5";
+    document.getElementById("loss").innerHTML += "0";
+    document.getElementById("goalsfor").innerHTML += "14";
+    document.getElementById("goalsagainst").innerHTML += "4";
+  </script>
+
+  <footer>
+    <div class="footerlogo">
+      <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logofootertext">TeamWatch</p>
+    </div>
+  </footer>
+</body>
+</html>

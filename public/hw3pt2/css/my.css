@@ -87,7 +87,6 @@ button:hover{
 }
 
 #teamimgcontainergame{
-  display: table-row;
   width: 5rem;
   height: 5rem;
   background: lightgrey;
@@ -95,10 +94,6 @@ button:hover{
   -webkit-border-radius: 6rem;
   border-radius: 6rem;
   margin: 0.2rem  1rem auto;
-}
-#funny{
-
-  display: table-cell;
 }
 
 #teamimggame{
@@ -109,9 +104,65 @@ button:hover{
   width: 6.5rem;
 }
 
-#gamedetailsimg{
+#gamedetailcontainer{
+  margin: 0.2rem  1rem auto;
+  text-align: center;
 
-  display: inline-table;
+}
+
+#gamedetailcontainer div{
+
+  display: inline-block;
+  width: 45%;
+}
+
+#firstdiv #teamimgdetailfirst{
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+
+}
+
+#seconddiv #teamimgdetailsecond{
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+
+}
+
+#gamedetailwarpper{
+
+  width: 100%;
+  display: inline-block;
+}
+#gamedetailfirst {
+
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  text-align: left;
+}
+
+#gamedetailsecond {
+
+    width: 50%;
+    border-left: 1px solid black;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    text-align: left;
+}
+
+#gamedetailteams p{
+  display: inline;
+  padding-right: .5rem;
+  padding-left: .5rem;
 }
 
 #stats p{
@@ -187,6 +238,8 @@ button:hover{
   margin: 0.7rem auto 0 auto;
   padding-left: 3px;
 }
+
+
 
 footer {
   position: fixed;
