@@ -79,3 +79,9 @@ nav {
   text-align: left;
   width: 300px;
 }
+
+table {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
