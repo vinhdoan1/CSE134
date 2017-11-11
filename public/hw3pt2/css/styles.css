@@ -88,6 +88,8 @@ input[type="email"]{
   display: block;
   width: 17rem;
   margin: .5rem auto .5rem auto;
+  height: 3rem;
+  white-space: normal;
 }
 
 #teaminput{
