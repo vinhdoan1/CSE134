@@ -35,6 +35,8 @@ body{
 
 .signupbutton{
   width: 17rem !important;
+  height: 2.5rem;
+  white-space: normal !important;
 }
 
 .teamimgcontainer{
