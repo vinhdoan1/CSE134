@@ -79,8 +79,6 @@ button:hover{
   width: 7rem;
   height: 7rem;
   background: lightgrey;
-  -moz-border-radius: 6rem;
-  -webkit-border-radius: 6rem;
   border-radius: 6rem;
   margin: 0.2rem auto 1rem auto;
 }
@@ -90,8 +88,6 @@ button:hover{
   width: 5rem;
   height: 5rem;
   background: lightgrey;
-  -moz-border-radius: 6rem;
-  -webkit-border-radius: 6rem;
   border-radius: 6rem;
   margin: 0.2rem  1rem auto;
 }
@@ -120,8 +116,6 @@ button:hover{
   width: 5rem;
   height: 5rem;
   background: lightgrey;
-  -moz-border-radius: 6rem;
-  -webkit-border-radius: 6rem;
   border-radius: 6rem;
 
 }
@@ -130,8 +124,6 @@ button:hover{
   width: 5rem;
   height: 5rem;
   background: lightgrey;
-  -moz-border-radius: 6rem;
-  -webkit-border-radius: 6rem;
   border-radius: 6rem;
 
 }
@@ -318,8 +310,6 @@ footer .logofootertextcenter {
     width: 3.5rem;
     height: 3.5rem;
     background: lightgrey;
-    -moz-border-radius: 4rem;
-    -webkit-border-radius: 4rem;
     border-radius: 4rem;
 
   }
@@ -328,8 +318,6 @@ footer .logofootertextcenter {
     width: 3.5rem;
     height: 3.5rem;
     background: lightgrey;
-    -moz-border-radius: 4rem;
-    -webkit-border-radius: 4rem;
     border-radius: 4rem;
 
   }
