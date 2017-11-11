@@ -29,7 +29,7 @@ h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button, [type="button"], [type="submit"]{
+button, [type="button"], [type="submit"], [role="button"]{
   border-radius: 5px;
   border: 0px;
   background-color: #4286f4;

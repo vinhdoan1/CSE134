@@ -98,6 +98,10 @@ footer .logofootertextcenter {
   display: block;
 }
 
+.playerbutton:hover {
+  background-color: #1b53ad;
+}
+
 .playerbutton img{
   display: inline-block;
   height: 5rem;
