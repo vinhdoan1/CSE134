@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <script src="teamwatch.js"></script>
+</head>
+<body>
+  <div class="outercontainer1">
+      <h1 class="logo">TeamWatch</h1>
+      <img id="logoimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <span id="login_error">Wrong username or password. Please try again.</span>
+      <form id="loginform" name="loginform" action="team.html">
+          <input type="text" id="username" name="username" class="forminput" placeholder="Username"/>
+          <input type="password" id="password" name="password" class="forminput" placeholder="Password"/>
+          <input type="button" class="formbutton" value="Log In" onclick="authenticate(this.form);"/>
+          <input type="button" class="formbutton" value="Sign Up" onclick="window.location='signup.html';"/>
+      </form>
+  </div>
+</body>
+</html>

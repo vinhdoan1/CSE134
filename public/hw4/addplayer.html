@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer">
+
+      <div class="playerpreview">
+        <h2>Add Player</h2>
+        <p>Upload a Picture:</p>
+        <form>
+          <input type="file" name="playerpic" accept="image/*">
+          <input type="submit">
+        </form>
+        <img id="playerbuttonimg" src="images/jefffull.png" alt="Jeff Evans">
+      </div>
+      <form id="addplayerform" name="addeventform">
+          <input type="text" id="playername" class="addplayerformfield" placeholder="Enter Player Name">
+          <input type="text" id="playernumber" class="addplayerformfield" placeholder="Enter Player Number">
+          <input type="text" id="playerposition" class="addplayerformfield" placeholder="Enter Player Position">
+          <input type="button" class="addplayerbutton" value="Add Player" onclick="window.location='players.html';"/>
+      </form>
+    </div>
+    
+ <footer>
+   <div class="footerlogo">
+     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+     <p id="logofootertext">TeamWatch</p>
+   </div>
+ </footer>
+
+</body>
+</html>

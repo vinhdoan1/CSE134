@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer">
+      <h2>Add Event</h2>
+      <form id="addeventform" name="addeventform">
+          <select name="eventdetail" class="addeventformfield">
+            <option selected disabled="disabled">Choose Event</option>
+            <option value="goal">Goal</option>
+            <option value="penalty">Penalty</option>
+            <option value="shotongoal">Shot on Goal</option>
+            <option value="cornerkick">Corner Kick</option>
+            <option value="redcard">Red Card</option>
+            <option value="yellowcard">Yellow Card</option>
+          </select>
+          <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames">
+          <datalist id="playernames">
+              <option value="Jeff Evans">
+              <option value="John Smith">
+              <option value="Thomas Powell">
+          </datalist>
+          <input type="button" class="addeventbutton" value="Add Event" onclick="window.location='events.html';"/>
+      </form>
+      <hr />
+      <h2>Event Feed</h2>
+      <div>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+        <button type="button" class="eventfeedbutton">
+            Jeff Evans (#1) scored a goal.
+        </button>
+      </div>
+  </div>
+
+ <footer>
+   <div class="footerlogo">
+     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+     <p id="logofootertext">TeamWatch</p>
+   </div>
+ </footer>
+
+</body>
+</html>

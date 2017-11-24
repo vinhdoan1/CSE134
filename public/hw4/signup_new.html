@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer2">
+    <h1>Sign Up</h1>
+    <h3>Enter your team's name:</h3>
+    <input type="text" id="teaminput" placeholder="Team Name"/>
+    <div class="fileuploadcontainer">
+      <span>Upload Logo:</span> <input id="logoupload" type="file"/>
+    </div>
+    <div class="teamimgcontainer">
+      <img class="teamimg" src="images/pig.png" alt="Team Logo">
+    </div>
+    <form id="signupform" name="signupform" action="team.html">
+      <input type="email" class="forminput" placeholder="E-mail"/>
+      <input type="text" class="forminput" placeholder="Username"/>
+      <input type="password" class="forminput" placeholder="Password"/>
+      <input type="password" class="forminput" placeholder="Confirm Password"/>
+      <input type="submit" class="formbutton" value="Sign Up"/>
+    </form>
+  </div>
+</body>
+</html>

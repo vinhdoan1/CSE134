@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+  <div class="outercontainer2">
+    <h2 id="h2">Add Game</h2>
+    <div id="teamimgcontainergame">
+      <img id="teamimggame" src="images/pig.png" alt="Team Logo">
+    </div>
+    <form id="addgameform" name="addgameform">
+        <select name="gamedetail" class="addgameformfield">
+          <option selected="true" disabled="disabled">Choose Oponent</option>
+          <option value="turtles">Turtles</option>
+          <option value="rhinos">Rhinos</option>
+          <option value="lions">Lions</option>
+          <option value="tigers">Tigers</option>
+          <option value="elephants">Elephants</option>
+        </select>
+        <input type="text" id="gamelocation" class="addgameformfield" placeholder="Location">
+        <input type="date" id="gamedate" class="addgameformfield" placeholder="Date">
+        <input type="time" id="gametime" class="addgameformfield" placeholder="Time">
+        <input type="button" class="addgamebutton" value="Add Game" onclick="window.location='schedule.html';"/>
+    </form>
+  </div>
+  <script>
+    document.getElementById("wins").innerHTML += "5";
+    document.getElementById("loss").innerHTML += "0";
+    document.getElementById("goalsfor").innerHTML += "14";
+    document.getElementById("goalsagainst").innerHTML += "4";
+  </script>
+
+  <footer>
+    <div class="footerlogo">
+      <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logofootertext">TeamWatch</p>
+    </div>
+  </footer>
+</body>
+</html>
