@@ -1,3 +1,5 @@
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
   if(form.username.value == "user" && form.password.value == "pass"){
@@ -50,10 +52,19 @@ function addGame(game){
   }
   else{
     scheduleList.push(game);
+    scheduleList.sort(function(a,b){
+      return new Date(a.date) - new Date(b.date);
+    });
     localStorage.setItem("schedule", JSON.stringify(scheduleList));
     window.location='schedule.html';
     console.log(scheduleList);  
   }
+}
+
+function parseDateAndTime(datestr, timestr){
+  var datearry = datestr.split("-");
+  var timearry = timestr.split(":");
+  return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
 }
 
 function displaySchedule(){
@@ -64,14 +75,14 @@ function displaySchedule(){
   else{
     for(var i = 0; i < scheduleList.length; i++){
       var game = scheduleList[i];
-      var date = new Date(game.date);
-      var time = game.time.split(":");
-      var ampm = time[0] >= 12 ? "PM" : "AM";
+      var date = parseDateAndTime(game.date, game.time);
+      var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12; 
+      var ampm = date.getHours() >= 12 ? "PM" : "AM";
       let btn = document.createElement("button");
       btn.setAttribute("type", "button");
       btn.setAttribute("class", "gamebutton");
       btn.setAttribute("onclick", "window.location='gamedetails.html';");
-      btn.innerHTML = "<p class='gamebuttondetail'>" + date.getMonth() + "/" + date.getDate() + " @ " +  time[0] + ":" + time[1] + ampm + " - Pigs vs. " + game.opponent + "</p>";
+      btn.innerHTML = "<p class='gamebuttondetail'>" + months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
       document.getElementById('schedulecontainer').appendChild(btn);
       console.log(game)
     }
