@@ -181,8 +181,14 @@ button:hover{
   width: 1.8rem;
 }
 
+#emptyschedule{
+  color: grey;
+  margin-top: 0.7rem;
+  display: none;
+}
+
 #schedulecontainer{
-  padding-top: 40px;
+  padding-top: 0.5rem;
   overflow-y: auto;
   max-height: 28rem;
 }

@@ -81,10 +81,12 @@ function createGameButtonDetail(game){
 
 function loadSchedule(){
   var scheduleList = JSON.parse(localStorage.getItem("schedule"));
+  var emptyschedule = document.getElementById('emptyschedule');
   if(scheduleList == null){
-    //There are currently no games scheduled
+    emptyschedule.style.display = 'block';
   }
   else{
+    emptyschedule.style.display = 'none';
     for(var i = 0; i < scheduleList.length; i++){
       var game = scheduleList[i];
       let btn = createGameButtonDetail(game);
@@ -100,7 +102,7 @@ function loadDashboard(){
 function getUpcomingGame(){
   var scheduleList = JSON.parse(localStorage.getItem("schedule"));
   if(scheduleList == null){
-    //There are currently no games scheduled
+
   }
   else{
     var game = scheduleList[0];
