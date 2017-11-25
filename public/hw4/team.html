@@ -7,8 +7,9 @@
   <link rel="stylesheet" type="text/css" href="css/my.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="teamwatch.js"></script>
 </head>
-<body>
+<body onload="loadDashboard()">
   <div class="outercontainer2">
     <div id="teamimgcontainerteam">
       <img id="teamimg" src="images/pig.png" alt="Team Logo">
@@ -34,14 +35,12 @@
     <div id="liveGame">
       <button id="corner">
         <p>
-          Live Game:
+          Upcoming Game:
         </p>
       </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/10 - Pigs vs Rhinos
-        </p>
-      </button>
+      <div id="upcominggamecontainer">
+
+      </div>
     </div>
     <hr />
     <div>

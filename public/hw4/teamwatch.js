@@ -67,7 +67,19 @@ function parseDateAndTime(datestr, timestr){
   return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
 }
 
-function displaySchedule(){
+function createGameButtonDetail(game){
+  var date = parseDateAndTime(game.date, game.time);
+  var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12; 
+  var ampm = date.getHours() >= 12 ? "PM" : "AM";
+  let btn = document.createElement("button");
+  btn.setAttribute("type", "button");
+  btn.setAttribute("class", "gamebutton");
+  btn.setAttribute("onclick", "window.location='gamedetails.html';");
+  btn.innerHTML = "<p class='gamebuttondetail'>" + months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
+  return btn;
+}
+
+function loadSchedule(){
   var scheduleList = JSON.parse(localStorage.getItem("schedule"));
   if(scheduleList == null){
     //There are currently no games scheduled
@@ -75,16 +87,25 @@ function displaySchedule(){
   else{
     for(var i = 0; i < scheduleList.length; i++){
       var game = scheduleList[i];
-      var date = parseDateAndTime(game.date, game.time);
-      var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12; 
-      var ampm = date.getHours() >= 12 ? "PM" : "AM";
-      let btn = document.createElement("button");
-      btn.setAttribute("type", "button");
-      btn.setAttribute("class", "gamebutton");
-      btn.setAttribute("onclick", "window.location='gamedetails.html';");
-      btn.innerHTML = "<p class='gamebuttondetail'>" + months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
+      let btn = createGameButtonDetail(game);
       document.getElementById('schedulecontainer').appendChild(btn);
-      console.log(game)
     }
   }
 }
+
+function loadDashboard(){
+  getUpcomingGame();
+}
+
+function getUpcomingGame(){
+  var scheduleList = JSON.parse(localStorage.getItem("schedule"));
+  if(scheduleList == null){
+    //There are currently no games scheduled
+  }
+  else{
+    var game = scheduleList[0];
+    let btn = createGameButtonDetail(game);
+    document.getElementById('upcominggamecontainer').appendChild(btn);
+  }
+}
+
