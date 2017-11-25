@@ -40,8 +40,6 @@ button:hover{
 }
 
 .outercontainer2 #h2{
-
-  text-align: left;
   padding-top: 20px;
 }
 #logoimg{
@@ -63,7 +61,6 @@ button:hover{
   text-align: left;
 }
 
-
 .gamebutton {
   text-align: center;
   width: 16rem;
@@ -71,9 +68,6 @@ button:hover{
   display: block;
 }
 
-.gamebutton p{
-
-}
 
 #teamimgcontainerteam{
   width: 7rem;
@@ -191,6 +185,13 @@ button:hover{
   padding-top: 40px;
   overflow-y: auto;
   max-height: 28rem;
+}
+
+#addgame_error, #addgame_duplicate{
+  display: none;
+  color: red;
+  font-size: small;
+  margin-top: 0.7rem;
 }
 
 #addgameform {

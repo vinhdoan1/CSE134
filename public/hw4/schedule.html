@@ -7,76 +7,17 @@
   <link rel="stylesheet" type="text/css" href="css/my.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="teamwatch.js"></script>
 </head>
-<body>
+<body onload="displaySchedule()">
   <div class="outercontainer2">
     <h2 id="h1">Schedule</h2>
-    <button type="button" id="addgamebutton" onclick="window.location='addgame.html';">+</button>
     <div id="schedulecontainer">
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/10 - Pigs vs Turtles
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/12 - Pigs vs Lions
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/15 - Pigs vs Frogs
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/20 - Pigs vs Hogs
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/23 - Pigs vs Elephants
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          11/28 - Pigs vs Rhinos
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          12/02 - Pigs vs Dogs
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          12/04 - Pigs vs Ravens
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          12/08 - Pigs vs Tigers
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          12/10 - Pigs vs Wolves
-        </p>
-      </button>
-      <button type="button" class="gamebutton" onclick="window.location='gamedetails.html';">
-        <p class="gamebuttondetail">
-          12/15 - Pigs vs Apes
-        </p>
-      </button>
-    </div>
-  </div>
-  <script>
-    document.getElementById("wins").innerHTML += "5";
-    document.getElementById("loss").innerHTML += "0";
-    document.getElementById("goalsfor").innerHTML += "14";
-    document.getElementById("goalsagainst").innerHTML += "4";
-  </script>
 
+    </div>
+    <button type="button" id="addgamebutton" onclick="window.location='addgame.html';">+</button>
+    
+  </div>
   <footer>
     <div class="footerlogo">
       <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
