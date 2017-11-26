@@ -161,6 +161,10 @@ input[type="number"]
   width: 5rem;
 }
 
+#teamlogoimg {
+  visibility: hidden;
+}
+
 @media only screen and (max-width: 400px) {
 
   .outercontainer2{

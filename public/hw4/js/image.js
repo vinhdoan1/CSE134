@@ -1,7 +1,7 @@
 var image = {};
 image.readImageAndResize = readImageAndResize;
 
-function readImageAndResize(imageFile, sideLength, callback) {
+function readImageAndResize(imageFile, sideLength, callback, png) {
   let reader = new FileReader();
   reader.onloadend = () => {
     var image = document.createElement("img");
@@ -14,7 +14,11 @@ function readImageAndResize(imageFile, sideLength, callback) {
       canvas.height = sideLength;
       var ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0, sideLength, sideLength);
-      var dataurl = canvas.toDataURL('image/jpeg', 1.0);
+      var type = 'jpeg';
+      if (png) {
+        type = 'png';
+      }
+      var dataurl = canvas.toDataURL('image/' + type, 1.0);
       return callback(dataurl);
     };
   };
