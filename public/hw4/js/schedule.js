@@ -1,8 +1,14 @@
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 function validateAddGameForm(form){
-  var game = new Object();
   var incomplete = false; 
+  var game = {
+    gameid: api.generateID(),
+    opponent: "",
+    location: "",
+    date: "",
+    time: ""
+  }
   game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
   game.location = form.elements['gamelocation'].value;
@@ -22,13 +28,14 @@ function validateAddGameForm(form){
 }
 
 function addGame(game){
-  //create or retrieve the schedule
-  var scheduleList = JSON.parse(localStorage.getItem("schedule"));
-  if(scheduleList == null){
-    scheduleList = new Array();
+  //create or retrieve the game schedule
+  var state = mainState.getState();
+  var gamesList = api.getTeamGames(state.teamID);
+  if(gamesList == null){
+    gamesList = {};
   }
 
-  var exists = scheduleList.some(function (other) {
+  var exists = gamesList.some(function (other) {
     return other.opponent == game.opponent && other.location == game.location &&
       other.date == game.date && other.time == game.time;
   });
@@ -38,11 +45,12 @@ function addGame(game){
     addgame_duplicate.style.display = 'block';
   }
   else{
-    scheduleList.push(game);
-    scheduleList.sort(function(a,b){
+    gamesList.push(game);
+    gamesList.sort(function(a,b){
       return new Date(a.date) - new Date(b.date);
     });
-    localStorage.setItem("schedule", JSON.stringify(scheduleList));
+    // localStorage.setItem("schedule", JSON.stringify(scheduleList));
+    api.setTeamGames(state.teamID, gamesList);
     window.location='schedule.html';
     console.log(scheduleList);  
   }
@@ -67,7 +75,8 @@ function createGameButtonDetail(game){
 }
 
 function loadSchedule(){
-  var scheduleList = JSON.parse(localStorage.getItem("schedule"));
+  var state = mainState.getState();
+  var gamesList= api.getTeamGa
   var emptyschedule = document.getElementById('emptyschedule');
   if(scheduleList == null){
     emptyschedule.style.display = 'block';

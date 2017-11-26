@@ -76,6 +76,14 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   background-color: red;
 }
 
+#gamedetails_delete{
+  background-color: #b72027;
+}
+
+#gamedetails_delete:hover {
+  background-color: #771c1a;
+}
+
 #teamimgcontainerteam{
   width: 7rem;
   height: 7rem;
