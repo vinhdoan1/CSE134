@@ -98,20 +98,11 @@ function getTeam(teamID) {
   return allTeams[teamID];
 }
 
-function getTeamGames(teamID) {
-  var allTeams = getTeams();
-  return allTeams[teamID].games;
-}
+// PLAYER DATA
 
 function getTeamPlayers(teamID) {
   var allTeams = getTeams();
   return allTeams[teamID].players;
-}
-
-function setTeamGames(teamID, teamGames) {
-  var allTeams = getTeams();
-  allTeams[teamID].games = teamGames;
-  saveTeams(allTeams);
 }
 
 function setTeamPlayers(teamID, teamPlayers) {
@@ -137,6 +128,19 @@ function setTeamPlayer(teamID, playerID, player) {
     players[playerIndex] = player;
     setTeamPlayers(teamID, players);
   }
+}
+
+// GAMES DATA
+
+function getTeamGames(teamID) {
+  var allTeams = getTeams();
+  return allTeams[teamID].games;
+}
+
+function setTeamGames(teamID, teamGames) {
+  var allTeams = getTeams();
+  allTeams[teamID].games = teamGames;
+  saveTeams(allTeams);
 }
 
 /*
