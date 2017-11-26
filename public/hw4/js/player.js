@@ -40,6 +40,8 @@ var mockPlayers = [
   }
 ]
 
+var deleteState = 0; // for delete player confirmation
+
 // load players and display to screen
 function loadPlayers() {
   var state = mainState.getState();
@@ -134,4 +136,21 @@ function populatePlayerDetails() {
   playerThrowIns.innerText = "Throw ins: " + player.throwIns;
   var playerGamesPlayed = document.getElementById('playerGamesPlayed');
   playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
+}
+
+
+function deletePlayer() {
+  var deleteButton = document.getElementById('deletePlayer');
+  if (deleteState == 0) {
+    deleteButton.value = "Press again to confirm";
+    deleteState = 1;
+    setTimeout(function() {
+      deleteState = 0;
+      deleteButton.value = "Delete Player";
+    }, 1000);
+  } else {
+    console.log("DELETED")
+    //window.location='players.html';
+  }
+
 }

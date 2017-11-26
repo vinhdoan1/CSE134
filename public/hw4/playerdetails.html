@@ -6,6 +6,7 @@
   <title>TeamWatch</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link rel="stylesheet" type="text/css" href="css/my.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script src="./js/api.js"></script>
@@ -23,7 +24,7 @@
       <ul class="playerdetails">
         <li id="playerGoals"></li>
         <li id="playerFouls"></li>
-        <li id="playerYellowCards">Yellow Cards:</li>
+        <li id="playerYellowCards"></li>
         <li id="playerRedCards"></li>
         <li id="playerShotsOnGoal"></li>
         <li id="playerCornerKicks"></li>
@@ -31,8 +32,8 @@
         <li id="playerThrowIns"></li>
         <li id="playerGamesPlayed"></li>
       </ul>
-      <input type="button" class="addplayerbutton" value="Edit Player" onclick=""/>
-      <input type="button" class="addplayerbutton" value="Delete Player" onclick=""/>
+      <input type="button" id="editPlayer" class="editplayerbuttons" value="Edit Player" onclick=""/>
+      <input type="button" id="deletePlayer" class="editplayerbuttons" value="Delete Player" onclick="deletePlayer()"/>
   </div>
 
  <footer>
