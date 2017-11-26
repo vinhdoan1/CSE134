@@ -7,12 +7,15 @@ api.userExists = userExists;
 api.getTeams = getTeams;
 api.addTeam = addTeam;
 api.getTeam = getTeam;
-api.getTeamGames = getTeamGames;
+api.getTeamName = getTeamName;
 api.getTeamPlayers = getTeamPlayers;
-api.setTeamGames = setTeamGames;
 api.setTeamPlayers = setTeamPlayers;
 api.getTeamPlayer = getTeamPlayer;
 api.setTeamPlayer = setTeamPlayer;
+api.getTeamGames = getTeamGames;
+api.setTeamGames = setTeamGames;
+api.getTeamGame = getTeamGame;
+api.setTeamGame = getTeamGame;
 
 function generateID() {
   return Date.now().toString(36);
@@ -98,6 +101,11 @@ function getTeam(teamID) {
   return allTeams[teamID];
 }
 
+function getTeamName(teamID){
+  var teams = getTeams();
+  return teams[teamID].name;
+}
+
 // PLAYER DATA
 
 function getTeamPlayers(teamID) {
@@ -116,7 +124,7 @@ function getTeamPlayer(teamID, playerID) {
   var teamPlayers = allTeams[teamID].players;
   return teamPlayers.find(function(player) {
     return player.id == playerID;
-  })
+  });
 }
 
 function setTeamPlayer(teamID, playerID, player) {
@@ -143,13 +151,22 @@ function setTeamGames(teamID, teamGames) {
   saveTeams(allTeams);
 }
 
-/*
-function addToSchedule(teamID, schedule) {
-  var allTeams = getTeams();
-  var teamGames = allTeams[teamID];
-  teamGames.push({
-    gameID
-  })
-  allTeams[teamID] = teamGames;
-  saveTeams(allTeams);
-}*/
+function getTeamGame(teamID, gameID) {
+  var teams = getTeams();
+  var games = teams[teamID].games;
+  return games.find(function(game){
+    return game.id == gameID;
+  });
+}
+
+function setTeamGame(teamID, gameID, game){
+  var games = getTeamGames(teamID);
+  var gameIndex = games.findIndex(function(game){
+    return game.id == gameID;
+  });
+  if(gameIndex >= 0){
+    games[gameIndex] = game;
+    setTeamGames(teamID, games);
+  }
+}
+

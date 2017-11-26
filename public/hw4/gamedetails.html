@@ -7,21 +7,25 @@
   <link rel="stylesheet" type="text/css" href="css/my.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="js/schedule.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/gamedetails.js"></script>
 </head>
-<body>
+<body onload="populateGameDetails()">
   <div class="outercontainer2">
-    <h3 id="gamedetails_date">[Game Date]</h3>
-    <h4 id="gamedetails_location">[Game Location]</h4>
+    <h3 id="gamedetails_date"></h3>
+    <h3 id="gamedetails_time"></h3>
+    <h4 id="gamedetails_location"></h4>
       <div id="gamedetails_details">
         <div id="firstdiv">
           <img id="teamimgdetailfirst" src="images/pig.png" alt="Team Logo">
-          <p id="firstteam">[My Team]</p>
+          <p id="firstteam"></p>
         </div>
         <span>VS.</span>
         <div id="seconddiv">
           <img id="teamimgdetailsecond" src="images/rhino.png" alt="Team Logo">
-          <p id="secondteam">[Opposing Team]</p>
+          <p id="secondteam"></p>
         </div>
       </div>
       <hr />
@@ -63,7 +67,7 @@
 
       <div id="gamedetails_options">
         <input type="button" id="gamedetails_collectstats" class="gamedetailbutton" value="Collect Game Statistics" onclick=""/>
-        <input type="button" id="gamedetails_edit" class="gamedetailbutton" value="Edit Game Details" onclick=""/>
+        <input type="button" id="gamedetails_edit" class="gamedetailbutton" value="Edit Game Details" onclick="window.location = 'editgame.html';"/>
         <input type="button" id="gamedetails_delete" class="gamedetailbutton" value="Delete Game" onclick="deleteGame()"/>
       </div>
   </div>

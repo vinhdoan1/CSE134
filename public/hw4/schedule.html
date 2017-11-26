@@ -8,10 +8,13 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script src="js/schedule.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
 </head>
 <body onload="loadSchedule()">
   <div class="outercontainer2">
     <h2 id="h1">Schedule</h2>
+    <button style="background-color:red" onclick="clearSchedule()">CLEAR!</button>    
     <p id="emptyschedule">There are no games scheduled.</p>
     <div id="schedulecontainer">
     </div>
