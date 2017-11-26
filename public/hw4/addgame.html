@@ -27,8 +27,8 @@
         <input type="text" name="gamelocation" id="gamelocation" class="addgameformfield" placeholder="Location">
         <input type="date" name="gamedate" id="gamedate" class="addgameformfield" placeholder="Date">
         <input type="time" name="gametime" id="gametime" class="addgameformfield" placeholder="Time">
-        <span id="addgame_error">Please fill out all fields.</span>
-        <span id="addgame_duplicate">Error: That game already exists on the schedule.</span>
+        <span class="errortext" id="addgame_error">Please fill out all fields.</span>
+        <span class="errortext" id="addgame_duplicate">Error: That game already exists on the schedule.</span>
         <input type="button" class="addgamebutton" value="Add Game" onclick="validateAddGameForm(this.form);"/>
     </form>
   </div>

@@ -1,14 +1,17 @@
+var api = {}; // not necessary just to make it more obvious
+api.getUsers = getUsers;
+api.addUser = addUser;
+api.authenticateUser = authenticateUser;
+api.getTeams = getTeams;
+api.getTeam = getTeam;
+api.getTeamGames = getTeamGames;
+api.getTeamPlayers = getTeamPlayers;
+api.setTeamGames = setTeamGames;
+api.setTeamPlayers = setTeamPlayers;
+api.getTeamPlayer = getTeamPlayer;
+
 function generateID() {
   return Date.now().toString(36);
-}
-
-// STATE: loggedIn, teamID
-function setState(state) {
-  localStorage.setItem('state', JSON.stringify(state));
-}
-
-function getState() {
-  return localStorage.getItem("state");
 }
 
 // USERS
@@ -39,6 +42,13 @@ function addUser(username, password, email) {
   })
   saveUser(alllUsers);
   return newID;
+}
+
+function authenticateUser(username, password) {
+  var allUsers = getUsers();
+  return allUsers.find(function(user) {
+    return user.name == username && user.pass == password;
+  });
 }
 
 // TEAMS
@@ -95,8 +105,16 @@ function setTeamGames(teamID, teamGames) {
 
 function setTeamPlayers(teamID, teamPlayers) {
   var allTeams = getTeams();
-  allTeams[teamID].players = teamGames;
+  allTeams[teamID].players = teamPlayers;
   saveTeams(allTeams);
+}
+
+function getTeamPlayer(teamID, playerID) {
+  var allTeams = getTeams();
+  var teamPlayers = allTeams[teamID].players;
+  return teamPlayers.find(function(player) {
+    return player.id == playerID;
+  })
 }
 
 /*

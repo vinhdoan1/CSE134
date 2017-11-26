@@ -193,7 +193,7 @@ button:hover{
   max-height: 28rem;
 }
 
-#addgame_error, #addgame_duplicate{
+.errortext {
   display: none;
   color: red;
   font-size: small;
