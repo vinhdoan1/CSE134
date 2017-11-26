@@ -13,7 +13,14 @@ function setState(key, value) {
 }
 
 function getState() {
-  return JSON.parse(localStorage.getItem("state"));
+  var stateString = localStorage.getItem('state');
+  var fullState = {};
+  if (stateString != null) {
+    fullState = JSON.parse(stateString);
+  } else {
+    localStorage.setItem('state', JSON.stringify(fullState));
+  }
+  return fullState;
 }
 
 function checkLoggedIn() {

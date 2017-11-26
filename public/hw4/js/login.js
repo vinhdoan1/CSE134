@@ -3,6 +3,7 @@ function authenticate(form) {
   var username = form.username.value;
   var password = form.password.value;
   var user = api.authenticateUser(username, password);
+  var login_error = document.getElementById('login_error');
   if (user){
     mainState.setState("loggedIn", true);
     mainState.setState("teamID", user.id);
@@ -10,7 +11,6 @@ function authenticate(form) {
     window.location='team.html';
   }
   else{
-    var login_error = document.getElementById('login_error');
     login_error.style.display = 'block';
   }
 }
