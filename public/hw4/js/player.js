@@ -46,6 +46,9 @@ var deleteState = 0; // for delete player confirmation
 function loadPlayers() {
   var state = mainState.getState();
   var players = api.getTeamPlayers(state.teamID);
+  players = players.filter(function(player) {
+    return !player.deleted;
+  })
   for (var i = 0; i < players.length; i++) {
     var player = players[i];
     var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
@@ -149,8 +152,39 @@ function deletePlayer() {
       deleteButton.value = "Delete Player";
     }, 1000);
   } else {
-    console.log("DELETED")
-    //window.location='players.html';
+    var state = mainState.getState();
+    var player = api.getTeamPlayer(state.teamID, state.playerID);
+    player.deleted = true;
+    api.setTeamPlayer(state.teamID, state.playerID, player);
+    window.location='players.html';
   }
+}
 
+function populateEditPlayer() {
+  var state = mainState.getState();
+  var player = api.getTeamPlayer(state.teamID, state.playerID);
+  var playerForm = document.getElementById('editplayerform');
+  playerForm.elements['playername'].value = player.name;
+  playerForm.elements['playernumber'].value = player.number;
+  playerForm.elements['playerposition'].value = player.position;
+}
+
+function validatePlayerEditForm() {
+  var state = mainState.getState();
+  var player = api.getTeamPlayer(state.teamID, state.playerID);
+  var incomplete = false;
+  var playerForm = document.getElementById('editplayerform');
+  player.name = playerForm.elements['playername'].value;
+  player.number = playerForm.elements['playernumber'].value;
+  player.position = playerForm.elements['playerposition'].value;
+  incomplete = player.name == "" || player.number == "" ||  player.position == "";
+  var addplayer_error = document.getElementById('addplayer_error');
+  if(incomplete){
+    addplayer_error.style.display = 'block';
+  }
+  else{
+    addplayer_error.style.display = 'none';
+    api.setTeamPlayer(state.teamID, state.playerID, player);
+    window.location='players.html';
+  }
 }
