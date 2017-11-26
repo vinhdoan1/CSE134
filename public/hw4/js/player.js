@@ -40,6 +40,7 @@ var mockPlayers = [
   }
 ]
 
+var imageSet = false;
 var deleteState = 0; // for delete player confirmation
 
 // load players and display to screen
@@ -57,13 +58,27 @@ function loadPlayers() {
     playerDiv.onclick = createToPlayerFunction(player);
     var playerDiv = playerButton.querySelector("img");
     playerDiv.alt = player.name;
-    //playerDiv.src = player.image;
+    playerDiv.src = player.image;
     var playerDetails = playerButton.querySelectorAll("li");
     playerDetails[0].innerText = player.name + " #" + player.number;
     playerDetails[1].innerText = player.position;
     playerDetails[2].innerText = "Goals: " + player.goals;
     document.getElementById('playerButtons').appendChild(playerButton);
   }
+}
+
+function uploadImage() {
+  var playerForm = document.getElementById('playerimagefield');
+  if (playerForm.files.length <= 0) {
+    return;
+  }
+  var uploaded = "";
+  image.readImageAndResize(playerForm.files[0], 300, function(result) {
+    var playerImage = document.getElementById('playerbuttonimg');
+    playerImage.style.visibility = "visible";
+    playerImage.src = result;
+    imageSet = true;
+  });
 }
 
 // creates function to send to individual player page. This is here because closures
@@ -79,6 +94,7 @@ function validatePlayerForm() {
     id: api.generateID(),
     name: "",
     position: "",
+    image: "#",
     number: 0,
     goals: 0,
     fouls: 0,
@@ -95,7 +111,8 @@ function validatePlayerForm() {
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
-  incomplete = player.name == "" || player.number == "" ||  player.position == "";
+  player.image = document.getElementById('playerbuttonimg').src;
+  incomplete = player.name == "" || player.number == "" ||  player.position == "" || !imageSet;
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
     addplayer_error.style.display = 'block';
@@ -139,6 +156,8 @@ function populatePlayerDetails() {
   playerThrowIns.innerText = "Throw ins: " + player.throwIns;
   var playerGamesPlayed = document.getElementById('playerGamesPlayed');
   playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
+  var playerImage = document.getElementById('playerImage');
+  playerImage.src = player.image;
 }
 
 
@@ -167,6 +186,7 @@ function populateEditPlayer() {
   playerForm.elements['playername'].value = player.name;
   playerForm.elements['playernumber'].value = player.number;
   playerForm.elements['playerposition'].value = player.position;
+  document.getElementById('playerimg').src = player.image;
 }
 
 function validatePlayerEditForm() {
@@ -177,6 +197,7 @@ function validatePlayerEditForm() {
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
+  player.image = document.getElementById('playerimg').src;
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
@@ -187,4 +208,15 @@ function validatePlayerEditForm() {
     api.setTeamPlayer(state.teamID, state.playerID, player);
     window.location='players.html';
   }
+}
+
+function uploadEditImage() {
+  var playerForm = document.getElementById('playerimagefield');
+  if (playerForm.files.length <= 0) {
+    return;
+  }
+  image.readImageAndResize(playerForm.files[0], 300, function(result) {
+    var playerImage = document.getElementById('playerimg');
+    playerImage.src = result;
+  });
 }

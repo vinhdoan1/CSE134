@@ -12,6 +12,7 @@
   <script src="./js/api.js"></script>
   <script src="./js/state.js"></script>
   <script src="./js/player.js"></script>
+  <script src="./js/image.js"></script>
 </head>
 <body onload="populateEditPlayer()">
   <div class="outercontainer">
@@ -20,10 +21,10 @@
         <h2>Edit Player</h2>
         <p>Upload a Picture:</p>
         <form id="editplayerpictureform">
-          <input type="file" name="playerpic" accept="image/*">
-          <input type="submit">
+          <input id="playerimagefield" type="file" name="playerpic" accept="image/*">
+          <input type="button" value="Upload" onclick="uploadEditImage()">
         </form>
-        <img id="playerbuttonimg" src="images/jefffull.png" alt="Player Image">
+        <img id="playerimg" src="#" alt="Player Image">
       </div>
       <form class="playerform" id="editplayerform" name="addeventform">
           <input type="text" id="playername" class="addplayerformfield" placeholder="Enter Player Name">
