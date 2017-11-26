@@ -61,13 +61,20 @@ button:hover{
   text-align: left;
 }
 
-.gamebutton {
+.gamebutton, .gamedetailbutton{
   text-align: center;
   width: 16rem;
   margin: .5rem auto 0 auto;
   display: block;
 }
 
+.gamedetailbutton{
+  height: 2rem;
+}
+
+#gamedetails_delete{
+  background-color: red;
+}
 
 #teamimgcontainerteam{
   width: 7rem;
@@ -98,13 +105,13 @@ button:hover{
   width: 6.5rem;
 }
 
-#gamedetailcontainer{
+#gamedetails_details{
   margin: 0.2rem  1rem auto;
   text-align: center;
 
 }
 
-#gamedetailcontainer div{
+#gamedetails_details div{
 
   display: inline-block;
   width: 45%;
@@ -130,44 +137,30 @@ button:hover{
 
 }
 
-#gamedetailwarpper{
-
+#gamedetails_stats{
   width: 100%;
   display: inline-block;
 }
-#gamedetailfirst {
 
+#gamedetailfirst {
   width: 50%;
-  height: 50%;
-  position: absolute;
+  float: left;
   text-align: left;
 }
 
 #gamedetailsecond {
-
-    width: 50%;
-    border-left: 1px solid black;
-    height: 50%;
-    position: absolute;
-    left: 50%;
-    text-align: left;
+  float: left;
+  border-left: 1px solid black;
+  text-align: left;
 }
 
-#gamedetailteams p{
-  display: inline;
-  padding-right: .5rem;
-  padding-left: .5rem;
-}
-
-#stats p{
-
+#stats p{}
   display: inline;
   padding-right: .3rem;
   padding-left: .3rem;
 }
 
 #goals p{
-
   display: inline;
   padding-right: .9rem;
   padding-left: .9rem;
@@ -314,7 +307,7 @@ footer .logofootertextcenter {
     width: 1.5rem;
   }
 
-  #gamedetailcontainer div{
+  #gamedetails_details div{
 
     display: inline-block;
     width: 45%;

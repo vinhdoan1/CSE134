@@ -1,9 +1,8 @@
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
-//Schedule
 function validateAddGameForm(form){
   var game = new Object();
-  var incomplete = false;
+  var incomplete = false; 
   game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
   game.location = form.elements['gamelocation'].value;
@@ -45,7 +44,7 @@ function addGame(game){
     });
     localStorage.setItem("schedule", JSON.stringify(scheduleList));
     window.location='schedule.html';
-    console.log(scheduleList);
+    console.log(scheduleList);  
   }
 }
 
@@ -57,7 +56,7 @@ function parseDateAndTime(datestr, timestr){
 
 function createGameButtonDetail(game){
   var date = parseDateAndTime(game.date, game.time);
-  var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
+  var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12; 
   var ampm = date.getHours() >= 12 ? "PM" : "AM";
   let btn = document.createElement("button");
   btn.setAttribute("type", "button");
@@ -98,3 +97,4 @@ function getUpcomingGame(){
     document.getElementById('upcominggamecontainer').appendChild(btn);
   }
 }
+
