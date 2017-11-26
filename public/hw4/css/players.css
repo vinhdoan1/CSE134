@@ -138,14 +138,14 @@ footer .logofootertextcenter {
   margin-right: auto;
 }
 
-#addplayerform {
+.playerform {
   width: 18rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-#addplayerform input{
+.playerform input{
   display: block;
   width: 18rem;
   height: 2rem;
@@ -156,7 +156,7 @@ footer .logofootertextcenter {
   box-sizing: border-box;
 }
 
-#addplayerform .addplayerbutton {
+.playerform .addplayerbutton {
   width: 12rem;
   margin: 1rem auto 1rem auto;
 }

@@ -13,24 +13,25 @@
   <script src="./js/state.js"></script>
   <script src="./js/player.js"></script>
 </head>
-<body>
+<body onload="populateEditPlayer()">
   <div class="outercontainer">
 
       <div class="playerpreview">
-        <h2>Add Player</h2>
+        <h2>Edit Player</h2>
         <p>Upload a Picture:</p>
-        <form id="addplayerpictureform">
+        <form id="editplayerpictureform">
           <input type="file" name="playerpic" accept="image/*">
           <input type="submit">
         </form>
         <img id="playerbuttonimg" src="images/jefffull.png" alt="Player Image">
       </div>
-      <form class="playerform" id="addplayerform" name="addeventform">
+      <form class="playerform" id="editplayerform" name="addeventform">
           <input type="text" id="playername" class="addplayerformfield" placeholder="Enter Player Name">
           <input type="number" id="playernumber" class="addplayerformfield" placeholder="Enter Player Number">
           <input type="text" id="playerposition" class="addplayerformfield" placeholder="Enter Player Position">
           <span class="errortext" id="addplayer_error">Please fill out all fields.</span>
-          <input type="button" class="addplayerbutton" value="Add Player" onclick="validatePlayerForm()"/>
+          <input type="button" class="addplayerbutton" value="Edit Player" onclick="validatePlayerEditForm()"/>
+          <input type="button" class="addplayerbutton" value="Cancel" onclick="window.location='playerdetails.html';"/>
       </form>
     </div>
 

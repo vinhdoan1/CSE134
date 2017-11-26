@@ -12,6 +12,7 @@ api.getTeamPlayers = getTeamPlayers;
 api.setTeamGames = setTeamGames;
 api.setTeamPlayers = setTeamPlayers;
 api.getTeamPlayer = getTeamPlayer;
+api.setTeamPlayer = setTeamPlayer;
 
 function generateID() {
   return Date.now().toString(36);
@@ -125,6 +126,17 @@ function getTeamPlayer(teamID, playerID) {
   return teamPlayers.find(function(player) {
     return player.id == playerID;
   })
+}
+
+function setTeamPlayer(teamID, playerID, player) {
+  var players = api.getTeamPlayers(teamID);
+  var playerIndex = players.findIndex(function(player) {
+    return player.id == playerID;
+  });
+  if (playerIndex) {
+    players[playerIndex] = player;
+    setTeamPlayers(teamID, players);
+  }
 }
 
 /*
