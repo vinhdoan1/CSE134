@@ -26,23 +26,32 @@ function createTeam() {
   var pass1 = teamForm.elements['teamPass1'].value;
   var pass2 = teamForm.elements['teamPass2'].value;
   incomplete = name == "" || email == "" ||  username == "" || pass1 == "" || pass2 == "";
-  var addplayer_error = document.getElementById('addplayer_error');
+  var addteam_error = document.getElementById('addteam_error');
+  var accountexists_error = document.getElementById('accountexists_error');
+  var password_error = document.getElementById('password_error');
   if(incomplete){
-    addplayer_error.style.display = 'block';
+    addteam_error.style.display = 'block';
+    accountexists_error.display = 'none';
     password_error.style.display = 'none';
-  } else if (pass1 != pass2) {
-    addplayer_error.style.display = 'none';
-    password_error.style.display = 'block';
+  } else if (api.userExists(username)){
+    addteam_error.style.display = 'block';
+    accountexists_error.display = 'none';
+    password_error.style.display = 'none';
   }
-  else{
-    addplayer_error.style.display = 'none';
+  else if (pass1 != pass2) {
+    addteam_error.style.display = 'none';
+    accountexists_error.display = 'none';
+    password_error.style.display = 'block';
+  } else{
+    addteam_error.style.display = 'none';
+    accountexists_error.display = 'none';
     password_error.style.display = 'none';
     var userID = api.addUser(username, pass1, email);
     api.addTeam(userID, name, "");
     mainState.setState({
       loggedIn: true,
       teamID: userID,
-    })
+    });
     window.location='team.html';
   }
 }

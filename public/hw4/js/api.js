@@ -2,7 +2,9 @@ var api = {}; // not necessary just to make it more obvious
 api.getUsers = getUsers;
 api.addUser = addUser;
 api.authenticateUser = authenticateUser;
+api.userExists = userExists;
 api.getTeams = getTeams;
+api.addTeam = addTeam;
 api.getTeam = getTeam;
 api.getTeamGames = getTeamGames;
 api.getTeamPlayers = getTeamPlayers;
@@ -21,7 +23,7 @@ function saveUsers(users) {
 
 function getUsers() {
   var allUsersString = localStorage.getItem("users");
-  var allUsers = {};
+  var allUsers = [];
   if (allUsersString != null) {
     allUsers = JSON.parse(allUsersString);
   } else {
@@ -31,16 +33,16 @@ function getUsers() {
 }
 
 function addUser(username, password, email) {
-  var alllUsers = getUsers();
+  var allUsers = getUsers();
 
   var newID = generateID();
-  alllUsers.push({
+  allUsers.push({
     name: username,
     pass: password,
     email: email,
     id: newID,
   })
-  saveUser(alllUsers);
+  saveUsers(allUsers);
   return newID;
 }
 
@@ -48,6 +50,13 @@ function authenticateUser(username, password) {
   var allUsers = getUsers();
   return allUsers.find(function(user) {
     return user.name == username && user.pass == password;
+  });
+}
+
+function userExists(username) {
+  var allUsers = getUsers();
+  return allUsers.find(function(user) {
+    return user.name == username;
   });
 }
 

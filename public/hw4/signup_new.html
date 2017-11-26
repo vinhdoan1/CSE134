@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TeamWatch</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/my.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script src="./js/login.js"></script>
@@ -22,14 +23,15 @@
     <div class="teamimgcontainer">
       <img class="teamimg" src="images/pig.png" alt="Team Logo">
     </div>
-    <form id="signupform" name="signupform" action="team.html">
+    <form id="signupform" name="signupform">
       <input type="email" class="forminput" placeholder="E-mail" id="teamEmail"/>
       <input type="text" class="forminput" placeholder="Username" id="teamUser"/>
       <input type="password" class="forminput" placeholder="Password" id="teamPass1"/>
       <input type="password" class="forminput" placeholder="Confirm Password" id="teamPass2"/>
       <span class="errortext" id="addteam_error">Please fill out all fields.</span>
+      <span class="errortext" id="accountexists_error">Account already exists.</span>
       <span class="errortext" id="password_error">Passwords do not match.</span>
-      <input type="submit" class="formbutton" value="Sign Up" onclick="createTeam()"/>
+      <input type="button" class="formbutton" value="Sign Up" onclick="createTeam()"/>
     </form>
   </div>
 </body>
