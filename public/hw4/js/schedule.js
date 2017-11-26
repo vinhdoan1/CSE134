@@ -123,12 +123,31 @@ function loadSchedule(){
   }
 }
 
+function populateOpponentSelect(selectcontainer){
+  var state = mainState.getState();
+  var teamID = state.teamID;
+  var opponentList = api.getOpponents(teamID);
+  for(var i = 0; i< opponentList.length; i++){
+    var opp = opponentList[i];
+    var opt = document.createElement("option");
+    opt.value = opp.name;
+    opt.text = opp.name;
+    document.getElementById(selectcontainer).appendChild(opt);
+  }
+}
+
+function loadAddForm(){
+  populateOpponentSelect('addgameopponent');
+}
+
 //preload the edit form
-function populateEditForm(){
+function loadEditForm(){
   var state = mainState.getState();
   var gameID = state.gameID;
   var teamID = state.teamID;
   var game = api.getTeamGame(teamID, gameID);
+
+  populateOpponentSelect('editgameopponent');
 
   // var date = parseDateAndTime(game.date, game.time);
 

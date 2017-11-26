@@ -8,10 +8,11 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script src="js/schedule.js"></script>
+  <script src="js/opponent.js"></script>
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
 </head>
-<body>
+<body onload="loadAddForm()">
   <div class="outercontainer2">
     <h2 id="h2">Add Game</h2>
     <div id="teamimgcontainergame">
@@ -20,12 +21,14 @@
     <form id="addgameform" class="gameform" name="addgameform">
         <select name="gameopponent" id="addgameopponent" class="gameformfield">
           <option selected="true" disabled="disabled">Choose Opponent</option>
-          <option value="Turtles">Turtles</option>
+          <!-- <option value="Turtles">Turtles</option>
           <option value="Rhinos">Rhinos</option>
           <option value="Lions">Lions</option>
           <option value="Tigers">Tigers</option>
-          <option value="Elephants">Elephants</option>
+          <option value="Elephants">Elephants</option> -->
         </select>
+        <p style="margin-top:0.2rem; margin-bottom:0.2rem">OR</p>
+        <input type="button" id="gameformaddop" class="gameformbutton" value="Add Opponent" onclick="goToAddOpponent('addgame.html')"/>
         <input type="text" name="gamelocation" id="addgamelocation" class="gameformfield" placeholder="Location">
         <input type="date" name="gamedate" id="addgamedate" class="gameformfield" placeholder="Date">
         <input type="time" name="gametime" id="addgametime" class="gameformfield" placeholder="Time">

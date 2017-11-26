@@ -242,6 +242,9 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   padding-left: 3px;
 }
 
+#gameformaddop{
+  margin-top: 0;
+}
 
 #homebutton{
   position: absolute;

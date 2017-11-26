@@ -16,6 +16,8 @@ api.getTeamGames = getTeamGames;
 api.setTeamGames = setTeamGames;
 api.getTeamGame = getTeamGame;
 api.setTeamGame = getTeamGame;
+api.getOpponents = getOpponents;
+api.setOpponents = setOpponents;
 
 function generateID() {
   return Date.now().toString(36);
@@ -90,6 +92,7 @@ function addTeam(userID, name, logo) {
     logo: logo,
     games: [],
     players: [],
+    opponents: []
   }
   saveTeams(allTeams);
 }
@@ -168,5 +171,17 @@ function setTeamGame(teamID, gameID, game){
     games[gameIndex] = game;
     setTeamGames(teamID, games);
   }
+}
+
+//OPPONENT DATA
+function getOpponents(teamID){
+  var allTeams = getTeams();
+  return allTeams[teamID].opponents;
+}
+
+function setOpponents(teamID, opponentList){
+  var allTeams = getTeams();
+  allTeams[teamID].opponents = opponentList;
+  saveTeams(allTeams);
 }
 

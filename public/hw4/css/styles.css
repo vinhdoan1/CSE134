@@ -86,6 +86,8 @@ input[type="number"]
   background-color: #4286f4;
   color: white;
   margin: 1rem auto 0 auto;
+  width: 15rem;
+  display: block;
 }
 
 .formbutton:hover{
@@ -100,7 +102,7 @@ input[type="number"]
   white-space: normal;
 }
 
-#teaminput{
+#teaminput, #opteaminput{
   height: 2.5rem;
   width: 15rem;
 }
@@ -126,7 +128,7 @@ input[type="number"]
   margin: 0.5rem auto 0 auto;
 }
 
-#logoupload{
+#logoupload, #oplogoupload{
   margin: auto;
   width: 10rem;
 }
@@ -172,7 +174,7 @@ input[type="number"]
     font-size: 30px;
   }
 
-  #teaminput{
+  #teaminput, #opteaminput{
     height: 2rem;
   }
 

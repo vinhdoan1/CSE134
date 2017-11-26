@@ -11,7 +11,7 @@
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
 </head>
-<body onload="populateEditForm()">
+<body onload="loadEditForm()">
   <div class="outercontainer2">
     <h2 id="h2">Edit Game</h2>
     <div id="teamimgcontainergame">
@@ -20,12 +20,14 @@
     <form id="editgameform" class="gameform" name="gameform">
         <select name="gameopponent" id="editgameopponent" class="gameformfield">
           <option selected="true" disabled="disabled">Choose Opponent</option>
-          <option value="Turtles">Turtles</option>
+          <!-- <option value="Turtles">Turtles</option>
           <option value="Rhinos">Rhinos</option>
           <option value="Lions">Lions</option>
           <option value="Tigers">Tigers</option>
-          <option value="Elephants">Elephants</option>
+          <option value="Elephants">Elephants</option> -->
         </select>
+        <p style="margin-top:0.2rem; margin-bottom:0.2rem">OR</p>
+        <input type="button" id="gameformaddop" class="gameformbutton" value="Add Opponent" onclick="goToAddOpponent('addgame.html')"/>
         <input type="text" name="gamelocation" id="editgamelocation" class="gameformfield" placeholder="Location">
         <input type="date" name="gamedate" id="editgamedate" class="gameformfield" placeholder="Date">
         <input type="time" name="gametime" id="editgametime" class="gameformfield" placeholder="Time">
