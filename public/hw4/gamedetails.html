@@ -10,68 +10,62 @@
 </head>
 <body>
   <div class="outercontainer2">
-    <button type="button" id="homebutton" onclick="window.location='team.html';">Home
-    </button>
-    <h3>November 10, 2017</h3>
-    <h4>Philadelphia Community Park (Home)</h4>
-      <div id="gamedetailcontainer">
+    <h3 id="gamedetails_date">[Game Date]</h3>
+    <h4 id="gamedetails_location">[Game Location]</h4>
+      <div id="gamedetails_details">
         <div id="firstdiv">
           <img id="teamimgdetailfirst" src="images/pig.png" alt="Team Logo">
-          <p id="firstteam">
-            Philadelphia Pigs
-          </p>
+          <p id="firstteam">[My Team]</p>
         </div>
+        <span>VS.</span>
         <div id="seconddiv">
           <img id="teamimgdetailsecond" src="images/rhino.png" alt="Team Logo">
-          <p id="secondteam">
-            Tallahasee Rhinos
-          </p>
+          <p id="secondteam">[Opposing Team]</p>
         </div>
       </div>
       <hr />
-      <div id="gamedetailwrapper">
-
+      
+      <div id="gamedetails_stats">
         <div id="gamedetailfirst">
           <ul>
             <li>
-              Goals: 3
+              Goals: <span id="gamesdetails_goals">--</span>
             </li>
             <li>
-              Shots on Goal: 10
+              Shots on Goal: <span id="gamesdetails_shotsongoals">--</span>
             </li>
             <li>
-              Corner Kicks: 2
+              Corner Kicks: <span id="gamesdetails_cornerkicks">--</span>
             </li>
             <li>
-              Goal Kicks: 5
+              Goal Kicks: <span id="gamesdetails_goalkicks">--</span>
             </li>
           </ul>
         </div>
         <div id="gamedetailsecond">
           <ul>
             <li>
-              Goals: 3
+              Goals: <span id="gamesdetails_goalsop">--</span>
             </li>
             <li>
-              Shots on Goal: 15
+              Shots on Goal: <span id="gamesdetails_shotsongoalsop">--</span>
             </li>
             <li>
-              Corner Kicks: 1
+              Corner Kicks: <span id="gamesdetails_cornerkicksop">--</span>
             </li>
             <li>
-              Goal Kicks: 3
+              Goal Kicks: <span id="gamesdetails_goalkicksop">--</span>
             </li>
           </ul>
         </div>
       </div>
+
+      <div id="gamedetails_options">
+        <button id="gamedetails_collectstats" class="gamedetailbutton">Collect Game Statistics</button>
+        <button id="gamedetails_edit" class="gamedetailbutton">Edit Game Details</button>
+        <button id="gamedetails_delete" class="gamedetailbutton">Delete Game</button>
+      </div>
   </div>
-  <script>
-    document.getElementById("h1").innerHTML = "Philadelphia Pigs";
-    document.getElementById("wins").innerHTML += "5";
-    document.getElementById("loss").innerHTML += "0";
-    document.getElementById("goalsfor").innerHTML += "14";
-    document.getElementById("goalsagainst").innerHTML += "4";
-  </script>
 
   <footer>
     <div class="footerlogo">
