@@ -201,14 +201,14 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   margin-top: 0.7rem;
 }
 
-#addgameform {
+.gameform {
   width: 18rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-#addgameform input{
+.gameform input{
   display: block;
   width: 18rem;
   height: 2rem;
@@ -219,12 +219,12 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   box-sizing: border-box;
 }
 
-#addgameform .addgamebutton {
+.gameform .gameformbutton {
   width: 12rem;
   margin: 1rem auto 1rem auto;
 }
 
-#addgameform select {
+.gameform select {
     display: block;
     border: 1px solid #ccc;
     width: 18rem;
@@ -232,16 +232,11 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
     border-radius: 5px;
 }
 
-#addgameform .addgamebutton {
-  width: 12rem;
-  margin: 1rem auto 1rem auto;
-}
-
-#addgameform .addgamebutton:hover{
+.gameform .gameformbutton:hover{
   background-color: #1b53ad;
 }
 
-#addgameform .addgameformfield{
+.gameform .gameformfield{
   border: 1px solid lightgray;
   margin: 0.7rem auto 0 auto;
   padding-left: 3px;
@@ -249,7 +244,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
 
 
 #homebutton{
-
   position: absolute;
   top: 1rem;
   right: 1rem;

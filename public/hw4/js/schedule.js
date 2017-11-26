@@ -1,9 +1,18 @@
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+schedule = {};
+schedule.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+schedule.months_long = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+schedule.parseDateAndTime = parseDateAndTime;
 
-function validateAddGameForm(form){
+function parseDateAndTime(datestr, timestr){
+  var datearry = datestr.split("-");
+  var timearry = timestr.split(":");
+  return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
+}
+
+function validateGameForm(form, action){
   var incomplete = false; 
   var game = {
-    gameid: api.generateID(),
+    id: "",
     opponent: "",
     location: "",
     date: "",
@@ -17,20 +26,31 @@ function validateAddGameForm(form){
   incomplete = incomplete ||  game.date == "";
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
-  var addgame_error = document.getElementById('addgame_error');
+
+  var error_msg = action == "add" ? document.getElementById('addgame_error') : document.getElementById('editgame_error');
   if(incomplete){
-    addgame_error.style.display = 'block';
+    error_msg.style.display = 'block';
   }
   else{
-    addgame_error.style.display = 'none';
-    addGame(game);
+    error_msg.style.display = 'none';
+    if(action == "add"){
+      game.id = api.generateID();
+    }
+    else if(action == "edit"){
+      var state = mainState.getState();
+      var gameid = state.gameID;
+      game.id = gameid;
+    }
+    updateGame(game, action);
   }
 }
 
-function addGame(game){
-  //create or retrieve the game schedule
+function updateGame(game, action){
   var state = mainState.getState();
-  var gamesList = api.getTeamGames(state.teamID);
+  var gameID = state.gameID;
+  var teamID = state.teamID;
+
+  var gamesList = api.getTeamGames(teamID);
   if(gamesList == null){
     gamesList = {};
   }
@@ -39,27 +59,38 @@ function addGame(game){
     return other.opponent == game.opponent && other.location == game.location &&
       other.date == game.date && other.time == game.time;
   });
-
   if(exists){
-    var addgame_duplicate = document.getElementById('addgame_duplicate');
-    addgame_duplicate.style.display = 'block';
+    var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
+    duplicate_msg.style.display = 'block';
   }
   else{
-    gamesList.push(game);
+    if(action == "edit"){
+      setTeamGame(teamID, gameID, game);
+      gamesList = api.getTeamGames(teamID);
+    }
+    else if(action == "add"){
+      gamesList. push(game);
+    }
     gamesList.sort(function(a,b){
       return new Date(a.date) - new Date(b.date);
     });
-    // localStorage.setItem("schedule", JSON.stringify(scheduleList));
     api.setTeamGames(state.teamID, gamesList);
-    window.location='schedule.html';
-    console.log(scheduleList);  
+    window.location='schedule.html';    
   }
 }
 
-function parseDateAndTime(datestr, timestr){
-  var datearry = datestr.split("-");
-  var timearry = timestr.split(":");
-  return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
+//for debugging purposes
+function clearSchedule(){
+  var state = mainState.getState();
+  api.setTeamGames(state.teamID, new Array());
+  location.reload();
+}
+
+function funcToGameDetails(gameID){
+  return function() {
+    mainState.setState("gameID", gameID);
+    window.location='gamedetails.html';
+  }
 }
 
 function createGameButtonDetail(game){
@@ -70,38 +101,71 @@ function createGameButtonDetail(game){
   btn.setAttribute("type", "button");
   btn.setAttribute("class", "gamebutton");
   btn.setAttribute("onclick", "window.location='gamedetails.html';");
-  btn.innerHTML = "<p class='gamebuttondetail'>" + months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
+  btn.onclick = funcToGameDetails(game.id);
+  btn.innerHTML = "<p class='gamebuttondetail'>" + schedule.months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
   return btn;
 }
 
 function loadSchedule(){
   var state = mainState.getState();
-  var gamesList= api.getTeamGa
+  var gamesList= api.getTeamGames(state.teamID);
   var emptyschedule = document.getElementById('emptyschedule');
-  if(scheduleList == null){
+  if(gamesList.length == 0){
     emptyschedule.style.display = 'block';
   }
   else{
     emptyschedule.style.display = 'none';
-    for(var i = 0; i < scheduleList.length; i++){
-      var game = scheduleList[i];
+    for(var i = 0; i < gamesList.length; i++){
+      var game = gamesList[i];
       let btn = createGameButtonDetail(game);
       document.getElementById('schedulecontainer').appendChild(btn);
     }
   }
 }
 
+//preload the edit form
+function populateEditForm(){
+  var state = mainState.getState();
+  var gameID = state.gameID;
+  var teamID = state.teamID;
+  var game = api.getTeamGame(teamID, gameID);
+
+  // var date = parseDateAndTime(game.date, game.time);
+
+  var gameopponent = document.getElementById('editgameopponent');
+  var gamelocation = document.getElementById('editgamelocation');
+  var gamedate = document.getElementById('editgamedate');
+  var gametime = document.getElementById('editgametime');
+  
+  setSelectedIndex(gameopponent, game.opponent);
+  gamelocation.value = game.location;
+  gamedate.value = game.date;
+  gametime.value = game.time;
+}
+
+function setSelectedIndex(s, v) {
+  for ( var i = 0; i < s.options.length; i++ ) {
+    if ( s.options[i].value == v ) {
+      s.options[i].selected = true;
+      return;
+    } 
+  }
+}
+
+// MOVE THIS ELSEWHERE LATER
+
 function loadDashboard(){
   getUpcomingGame();
 }
 
 function getUpcomingGame(){
-  var scheduleList = JSON.parse(localStorage.getItem("schedule"));
-  if(scheduleList == null){
-
+  var state = mainState.getState();
+  var gamesList = api.getTeamGames(state.teamID);
+  if(gamesList.length == 0){
+    //display no upcoming games
   }
   else{
-    var game = scheduleList[0];
+    var game = gamesList[0];
     let btn = createGameButtonDetail(game);
     document.getElementById('upcominggamecontainer').appendChild(btn);
   }
