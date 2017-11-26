@@ -160,3 +160,19 @@ footer .logofootertextcenter {
   width: 12rem;
   margin: 1rem auto 1rem auto;
 }
+
+.editplayerbuttons {
+  display: inherit;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: .5rem;
+}
+
+#deletePlayer {
+  background-color: #b72027;
+}
+
+#deletePlayer:hover {
+  background-color: #771c1a;
+}

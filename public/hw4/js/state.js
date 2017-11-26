@@ -6,12 +6,21 @@ mainState.setState = setState;
 mainState.getState = getState;
 
 // STATE
-function setState(state) {
+function setState(key, value) {
+  var state = getState();
+  state[key] = value;
   localStorage.setItem('state', JSON.stringify(state));
 }
 
 function getState() {
-  return JSON.parse(localStorage.getItem("state"));
+  var stateString = localStorage.getItem('state');
+  var fullState = {};
+  if (stateString != null) {
+    fullState = JSON.parse(stateString);
+  } else {
+    localStorage.setItem('state', JSON.stringify(fullState));
+  }
+  return fullState;
 }
 
 function checkLoggedIn() {

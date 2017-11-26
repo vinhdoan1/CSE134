@@ -35,7 +35,7 @@ button, [type="button"], [type="submit"]{
   color: white;
 }
 
-button:hover{
+button:hover, [type="button"]:hover, [type="submit"]:hover{
   background-color: #1b53ad;
 }
 

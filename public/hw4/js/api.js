@@ -1,4 +1,5 @@
 var api = {}; // not necessary just to make it more obvious
+api.generateID = generateID;
 api.getUsers = getUsers;
 api.addUser = addUser;
 api.authenticateUser = authenticateUser;

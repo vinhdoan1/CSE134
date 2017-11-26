@@ -40,9 +40,12 @@ var mockPlayers = [
   }
 ]
 
+var deleteState = 0; // for delete player confirmation
+
 // load players and display to screen
 function loadPlayers() {
-  var players = api.getTeamPlayers("test");
+  var state = mainState.getState();
+  var players = api.getTeamPlayers(state.teamID);
   for (var i = 0; i < players.length; i++) {
     var player = players[i];
     var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
@@ -63,9 +66,7 @@ function loadPlayers() {
 // creates function to send to individual player page. This is here because closures
 function createToPlayerFunction(player) {
   return function() {
-    mainState.setState({
-      playerID: player.id,
-    })
+    mainState.setState("playerID", player.id);
     window.location='playerdetails.html';
   }
 }
@@ -103,15 +104,16 @@ function validatePlayerForm() {
 }
 
 function addPlayer(player) {
-  var players = api.getTeamPlayers("test");
+  var state = mainState.getState();
+  var players = api.getTeamPlayers(state.teamID);
   players.push(player);
-  api.setTeamPlayers("test", players);
+  api.setTeamPlayers(state.teamID, players);
   window.location='players.html';
 }
 
 function populatePlayerDetails() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer("test", state.playerID);
+  var player = api.getTeamPlayer(state.teamID, state.playerID);
   var playerName = document.getElementById('playerName');
   playerName.innerText = player.name + " #" + player.number;
   var playerPosition = document.getElementById('playerPosition');
@@ -134,4 +136,21 @@ function populatePlayerDetails() {
   playerThrowIns.innerText = "Throw ins: " + player.throwIns;
   var playerGamesPlayed = document.getElementById('playerGamesPlayed');
   playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
+}
+
+
+function deletePlayer() {
+  var deleteButton = document.getElementById('deletePlayer');
+  if (deleteState == 0) {
+    deleteButton.value = "Press again to confirm";
+    deleteState = 1;
+    setTimeout(function() {
+      deleteState = 0;
+      deleteButton.value = "Delete Player";
+    }, 1000);
+  } else {
+    console.log("DELETED")
+    //window.location='players.html';
+  }
+
 }

@@ -50,7 +50,9 @@ input{
 
 input[type="text"],
 input[type="password"],
-input[type="email"]{
+input[type="email"],
+input[type="number"]
+{
   border: 1px solid lightgray;
   padding-left: 3px;
 }
