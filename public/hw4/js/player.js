@@ -42,7 +42,8 @@ var mockPlayers = [
 
 // load players and display to screen
 function loadPlayers() {
-  var players = api.getTeamPlayers("test");
+  var state = mainState.getState();
+  var players = api.getTeamPlayers(state.teamID);
   for (var i = 0; i < players.length; i++) {
     var player = players[i];
     var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
@@ -63,9 +64,7 @@ function loadPlayers() {
 // creates function to send to individual player page. This is here because closures
 function createToPlayerFunction(player) {
   return function() {
-    mainState.setState({
-      playerID: player.id,
-    })
+    mainState.setState("playerID", player.id);
     window.location='playerdetails.html';
   }
 }
@@ -103,15 +102,16 @@ function validatePlayerForm() {
 }
 
 function addPlayer(player) {
-  var players = api.getTeamPlayers("test");
+  var state = mainState.getState();
+  var players = api.getTeamPlayers(state.teamID);
   players.push(player);
-  api.setTeamPlayers("test", players);
+  api.setTeamPlayers(state.teamID, players);
   window.location='players.html';
 }
 
 function populatePlayerDetails() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer("test", state.playerID);
+  var player = api.getTeamPlayer(state.teamID, state.playerID);
   var playerName = document.getElementById('playerName');
   playerName.innerText = player.name + " #" + player.number;
   var playerPosition = document.getElementById('playerPosition');

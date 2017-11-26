@@ -6,7 +6,9 @@ mainState.setState = setState;
 mainState.getState = getState;
 
 // STATE
-function setState(state) {
+function setState(key, value) {
+  var state = getState();
+  state[key] = value;
   localStorage.setItem('state', JSON.stringify(state));
 }
 

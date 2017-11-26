@@ -4,10 +4,8 @@ function authenticate(form) {
   var password = form.password.value;
   var user = api.authenticateUser(username, password);
   if (user){
-    mainState.setState({
-      loggedIn: true,
-      teamID: user.id,
-    })
+    mainState.setState("loggedIn", true);
+    mainState.setState("teamID", user.id);
     login_error.style.display = 'none';
     window.location='team.html';
   }
@@ -48,10 +46,8 @@ function createTeam() {
     password_error.style.display = 'none';
     var userID = api.addUser(username, pass1, email);
     api.addTeam(userID, name, "");
-    mainState.setState({
-      loggedIn: true,
-      teamID: userID,
-    });
+    mainState.setState("loggedIn", true);
+    mainState.setState("teamID", userID);
     window.location='team.html';
   }
 }
