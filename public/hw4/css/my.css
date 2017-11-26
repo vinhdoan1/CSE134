@@ -1,5 +1,6 @@
 body{
   font-family: 'Lato', sans-serif;
+  margin: 0px;
 }
 
 .outercontainer1{
@@ -84,12 +85,12 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   background-color: #771c1a;
 }
 
-#teamimgcontainerteam{
-  width: 7rem;
-  height: 7rem;
+#teamimgcontainerteam img{
+  width: 10rem;
+  height: 10rem;
   background: lightgrey;
-  -moz-border-radius: 6rem;
-  -webkit-border-radius: 6rem;
+  border-color: lightgrey;
+  border-style: solid;
   border-radius: 6rem;
   margin: 0.2rem auto 1rem auto;
 }
@@ -162,7 +163,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   text-align: left;
 }
 
-#stats p{}
+#stats p{
   display: inline;
   padding-right: .3rem;
   padding-left: .3rem;

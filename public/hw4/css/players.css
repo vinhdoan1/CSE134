@@ -72,6 +72,51 @@ footer .logofootertextcenter {
   height: 2rem;
 }
 
+header {
+  height: 3rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  background-color: rgb(240,240,240);
+}
+
+header #logoheaderimg{
+  display: inline;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+header #logoheadertext{
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Roboto Slab', serif;
+}
+
+header .headerlogo {
+  text-align: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header .logofootertextcenter {
+  display: inline;
+  line-height: 2rem;
+  height: 2rem;
+}
+
+header #backheadertext {
+  position: absolute;
+  left: 1rem;
+}
+
+header #logoutheadertext {
+  position: absolute;
+  right: 1rem;
+  top: 0;
+}
+
 #addplayerbutton {
   position: absolute;
   top: 1rem;
