@@ -179,6 +179,7 @@ function setTeamGame(teamID, gameID, game){
 function getStats (teamID, gameID){
 
   let teams = getTeams()
+  let games = teams[teamID].games;
   return games.find(function(game){
     return game.id == gameID;
   }).stats
@@ -191,17 +192,19 @@ function setStat (teamID, gameID, stat){
 
     return game.id == gameID
   })
+
   if(gameIndex >= 0){
     games[gameIndex].stats.push(stat)
-    setStats(teamID, games[gameIndex].stats);
+    setStats(teamID, gameIndex, games[gameIndex].stats);
   }
 
 }
 
-function setStats(teamID, stats){
+function setStats(teamID, gameIndex, stats){
 
   let allTeams = getTeams();
-  allTeams[teamID].games.stats = stats;
+  allTeams[teamID].games[gameIndex].stats = stats;
+  console.log(stats)
   saveTeams(allTeams);
 }
 

@@ -15,8 +15,15 @@
   <script src="./js/image.js"></script>
 </head>
 <body onload="populateEditPlayer()">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='playerdetails.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
+  </header>
   <div class="outercontainer">
-
       <div class="playerpreview">
         <h2>Edit Player</h2>
         <p>Upload a Picture:</p>
@@ -35,13 +42,5 @@
           <input type="button" class="addplayerbutton" value="Cancel" onclick="window.location='playerdetails.html';"/>
       </form>
     </div>
-
- <footer>
-   <div class="footerlogo">
-     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
-     <p id="logofootertext">TeamWatch</p>
-   </div>
- </footer>
-
 </body>
 </html>

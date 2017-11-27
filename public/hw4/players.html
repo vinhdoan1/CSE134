@@ -13,6 +13,14 @@
   <script src="./js/state.js"></script>
 </head>
 <body onload="loadPlayers()">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='team.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
+  </header>
   <div class="outercontainer">
       <h2>Players</h2>
       <button type="button" id="addplayerbutton" onclick="window.location='addplayer.html';">+</button>
@@ -39,13 +47,5 @@
         </div>
       </template>
   </div>
-
- <footer>
-   <div class="footerlogo">
-     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
-     <p id="logofootertext">TeamWatch</p>
-   </div>
- </footer>
-
 </body>
 </html>

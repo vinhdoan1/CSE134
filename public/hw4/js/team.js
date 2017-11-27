@@ -46,14 +46,16 @@ function createGameButtonDetail(game){
 loadStats = () => {
 
   const state = mainState.getState()
-  let teamStats = api.getTeamStats(state.teamID, state.gameID)
+  let teamStats = api.getStats(state.teamID, state.gameID)
+  console.log(teamStats)
+  let divSection = document.getElementById("dynamicevents")
   for (let index = 0; index < teamStats.length; index++ ){
 
     let btn = document.createElement("button")
     btn.setAttribute("type", "button")
-    btn.setAttribute("class", "eventfeedbackbutton")
-    btn.setAttribute("onclick", "window.location='addevent.html';")
-    btn.innerHTML = teamStats[index]
+    btn.setAttribute("class", "eventfeedbutton")
+    btn.innerHTML = "<span>" + teamStats[index] + "</span>"
+    divSection.appendChild(btn)
 
   }
 }
@@ -65,15 +67,15 @@ addStat = () => {
   let type = document.getElementById("selectStat").value
   let player = document.getElementById("eventplayername").value
 
-  if (type === 'Corner Kick' || type === 'Shot on Goal'){
+  if (type === 'cornerkick' || type === 'shotongoal'){
 
     stat = player + " took a " + type
   }
-  else if (type === 'Yellow Card' || type === 'Red Card') {
+  else if (type === 'yellowcard' || type === 'redcard') {
 
     stat = player + " received a " + type
   }
-  else if (type === 'Goal'){
+  else if (type === 'goal'){
 
     stat = player + " scored a " + type
   }
@@ -82,7 +84,7 @@ addStat = () => {
     stat = player + " made a " + type
   }
 
-  api.setStat(state.teamID, state.gameID, stat)
+  setStat(state.teamID, state.gameID, stat)
   loadStats()
 
 }
