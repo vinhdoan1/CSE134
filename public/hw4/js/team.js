@@ -13,24 +13,12 @@ function loadDashboard(){
 function getUpcomingGame(){
   var state = mainState.getState();
   var gamesList = api.getTeamGames(state.teamID);
-  if(gamesList.length == 0){
-    //display no upcoming games
-  }
-  else{
-    if(gamesList.length == 0){
-      var msg = document.getElementById('upcominggame_empty');
-      msg.style.height = "1 rem";
-    }
-    else{
-      var i = 0;
-      var game = gamesList[i];
-      while(i < gamesList.length && !game.active){
-        game = gamesList[++i];
-      }
-      let btn = createGameButtonDetail(game);
-      document.getElementById('upcominggamecontainer').appendChild(btn);
-    }
-    
+  var nextGame = gamesList.find(function(game){
+    game.active == true;
+  });
+  if(nextGame){
+    let btn = createGameButtonDetail(game);
+    document.getElementById('upcominggamecontainer').appendChild(btn);
   }
 }
 
