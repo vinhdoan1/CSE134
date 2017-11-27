@@ -8,12 +8,15 @@
   <link rel="stylesheet" type="text/css" href="css/players.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="js/team.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
 </head>
 <body>
   <div class="outercontainer">
       <h2>Add Event</h2>
       <form id="addeventform" name="addeventform">
-          <select name="eventdetail" class="addeventformfield">
+          <select id="selectStat" name="eventdetail" class="addeventformfield" >
             <option selected disabled="disabled">Choose Event</option>
             <option value="goal">Goal</option>
             <option value="penalty">Penalty</option>
@@ -28,32 +31,12 @@
               <option value="John Smith">
               <option value="Thomas Powell">
           </datalist>
-          <input type="button" class="addeventbutton" value="Add Event" onclick="window.location='events.html';"/>
+          <input type="button" class="addeventbutton" value="Add Event" onclick=addStat()>
       </form>
       <hr />
       <h2>Event Feed</h2>
       <div>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
-        <button type="button" class="eventfeedbutton">
-            Jeff Evans (#1) scored a goal.
-        </button>
+
       </div>
   </div>
 
@@ -63,6 +46,5 @@
      <p id="logofootertext">TeamWatch</p>
    </div>
  </footer>
-
 </body>
 </html>

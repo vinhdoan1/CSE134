@@ -18,6 +18,9 @@ api.getTeamGame = getTeamGame;
 api.setTeamGame = getTeamGame;
 api.getOpponents = getOpponents;
 api.setOpponents = setOpponents;
+api.setStat = setStat
+api.setStats = setStats
+api.getStats = getStats
 
 function generateID() {
   return Date.now().toString(36);
@@ -173,6 +176,35 @@ function setTeamGame(teamID, gameID, game){
   }
 }
 
+function getStats (teamID, gameID){
+
+  let teams = getTeams()
+  return games.find(function(game){
+    return game.id == gameID;
+  }).stats
+}
+
+function setStat (teamID, gameID, stat){
+
+  let games = getTeamGames(teamID)
+  let gameIndex = games.findIndex(function(game){
+
+    return game.id == gameID
+  })
+  if(gameIndex >= 0){
+    games[gameIndex].stats.push(stat)
+    setStats(teamID, games[gameIndex].stats);
+  }
+
+}
+
+function setStats(teamID, stats){
+
+  let allTeams = getTeams();
+  allTeams[teamID].games.stats = stats;
+  saveTeams(allTeams);
+}
+
 //OPPONENT DATA
 function getOpponents(teamID){
   var allTeams = getTeams();
@@ -184,4 +216,3 @@ function setOpponents(teamID, opponentList){
   allTeams[teamID].opponents = opponentList;
   saveTeams(allTeams);
 }
-

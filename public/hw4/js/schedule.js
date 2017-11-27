@@ -16,7 +16,8 @@ function validateGameForm(form, action){
     opponent: "",
     location: "",
     date: "",
-    time: ""
+    time: "",
+    stats: []
   }
   game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";

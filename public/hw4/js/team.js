@@ -42,3 +42,48 @@ function createGameButtonDetail(game){
   btn.innerHTML = "<p class='gamebuttondetail'>" + schedule.months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
   return btn;
 }
+
+
+loadStats = () => {
+
+  const state = mainState.getState()
+  let teamStats = api.getTeamStats(state.teamID, state.gameID)
+  for (let index = 0; index < teamStats.length; index++ ){
+
+    let btn = document.createElement("button")
+    btn.setAttribute("type", "button")
+    btn.setAttribute("class", "eventfeedbackbutton")
+    btn.setAttribute("onclick", "window.location='addevent.html';")
+    btn.innerHTML = teamStats[index]
+
+  }
+}
+
+addStat = () => {
+
+  let stat
+  const state = mainState.getState()
+  let type = document.getElementById("selectStat").value
+  let player = document.getElementById("eventplayername").value
+
+  if (type === 'Corner Kick' || type === 'Shot on Goal'){
+
+    stat = player + " took a " + type
+  }
+  else if (type === 'Yellow Card' || type === 'Red Card') {
+
+    stat = player + " received a " + type
+  }
+  else if (type === 'Goal'){
+
+    stat = player + " scored a " + type
+  }
+  else {
+
+    stat = player + " made a " + type
+  }
+
+  api.setStat(state.teamID, state.gameID, stat)
+  loadStats()
+
+}
