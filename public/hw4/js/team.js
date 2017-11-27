@@ -43,7 +43,6 @@ function createGameButtonDetail(game){
 }
 
 loadStats = () => {
-
   const state = mainState.getState()
   let teamStats = api.getStats(state.teamID, state.gameID)
   let divSection = document.getElementById("dynamicevents")
@@ -56,6 +55,15 @@ loadStats = () => {
     divSection.appendChild(btn)
 
   }
+}
+
+function appendStat(stat){
+  let divSection = document.getElementById("dynamicevents");
+  let btn = document.createElement("button")
+  btn.setAttribute("type", "button")
+  btn.setAttribute("class", "eventfeedbutton")
+  btn.innerHTML = "<span>" + stat + "</span>"
+  divSection.appendChild(btn)
 }
 
 addStat = () => {
@@ -87,8 +95,11 @@ addStat = () => {
     stat = player + " made a " + type
   }
 
-  setStat(state.teamID, state.gameID, stat)
-  loadStats()
+  document.getElementById('addeventform').reset();
+
+  setStat(state.teamID, state.gameID, stat);
+  appendStat(stat);
+  // loadStats()
 
 }
 
