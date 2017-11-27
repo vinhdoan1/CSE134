@@ -67,7 +67,12 @@ addStat = () => {
   let type = document.getElementById("selectStat").value
   let player = document.getElementById("eventplayername").value
 
-  if (type === 'cornerkick' || type === 'shotongoal'){
+
+  if (player === "" || type === "Choose Event" || type === ""){
+
+    return false
+  }
+  else if (type === 'cornerkick' || type === 'shotongoal'){
 
     stat = player + " took a " + type
   }

@@ -12,7 +12,7 @@
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
 </head>
-<body>
+<body onload=loadStats()>
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='gamedetails.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -24,7 +24,7 @@
   <div class="outercontainer">
       <h2>Add Event</h2>
       <form id="addeventform" name="addeventform">
-          <select id="selectStat" name="eventdetail" class="addeventformfield" >
+          <select id="selectStat" name="eventdetail" class="addeventformfield" required>
             <option selected disabled="disabled">Choose Event</option>
             <option value="goal">Goal</option>
             <option value="penalty">Penalty</option>
@@ -33,7 +33,7 @@
             <option value="redcard">Red Card</option>
             <option value="yellowcard">Yellow Card</option>
           </select>
-          <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames">
+          <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames" required>
           <datalist id="playernames">
               <option value="Jeff Evans">
               <option value="John Smith">
