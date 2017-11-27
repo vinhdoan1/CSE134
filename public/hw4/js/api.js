@@ -138,7 +138,7 @@ function setTeamPlayer(teamID, playerID, player) {
   var playerIndex = players.findIndex(function(player) {
     return player.id == playerID;
   });
-  if (playerIndex) {
+  if (playerIndex !== undefined) {
     players[playerIndex] = player;
     setTeamPlayers(teamID, players);
   }
@@ -202,7 +202,6 @@ function setStats(teamID, gameIndex, stats){
 
   let allTeams = getTeams();
   allTeams[teamID].games[gameIndex].stats = stats;
-  console.log(stats)
   saveTeams(allTeams);
 }
 

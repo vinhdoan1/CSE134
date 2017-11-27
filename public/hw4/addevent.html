@@ -12,19 +12,19 @@
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
 </head>
-<body>
+<body onload=loadStats()>
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='gamedetails.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
       <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
       <p id="logoheadertext">TeamWatch</p>
     </div>
-    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedin', false); window.location='login.html';">Logout</p>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
   </header>
   <div class="outercontainer">
       <h2>Add Event</h2>
       <form id="addeventform" name="addeventform">
-          <select id="selectStat" name="eventdetail" class="addeventformfield" >
+          <select id="selectStat" name="eventdetail" class="addeventformfield" required>
             <option selected disabled="disabled">Choose Event</option>
             <option value="goal">Goal</option>
             <option value="penalty">Penalty</option>
@@ -33,7 +33,7 @@
             <option value="redcard">Red Card</option>
             <option value="yellowcard">Yellow Card</option>
           </select>
-          <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames">
+          <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames" required>
           <datalist id="playernames">
               <option value="Jeff Evans">
               <option value="John Smith">
@@ -43,7 +43,7 @@
       </form>
       <hr />
       <h2>Event Feed</h2>
-      <div id="dynamicevents">
+      <div>
 
       </div>
   </div>

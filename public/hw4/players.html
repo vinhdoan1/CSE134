@@ -24,8 +24,8 @@
   <div class="outercontainer">
       <h2>Players</h2>
       <button type="button" id="addplayerbutton" onclick="window.location='addplayer.html';">+</button>
-      <form id="playersort" name="playersort">
-          <select name="playersortselect" class="playersortselect">
+      <form id="playersort" name="playersort" onchange="sortSelect()">
+          <select name="playersortselect" id="playersortselect">
             <option selected disabled="disabled">Sort by...</option>
             <option value="goals">Goals</option>
             <option value="penalty">Name (Alphabetical)</option>

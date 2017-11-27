@@ -47,7 +47,6 @@ loadStats = () => {
 
   const state = mainState.getState()
   let teamStats = api.getStats(state.teamID, state.gameID)
-  console.log(teamStats)
   let divSection = document.getElementById("dynamicevents")
   for (let index = 0; index < teamStats.length; index++ ){
 
@@ -67,7 +66,12 @@ addStat = () => {
   let type = document.getElementById("selectStat").value
   let player = document.getElementById("eventplayername").value
 
-  if (type === 'cornerkick' || type === 'shotongoal'){
+
+  if (player === "" || type === "Choose Event" || type === ""){
+
+    return false
+  }
+  else if (type === 'cornerkick' || type === 'shotongoal'){
 
     stat = player + " took a " + type
   }
