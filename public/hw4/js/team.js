@@ -17,13 +17,20 @@ function getUpcomingGame(){
     //display no upcoming games
   }
   else{
-    var i = 0;
-    var game = gamesList[i];
-    while(!game.active && i < gamesList.length){
-      game = gamesList[++i];
+    if(gamesList.length == 0){
+      var msg = document.getElementById('upcominggame_empty');
+      msg.style.height = "1 rem";
     }
-    let btn = createGameButtonDetail(game);
-    document.getElementById('upcominggamecontainer').appendChild(btn);
+    else{
+      var i = 0;
+      var game = gamesList[i];
+      while(i < gamesList.length && !game.active){
+        game = gamesList[++i];
+      }
+      let btn = createGameButtonDetail(game);
+      document.getElementById('upcominggamecontainer').appendChild(btn);
+    }
+    
   }
 }
 
