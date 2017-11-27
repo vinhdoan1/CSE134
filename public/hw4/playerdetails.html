@@ -14,6 +14,14 @@
   <script src="./js/state.js"></script>
 </head>
 <body onload="checkLoggedIn(); populatePlayerDetails();">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='players.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedin', false); window.location='login.html';">Logout</p>
+  </header>
   <div class="outercontainer">
       <div class="playerpreview">
         <img id="playerImage" src="#" alt="Player Image">
@@ -35,13 +43,5 @@
       <input type="button" id="editPlayer" class="editplayerbuttons" value="Edit Player" onclick="window.location='editplayer.html';"/>
       <input type="button" id="deletePlayer" class="editplayerbuttons" value="Delete Player" onclick="deletePlayer()"/>
   </div>
-
- <footer>
-   <div class="footerlogo">
-     <img id="logofooterimg" src="images/soccerball.png" alt="TeamWatch Logo">
-     <p id="logofootertext">TeamWatch</p>
-   </div>
- </footer>
-
 </body>
 </html>
