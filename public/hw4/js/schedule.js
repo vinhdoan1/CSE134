@@ -17,7 +17,8 @@ function validateGameForm(form, action){
     location: "",
     date: "",
     time: "",
-    stats: []
+    stats: [],
+    active: true
   }
   game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
@@ -36,6 +37,7 @@ function validateGameForm(form, action){
     error_msg.style.display = 'none';
     if(action == "add"){
       game.id = api.generateID();
+      game.active = true;
     }
     else if(action == "edit"){
       var state = mainState.getState();
@@ -65,18 +67,21 @@ function updateGame(game, action){
     duplicate_msg.style.display = 'block';
   }
   else{
+    var returnTo="";
     if(action == "edit"){
       setTeamGame(teamID, gameID, game);
       gamesList = api.getTeamGames(teamID);
+      returnTo = 'gamedetails.html';
     }
     else if(action == "add"){
-      gamesList. push(game);
+      gamesList.push(game);
+      returnTo = 'schedule.html';
     }
     gamesList.sort(function(a,b){
       return new Date(a.date) - new Date(b.date);
     });
     api.setTeamGames(state.teamID, gamesList);
-    window.location='gamedetails.html';
+    window.location= returnTo;
   }
 }
 
@@ -98,8 +103,10 @@ function loadSchedule(){
     emptyschedule.style.display = 'none';
     for(var i = 0; i < gamesList.length; i++){
       var game = gamesList[i];
-      let btn = createGameButtonDetail(game);
-      document.getElementById('schedulecontainer').appendChild(btn);
+      if(game.active){
+        let btn = createGameButtonDetail(game);
+        document.getElementById('schedulecontainer').appendChild(btn);
+      }
     }
   }
 }
@@ -142,7 +149,7 @@ function loadEditForm(){
   gamedate.value = game.date;
   gametime.value = game.time;
 
-  loadOpponentImage('editgameopponent', 'editgameopimg')
+  loadOpponentImage('editgameopponent', 'editgameopimg  ')
 }
 
 function setSelectedIndex(s, v) {

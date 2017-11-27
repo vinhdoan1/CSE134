@@ -26,15 +26,12 @@ function loadGameDetails(){
   var myTeamLogo = document.getElementById('teamimgdetailfirst');
   var otherTeamLogo = document.getElementById('teamimgdetailsecond');
   var myTeamLogoImg = api.getTeam(teamID).logo;
-  console.log(myTeamLogoImg);
   var otherTeamLogoImg = getOpTeamLogo(game.opponent);
-  console.log(otherTeamLogoImg);
   myTeamName.src = myTeamLogoImg;
   otherTeamLogo.src = otherTeamLogoImg;
 }
 
 function loadOpponentImage(selectid, logoid){
-  // console.log('loadopponentimg');
   var op = document.getElementById(selectid);
   var opname = op.value;
   var state = mainState.getState();
@@ -43,7 +40,6 @@ function loadOpponentImage(selectid, logoid){
   var opponent = opponents.find(function(opteam){
     return opname == opteam.name;
   });
-  console.log(opponents);
 
   var logo = document.getElementById(logoid);
   logo.src = opponent.logo;
@@ -64,7 +60,16 @@ function deleteGame(){
       deleteState = 0;
       deleteButton.value = "Delete Game";
     }, 1000);
-  } else {
+  } 
+  else {
+    var state = mainState.getState();
+    var teamID = state.teamID;
+    var gameID = state.gameID;
+    var currGame = getTeamGame(teamID, gameID);
+    var games = api.getTeamGames(teamID);
+    currGame.active = false;
+    api.setTeamGame(teamID, gameID, currGame);
+    window.location = 'schedule.html';
     console.log("DELETED")
   }
 

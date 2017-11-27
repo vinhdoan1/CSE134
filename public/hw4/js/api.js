@@ -15,7 +15,7 @@ api.setTeamPlayer = setTeamPlayer;
 api.getTeamGames = getTeamGames;
 api.setTeamGames = setTeamGames;
 api.getTeamGame = getTeamGame;
-api.setTeamGame = getTeamGame;
+api.setTeamGame = setTeamGame;
 api.getOpponents = getOpponents;
 api.setOpponents = setOpponents;
 api.setStat = setStat
@@ -170,14 +170,14 @@ function setTeamGame(teamID, gameID, game){
   var gameIndex = games.findIndex(function(game){
     return game.id == gameID;
   });
-  if(gameIndex >= 0){
+  if(gameIndex > -1){
     games[gameIndex] = game;
     setTeamGames(teamID, games);
+    // console.log(games);
   }
 }
 
 function getStats (teamID, gameID){
-
   let teams = getTeams()
   let games = teams[teamID].games;
   return games.find(function(game){
@@ -186,10 +186,8 @@ function getStats (teamID, gameID){
 }
 
 function setStat (teamID, gameID, stat){
-
   let games = getTeamGames(teamID)
   let gameIndex = games.findIndex(function(game){
-
     return game.id == gameID
   })
 
@@ -204,7 +202,6 @@ function setStats(teamID, gameIndex, stats){
 
   let allTeams = getTeams();
   allTeams[teamID].games[gameIndex].stats = stats;
-  console.log(stats)
   saveTeams(allTeams);
 }
 
