@@ -17,7 +17,11 @@ function getUpcomingGame(){
     //display no upcoming games
   }
   else{
-    var game = gamesList[0];
+    var i = 0;
+    var game = gamesList[i];
+    while(!game.active && i < gamesList.length){
+      game = gamesList[++i];
+    }
     let btn = createGameButtonDetail(game);
     document.getElementById('upcominggamecontainer').appendChild(btn);
   }
