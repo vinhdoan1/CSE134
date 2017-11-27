@@ -1,5 +1,5 @@
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/opponent.js
+CSE134/public/hw4/js/opponent.js
    1:10  error  'goToAddOpponent' is defined but never used    no-unused-vars
    6:10  error  'goBack' is defined but never used             no-unused-vars
   10:10  error  'validateOppForm' is defined but never used    no-unused-vars
@@ -12,7 +12,7 @@
   69:10  error  'loadOpponentImage' is defined but never used  no-unused-vars
   73:16  error  'getOpTeamLogo' is not defined                 no-undef
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/player.js
+CSE134/public/hw4/js/player.js
     5:10  error  'sortSelect' is defined but never used              no-unused-vars
    36:15  error  'mainState' is not defined                          no-undef
    37:17  error  'api' is not defined                                no-undef
@@ -43,7 +43,7 @@
   204:10  error  'uploadEditImage' is defined but never used         no-unused-vars
   209:3   error  'image' is not defined                              no-undef
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/schedule.js
+CSE134/public/hw4/js/schedule.js
     1:1   error  'schedule' is not defined                     no-undef
     2:1   error  'schedule' is not defined                     no-undef
     3:1   error  'schedule' is not defined                     no-undef
@@ -71,10 +71,10 @@
   136:14  error  'api' is not defined                          no-undef
   152:3   error  'loadOpponentImage' is not defined            no-undef
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/state.js
+CSE134/public/hw4/js/state.js
   26:10  error  'checkLoggedIn' is defined but never used  no-unused-vars
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/login.js
+CSE134/public/hw4/js/login.js
    4:10  error  'authenticate' is defined but never used  no-unused-vars
    7:14  error  'api' is not defined                      no-undef
   10:5   error  'mainState' is not defined                no-undef
@@ -88,7 +88,7 @@
   65:5   error  'mainState' is not defined                no-undef
   66:5   error  'mainState' is not defined                no-undef
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/gamedetails.js
+CSE134/public/hw4/js/gamedetails.js
    1:10  error  'populateGameDetails' is defined but never used  no-unused-vars
    7:16  error  'mainState' is not defined                       no-undef
    8:16  error  'mainState' is not defined                       no-undef
@@ -110,10 +110,10 @@
   71:5   error  'api' is not defined                             no-undef
   73:5   error  Unexpected console statement                     no-console
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/image.js
+CSE134/public/hw4/js/image.js
   15:11  error  'ctx' is already defined  no-redeclare
 
-/Users/allenord/Documents/CSE/CSE134B/CSE134/public/hw4/js/team.js
+CSE134/public/hw4/js/team.js
     1:10  error  'loadDashboard' is defined but never used  no-unused-vars
     2:15  error  'mainState' is not defined                 no-undef
     3:14  error  'api' is not defined                       no-undef
@@ -134,4 +134,3 @@
   109:19  error  'api' is not defined                       no-undef
 
 ✖ 118 problems (118 errors, 0 warnings)
-
