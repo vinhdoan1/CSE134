@@ -95,7 +95,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   margin: 0.2rem auto 1rem auto;
 }
 
-#teamimgcontainergame{
+.teamimgcontainergame{
   display: inline-block;
   width: 5rem;
   height: 5rem;
@@ -106,7 +106,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   margin: 0.2rem  1rem auto;
 }
 
-#teamimggame{
+.teamimggame{
   width: 4.5rem;
 }
 

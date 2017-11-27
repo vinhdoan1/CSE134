@@ -15,17 +15,12 @@
 <body onload="loadAddForm()">
   <div class="outercontainer2">
     <h2 id="h2">Add Game</h2>
-    <div id="teamimgcontainergame">
-      <img id="teamimggame" src="images/pig.png" alt="Team Logo">
+    <div id="addgameopimgcontainer" class="teamimgcontainergame" style="height:0";>
+      <img id="addgameopimg" class="teamimggame" src="">
     </div>
     <form id="addgameform" class="gameform" name="addgameform">
-        <select name="gameopponent" id="addgameopponent" class="gameformfield">
+        <select name="gameopponent" id="addgameopponent" class="gameformfield" onchange="loadOpponentImage('addgameopponent','addgameopimg')">
           <option selected="true" disabled="disabled">Choose Opponent</option>
-          <!-- <option value="Turtles">Turtles</option>
-          <option value="Rhinos">Rhinos</option>
-          <option value="Lions">Lions</option>
-          <option value="Tigers">Tigers</option>
-          <option value="Elephants">Elephants</option> -->
         </select>
         <p style="margin-top:0.2rem; margin-bottom:0.2rem">OR</p>
         <input type="button" id="gameformaddop" class="gameformbutton" value="Add Opponent" onclick="goToAddOpponent('addgame.html')"/>

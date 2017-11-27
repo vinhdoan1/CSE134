@@ -41,8 +41,44 @@ function addOpponent(opponent){
   }
   else{
     duplicate_msg.style.display = 'none';
+
+    var logo = document.getElementById('oplogoimg');
+    if(logo.src != ""){
+      opponent.logo = logo.src;
+    }
+
     opponentList.push(opponent);
     api.setOpponents(teamID, opponentList);
     window.location = localStorage.getItem("back");
   }
+}
+
+function uploadOpLogo() {
+  var logoForm = document.getElementById('oplogoupload');
+  if (logoForm.files.length <= 0) {
+    return;
+  }
+  image.readImageAndResize(logoForm.files[0], 300, function(result) {
+    var oplogo = document.getElementById('oplogoimg');
+    oplogo.style.visibility = "visible";
+    oplogo.src = result;
+    imageSet = true;
+  }, true);
+}
+
+function loadOpponentImage(selectid, logoid){
+  // console.log('loadopponentimg');
+  var op = document.getElementById(selectid);
+  var opname = op.value;
+  var state = mainState.getState();
+  var teamID = state.teamID;
+  var opponents = api.getOpponents(teamID);
+  var opponent = opponents.find(function(opteam){
+    return opname == opteam.name;
+  });
+  console.log(opponents);
+
+  var logo = document.getElementById(logoid);
+  logo.src = opponent.logo;
+  logo.style.height = "5 rem";
 }
