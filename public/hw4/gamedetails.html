@@ -20,9 +20,10 @@
       <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
       <p id="logoheadertext">TeamWatch</p>
     </div>
-    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedin', false); window.location='login.html';">Logout</p>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
   </header>
   <div class="outercontainer2">
+    <button type="button" id="addeventbutton" onclick="window.location='addevent.html';">+</button>
     <h3 id="gamedetails_date"></h3>
     <h3 id="gamedetails_time"></h3>
     <h4 id="gamedetails_location"></h4>
