@@ -43,7 +43,6 @@ function createGameButtonDetail(game){
   return btn;
 }
 
-
 loadStats = () => {
 
   const state = mainState.getState()
@@ -86,4 +85,14 @@ addStat = () => {
   api.setStat(state.teamID, state.gameID, stat)
   loadStats()
 
+}
+
+function getOpTeamLogo(teamname){
+  var state = mainState.getState();
+  var teamID = state.teamID;
+  var opponents = api.getOpponents(teamID);
+  var opponent = opponents.find(function(team){
+    return teamname == team.name;
+  });
+  return opponent.logo;
 }

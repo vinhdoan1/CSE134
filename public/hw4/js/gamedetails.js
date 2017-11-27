@@ -22,6 +22,32 @@ function loadGameDetails(){
   myTeam.innerHTML = myTeamName;
   var otherTeam = document.getElementById('secondteam');
   otherTeam.innerHTML = game.opponent;
+
+  var myTeamLogo = document.getElementById('teamimgdetailfirst');
+  var otherTeamLogo = document.getElementById('teamimgdetailsecond');
+  var myTeamLogoImg = api.getTeam(teamID).logo;
+  console.log(myTeamLogoImg);
+  var otherTeamLogoImg = getOpTeamLogo(game.opponent);
+  console.log(otherTeamLogoImg);
+  myTeamName.src = myTeamLogoImg;
+  otherTeamLogo.src = otherTeamLogoImg;
+}
+
+function loadOpponentImage(selectid, logoid){
+  // console.log('loadopponentimg');
+  var op = document.getElementById(selectid);
+  var opname = op.value;
+  var state = mainState.getState();
+  var teamID = state.teamID;
+  var opponents = api.getOpponents(teamID);
+  var opponent = opponents.find(function(opteam){
+    return opname == opteam.name;
+  });
+  console.log(opponents);
+
+  var logo = document.getElementById(logoid);
+  logo.src = opponent.logo;
+  logo.style.height = "5 rem";
 }
 
 function loadGameStats(){

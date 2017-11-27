@@ -70,15 +70,8 @@ function loadOpponentImage(selectid, logoid){
   // console.log('loadopponentimg');
   var op = document.getElementById(selectid);
   var opname = op.value;
-  var state = mainState.getState();
-  var teamID = state.teamID;
-  var opponents = api.getOpponents(teamID);
-  var opponent = opponents.find(function(opteam){
-    return opname == opteam.name;
-  });
-  console.log(opponents);
-
+  var imgsrc = getOpTeamLogo(opname)
   var logo = document.getElementById(logoid);
-  logo.src = opponent.logo;
+  logo.src = imgsrc;
   logo.style.height = "5 rem";
 }

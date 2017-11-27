@@ -76,7 +76,7 @@ function updateGame(game, action){
       return new Date(a.date) - new Date(b.date);
     });
     api.setTeamGames(state.teamID, gamesList);
-    window.location='schedule.html';
+    window.location='gamedetails.html';
   }
 }
 
@@ -141,6 +141,8 @@ function loadEditForm(){
   gamelocation.value = game.location;
   gamedate.value = game.date;
   gametime.value = game.time;
+
+  loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 
 function setSelectedIndex(s, v) {
