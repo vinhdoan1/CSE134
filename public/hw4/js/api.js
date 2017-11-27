@@ -204,7 +204,6 @@ function setStats(teamID, gameIndex, stats){
 
   let allTeams = getTeams();
   allTeams[teamID].games[gameIndex].stats = stats;
-  console.log(stats)
   saveTeams(allTeams);
 }
 
