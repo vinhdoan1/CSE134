@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>HW 4</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/homepage.css">
+</head>
+<body>
+  <h1>CSE 134B: Jeff Evans Fan Club</h1>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">LINKS:</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./index.html">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./hw2.html">HW 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./hw3.html">HW 3</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/hw4.html">HW 4</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>HW 4</h2>
+          <p>
+            It is time to implement the soccer team management application we speced in HW1 and prototyped in HW3. Traditionally as coding focused computing professionals we would spend a great deal of time building data structures and models first, but so far in this class we have designed from the interface down. In this step we should work upwards from the data and join the two halves. In this assignment we will build a partially functioning application and when finished all that be missing will be a few server-side pieces of the application.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Links</h2>
+          <ul>
+            <li>
+              <a href="./hw4/login.html">TeamWatch</a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Planning Document</h2>
+          <p>
+            Our group fleshed out a decent amount of features in this iteration of the homework.
+            Using local storage, we were able to implement CRUD with the players, games, and game events.
+            We were also able to handle log in, supporting multiple accounts, with the use of state management.
+            In addition, we also added the capability to upload and view images, which were used for the team logo
+            and the players' image.
+          </p>
+          <p>
+            Moving forward, we still have several features we would like to add.
+            As it is required, we would like to actually hook up our site to an
+            actual online backend, such as Firebase, and not have to use local storage.
+            We would also like to add the ability to manage one's account. In addition,
+            users can currently only sign up as coaches who manage teams. In the future,
+            we would like to add the ability for players/parents/spectators to be
+            able to view the team data, but not have the ability to modify it. Lastly,
+            we would like to add some sort of mechanism for linking teams together in a league.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Load Time and Size Analysis:</h2>
+          <table>
+            <tr>
+              <th>Site</th>
+              <th>Load Time</th>
+              <th>Page Size</th>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/login.html">Login</a></td>
+              <td>101 ms</td>
+              <td>58.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/signup.html">Sign Up</a></td>
+              <td>97 ms</td>
+              <td>55.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/signup_invite.html">Coach Sign Up</a></td>
+              <td>70 ms</td>
+              <td>58.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/signup_new.html">Player Sign Up</a></td>
+              <td>62 ms</td>
+              <td>54.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/team.html">Home Page</a></td>
+              <td>72 ms</td>
+              <td>55.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/schedule.html">Schedule</a></td>
+              <td>79 ms</td>
+              <td>58.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/gamedetails.html">Game Detail</a></td>
+              <td>66 ms</td>
+              <td>55.8 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/addgame.html">Add Game</a></td>
+              <td>68 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/editgame.html">Edit Game</a></td>
+              <td>68 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/addevent.html">Add Event</a></td>
+              <td>56 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/players.html">Players</a></td>
+              <td>79 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/addplayer.html">Add Player</a></td>
+              <td>66 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/editplayer.html">Edit Player</a></td>
+              <td>66 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/hw4/playerdetails.html">Player Details</a></td>
+              <td>80 ms</td>
+              <td>55.9 kb</td>
+            </tr>
+          </table>
+        </article>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>
