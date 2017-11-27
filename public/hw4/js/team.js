@@ -47,7 +47,6 @@ loadStats = () => {
 
   const state = mainState.getState()
   let teamStats = api.getStats(state.teamID, state.gameID)
-  console.log(teamStats)
   let divSection = document.getElementById("dynamicevents")
   for (let index = 0; index < teamStats.length; index++ ){
 
