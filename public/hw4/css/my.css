@@ -47,6 +47,10 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   width: 8rem;
 }
 
+#upcominggame_empty{
+  height: 0;
+}
+
 #liveGame #corner{
 
   border-radius: 5px;

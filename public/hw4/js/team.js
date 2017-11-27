@@ -13,11 +13,10 @@ function loadDashboard(){
 function getUpcomingGame(){
   var state = mainState.getState();
   var gamesList = api.getTeamGames(state.teamID);
-  if(gamesList.length == 0){
-    //display no upcoming games
-  }
-  else{
-    var game = gamesList[0];
+  var nextGame = gamesList.find(function(game){
+    game.active == true;
+  });
+  if(nextGame){
     let btn = createGameButtonDetail(game);
     document.getElementById('upcominggamecontainer').appendChild(btn);
   }
