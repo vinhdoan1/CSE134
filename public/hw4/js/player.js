@@ -1,47 +1,35 @@
-var mockPlayers = [
-  {
-    name: "Jeff Evans",
-    position: "Forward",
-    number: 10,
-    goals: 10,
-    yelllowCards: 0,
-    redCards: 0,
-    shotsOnGoal: 0,
-    cornerKicks: 0,
-    penalties: 0,
-    throwIns: 0,
-    gamesPlayed: 0,
-  },
-  {
-    name: "John Doe",
-    position: "Goalie",
-    number: 2,
-    goals: 0,
-    yelllowCards: 0,
-    redCards: 0,
-    shotsOnGoal: 0,
-    cornerKicks: 0,
-    penalties: 0,
-    throwIns: 0,
-    gamesPlayed: 0,
-  },
-  {
-    name: "Joe Shmoe",
-    position: "Defender",
-    number: 24,
-    goals: 3,
-    yelllowCards: 0,
-    redCards: 0,
-    shotsOnGoal: 0,
-    cornerKicks: 0,
-    penalties: 0,
-    throwIns: 0,
-    gamesPlayed: 0,
-  }
-]
-
 var imageSet = false;
 var deleteState = 0; // for delete player confirmation
+var sortFunction;
+
+function sortSelect() {
+  var sortSelector = document.getElementById('playersortselect');
+  switch(sortSelector.selectedIndex) {
+    case 1: // goals
+        sortFunction = function(player1, player2) {
+          return player1.goals > player2.goals;
+        }
+        break;
+    case 2: // name
+        sortFunction = function(player1, player2) {
+          return player1.name > player2.name;
+        }
+        break;
+    default: // number
+        sortFunction = function(player1, player2) {
+          return player1.number > player2.number;
+        }
+}
+  refreshPlayers();
+}
+
+function refreshPlayers() {
+  var playerButtons = document.getElementById('playerButtons');
+  while (playerButtons.firstChild) {
+    playerButtons.removeChild(playerButtons.firstChild);
+  }
+  loadPlayers();
+}
 
 // load players and display to screen
 function loadPlayers() {
@@ -50,6 +38,9 @@ function loadPlayers() {
   players = players.filter(function(player) {
     return !player.deleted;
   })
+  if (sortFunction) {
+    players = players.sort(sortFunction);
+  }
   for (var i = 0; i < players.length; i++) {
     var player = players[i];
     var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);

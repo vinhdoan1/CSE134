@@ -48,8 +48,8 @@ function createTeam() {
     accountexists_error.display = 'none';
     password_error.style.display = 'none';
   } else if (api.userExists(username)){
-    addteam_error.style.display = 'block';
-    accountexists_error.display = 'none';
+    addteam_error.style.display = 'none';
+    accountexists_error.display = 'block';
     password_error.style.display = 'none';
   }
   else if (pass1 != pass2) {
