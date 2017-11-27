@@ -76,7 +76,7 @@ function updateGame(game, action){
     else if(action == "add"){
       gamesList.push(game);
       returnTo = 'schedule.html';
-    }
+    } 
     gamesList.sort(function(a,b){
       return new Date(a.date) - new Date(b.date);
     });
@@ -149,7 +149,7 @@ function loadEditForm(){
   gamedate.value = game.date;
   gametime.value = game.time;
 
-  loadOpponentImage('editgameopponent', 'editgameopimg  ')
+  loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 
 function setSelectedIndex(s, v) {
