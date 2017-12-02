@@ -1,0 +1,362 @@
+body{
+  font-family: 'Lato', sans-serif;
+  margin: 0px;
+}
+
+.outercontainer1{
+  text-align: center;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 4rem;
+  overflow: auto;
+  padding-top: 10%;
+}
+
+.outercontainer2{
+  text-align: center;
+  padding-top: 5%;
+}
+
+h1, h2, logo{
+  font-family: 'Roboto Slab', serif;
+  margin: 0 0 0 0.5rem;
+}
+
+h3{
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+button, [type="button"], [type="submit"]{
+  border-radius: 5px;
+  border: 0px;
+  background-color: #4286f4;
+  color: white;
+}
+
+button:hover, [type="button"]:hover, [type="submit"]:hover{
+  background-color: #1b53ad;
+}
+
+.outercontainer2 #h2{
+  padding-top: 20px;
+}
+#logoimg{
+  width: 8rem;
+}
+
+#upcominggame_empty{
+  height: 0;
+}
+
+#liveGame #corner{
+
+  border-radius: 5px;
+  border: 0px;
+  background-color: white;
+  color: black;
+  height: .5rem;
+  width: 16rem;
+  font-size: .5rem;
+}
+#corner p{
+
+  text-align: left;
+}
+
+.gamebutton, .gamedetailbutton{
+  text-align: center;
+  width: 16rem;
+  margin: .5rem auto 0 auto;
+  display: block;
+}
+
+.gamedetailbutton{
+  height: 2rem;
+}
+
+#gamedetails_delete{
+  background-color: red;
+}
+
+#gamedetails_delete{
+  background-color: #b72027;
+}
+
+#gamedetails_delete:hover {
+  background-color: #771c1a;
+}
+
+#teamimgcontainerteam img{
+  width: 10rem;
+  height: 10rem;
+  background: lightgrey;
+  border-color: lightgrey;
+  border-style: solid;
+  border-radius: 6rem;
+  margin: 0.2rem auto 1rem auto;
+}
+
+.teamimgcontainergame{
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+  margin: 0.2rem  1rem auto;
+}
+
+.teamimggame{
+  width: 4.5rem;
+}
+
+#teamimg{
+  width: 6.5rem;
+}
+
+#gamedetails_details{
+  margin: 0.2rem  1rem auto;
+  text-align: center;
+
+}
+
+#gamedetails_details div{
+
+  display: inline-block;
+  width: 45%;
+}
+
+#firstdiv #teamimgdetailfirst{
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+
+}
+
+#seconddiv #teamimgdetailsecond{
+  width: 5rem;
+  height: 5rem;
+  background: lightgrey;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+
+}
+
+#gamedetails_stats{
+  width: 100%;
+  display: inline-block;
+}
+
+#gamedetailfirst {
+  width: 50%;
+  float: left;
+  text-align: left;
+}
+
+#gamedetailsecond {
+  float: left;
+  border-left: 1px solid black;
+  text-align: left;
+}
+
+#stats p{
+  display: inline;
+  padding-right: .3rem;
+  padding-left: .3rem;
+}
+
+#goals p{
+  display: inline;
+  padding-right: .9rem;
+  padding-left: .9rem;
+}
+
+#addgamebutton {
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  font-size: 20px;
+  width: 1.8rem;
+}
+
+#addeventbutton {
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  font-size: 20px;
+  width: 1.8rem;
+}
+
+#emptyschedule{
+  color: grey;
+  margin-top: 0.7rem;
+  display: none;
+}
+
+#schedulecontainer{
+  padding-top: 0.5rem;
+  overflow-y: auto;
+  max-height: 28rem;
+}
+
+.errortext {
+  display: none;
+  color: red;
+  font-size: small;
+  margin-top: 0.7rem;
+}
+
+.gameform {
+  width: 18rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.gameform input{
+  display: block;
+  width: 18rem;
+  height: 2rem;
+  border-radius: 5px;
+  margin-top: .5rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.gameform .gameformbutton {
+  width: 12rem;
+  margin: 1rem auto 1rem auto;
+}
+
+.gameform select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 18rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+.gameform .gameformbutton:hover{
+  background-color: #1b53ad;
+}
+
+.gameform .gameformfield{
+  border: 1px solid lightgray;
+  margin: 0.7rem auto 0 auto;
+  padding-left: 3px;
+}
+
+#gameformaddop{
+  margin-top: 0;
+}
+
+#homebutton{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 10px;
+  width: 3rem;
+  height: 2rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  background-color: rgb(240,240,240);
+}
+
+footer #logofooterimg{
+  display: inline;
+  width: 2rem;
+  height: 2rem;
+}
+
+footer #logofootertext{
+  margin-top: 0;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Roboto Slab', serif;
+}
+
+footer .footerlogo {
+  text-align: center;
+  height: 2rem;
+}
+
+footer .logofootertextcenter {
+  display: inline;
+  line-height: 2rem;
+  height: 2rem;
+}
+
+@media only screen and (max-width: 400px) {
+
+  .outercontainer2{
+    text-align: center;
+    padding-top: 1%;
+  }
+
+  h1{
+    font-size: 30px;
+  }
+
+  #teaminput{
+    height: 2rem;
+  }
+
+  #addgamebutton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 15px;
+    width: 1.5rem;
+  }
+
+  #gamedetails_details div{
+
+    display: inline-block;
+    width: 45%;
+    font-size: .8rem;
+  }
+
+  #firstdiv #teamimgdetailfirst{
+    width: 3.5rem;
+    height: 3.5rem;
+    background: lightgrey;
+    -moz-border-radius: 4rem;
+    -webkit-border-radius: 4rem;
+    border-radius: 4rem;
+
+  }
+
+  #seconddiv #teamimgdetailsecond{
+    width: 3.5rem;
+    height: 3.5rem;
+    background: lightgrey;
+    -moz-border-radius: 4rem;
+    -webkit-border-radius: 4rem;
+    border-radius: 4rem;
+
+  }
+
+  #gamedetailwarpper{
+
+    width: 100%;
+    display: inline-block;
+    font-size: .8rem;
+  }
+
+}

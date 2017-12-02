@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="./js/api.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/player.js"></script>
+  <script src="./js/image.js"></script>
+</head>
+<body onload="populateEditPlayer()">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='playerdetails.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.jpg" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
+  </header>
+  <div class="outercontainer">
+      <div class="playerpreview">
+        <h2>Edit Player</h2>
+        <p>Upload a Picture:</p>
+        <form id="editplayerpictureform">
+          <input id="playerimagefield" type="file" name="playerpic" accept="image/*">
+          <input type="button" value="Upload" onclick="uploadEditImage()">
+        </form>
+        <img id="playerimg" src="#" alt="Player Image">
+      </div>
+      <form class="playerform" id="editplayerform" name="addeventform">
+          <input type="text" id="playername" class="addplayerformfield" placeholder="Enter Player Name">
+          <input type="number" id="playernumber" class="addplayerformfield" placeholder="Enter Player Number">
+          <input type="text" id="playerposition" class="addplayerformfield" placeholder="Enter Player Position">
+          <span class="errortext" id="addplayer_error">Please fill out all fields.</span>
+          <input type="button" class="addplayerbutton" value="Edit Player" onclick="validatePlayerEditForm()"/>
+          <input type="button" class="addplayerbutton" value="Cancel" onclick="window.location='playerdetails.html';"/>
+      </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="js/schedule.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/gamedetails.js"></script>
+</head>
+<body onload="populateGameDetails()">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.jpg" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
+  </header>
+  <div class="outercontainer2">
+    <button type="button" id="addeventbutton" onclick="window.location='addevent.html';">+</button>
+    <h3 id="gamedetails_date"></h3>
+    <h3 id="gamedetails_time"></h3>
+    <h4 id="gamedetails_location"></h4>
+      <div id="gamedetails_details">
+        <div id="firstdiv">
+          <img id="teamimgdetailfirst" src="" alt="No Logo">
+          <p id="firstteam"></p>
+        </div>
+        <span>VS.</span>
+        <div id="seconddiv">
+          <img id="teamimgdetailsecond" src="" alt="No Logo">
+          <p id="secondteam"></p>
+        </div>
+      </div>
+      <hr />
+
+      <div id="gamedetails_stats">
+        <div id="gamedetailfirst">
+          <ul>
+            <li>
+              Goals: <span id="gamesdetails_goals">--</span>
+            </li>
+            <li>
+              Shots on Goal: <span id="gamesdetails_shotsongoals">--</span>
+            </li>
+            <li>
+              Corner Kicks: <span id="gamesdetails_cornerkicks">--</span>
+            </li>
+            <li>
+              Goal Kicks: <span id="gamesdetails_goalkicks">--</span>
+            </li>
+          </ul>
+        </div>
+        <div id="gamedetailsecond">
+          <ul>
+            <li>
+              Goals: <span id="gamesdetails_goalsop">--</span>
+            </li>
+            <li>
+              Shots on Goal: <span id="gamesdetails_shotsongoalsop">--</span>
+            </li>
+            <li>
+              Corner Kicks: <span id="gamesdetails_cornerkicksop">--</span>
+            </li>
+            <li>
+              Goal Kicks: <span id="gamesdetails_goalkicksop">--</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="gamedetails_options">
+        <input type="button" id="gamedetails_collectstats" class="gamedetailbutton" value="View Event Feed" onclick="window.location='addevent.html';"/>
+        <input type="button" id="gamedetails_edit" class="gamedetailbutton" value="Edit Game Details" onclick="window.location = 'editgame.html';"/>
+        <input type="button" id="gamedetails_delete" class="gamedetailbutton" value="Delete Game" onclick="deleteGame()"/>
+      </div>
+  </div>
+</body>
+</html>

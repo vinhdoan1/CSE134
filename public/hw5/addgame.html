@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/my.css">
+  <link rel="stylesheet" type="text/css" href="css/players.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="js/schedule.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/opponent.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body onload="loadAddForm()">
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+      <img id="logoheaderimg" src="images/soccerball.jpg" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="mainState.setState('loggedIn', false); window.location='login.html';">Logout</p>
+  </header>
+  <div class="outercontainer2">
+    <h2 id="h2">Add Game</h2>
+    <div id="addgameopimgcontainer" class="teamimgcontainergame" style="height:0";>
+      <img id="addgameopimg" class="teamimggame" src="">
+    </div>
+    <form id="addgameform" class="gameform" name="addgameform">
+        <select name="gameopponent" id="addgameopponent" class="gameformfield" onchange="loadOpponentImage('addgameopponent','addgameopimg')">
+          <option selected="true" disabled="disabled">Choose Opponent</option>
+        </select>
+        <p style="margin-top:0.2rem; margin-bottom:0.2rem">OR</p>
+        <input type="button" id="gameformaddop" class="gameformbutton" value="Add Opponent" onclick="goToAddOpponent('addgame.html')"/>
+        <input type="text" name="gamelocation" id="addgamelocation" class="gameformfield" placeholder="Location">
+        <input type="date" name="gamedate" id="addgamedate" class="gameformfield" placeholder="Date">
+        <input type="time" name="gametime" id="addgametime" class="gameformfield" placeholder="Time">
+        <span class="errortext" id="addgame_error">Please fill out all fields.</span>
+        <span class="errortext" id="addgame_duplicate">Error: That game already exists on the schedule.</span>
+        <input type="button" class="gameformbutton" value="Add Game" onclick="validateGameForm(this.form, 'add');"/>
+    </form>
+  </div>
+</body>
+</html>
