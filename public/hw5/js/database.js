@@ -1,4 +1,5 @@
 var config = {
+    apiKey: "AIzaSyC5ELIjf0XaLwgtOHKPjijx_p9Ihcg2fWA",
     firedatabaseKey: "AIzaSyC5ELIjf0XaLwgtOHKPjijx_p9Ihcg2fWA",
     authDomain: "cse134-bfd99.firebaseapp.com",
     databaseURL: "https://cse134-bfd99.firebaseio.com",
@@ -19,18 +20,18 @@ var config = {
   firedatabase.getTeam = getTeam;
   firedatabase.getTeamName = getTeamName;
   firedatabase.getTeamPlayers = getTeamPlayers;
-  firedatabase.setTeamPlayers = setTeamPlayers;
+  // firedatabase.setTeamPlayers = setTeamPlayers;
   firedatabase.getTeamPlayer = getTeamPlayer;
-  firedatabase.setTeamPlayer = setTeamPlayer;
+  // firedatabase.setTeamPlayer = setTeamPlayer;
   firedatabase.getTeamGames = getTeamGames;
-  firedatabase.setTeamGames = setTeamGames;
-  firedatabase.getTeamGame = getTeamGame;
-  firedatabase.setTeamGame = setTeamGame;
+  // firedatabase.setTeamGames = setTeamGames;
+  // firedatabase.getTeamGame = getTeamGame;
+  // firedatabase.setTeamGame = setTeamGame;
   firedatabase.getOpponents = getOpponents;
   firedatabase.setOpponents = setOpponents;
-  firedatabase.setStat = setStat
+  // firedatabase.setStat = setStat
   firedatabase.setStats = setStats
-  firedatabase.getStats = getStats
+  // firedatabase.getStats = getStats
 
   function generateID() {
     return Date.now().toString(36);
@@ -173,7 +174,7 @@ function addNewGame(userID, teamID, game) {
 
 function updateGame(userID, teamID, gameID, game) {
   var updates = {};
-  updates['/games/' + teamID + '/' gameID] = game;
+  updates['/games/' + teamID + '/' + gameID] = game;
   return firebase.database().ref().update(updates);
 }
 

@@ -1,20 +1,37 @@
 var imageSet = false;
 
+window.onload = function() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      window.location = 'team.html';
+    }
+  });
+};
+
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
   var username = form.username.value;
   var password = form.password.value;
-  var user = api.authenticateUser(username, password);
-  var login_error = document.getElementById('login_error');
-  if (user){
-    mainState.setState("loggedIn", true);
-    mainState.setState("teamID", user.id);
-    login_error.style.display = 'none';
-    window.location='team.html';
+  var dummyemail = username + "@teamwatch.com";
+  //Firebase auth
+  firebase.auth().signInWithEmailAndPassword(dummyemail, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    if (errorCode === 'auth/wrong-password') {
+      login_error.style.display = 'block';
+    } else {
+      console.log(error);
+    }
+  });
+}
+
+function logout(){
+  mainState.setState('loggedIn', false);
+  if (firebase.auth().currentUser) {
+    firebase.auth().signOut();
   }
-  else{
-    login_error.style.display = 'block';
-  }
+  window.location='login.html';
 }
 
 function uploadLogo() {
