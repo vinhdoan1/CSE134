@@ -28,9 +28,11 @@ var config = {
   firedatabase.setTeamGame = setTeamGame;
   firedatabase.getOpponents = getOpponents;
   firedatabase.setOpponents = setOpponents;
-  firedatabase.setStat = setStat
-  firedatabase.setStats = setStats
-  firedatabase.getStats = getStats
+  firedatabase.setStat = setStat;
+  firedatabase.setStats = setStats;
+  firedatabase.getStats = getStats;
+
+  firedatabase.addNewPlayer = addNewPlayer;
 
   function generateID() {
     return Date.now().toString(36);
@@ -97,14 +99,24 @@ function getTeams() {
   return allTeams;
 }
 
-function addTeam(teamID, name, logo) {
-  firebase.database().ref('teams/' + teamID).set({
+function addTeam(userID, name, logo) {
+  var team = {
     name: name,
     logo: logo,
     games: {},
     players: {},
     opponents: {},
-  });
+  };
+
+  var newPostKey = firebase.database().ref().child('teams').push().key;
+
+  var updates = {};
+  updates['/teams/' + newPostKey] = team;
+  var userTeams = {};
+//  userTeams[newPostKey] = true;
+  //updates['/users/teams' + userID] = userTeams;
+  firebase.database().ref().update(updates);
+  return newPostKey;
 }
 
 // TEAM SPECIFICS
@@ -157,7 +169,7 @@ function getTeamGames(teamID) {
   });
 }
 
-function getTeamPlayer(teamID, gameID) {
+function getTeamGame(teamID, gameID) {
   return firebase.database().ref('/players/' + teamID + '/' + gameID).once('value').then(function(teamGame) {
     return teamGame;
   });
@@ -173,7 +185,7 @@ function addNewGame(userID, teamID, game) {
 
 function updateGame(userID, teamID, gameID, game) {
   var updates = {};
-  updates['/games/' + teamID + '/' gameID] = game;
+  updates['/games/' + teamID + '/' + gameID] = game;
   return firebase.database().ref().update(updates);
 }
 
