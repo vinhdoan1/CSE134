@@ -1,13 +1,16 @@
 function loadDashboard(){
   var state = mainState.getState();
-  var team = api.getTeam(state.teamID);
-  getUpcomingGame();
-  document.getElementById("h1").innerHTML = team.name;
-  document.getElementById("wins").innerHTML += "5";
-  document.getElementById("loss").innerHTML += "0";
-  document.getElementById("goalsfor").innerHTML += "14";
-  document.getElementById("goalsagainst").innerHTML += "4";
-  document.getElementById("teamimglogo").src = team.logo;
+  //var team = api.getTeam(state.teamID);
+  firedatabase.getTeam(state.teamID).then(function (teamData){
+    var team = teamData.val();
+    //getUpcomingGame(); commented out for now
+    document.getElementById("h1").innerHTML = team.name;
+    document.getElementById("wins").innerHTML += "5";
+    document.getElementById("loss").innerHTML += "0";
+    document.getElementById("goalsfor").innerHTML += "14";
+    document.getElementById("goalsagainst").innerHTML += "4";
+    document.getElementById("teamimglogo").src = team.logo;
+  });
 }
 
 function getUpcomingGame(){

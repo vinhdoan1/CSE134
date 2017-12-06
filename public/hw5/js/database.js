@@ -13,6 +13,7 @@ var config = {
   firedatabase.generateID = generateID;
   firedatabase.getUsers = getUsers;
   firedatabase.addUser = addUser;
+  firedatabase.getUser = getUser;
   firedatabase.authenticateUser = authenticateUser;
   firedatabase.userExists = userExists;
   firedatabase.getTeams = getTeams;
@@ -54,18 +55,14 @@ var config = {
     return allUsers;
   }
 
-  function addUser(username, password, email) {
-    var allUsers = getUsers();
-
-    var newID = generateID();
-    allUsers.push({
-      name: username,
-      pass: password,
-      email: email,
-      id: newID,
+  function addUser(userID, team) {
+    return firebase.database().ref('users/' + userID).set({
+      team: team,
     })
-    saveUsers(allUsers);
-    return newID;
+  }
+
+  function getUser(userID) {
+    return firebase.database().ref('users/' + userID).once('value');
   }
 
   function authenticateUser(username, password) {
@@ -99,7 +96,7 @@ function getTeams() {
   return allTeams;
 }
 
-function addTeam(userID, name, logo) {
+function addTeam(name, logo, callback) {
   var team = {
     name: name,
     logo: logo,
@@ -115,16 +112,15 @@ function addTeam(userID, name, logo) {
   var userTeams = {};
 //  userTeams[newPostKey] = true;
   //updates['/users/teams' + userID] = userTeams;
-  firebase.database().ref().update(updates);
-  return newPostKey;
+  firebase.database().ref().update(updates).then(function() {
+    callback(newPostKey);
+  });
 }
 
 // TEAM SPECIFICS
 
 function getTeam(teamID) {
-  return firebase.database().ref('/teams/' + teamID).once('value').then(function(team) {
-    return team.val();
-  });
+  return firebase.database().ref('/teams/' + teamID).once('value');
 }
 
 function getTeamName(teamID){

@@ -38,12 +38,9 @@
     </div>
     <form id="signupform" name="signupform">
       <input type="email" class="forminput" placeholder="E-mail" id="teamEmail"/>
-      <input type="text" class="forminput" placeholder="Username" id="teamUser"/>
       <input type="password" class="forminput" placeholder="Password" id="teamPass1"/>
       <input type="password" class="forminput" placeholder="Confirm Password" id="teamPass2"/>
-      <span class="errortext" id="addteam_error">Please fill out all fields.</span>
-      <span class="errortext" id="accountexists_error">Account already exists.</span>
-      <span class="errortext" id="password_error">Passwords do not match.</span>
+      <span class="error-text" id="signup_error"></span>
       <input type="button" class="formbutton" value="Sign Up" onclick="createTeam()"/>
     </form>
   </div>

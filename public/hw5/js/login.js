@@ -1,20 +1,21 @@
 var imageSet = false;
 
+/*
 window.onload = function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       window.location = 'team.html';
     }
   });
-};
+}; */
 
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
   var username = form.username.value;
   var password = form.password.value;
-  var dummyemail = username + "@teamwatch.com";
+  //var dummyemail = username + "@teamwatch.com";
   //Firebase auth
-  firebase.auth().signInWithEmailAndPassword(dummyemail, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -23,6 +24,11 @@ function authenticate(form) {
     } else {
       console.log(error);
     }
+  }).then(function(user) {
+    firedatabase.getUser(user.uid).then(function(user) {
+      mainState.setState("teamID", user.val().team);
+      window.location='team.html';
+    });
   });
 }
 
@@ -52,28 +58,48 @@ function createTeam() {
   var teamForm = document.getElementById('signupform');
   var name = document.getElementById('teaminput').value;
   var email = teamForm.elements['teamEmail'].value;
-  var username = teamForm.elements['teamUser'].value;
   var pass1 = teamForm.elements['teamPass1'].value;
   var pass2 = teamForm.elements['teamPass2'].value;
   var picture = document.getElementById('teamlogoimg').src
-  incomplete = name == "" || email == "" ||  username == "" || pass1 == "" || pass2 == "" || !imageSet;
-  var addteam_error = document.getElementById('addteam_error');
-  var accountexists_error = document.getElementById('accountexists_error');
-  var password_error = document.getElementById('password_error');
+  incomplete = name == "" || email == "" || pass1 == "" || pass2 == "" || !imageSet;
+  var signup_error = document.getElementById('signup_error');
   if(incomplete){
-    addteam_error.style.display = 'block';
-    accountexists_error.display = 'none';
-    password_error.style.display = 'none';
-  } else if (api.userExists(username)){
-    addteam_error.style.display = 'none';
-    accountexists_error.display = 'block';
-    password_error.style.display = 'none';
+    signup_error.innerText = "Please fill out all fields."
+  } else if (pass1 != pass2) {
+    signup_error.innerText = "Passwords do not match."
   }
-  else if (pass1 != pass2) {
-    addteam_error.style.display = 'none';
-    accountexists_error.display = 'none';
-    password_error.style.display = 'block';
-  } else{
+  else{
+
+    firebase.auth().createUserWithEmailAndPassword(email, pass1)
+    .then(function (user) {
+      // successful account creation
+      signup_error.innerText = "";
+      var teamKey = firedatabase.addTeam(name, picture, function(teamKey) {
+        firedatabase.addUser(user.uid, teamKey).then(function(userKey) {
+          mainState.setState("teamID", teamKey);
+          window.location='team.html';
+        });
+      });
+    })
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/email-already-in-use') {
+        signup_error.innerText = "Account already in use."
+      } else if (errorCode === 'auth/invalid-email') {
+        signup_error.innerText = "Email not valid."
+      } else if (errorCode === 'auth/weak-password') {
+        signup_error.innerText = "Password not valid."
+      }
+    });
+    /*
+    if (api.userExists(username)){
+      addteam_error.style.display = 'none';
+      accountexists_error.display = 'block';
+      password_error.style.display = 'none';
+
+      break;
+    }
     addteam_error.style.display = 'none';
     accountexists_error.display = 'none';
     password_error.style.display = 'none';
@@ -82,5 +108,6 @@ function createTeam() {
     mainState.setState("loggedIn", true);
     mainState.setState("teamID", userID);
     window.location='team.html';
+    */
   }
 }
