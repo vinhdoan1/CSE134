@@ -164,7 +164,7 @@ function getTeamGames(teamID) {
 }
 
 function getTeamGame(teamID, gameID) {
-  return firebase.database().ref('/players/' + teamID + '/' + gameID).once('value').then(function(teamGame) {
+  return firebase.database().ref('/games/' + teamID + '/' + gameID).once('value').then(function(teamGame) {
     return teamGame;
   });
 }
