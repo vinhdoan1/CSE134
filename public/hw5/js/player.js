@@ -148,9 +148,6 @@ function populatePlayerDetails() {
   var state = mainState.getState();
   firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
     var player = playerData.val();
-  //  console.log(player);
-
-  //  var player = api.getTeamPlayer(state.teamID, state.playerID);
     var playerName = document.getElementById('playerName');
     playerName.innerText = player.name + " #" + player.number;
     var playerPosition = document.getElementById('playerPosition');
@@ -180,7 +177,7 @@ function populatePlayerDetails() {
       playerImage.src = player.image;
 
     }
-  })
+  });
 }
 
 
@@ -206,17 +203,22 @@ function deletePlayer() {
 
 function populateEditPlayer() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
-  var playerForm = document.getElementById('editplayerform');
-  playerForm.elements['playername'].value = player.name;
-  playerForm.elements['playernumber'].value = player.number;
-  playerForm.elements['playerposition'].value = player.position;
-  document.getElementById('playerimg').src = player.image;
+  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.val();
+    mainState.setState('player', player);
+    var playerForm = document.getElementById('editplayerform');
+    playerForm.elements['playername'].value = player.name;
+    playerForm.elements['playernumber'].value = player.number;
+    playerForm.elements['playerposition'].value = player.position;
+    if (player.image != "") {
+      document.getElementById('playerimg').src = player.image;
+    }
+  });
 }
 
 function validatePlayerEditForm() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
+  var player = state.player;
   var incomplete = false;
   var playerForm = document.getElementById('editplayerform');
   player.name = playerForm.elements['playername'].value;
@@ -232,8 +234,9 @@ function validatePlayerEditForm() {
   }
   else{
     addplayer_error.style.display = 'none';
-    api.setTeamPlayer(state.teamID, state.playerID, player);
-    window.location='players.html';
+    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
