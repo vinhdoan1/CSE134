@@ -19,16 +19,16 @@ function authenticate(form) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    if (errorCode === 'auth/wrong-password') {
+    if (errorCode) {
       login_error.style.display = 'block';
-    } else {
-      console.log(error);
     }
   }).then(function(user) {
-    firedatabase.getUser(user.uid).then(function(user) {
-      mainState.setState("teamID", user.val().team);
-      window.location='team.html';
-    });
+    if (user) {
+      firedatabase.getUser(user.uid).then(function(user) {
+        mainState.setState("teamID", user.val().team);
+        window.location='team.html';
+      });
+    }
   });
 }
 
