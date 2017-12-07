@@ -51,7 +51,7 @@ function createTeam() {
   var email = teamForm.elements['teamEmail'].value;
   var pass1 = teamForm.elements['teamPass1'].value;
   var pass2 = teamForm.elements['teamPass2'].value;
-  var picture = document.getElementById('teamlogoimg').src
+  var picture = document.getElementById('newteam_teamimg').src;
   incomplete = name == "" || email == "" || pass1 == "" || pass2 == "";
   var signup_error = document.getElementById('signup_error');
   if(incomplete){
