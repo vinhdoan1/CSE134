@@ -132,9 +132,7 @@ function getTeamName(teamID){
 // PLAYER DATA
 
 function getTeamPlayers(teamID) {
-  return firebase.database().ref('/players/' + teamID).once('value').then(function(teamPlayers) {
-    return teamPlayers;
-  });
+  return firebase.database().ref('/players/' + teamID).once('value')
 }
 
 function getTeamPlayer(teamID, playerID) {
@@ -143,7 +141,7 @@ function getTeamPlayer(teamID, playerID) {
   });
 }
 
-function addNewPlayer(userID, teamID, player) {
+function addNewPlayer(teamID, player) {
   var newPostKey = firebase.database().ref().child('/players/' + teamID + '/').push().key;
 
   var updates = {};

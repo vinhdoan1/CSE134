@@ -34,28 +34,35 @@ function refreshPlayers() {
 // load players and display to screen
 function loadPlayers() {
   var state = mainState.getState();
-  var players = api.getTeamPlayers(state.teamID);
-  players = players.filter(function(player) {
-    return !player.deleted;
+  firedatabase.getTeamPlayers(state.teamID).then(function (playersData) {
+    if (!playersData) {
+      return;
+    }
+    var playersObj = playersData.val();
+    var players = Object.keys(playersObj).map(function (key) { return playersObj[key]; });
+
+    players = players.filter(function(player) {
+      return !player.deleted;
+    })
+    if (sortFunction) {
+      players = players.sort(sortFunction);
+    }
+    for (var i = 0; i < players.length; i++) {
+      var player = players[i];
+      var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
+      var playerButton = playerTemplate.content;
+      var playerDiv = playerButton.querySelector("div");
+      playerDiv.onclick = createToPlayerFunction(player);
+      var playerDiv = playerButton.querySelector("img");
+      playerDiv.alt = player.name;
+      playerDiv.src = player.image;
+      var playerDetails = playerButton.querySelectorAll("li");
+      playerDetails[0].innerText = player.name + " #" + player.number;
+      playerDetails[1].innerText = player.position;
+      playerDetails[2].innerText = "Goals: " + player.goals;
+      document.getElementById('playerButtons').appendChild(playerButton);
+    }
   })
-  if (sortFunction) {
-    players = players.sort(sortFunction);
-  }
-  for (var i = 0; i < players.length; i++) {
-    var player = players[i];
-    var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
-    var playerButton = playerTemplate.content;
-    var playerDiv = playerButton.querySelector("div");
-    playerDiv.onclick = createToPlayerFunction(player);
-    var playerDiv = playerButton.querySelector("img");
-    playerDiv.alt = player.name;
-    playerDiv.src = player.image;
-    var playerDetails = playerButton.querySelectorAll("li");
-    playerDetails[0].innerText = player.name + " #" + player.number;
-    playerDetails[1].innerText = player.position;
-    playerDetails[2].innerText = "Goals: " + player.goals;
-    document.getElementById('playerButtons').appendChild(playerButton);
-  }
 }
 
 function uploadImage() {
@@ -110,7 +117,10 @@ function validatePlayerForm() {
   }
   else{
     addplayer_error.style.display = 'none';
-    addPlayer(player);
+    var state = mainState.getState();
+    firedatabase.addNewPlayer(state.teamID, player).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
@@ -124,31 +134,37 @@ function addPlayer(player) {
 
 function populatePlayerDetails() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
-  var playerName = document.getElementById('playerName');
-  playerName.innerText = player.name + " #" + player.number;
-  var playerPosition = document.getElementById('playerPosition');
-  playerPosition.innerText = player.position;
-  var playerGoals = document.getElementById('playerGoals');
-  playerGoals.innerText = "Goals: " + player.goals;
-  var playerFouls = document.getElementById('playerFouls');
-  playerFouls.innerText = "Fouls: " + player.fouls;
-  var playerYellowCards = document.getElementById('playerYellowCards');
-  playerYellowCards.innerText = "Yellow Cards: " + player.yellowCards;
-  var playerRedCards = document.getElementById('playerRedCards');
-  playerRedCards.innerText = "Red Cards: " + player.redCards;
-  var playerShotsOnGoal = document.getElementById('playerShotsOnGoal');
-  playerShotsOnGoal.innerText = "Shots on Goal: " + player.shotsOnGoal;
-  var playerCornerKicks = document.getElementById('playerCornerKicks');
-  playerCornerKicks.innerText = "Corner Kicks: " + player.cornerKicks;
-  var playerPenaltyKicks = document.getElementById('playerPenaltyKicks');
-  playerPenaltyKicks.innerText = "Penalty Kicks: " + player.penalties;
-  var playerThrowIns = document.getElementById('playerThrowIns');
-  playerThrowIns.innerText = "Throw ins: " + player.throwIns;
-  var playerGamesPlayed = document.getElementById('playerGamesPlayed');
-  playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
-  var playerImage = document.getElementById('playerImage');
-  playerImage.src = player.image;
+  console.log(state.playerID);
+  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.val();
+    console.log(player);
+
+    var player = api.getTeamPlayer(state.teamID, state.playerID);
+    var playerName = document.getElementById('playerName');
+    playerName.innerText = player.name + " #" + player.number;
+    var playerPosition = document.getElementById('playerPosition');
+    playerPosition.innerText = player.position;
+    var playerGoals = document.getElementById('playerGoals');
+    playerGoals.innerText = "Goals: " + player.goals;
+    var playerFouls = document.getElementById('playerFouls');
+    playerFouls.innerText = "Fouls: " + player.fouls;
+    var playerYellowCards = document.getElementById('playerYellowCards');
+    playerYellowCards.innerText = "Yellow Cards: " + player.yellowCards;
+    var playerRedCards = document.getElementById('playerRedCards');
+    playerRedCards.innerText = "Red Cards: " + player.redCards;
+    var playerShotsOnGoal = document.getElementById('playerShotsOnGoal');
+    playerShotsOnGoal.innerText = "Shots on Goal: " + player.shotsOnGoal;
+    var playerCornerKicks = document.getElementById('playerCornerKicks');
+    playerCornerKicks.innerText = "Corner Kicks: " + player.cornerKicks;
+    var playerPenaltyKicks = document.getElementById('playerPenaltyKicks');
+    playerPenaltyKicks.innerText = "Penalty Kicks: " + player.penalties;
+    var playerThrowIns = document.getElementById('playerThrowIns');
+    playerThrowIns.innerText = "Throw ins: " + player.throwIns;
+    var playerGamesPlayed = document.getElementById('playerGamesPlayed');
+    playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
+    var playerImage = document.getElementById('playerImage');
+    playerImage.src = player.image;
+  })
 }
 
 
