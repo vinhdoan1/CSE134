@@ -25,8 +25,10 @@ var config = {
   firedatabase.getTeamPlayer = getTeamPlayer;
   // firedatabase.setTeamPlayer = setTeamPlayer;
   firedatabase.getTeamGames = getTeamGames;
+  firedatabase.addNewGame = addNewGame;
+  firedatabase.updateGame = updateGame
   // firedatabase.setTeamGames = setTeamGames;
-  // firedatabase.getTeamGame = getTeamGame;
+  firedatabase.getTeamGame = getTeamGame;
   // firedatabase.setTeamGame = setTeamGame;
   firedatabase.getOpponents = getOpponents;
   firedatabase.setOpponents = setOpponents;
@@ -171,7 +173,7 @@ function getTeamGame(teamID, gameID) {
   });
 }
 
-function addNewGame(userID, teamID, game) {
+function addNewGame(teamID, game) {
   var newPostKey = firebase.database().ref().child('/players/' + teamID + '/').push().key;
 
   var updates = {};
@@ -179,7 +181,7 @@ function addNewGame(userID, teamID, game) {
   return firebase.database().ref().update(updates);
 }
 
-function updateGame(userID, teamID, gameID, game) {
+function updateGame(teamID, gameID, game) {
   var updates = {};
   updates['/games/' + teamID + '/' + gameID] = game;
   return firebase.database().ref().update(updates);
