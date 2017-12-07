@@ -24,3 +24,16 @@ function readImageAndResize(imageFile, sideLength, callback, png) {
   };
   reader.readAsDataURL(imageFile);
 }
+
+function uploadLogo(imagefilenameid, teamlogoimgid) {
+  var logoForm = document.getElementById(imagefilenameid);
+  if (logoForm.files.length <= 0) {
+    return;
+  }
+  image.readImageAndResize(logoForm.files[0], 300, function(result) {
+    var playerImage = document.getElementById(teamlogoimgid);
+    playerImage.style.visibility = "visible";
+    playerImage.src = result;
+    imageSet = true;
+  }, true);
+}

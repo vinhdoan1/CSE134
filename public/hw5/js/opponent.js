@@ -53,18 +53,18 @@ function addOpponent(opponent){
   }
 }
 
-function uploadOpLogo() {
-  var logoForm = document.getElementById('oplogoupload');
-  if (logoForm.files.length <= 0) {
-    return;
-  }
-  image.readImageAndResize(logoForm.files[0], 300, function(result) {
-    var oplogo = document.getElementById('oplogoimg');
-    oplogo.style.visibility = "visible";
-    oplogo.src = result;
-    imageSet = true;
-  }, true);
-}
+// function uploadOpLogo() {
+//   var logoForm = document.getElementById('oplogoupload');
+//   if (logoForm.files.length <= 0) {
+//     return;
+//   }
+//   image.readImageAndResize(logoForm.files[0], 300, function(result) {
+//     var oplogo = document.getElementById('oplogoimg');
+//     oplogo.style.visibility = "visible";
+//     oplogo.src = result;
+//     imageSet = true;
+//   }, true);
+// }
 
 function loadOpponentImage(selectid, logoid){
   // console.log('loadopponentimg');

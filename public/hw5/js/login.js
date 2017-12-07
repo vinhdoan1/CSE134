@@ -31,18 +31,18 @@ function logout(){
   window.location='login.html';
 }
 
-function uploadLogo() {
-  var logoForm = document.getElementById('logoupload');
-  if (logoForm.files.length <= 0) {
-    return;
-  }
-  image.readImageAndResize(logoForm.files[0], 300, function(result) {
-    var playerImage = document.getElementById('teamlogoimg');
-    playerImage.style.visibility = "visible";
-    playerImage.src = result;
-    imageSet = true;
-  }, true);
-}
+// function uploadLogo(imagefilenameid, teamlogoimgid) {
+//   var logoForm = document.getElementById(imagefilenameid);
+//   if (logoForm.files.length <= 0) {
+//     return;
+//   }
+//   image.readImageAndResize(logoForm.files[0], 300, function(result) {
+//     var playerImage = document.getElementById(teamlogoimgid);
+//     playerImage.style.visibility = "visible";
+//     playerImage.src = result;
+//     imageSet = true;
+//   }, true);
+// }
 
 function createTeam() {
   var incomplete = false;
@@ -60,7 +60,6 @@ function createTeam() {
     signup_error.innerText = "Passwords do not match."
   }
   else{
-
     firebase.auth().createUserWithEmailAndPassword(email, pass1)
     .then(function (user) {
       // successful account creation

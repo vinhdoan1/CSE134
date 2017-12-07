@@ -15,6 +15,7 @@
   <script src="js/opponent.js"></script>
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/image.js"></script>
 </head>
 <body>
   <header>
@@ -28,18 +29,20 @@
   <div class="outercontainer2">
     <h2 id="h2">Edit Team Information</h2>
     <div id="changenamecontainer">
-
+      <p>Team Name:</p>
+      <input type="text" id="newteamname" class="settingsinput" placeholder="Team Name"/>
     </div>
     <div id="changelogocontainer">
+      <p>Team Logo:</p>
       <div class="fileuploadcontainer">
-        <input id="logoupload" type="file"/>
-        <input type="button" value="Upload" onclick="uploadLogo()">
+        <input class="logoupload" id="editteam_logoupload" type="file"/>
+        <input type="button" value="Upload" onclick="uploadLogo('editteam_logoupload','editteam_teamimg');"/>
       </div>
       <div class="teamimgcontainer">
-        <img class="teamimg" id="teamlogoimg" src="" alt="Team Logo">
+        <img class="teamimg" id="editteam_teamimg" src="" alt="Team Logo">
       </div>
     </div>
-    
+    <input type="button" class="settingsbutton" value="Update Team Information" onclick=""/> 
     <!-- <div id="addgameopimgcontainer" class="teamimgcontainergame" style="height:0";>
       <img id="addgameopimg" class="teamimggame" src="">
     </div>

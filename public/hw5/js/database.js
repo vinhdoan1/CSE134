@@ -129,6 +129,12 @@ function getTeamName(teamID){
   });
 }
 
+function setTeam(teamID, team){
+ var updates={};
+ updates['/teams' + teamID] = team;
+ return firebase.database().ref().update(updates);
+}
+
 // PLAYER DATA
 
 function getTeamPlayers(teamID) {
