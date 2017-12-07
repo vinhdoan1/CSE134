@@ -62,7 +62,7 @@ var config = {
   }
 
   function getUser(userID) {
-    return firebase.database().ref('users/' + userID).once('value');
+    return firebase.auth().currentUser
   }
 
   function authenticateUser(username, password) {
@@ -166,7 +166,7 @@ function getTeamGames(teamID) {
 }
 
 function getTeamGame(teamID, gameID) {
-  return firebase.database().ref('/players/' + teamID + '/' + gameID).once('value').then(function(teamGame) {
+  return firebase.database().ref('/games/' + teamID + '/' + gameID).once('value').then(function(teamGame) {
     return teamGame;
   });
 }
