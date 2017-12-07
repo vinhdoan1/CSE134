@@ -34,6 +34,6 @@ function uploadLogo(imagefilenameid, teamlogoimgid) {
     var playerImage = document.getElementById(teamlogoimgid);
     playerImage.style.visibility = "visible";
     playerImage.src = result;
-    imageSet = true;
+    // imageSet = true;
   }, true);
 }

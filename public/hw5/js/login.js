@@ -1,4 +1,4 @@
-var imageSet = false;
+// var imageSet = false;
 
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
@@ -52,7 +52,7 @@ function createTeam() {
   var pass1 = teamForm.elements['teamPass1'].value;
   var pass2 = teamForm.elements['teamPass2'].value;
   var picture = document.getElementById('teamlogoimg').src
-  incomplete = name == "" || email == "" || pass1 == "" || pass2 == "" || !imageSet;
+  incomplete = name == "" || email == "" || pass1 == "" || pass2 == "";
   var signup_error = document.getElementById('signup_error');
   if(incomplete){
     signup_error.innerText = "Please fill out all fields."

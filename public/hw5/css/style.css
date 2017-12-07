@@ -736,7 +736,8 @@ input[type="number"]
 
 .teamimg{
   width: 5rem;
-  visibility: hidden;
+  /* height: 0rem; */
+  /* visibility: hidden; */
 }
 
 /* #teamlogoimg {
