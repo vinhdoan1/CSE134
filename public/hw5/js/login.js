@@ -1,14 +1,5 @@
 var imageSet = false;
 
-/*
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      window.location = 'team.html';
-    }
-  });
-}; */
-
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
   var username = form.username.value;
