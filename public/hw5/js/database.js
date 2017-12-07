@@ -62,7 +62,7 @@ var config = {
   }
 
   function getUser(userID) {
-    return firebase.auth().currentUser
+    return firebase.database().ref('users/' + userID).once('value');
   }
 
   function authenticateUser(username, password) {
