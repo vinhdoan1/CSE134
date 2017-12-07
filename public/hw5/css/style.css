@@ -327,14 +327,6 @@ footer .logofootertextcenter {
     height: 2rem;
   }
 
-  #addgamebutton {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 15px;
-    width: 1.5rem;
-  }
-
   #gamedetails_details div{
 
     display: inline-block;
