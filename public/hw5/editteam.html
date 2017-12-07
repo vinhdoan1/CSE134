@@ -16,8 +16,9 @@
   <script src="js/state.js"></script>
   <script src="js/api.js"></script>
   <script src="js/image.js"></script>
+  <script src="js/settings.js"></script>
 </head>
-<body>
+<body onload=populateTeamInformation()>
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -42,23 +43,9 @@
         <img class="teamimg" id="editteam_teamimg" src="images/default.jpg" alt="Team Logo">
       </div>
     </div>
-    <input type="button" class="settingsbutton" value="Update Team Information" onclick=""/> 
-    <!-- <div id="addgameopimgcontainer" class="teamimgcontainergame" style="height:0";>
-      <img id="addgameopimg" class="teamimggame" src="">
-    </div>
-    <form id="addgameform" class="gameform" name="addgameform">
-        <select name="gameopponent" id="addgameopponent" class="gameformfield" onchange="loadOpponentImage('addgameopponent','addgameopimg')">
-          <option selected="true" disabled="disabled">Choose Opponent</option>
-        </select>
-        <p style="margin-top:0.2rem; margin-bottom:0.2rem">OR</p>
-        <input type="button" id="gameformaddop" class="gameformbutton" value="Add Opponent" onclick="goToAddOpponent('addgame.html')"/>
-        <input type="text" name="gamelocation" id="addgamelocation" class="gameformfield" placeholder="Location">
-        <input type="date" name="gamedate" id="addgamedate" class="gameformfield" placeholder="Date">
-        <input type="time" name="gametime" id="addgametime" class="gameformfield" placeholder="Time">
-        <span class="errortext" id="addgame_error">Please fill out all fields.</span>
-        <span class="errortext" id="addgame_duplicate">Error: That game already exists on the schedule.</span>
-        <input type="button" class="gameformbutton" value="Add Game" onclick="validateGameForm(this.form, 'add');"/>
-    </form> -->
+    <input type="button" class="settingsbutton" value="Update Team Information" onclick="updateTeam()"/> 
+    <div class="editteammsg" id="editteam_confirm" style="color:blue;">Changes saved.</div>
+    <div class="editteammsg" id="editteam_error" style="color:red; height:0;"></div>
   </div>
 </body>
 </html>

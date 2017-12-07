@@ -19,6 +19,7 @@ var config = {
   firedatabase.getTeams = getTeams;
   firedatabase.addTeam = addTeam;
   firedatabase.getTeam = getTeam;
+  firedatabase.setTeam = setTeam;
   firedatabase.getTeamName = getTeamName;
   firedatabase.getTeamPlayers = getTeamPlayers;
   // firedatabase.setTeamPlayers = setTeamPlayers;
@@ -134,7 +135,7 @@ function getTeamName(teamID){
 
 function setTeam(teamID, team){
  var updates={};
- updates['/teams' + teamID] = team;
+ updates['/teams/' + teamID] = team;
  return firebase.database().ref().update(updates);
 }
 
