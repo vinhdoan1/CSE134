@@ -73,6 +73,10 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   display: block;
 }
 
+.gamebutton{
+  padding: 0.5rem auto 0.5rem auto;
+}
+
 .gamedetailbutton{
   height: 2rem;
 }
