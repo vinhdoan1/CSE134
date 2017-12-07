@@ -32,7 +32,7 @@ function funcToGameDetails(gameID){
   }
 }
 
-function createGameButtonDetail(game){
+function createGameButtonDetail(game, gameID){
   var date = parseDateAndTime(game.date, game.time);
   var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
   var ampm = date.getHours() >= 12 ? "PM" : "AM";
@@ -40,7 +40,7 @@ function createGameButtonDetail(game){
   btn.setAttribute("type", "button");
   btn.setAttribute("class", "gamebutton");
   btn.setAttribute("onclick", "window.location='gamedetails.html';");
-  btn.onclick = funcToGameDetails(game.id);
+  btn.onclick = funcToGameDetails(gameID);
   btn.innerHTML = "<p class='gamebuttondetail'>" + schedule.months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
   return btn;
 }

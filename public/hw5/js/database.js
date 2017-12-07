@@ -25,8 +25,10 @@ var config = {
   firedatabase.getTeamPlayer = getTeamPlayer;
   // firedatabase.setTeamPlayer = setTeamPlayer;
   firedatabase.getTeamGames = getTeamGames;
+  firedatabase.addNewGame = addNewGame;
+  firedatabase.updateGame = updateGame
   // firedatabase.setTeamGames = setTeamGames;
-  // firedatabase.getTeamGame = getTeamGame;
+  firedatabase.getTeamGame = getTeamGame;
   // firedatabase.setTeamGame = setTeamGame;
   firedatabase.getOpponents = getOpponents;
   firedatabase.setOpponents = setOpponents;
@@ -34,6 +36,7 @@ var config = {
   firedatabase.setStats = setStats
   // firedatabase.getStats = getStats
   firedatabase.addNewPlayer = addNewPlayer;
+  firedatabase.updatePlayer = updatePlayer;
 
   function generateID() {
     return Date.now().toString(36);
@@ -138,9 +141,7 @@ function setTeam(teamID, team){
 // PLAYER DATA
 
 function getTeamPlayers(teamID) {
-  return firebase.database().ref('/players/' + teamID).once('value').then(function(teamPlayers) {
-    return teamPlayers;
-  });
+  return firebase.database().ref('/players/' + teamID).once('value')
 }
 
 function getTeamPlayer(teamID, playerID) {
@@ -149,15 +150,16 @@ function getTeamPlayer(teamID, playerID) {
   });
 }
 
-function addNewPlayer(userID, teamID, player) {
+function addNewPlayer(teamID, player) {
   var newPostKey = firebase.database().ref().child('/players/' + teamID + '/').push().key;
 
   var updates = {};
+  player.id = newPostKey;
   updates['/players/' + teamID + '/' + newPostKey] = player;
   return firebase.database().ref().update(updates);
 }
 
-function updatePlayer(userID, teamID, playerID, player) {
+function updatePlayer(teamID, playerID, player) {
   var updates = {};
   updates['/players/' + teamID + '/' + playerID] = player;
   return firebase.database().ref().update(updates);
@@ -177,7 +179,7 @@ function getTeamGame(teamID, gameID) {
   });
 }
 
-function addNewGame(userID, teamID, game) {
+function addNewGame(teamID, game) {
   var newPostKey = firebase.database().ref().child('/players/' + teamID + '/').push().key;
 
   var updates = {};
@@ -185,7 +187,7 @@ function addNewGame(userID, teamID, game) {
   return firebase.database().ref().update(updates);
 }
 
-function updateGame(userID, teamID, gameID, game) {
+function updateGame(teamID, gameID, game) {
   var updates = {};
   updates['/games/' + teamID + '/' + gameID] = game;
   return firebase.database().ref().update(updates);

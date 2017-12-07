@@ -20,21 +20,36 @@ function sortSelect() {
           return player1.number > player2.number;
         }
 }
-  refreshPlayers();
+  refreshPlayers(true);
 }
 
-function refreshPlayers() {
+function refreshPlayers(fromSort) {
   var playerButtons = document.getElementById('playerButtons');
   while (playerButtons.firstChild) {
     playerButtons.removeChild(playerButtons.firstChild);
   }
-  loadPlayers();
+  loadPlayers(fromSort);
 }
 
 // load players and display to screen
-function loadPlayers() {
+function loadPlayers(fromSort) {
   var state = mainState.getState();
-  var players = api.getTeamPlayers(state.teamID);
+  if (fromSort) {
+    loadPlayerPage(state.players);
+    return;
+  }
+  firedatabase.getTeamPlayers(state.teamID).then(function (playersData) {
+    var playersObj = playersData.val();
+    if (!playersObj) {
+      return;
+    }
+    var players = Object.keys(playersObj).map(function (key) { return playersObj[key]; });
+    mainState.setState('players', players);
+    loadPlayerPage(players);
+  })
+}
+
+function loadPlayerPage(players) {
   players = players.filter(function(player) {
     return !player.deleted;
   })
@@ -49,7 +64,11 @@ function loadPlayers() {
     playerDiv.onclick = createToPlayerFunction(player);
     var playerDiv = playerButton.querySelector("img");
     playerDiv.alt = player.name;
-    playerDiv.src = player.image;
+    if (player.image == "") {
+      playerDiv.src = "images/anonymous.png"
+    } else {
+      playerDiv.src = player.image;
+    }
     var playerDetails = playerButton.querySelectorAll("li");
     playerDetails[0].innerText = player.name + " #" + player.number;
     playerDetails[1].innerText = player.position;
@@ -66,9 +85,7 @@ function uploadImage() {
   var uploaded = "";
   image.readImageAndResize(playerForm.files[0], 300, function(result) {
     var playerImage = document.getElementById('playerbuttonimg');
-    playerImage.style.visibility = "visible";
     playerImage.src = result;
-    imageSet = true;
   });
 }
 
@@ -85,7 +102,7 @@ function validatePlayerForm() {
     id: api.generateID(),
     name: "",
     position: "",
-    image: "#",
+    image: "",
     number: 0,
     goals: 0,
     fouls: 0,
@@ -102,15 +119,20 @@ function validatePlayerForm() {
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
-  player.image = document.getElementById('playerbuttonimg').src;
-  incomplete = player.name == "" || player.number == "" ||  player.position == "" || !imageSet;
+  if (imageSet) {
+    player.image = document.getElementById('playerbuttonimg').src;
+  }
+  incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
     addplayer_error.style.display = 'block';
   }
   else{
     addplayer_error.style.display = 'none';
-    addPlayer(player);
+    var state = mainState.getState();
+    firedatabase.addNewPlayer(state.teamID, player).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
@@ -124,31 +146,38 @@ function addPlayer(player) {
 
 function populatePlayerDetails() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
-  var playerName = document.getElementById('playerName');
-  playerName.innerText = player.name + " #" + player.number;
-  var playerPosition = document.getElementById('playerPosition');
-  playerPosition.innerText = player.position;
-  var playerGoals = document.getElementById('playerGoals');
-  playerGoals.innerText = "Goals: " + player.goals;
-  var playerFouls = document.getElementById('playerFouls');
-  playerFouls.innerText = "Fouls: " + player.fouls;
-  var playerYellowCards = document.getElementById('playerYellowCards');
-  playerYellowCards.innerText = "Yellow Cards: " + player.yellowCards;
-  var playerRedCards = document.getElementById('playerRedCards');
-  playerRedCards.innerText = "Red Cards: " + player.redCards;
-  var playerShotsOnGoal = document.getElementById('playerShotsOnGoal');
-  playerShotsOnGoal.innerText = "Shots on Goal: " + player.shotsOnGoal;
-  var playerCornerKicks = document.getElementById('playerCornerKicks');
-  playerCornerKicks.innerText = "Corner Kicks: " + player.cornerKicks;
-  var playerPenaltyKicks = document.getElementById('playerPenaltyKicks');
-  playerPenaltyKicks.innerText = "Penalty Kicks: " + player.penalties;
-  var playerThrowIns = document.getElementById('playerThrowIns');
-  playerThrowIns.innerText = "Throw ins: " + player.throwIns;
-  var playerGamesPlayed = document.getElementById('playerGamesPlayed');
-  playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
-  var playerImage = document.getElementById('playerImage');
-  playerImage.src = player.image;
+  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.val();
+    var playerName = document.getElementById('playerName');
+    playerName.innerText = player.name + " #" + player.number;
+    var playerPosition = document.getElementById('playerPosition');
+    playerPosition.innerText = player.position;
+    var playerGoals = document.getElementById('playerGoals');
+    playerGoals.innerText = "Goals: " + player.goals;
+    var playerFouls = document.getElementById('playerFouls');
+    playerFouls.innerText = "Fouls: " + player.fouls;
+    var playerYellowCards = document.getElementById('playerYellowCards');
+    playerYellowCards.innerText = "Yellow Cards: " + player.yellowCards;
+    var playerRedCards = document.getElementById('playerRedCards');
+    playerRedCards.innerText = "Red Cards: " + player.redCards;
+    var playerShotsOnGoal = document.getElementById('playerShotsOnGoal');
+    playerShotsOnGoal.innerText = "Shots on Goal: " + player.shotsOnGoal;
+    var playerCornerKicks = document.getElementById('playerCornerKicks');
+    playerCornerKicks.innerText = "Corner Kicks: " + player.cornerKicks;
+    var playerPenaltyKicks = document.getElementById('playerPenaltyKicks');
+    playerPenaltyKicks.innerText = "Penalty Kicks: " + player.penalties;
+    var playerThrowIns = document.getElementById('playerThrowIns');
+    playerThrowIns.innerText = "Throw ins: " + player.throwIns;
+    var playerGamesPlayed = document.getElementById('playerGamesPlayed');
+    playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
+    var playerImage = document.getElementById('playerImage');
+    if (player.image == "") {
+      playerImage.src = "images/anonymous.png"
+    } else {
+      playerImage.src = player.image;
+
+    }
+  });
 }
 
 
@@ -163,32 +192,41 @@ function deletePlayer() {
     }, 1000);
   } else {
     var state = mainState.getState();
-    var player = api.getTeamPlayer(state.teamID, state.playerID);
-    player.deleted = true;
-    api.setTeamPlayer(state.teamID, state.playerID, player);
-    window.location='players.html';
+    var playerDeleted = {
+      deleted: true,
+    }
+    firedatabase.updatePlayer(state.teamID, state.playerID, playerDeleted).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
 function populateEditPlayer() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
-  var playerForm = document.getElementById('editplayerform');
-  playerForm.elements['playername'].value = player.name;
-  playerForm.elements['playernumber'].value = player.number;
-  playerForm.elements['playerposition'].value = player.position;
-  document.getElementById('playerimg').src = player.image;
+  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.val();
+    mainState.setState('player', player);
+    var playerForm = document.getElementById('editplayerform');
+    playerForm.elements['playername'].value = player.name;
+    playerForm.elements['playernumber'].value = player.number;
+    playerForm.elements['playerposition'].value = player.position;
+    if (player.image != "") {
+      document.getElementById('playerimg').src = player.image;
+    }
+  });
 }
 
 function validatePlayerEditForm() {
   var state = mainState.getState();
-  var player = api.getTeamPlayer(state.teamID, state.playerID);
+  var player = state.player;
   var incomplete = false;
   var playerForm = document.getElementById('editplayerform');
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
-  player.image = document.getElementById('playerimg').src;
+  if (imageSet) {
+    player.image = document.getElementById('playerbuttonimg').src;
+  }
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
@@ -196,8 +234,9 @@ function validatePlayerEditForm() {
   }
   else{
     addplayer_error.style.display = 'none';
-    api.setTeamPlayer(state.teamID, state.playerID, player);
-    window.location='players.html';
+    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
@@ -209,5 +248,6 @@ function uploadEditImage() {
   image.readImageAndResize(playerForm.files[0], 300, function(result) {
     var playerImage = document.getElementById('playerimg');
     playerImage.src = result;
+    imageSet = true;
   });
 }

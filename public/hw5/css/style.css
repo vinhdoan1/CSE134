@@ -333,14 +333,6 @@ footer .logofootertextcenter {
     height: 2rem;
   }
 
-  #addgamebutton {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 15px;
-    width: 1.5rem;
-  }
-
   #gamedetails_details div{
 
     display: inline-block;
@@ -533,10 +525,6 @@ header #logoutheadertext {
   border-style: solid;
   border-width: 1px;
   border-radius: 5rem;
-}
-
-.playerpreview #playerbuttonimg {
-  visibility: hidden;
 }
 
 .playerdetails {
@@ -771,5 +759,3 @@ input[type="number"]
   }
 
 }
-
-
