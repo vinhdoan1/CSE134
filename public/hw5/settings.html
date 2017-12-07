@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/database.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/image.js"></script>
+</head>
+<body>
+  <header>
+    <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
+  <div class="headerlogo" onclick="window.location='team.html';">
+    <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+    <p id="logoheadertext">TeamWatch</p>
+  </div>
+  <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
+</header>
+  <div class="outercontainer2">
+    <h1>Settings</h1>
+    <div id="accountsettings" class="settingsdiv">
+      <h3>Account Settings</h3>
+      <input type="email" id="newemail" class="settingsinput" placeholder="New Email"/>
+      <input type="password" id="newpassword" class="settingsinput" placeholder="New Password"/>
+      <input type="password" id="confirmnewpassword" class="settingsinput" placeholder="Confirm New Password"/>
+      <input type="password" id="oldpassword" class="settingsinput" placeholder="Current Password"/>
+      <input type="button" class="settingsbutton" value="Update Account" onclick=""/>
+    </div>
+    <div id="teammanagementsettings" class="settingsdiv">
+      <h3>Team Management Settings</h3>
+      <input type="button" class="settingsbutton" value="Edit Team Information" onclick="window.location='editteam.html';"/>      
+      <input type="button" class="settingsbutton" value="Manage Opponents List" onclick=""/>
+    </div>
+    <div id="inviteusers" class="settingsdiv">    
+      <h3>Invite Users</h3>
+      <p>Share this team's invite code:</p>
+    </div>
+    
+  </div>
+</body>
+</html>

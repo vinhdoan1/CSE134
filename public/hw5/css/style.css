@@ -71,18 +71,24 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   width: 16rem;
   margin: .5rem auto 0 auto;
   display: block;
-}
-
-.gamebutton{
-  padding: 0.5rem auto 0.5rem auto;
-}
-
-.gamedetailbutton{
   height: 2rem;
 }
 
-#gamedetails_delete{
-  background-color: red;
+.settingsdiv{
+  border-bottom: 1px solid grey;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+#inviteusers{
+  border-bottom: 0px;
+}
+
+.settingsinput, .settingsbutton{
+  display: block;
+  margin: 0.5rem auto 0.5rem auto;
+  width: 15rem;
+  height: 2rem;
 }
 
 #gamedetails_delete{
@@ -764,3 +770,5 @@ input[type="number"]
   }
 
 }
+
+
