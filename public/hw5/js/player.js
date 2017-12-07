@@ -20,49 +20,61 @@ function sortSelect() {
           return player1.number > player2.number;
         }
 }
-  refreshPlayers();
+  refreshPlayers(true);
 }
 
-function refreshPlayers() {
+function refreshPlayers(fromSort) {
   var playerButtons = document.getElementById('playerButtons');
   while (playerButtons.firstChild) {
     playerButtons.removeChild(playerButtons.firstChild);
   }
-  loadPlayers();
+  loadPlayers(fromSort);
 }
 
 // load players and display to screen
-function loadPlayers() {
+function loadPlayers(fromSort) {
   var state = mainState.getState();
+  if (fromSort) {
+    loadPlayerPage(state.players);
+    return;
+  }
   firedatabase.getTeamPlayers(state.teamID).then(function (playersData) {
-    if (!playersData) {
+    var playersObj = playersData.val();
+    if (!playersObj) {
       return;
     }
-    var playersObj = playersData.val();
     var players = Object.keys(playersObj).map(function (key) { return playersObj[key]; });
-
-    players = players.filter(function(player) {
-      return !player.deleted;
-    })
-    if (sortFunction) {
-      players = players.sort(sortFunction);
-    }
-    for (var i = 0; i < players.length; i++) {
-      var player = players[i];
-      var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
-      var playerButton = playerTemplate.content;
-      var playerDiv = playerButton.querySelector("div");
-      playerDiv.onclick = createToPlayerFunction(player);
-      var playerDiv = playerButton.querySelector("img");
-      playerDiv.alt = player.name;
-      playerDiv.src = player.image;
-      var playerDetails = playerButton.querySelectorAll("li");
-      playerDetails[0].innerText = player.name + " #" + player.number;
-      playerDetails[1].innerText = player.position;
-      playerDetails[2].innerText = "Goals: " + player.goals;
-      document.getElementById('playerButtons').appendChild(playerButton);
-    }
+    mainState.setState('players', players);
+    loadPlayerPage(players);
   })
+}
+
+function loadPlayerPage(players) {
+  players = players.filter(function(player) {
+    return !player.deleted;
+  })
+  if (sortFunction) {
+    players = players.sort(sortFunction);
+  }
+  for (var i = 0; i < players.length; i++) {
+    var player = players[i];
+    var playerTemplate = document.getElementById('playerButtonTemplate').cloneNode(true);
+    var playerButton = playerTemplate.content;
+    var playerDiv = playerButton.querySelector("div");
+    playerDiv.onclick = createToPlayerFunction(player);
+    var playerDiv = playerButton.querySelector("img");
+    playerDiv.alt = player.name;
+    if (player.image == "") {
+      playerDiv.src = "images/anonymous.png"
+    } else {
+      playerDiv.src = player.image;
+    }
+    var playerDetails = playerButton.querySelectorAll("li");
+    playerDetails[0].innerText = player.name + " #" + player.number;
+    playerDetails[1].innerText = player.position;
+    playerDetails[2].innerText = "Goals: " + player.goals;
+    document.getElementById('playerButtons').appendChild(playerButton);
+  }
 }
 
 function uploadImage() {
@@ -73,9 +85,7 @@ function uploadImage() {
   var uploaded = "";
   image.readImageAndResize(playerForm.files[0], 300, function(result) {
     var playerImage = document.getElementById('playerbuttonimg');
-    playerImage.style.visibility = "visible";
     playerImage.src = result;
-    imageSet = true;
   });
 }
 
@@ -92,7 +102,7 @@ function validatePlayerForm() {
     id: api.generateID(),
     name: "",
     position: "",
-    image: "#",
+    image: "",
     number: 0,
     goals: 0,
     fouls: 0,
@@ -109,8 +119,10 @@ function validatePlayerForm() {
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
-  player.image = document.getElementById('playerbuttonimg').src;
-  incomplete = player.name == "" || player.number == "" ||  player.position == "" || !imageSet;
+  if (imageSet) {
+    player.image = document.getElementById('playerbuttonimg').src;
+  }
+  incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
     addplayer_error.style.display = 'block';
@@ -134,12 +146,11 @@ function addPlayer(player) {
 
 function populatePlayerDetails() {
   var state = mainState.getState();
-  console.log(state.playerID);
   firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
     var player = playerData.val();
-    console.log(player);
+  //  console.log(player);
 
-    var player = api.getTeamPlayer(state.teamID, state.playerID);
+  //  var player = api.getTeamPlayer(state.teamID, state.playerID);
     var playerName = document.getElementById('playerName');
     playerName.innerText = player.name + " #" + player.number;
     var playerPosition = document.getElementById('playerPosition');
@@ -163,7 +174,12 @@ function populatePlayerDetails() {
     var playerGamesPlayed = document.getElementById('playerGamesPlayed');
     playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
     var playerImage = document.getElementById('playerImage');
-    playerImage.src = player.image;
+    if (player.image == "") {
+      playerImage.src = "images/anonymous.png"
+    } else {
+      playerImage.src = player.image;
+
+    }
   })
 }
 
@@ -179,10 +195,12 @@ function deletePlayer() {
     }, 1000);
   } else {
     var state = mainState.getState();
-    var player = api.getTeamPlayer(state.teamID, state.playerID);
-    player.deleted = true;
-    api.setTeamPlayer(state.teamID, state.playerID, player);
-    window.location='players.html';
+    var playerDeleted = {
+      deleted: true,
+    }
+    firedatabase.updatePlayer(state.teamID, state.playerID, playerDeleted).then(function() {
+      window.location='players.html';
+    });
   }
 }
 
@@ -204,7 +222,9 @@ function validatePlayerEditForm() {
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
-  player.image = document.getElementById('playerimg').src;
+  if (imageSet) {
+    player.image = document.getElementById('playerbuttonimg').src;
+  }
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
@@ -225,5 +245,6 @@ function uploadEditImage() {
   image.readImageAndResize(playerForm.files[0], 300, function(result) {
     var playerImage = document.getElementById('playerimg');
     playerImage.src = result;
+    imageSet = true;
   });
 }

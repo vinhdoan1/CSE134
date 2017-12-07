@@ -34,6 +34,7 @@ var config = {
   firedatabase.setStats = setStats
   // firedatabase.getStats = getStats
   firedatabase.addNewPlayer = addNewPlayer;
+  firedatabase.updatePlayer = updatePlayer;
 
   function generateID() {
     return Date.now().toString(36);
@@ -145,11 +146,12 @@ function addNewPlayer(teamID, player) {
   var newPostKey = firebase.database().ref().child('/players/' + teamID + '/').push().key;
 
   var updates = {};
+  player.id = newPostKey;
   updates['/players/' + teamID + '/' + newPostKey] = player;
   return firebase.database().ref().update(updates);
 }
 
-function updatePlayer(userID, teamID, playerID, player) {
+function updatePlayer(teamID, playerID, player) {
   var updates = {};
   updates['/players/' + teamID + '/' + playerID] = player;
   return firebase.database().ref().update(updates);

@@ -527,10 +527,6 @@ header #logoutheadertext {
   border-radius: 5rem;
 }
 
-.playerpreview #playerbuttonimg {
-  visibility: hidden;
-}
-
 .playerdetails {
   list-style-type: none;
   width: 18rem;
@@ -762,5 +758,3 @@ input[type="number"]
   }
 
 }
-
-
