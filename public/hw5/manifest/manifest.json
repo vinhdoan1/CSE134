@@ -1,7 +1,7 @@
 {
     "name": "TeamWatch",
     "short_name": "TeamWatch",
-    "start_url": ".",
+    "start_url": "/",
     "description": "Soccer team management app.",
     "icons": [
         {
