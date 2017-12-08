@@ -11,8 +11,8 @@
   <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/database.js"></script>
-  <script src="./js/api.js"></script>
   <script src="./js/state.js"></script>
+  <script src="./js/serviceworker.js"></script>
 </head>
 <body>
   <div class="outercontainer1">
@@ -26,15 +26,5 @@
           <input type="button" class="formbutton" value="Sign Up" onclick="window.location='signup.html';"/>
       </form>
   </div>
-  <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-          .then(function(registration) {
-          })
-          .catch(function(err) {
-            console.log('Service Worker registration failed: ', err);
-          });
-      }
-    </script>
 </body>
 </html>
