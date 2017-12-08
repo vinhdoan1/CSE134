@@ -1,6 +1,7 @@
 body{
   font-family: 'Lato', sans-serif;
   margin: 0px;
+  background-color: #f0f8ff;
 }
 
 .outercontainer1{
@@ -28,15 +29,17 @@ h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button, [type="button"], [type="submit"]{
+button, [type="button"], [type="submit"], [role="button"]{
   border-radius: 5px;
   border: 0px;
-  background-color: #4286f4;
+  background-color: #68b7f5;
+  font-family: 'Lato', sans-serif;
+  font-size: .75rem;
   color: white;
 }
 
-button:hover, [type="button"]:hover, [type="submit"]:hover{
-  background-color: #1b53ad;
+button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hover{
+  background-color: #378fd4;
 }
 
 .outercontainer2 #h2{
@@ -51,14 +54,10 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
 }
 
 #liveGame #corner{
-
-  border-radius: 5px;
-  border: 0px;
-  background-color: white;
-  color: black;
-  height: .5rem;
-  width: 16rem;
-  font-size: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: .8rem;
+  font-size: .8rem;
 }
 #corner p{
 
@@ -102,8 +101,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
   width: 10rem;
   height: 10rem;
   background: lightgrey;
-  border-color: lightgrey;
-  border-style: solid;
   border-radius: 6rem;
   margin: 0.2rem auto 1rem auto;
 }
@@ -260,10 +257,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover{
     border-radius: 5px;
 }
 
-.gameform .gameformbutton:hover{
-  background-color: #1b53ad;
-}
-
 .gameform .gameformfield{
   border: 1px solid lightgray;
   margin: 0.7rem auto 0 auto;
@@ -394,10 +387,6 @@ body {
   margin: 1rem auto 1rem auto;
 }
 
-#addeventform .addeventbutton:hover{
-  background-color: #1b53ad;
-}
-
 #addeventform .addeventformfield{
   border: 1px solid lightgray;
   margin: 0.7rem auto 0 auto;
@@ -416,7 +405,7 @@ header {
   width: 100%;
   margin-bottom: 1rem;
   padding-bottom: .5rem;
-  background-color: rgb(240,240,240);
+  background-color: #add9ff;
 }
 
 header #logoheaderimg{
@@ -490,10 +479,6 @@ header #logoutheadertext {
   padding-top: 0;
   padding-bottom: 0;
   display: block;
-}
-
-.playerbutton:hover {
-  background-color: #1b53ad;
 }
 
 .playerbutton img{
@@ -601,17 +586,6 @@ h3{
   margin: 0.5rem 0 0.5rem 0;
 }
 
-button, [type="button"], [type="submit"], [role="button"]{
-  border-radius: 5px;
-  border: 0px;
-  background-color: #4286f4;
-  color: white;
-}
-
-button:hover{
-  background-color: #1b53ad;
-}
-
 input{
   height: 2rem;
   border-radius: 5px;
@@ -654,16 +628,7 @@ input[type="number"]
 }
 
 .formbutton{
-  border: 0px;
-  background-color: #4286f4;
-  color: white;
   margin: 1rem auto 0 auto;
-  width: 15rem;
-  display: block;
-}
-
-.formbutton:hover{
-  background-color: #1b53ad;
 }
 
 .signupbutton{
