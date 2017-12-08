@@ -14,8 +14,9 @@ function authenticate(form) {
   })
   .then(function(user) {
     if (user) {
-      firedatabase.getUser(user.uid).then(function(user) {
-        mainState.setState("teamID", user.val().team);
+      firestoreDB.getUser(user.uid).then(function(user) {
+        mainState.setState("teamID", user.data().team);
+        mainState.setState("admin", user.data().admin);
         window.location='team.html';
       });
     }
@@ -63,8 +64,9 @@ function createTeam() {
     .then(function (user) {
       // successful account creation
       signup_error.innerText = "";
-      var teamKey = firedatabase.addTeam(name, picture, function(teamKey) {
-        firedatabase.addUser(user.uid, teamKey).then(function(userKey) {
+      firestoreDB.addTeam(name, picture).then(function(teamData) {
+        var teamKey = teamData.id;
+        firestoreDB.addUser(user.uid, teamKey, true).then(function(userKey) {
           mainState.setState("teamID", teamKey);
           window.location='team.html';
         });

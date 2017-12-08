@@ -1,8 +1,8 @@
 function loadDashboard(){
   var state = mainState.getState();
   //var team = api.getTeam(state.teamID);
-  firedatabase.getTeam(state.teamID).then(function (teamData){
-    var team = teamData.val();
+  firestoreDB.getTeam(state.teamID).then(function (teamData){
+    var team = teamData.data();
     //getUpcomingGame(); commented out for now
     document.getElementById("h1").innerHTML = team.name;
     document.getElementById("wins").innerHTML += "5";
