@@ -9,6 +9,36 @@ var config = {
   };
   firebase.initializeApp(config);
 
+  var db = firebase.firestore();
+  
+  var firestoreDB = {};
+
+  // USERS
+  firestoreDB.addUser = function(userID, team, admin) {
+    return (db.collection("users").doc(userID).set({
+      team: team,
+      admin: admin,
+    }))
+  }
+
+  firestoreDB.getUser = function(userID) {
+    return db.collection("users").doc(userID).get();
+  }
+
+  // TEAMS
+  firestoreDB.addTeam = function(name, logo) {
+    return (db.collection("teams").add({
+      name: name,
+      logo: logo,
+    }));
+  }
+
+  firestoreDB.getTeam = function(teamID) {
+    return db.collection("teams").doc(teamID).get();
+  }
+
+  // PLAYERS
+
   var firedatabase = {}; // not necessary just to make it more obvious
   firedatabase.generateID = generateID;
   firedatabase.getUsers = getUsers;
