@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TeamWatch</title>
+  <link rel="manifest" href="./manifest/manifest.json">
+  <meta name="theme-color" content="#777777"/>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -43,14 +45,16 @@
     </div>
     <div id="teammanagementsettings" class="settingsdiv">
       <h3>Team Management Settings</h3>
-      <input type="button" class="settingsbutton" value="Edit Team Information" onclick="window.location='editteam.html';"/>      
+      <input type="button" class="settingsbutton" value="Edit Team Information" onclick="window.location='editteam.html';"/>
       <input type="button" class="settingsbutton" value="Manage Opponents List" onclick=""/>
     </div>
-    <div id="inviteusers" class="settingsdiv">    
+    <div id="inviteusers" class="settingsdiv">
       <h3>Invite Users</h3>
       <p>Share this team's invite code:</p>
     </div>
-    
+
   </div>
+  <script src="./js/serviceworker.js"></script>
+
 </body>
 </html>

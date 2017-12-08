@@ -1,0 +1,21 @@
+{
+  "name": "team-watch",
+  "version": "1.0.0",
+  "description": "a soccer team managerment app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "copyfiles -e '**/sw.js' -u 1 hw5/**/*.{jpg,png,svg,js,html,css,xml,json} hw5/*.{js,html,ico} build && node server.js",
+    "build": "workbox inject:manifest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.15.4",
+    "workbox-sw": "2.0.0"
+  },
+  "devDependencies": {
+    "copyfiles": "1.2.0",
+    "workbox-cli": "2.1.1"
+  }
+}

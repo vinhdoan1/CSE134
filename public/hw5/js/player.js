@@ -86,6 +86,7 @@ function uploadImage() {
   image.readImageAndResize(playerForm.files[0], 300, function(result) {
     var playerImage = document.getElementById('playerbuttonimg');
     playerImage.src = result;
+    imageSet = true;
   });
 }
 
@@ -192,10 +193,9 @@ function deletePlayer() {
     }, 1000);
   } else {
     var state = mainState.getState();
-    var playerDeleted = {
-      deleted: true,
-    }
-    firedatabase.updatePlayer(state.teamID, state.playerID, playerDeleted).then(function() {
+    var player = state.player;
+    player.deleted = true;
+    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
       window.location='players.html';
     });
   }
@@ -218,14 +218,14 @@ function populateEditPlayer() {
 
 function validatePlayerEditForm() {
   var state = mainState.getState();
-  var player = state.player;
+  var player = state.player
   var incomplete = false;
   var playerForm = document.getElementById('editplayerform');
   player.name = playerForm.elements['playername'].value;
   player.number = playerForm.elements['playernumber'].value;
   player.position = playerForm.elements['playerposition'].value;
   if (imageSet) {
-    player.image = document.getElementById('playerbuttonimg').src;
+    player.image = document.getElementById('playerimg').src;
   }
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
