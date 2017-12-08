@@ -1,5 +1,3 @@
-// var imageSet = false;
-
 //Mocked login function with hardcoded passwords
 function authenticate(form) {
   var username = form.username.value;
@@ -13,7 +11,8 @@ function authenticate(form) {
     if (errorCode) {
       login_error.style.display = 'block';
     }
-  }).then(function(user) {
+  })
+  .then(function(user) {
     if (user) {
       firedatabase.getUser(user.uid).then(function(user) {
         mainState.setState("teamID", user.val().team);

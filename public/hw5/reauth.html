@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWatch</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/database.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/image.js"></script>
+  <script src="js/settings.js"></script>
+</head>
+<body>
+  <header>
+      <p class="headertext" id="backheadertext" onclick="window.location='settings.html';">&lt; Back</p>
+      <div class="headerlogo" onclick="window.location='team.html';">
+        <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+        <p id="logoheadertext">TeamWatch</p>
+      </div>
+      <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
+  </header>
+  <div class="outercontainer2">
+    <h1>Sign In</h1>
+    <p>Verify your credentials to continue</p>
+    <form id="loginform" name="loginform" action="team.html">
+        <input type="email" id="username" name="username" class="forminput" placeholder="Email"/>
+        <input type="password" id="password" name="password" class="forminput" placeholder="Password"/>
+        <input type="button" class="formbutton" value="Sign In" onclick=""/>
+    </form>
+  </div>
+</body>
+</html>

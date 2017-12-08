@@ -10,29 +10,36 @@
   <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/database.js"></script>
-  <script src="./js/login.js"></script>
   <script src="./js/api.js"></script>
   <script src="./js/state.js"></script>
   <script src="./js/image.js"></script>
+  <script src="js/settings.js"></script>
 </head>
-<body>
+<body onload="populateUserInformation()">
   <header>
-    <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
-  <div class="headerlogo" onclick="window.location='team.html';">
-    <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
-    <p id="logoheadertext">TeamWatch</p>
-  </div>
-  <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
-</header>
+    <p class="headertext" id="backheadertext" onclick="window.location='team.html';">&lt; Back</p>
+    <div class="headerlogo" onclick="window.location='team.html';">
+     <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
+      <p id="logoheadertext">TeamWatch</p>
+    </div>
+    <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
+  </header>
   <div class="outercontainer2">
     <h1>Settings</h1>
     <div id="accountsettings" class="settingsdiv">
       <h3>Account Settings</h3>
-      <input type="email" id="newemail" class="settingsinput" placeholder="New Email"/>
+      <input type="email" id="newemail" class="settingsinput" placeholder="E-mail"/>
+      <div id="newemail_reauth">
+        <p id="reauth_msg">Please verify your password to continue:</p>
+        <input type="password" id="reauth_pw" class="settingsinput" placeholder="Current Password"/>        
+      </div>
+      <input type="button" class="settingsbutton" value="Change Email" onclick="updateEmail()"/>
+      <div class="settingsmsg" id="settingsmsg_newemail">Hello</div>
       <input type="password" id="newpassword" class="settingsinput" placeholder="New Password"/>
       <input type="password" id="confirmnewpassword" class="settingsinput" placeholder="Confirm New Password"/>
       <input type="password" id="oldpassword" class="settingsinput" placeholder="Current Password"/>
-      <input type="button" class="settingsbutton" value="Update Account" onclick=""/>
+      <input type="button" class="settingsbutton" value="Change Password" onclick="updatePassword()"/>
+      <div class="settingsmsg" id="settingsmsg_newpassword">Hello</div>
     </div>
     <div id="teammanagementsettings" class="settingsdiv">
       <h3>Team Management Settings</h3>
