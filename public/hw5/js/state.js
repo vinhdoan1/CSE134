@@ -29,3 +29,14 @@ function checkLoggedIn() {
     window.location='login.html';
   }
 }
+
+function goTo(wheredidyoucomefrom, wheredidyougo){
+  setState("back", wheredidyoucomefrom);
+  window.location = wheredidyougo;
+}
+
+function goBack(){
+  var state = mainState.getState();
+  console.log(state.back);
+  window.location = state.back;
+}
