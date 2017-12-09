@@ -21,9 +21,7 @@ function validateGameForm(form, action){
   }
   game.opponent = form.elements['gameopponent'].value;
 
-  // TODO:
-  //incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-  incomplete = game.opponent == "Lions";
+  incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
   game.opponent = "Lions";
   game.location = form.elements['gamelocation'].value;
   incomplete = incomplete || game.location == "";
@@ -32,13 +30,14 @@ function validateGameForm(form, action){
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
 
-  var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
+
+  var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
     //error_msg.style.display = 'block';
   }
   else{
-    hideMessage(error_msg);
+    //hideMessage(error_msg);
     //error_msg.style.display = 'none';
     if(action == "add"){
       game.active = true;
@@ -57,7 +56,6 @@ function updateGame(game, action){
   var gameID = state.gameID
 
 
-  //var exists = gamesList.gameID
   var exists = false;
   if(exists){
     var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
@@ -82,7 +80,7 @@ function updateGame(game, action){
 
 function loadSchedule(){
   var state = mainState.getState();
-  var gamesList = firestoreDB.getTeamGames(state.teamID).then(function(games){
+  firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
       emptyschedule.style.display = 'block';
@@ -129,7 +127,7 @@ function populateOpponentSelect(selectcontainer){
 }
 
 function loadAddForm(){
-  //populateOpponentSelect('addgameopponent');
+  populateOpponentSelect('addgameopponent');
 }
 
 //preload the edit form
@@ -138,8 +136,13 @@ function loadEditForm(){
   var state = mainState.getState();
   var gameID = state.gameID;
   var teamID = state.teamID;
-  var game = firestoreDB.getTeamGame(teamID, gameID)
-  var games = Object.values(game)
+
+  populateOpponentSelect('editgameopponent');
+
+  var gameopponent = document.getElementById('editgameopponent');
+  var gamelocation = document.getElementById('editgamelocation');
+  var gamedate = document.getElementById('editgamedate');
+  var gametime = document.getElementById('editgametime');
 
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
@@ -148,9 +151,9 @@ function loadEditForm(){
     gamelocation.value = game.data().location;
     gamedate.value = game.data().date;
     gametime.value = game.data().time;
+    loadOpponentImage('editgameopponent', 'editgameopimg');
   });
 
-  loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 
 function setSelectedIndex(s, v) {
