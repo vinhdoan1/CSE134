@@ -1,3 +1,5 @@
+
+//loads the homePage with some data
 function loadDashboard(){
   var state = mainState.getState();
   firestoreDB.getTeam(state.teamID).then(function (teamData){
