@@ -92,6 +92,7 @@ addStat = () => {
   let teamID = state.teamID
   let gameID = state.gameID
   let type = document.getElementById("selectStat").value
+  console.log(type)
   let player = document.getElementById("eventplayername").value
 
 
