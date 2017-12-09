@@ -1,6 +1,5 @@
 function loadDashboard(){
   var state = mainState.getState();
-  //var team = api.getTeam(state.teamID);
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
     //getUpcomingGame(); commented out for now
@@ -49,32 +48,49 @@ function createGameButtonDetail(game){
 
 loadStats = () => {
   const state = mainState.getState()
-  let teamStats = api.getStats(state.teamID, state.gameID)
+  let teamID = state.teamID
+  let gameID = state.gameID
   let divSection = document.getElementById("dynamicevents")
-  for (let index = 0; index < teamStats.length; index++ ){
+  let stats = firedatabase.getStats(teamID, gameID).then(function(stats){
 
-    let btn = document.createElement("button")
-    btn.setAttribute("type", "button")
-    btn.setAttribute("class", "eventfeedbutton")
-    btn.innerHTML = "<span>" + teamStats[index] + "</span>"
-    divSection.appendChild(btn)
+    return stats.val()
 
-  }
-}
+  });
 
-function appendStat(stat){
-  let divSection = document.getElementById("dynamicevents");
-  let btn = document.createElement("button")
-  btn.setAttribute("type", "button")
-  btn.setAttribute("class", "eventfeedbutton")
-  btn.innerHTML = "<span>" + stat + "</span>"
-  divSection.appendChild(btn)
+  let datalist = document.getElementById("playernames");
+  firedatabase.getTeamPlayers(teamID).then(function(player){
+
+    values = Object.values(player.val())
+    for (var i = 0; i < values.length; i++){
+
+      var option = document.createElement("option");
+      option.value = values[i].name;
+      datalist.appendChild(option)
+    }
+  });
+
+
+  stats.then(function(stat){
+    var keys = Object.keys(stat)
+    var values = Object.values(stat)
+
+    for (var i = 0; i < values.length; i++){
+
+      let btn = document.createElement("button")
+      btn.setAttribute("type", "button")
+      btn.setAttribute("class", "eventfeedbutton")
+      btn.innerHTML = "<span>" + values[i] + "</span>"
+      divSection.appendChild(btn)
+    }
+  });
 }
 
 addStat = () => {
 
   let stat
   const state = mainState.getState()
+  let teamID = state.teamID
+  let gameID = state.gameID
   let type = document.getElementById("selectStat").value
   let player = document.getElementById("eventplayername").value
 
@@ -102,9 +118,8 @@ addStat = () => {
 
   document.getElementById('addeventform').reset();
 
-  setStat(state.teamID, state.gameID, stat);
-  appendStat(stat);
-  // loadStats()
+  firedatabase.setStat(teamID, gameID, stat);
+  window.location = "addevent.html"
 
 }
 
