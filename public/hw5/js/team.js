@@ -50,38 +50,30 @@ loadStats = () => {
   const state = mainState.getState()
   let teamID = state.teamID
   let gameID = state.gameID
-  let divSection = document.getElementById("dynamicevents")
-  let stats = firedatabase.getStats(teamID, gameID).then(function(stats){
-
-    return stats.val()
-
-  });
-
+  let divSection = document.getElementById("dynamicevents");
   let datalist = document.getElementById("playernames");
-  firedatabase.getTeamPlayers(teamID).then(function(player){
+  firestoreDB.getTeamPlayers(teamID).then(function(players){
 
-    values = Object.values(player.val())
-    for (var i = 0; i < values.length; i++){
+    players.forEach(function(player){
 
-      var option = document.createElement("option");
-      option.value = values[i].name;
-      datalist.appendChild(option)
-    }
+      if(!player.data().deleted){
+        var option = document.createElement("option");
+        option.value = player.data().name;
+        datalist.appendChild(option)
+      }
+    });
   });
 
+  firestoreDB.getStats(teamID,gameID).then(function(stats){
 
-  stats.then(function(stat){
-    var keys = Object.keys(stat)
-    var values = Object.values(stat)
-
-    for (var i = 0; i < values.length; i++){
+    stats.forEach(function(stat){
 
       let btn = document.createElement("button")
       btn.setAttribute("type", "button")
       btn.setAttribute("class", "eventfeedbutton")
-      btn.innerHTML = "<span>" + values[i] + "</span>"
+      btn.innerHTML = "<span>" + stat.data().stat + "</span>"
       divSection.appendChild(btn)
-    }
+    });
   });
 }
 
@@ -92,7 +84,6 @@ addStat = () => {
   let teamID = state.teamID
   let gameID = state.gameID
   let type = document.getElementById("selectStat").value
-  console.log(type)
   let player = document.getElementById("eventplayername").value
 
 
@@ -119,8 +110,10 @@ addStat = () => {
 
   document.getElementById('addeventform').reset();
 
-  firedatabase.setStat(teamID, gameID, stat);
-  window.location = "addevent.html"
+  firestoreDB.setStat(teamID, gameID, stat).then(function(){
+    window.location='addevent.html';
+
+  });
 
 }
 

@@ -21,9 +21,7 @@ function validateGameForm(form, action){
   }
   game.opponent = form.elements['gameopponent'].value;
 
-  // TODO:
-  //incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-  incomplete = game.opponent == "Lions";
+  incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
   game.opponent = "Lions";
   game.location = form.elements['gamelocation'].value;
   incomplete = incomplete || game.location == "";
@@ -39,7 +37,7 @@ function validateGameForm(form, action){
     //error_msg.style.display = 'block';
   }
   else{
-    hideMessage(error_msg);
+    //hideMessage(error_msg);
     //error_msg.style.display = 'none';
     if(action == "add"){
       game.active = true;
@@ -58,12 +56,10 @@ function updateGame(game, action){
   var gameID = state.gameID
 
 
-  //var exists = gamesList.gameID
   var exists = false;
   if(exists){
     var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
     duplicate_msg.style.display = 'block';
-    console.log("here")
   }
   else{
     var returnTo="";
@@ -83,7 +79,7 @@ function updateGame(game, action){
 
 function loadSchedule(){
   var state = mainState.getState();
-  var gamesList = firestoreDB.getTeamGames(state.teamID).then(function(games){
+  firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
       emptyschedule.style.display = 'block';
@@ -130,52 +126,32 @@ function populateOpponentSelect(selectcontainer){
 }
 
 function loadAddForm(){
-  //populateOpponentSelect('addgameopponent');
+  populateOpponentSelect('addgameopponent');
 }
 
 //preload the edit form
 function loadEditForm(){
-<<<<<<< HEAD
-  // var state = mainState.getState();
-  // var gameID = state.gameID;
-  // var teamID = state.teamID;
-  // var game = firedatabase.getTeamGame(teamID, gameID)
-  // var games = Object.values(game)
-=======
+
   var state = mainState.getState();
   var gameID = state.gameID;
   var teamID = state.teamID;
-  var game = firestoreDB.getTeamGame(teamID, gameID)
-  var games = Object.values(game)
->>>>>>> 65668d9bccaace6dec6a0479a029e918812f3e0e
 
-//  populateOpponentSelect('editgameopponent');
+  populateOpponentSelect('editgameopponent');
 
-  // var gameopponent = document.getElementById('editgameopponent');
-  // var gamelocation = document.getElementById('editgamelocation');
-  // var gamedate = document.getElementById('editgamedate');
-  // var gametime = document.getElementById('editgametime');
+  var gameopponent = document.getElementById('editgameopponent');
+  var gamelocation = document.getElementById('editgamelocation');
+  var gamedate = document.getElementById('editgamedate');
+  var gametime = document.getElementById('editgametime');
 
-<<<<<<< HEAD
-  // firedatabase.getTeamGame(teamID, gameID).then(function(game){
-
-  //   setSelectedIndex(gameopponent, game.val().opponent);
-  //   gamelocation.value = game.val().location;
-  //   gamedate.value = game.val().date;
-  //   gametime.value = game.val().time;
-  // });
-=======
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
     setSelectedIndex(gameopponent, game.data().opponent);
-    console.log(gamelocation.value = game.data().location)
     gamelocation.value = game.data().location;
     gamedate.value = game.data().date;
     gametime.value = game.data().time;
+    loadOpponentImage('editgameopponent', 'editgameopimg');
   });
->>>>>>> 65668d9bccaace6dec6a0479a029e918812f3e0e
 
-  loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 
 function setSelectedIndex(s, v) {

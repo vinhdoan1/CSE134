@@ -9,21 +9,23 @@ var config = {
   };
   firebase.initializeApp(config);
 
+var enablePersistenceOn = false;
 
   /*
   Obtains reference to firestore database. On first call, it enables offline
   persistence, and then gets firestore directly on other occasions.
   */
   async function getDB() {
-    if (sessionStorage.getItem('offline')) {
+    if (enablePersistenceOn) {
       return firebase.firestore();
     } else {
       var db;
+      enablePersistenceOn = true;
       await firebase.firestore().enablePersistence()
         .then(function() {
             // Initialize Cloud Firestore through firebase
             db = firebase.firestore();
-            sessionStorage.setItem('offline', true);
+
         })
         .catch(function(err) {
             if (err.code == 'failed-precondition') {
@@ -109,7 +111,7 @@ var config = {
 
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
-    .doc(gameID).collection("stats").set(stat)
+    .doc(gameID).collection("stats").add({stat})
   }
 
 
@@ -128,9 +130,6 @@ var config = {
 
   firestoreDB.addNewGame = async function(teamID, game){
 
-    console.log(game)
-    console.log(teamID)
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").add(game)
   }
@@ -141,8 +140,6 @@ var config = {
     return db.collection("teams").doc(teamID).collection("games")
     .doc(gameID).set(game)
   }
-
-  // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
   // PLAYERS
   firestoreDB.getTeamPlayers = async function(teamID) {

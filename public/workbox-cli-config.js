@@ -1,7 +1,7 @@
 module.exports = {
   "globDirectory": "build/",
   "globPatterns": [
-    "*/.css",
+    "**/*.css",
     "index.html",
     "index.html",
     "login.html",
