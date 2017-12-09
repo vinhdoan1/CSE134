@@ -36,6 +36,9 @@ function loadGameDetails(){
       var otherTeamLogo = document.getElementById('teamimgdetailsecond');
       otherTeamLogo.src = opponent.logo;
     });
+
+    var checkbox = document.getElementById('gamedetails_checkbox');
+    checkbox.checked = game.complete;
   });
   firestoreDB.getTeam(teamID).then(function(teamData) {
     var team = teamData.data();
@@ -44,11 +47,13 @@ function loadGameDetails(){
     var myTeamLogo = document.getElementById('teamimgdetailfirst');
     myTeamLogo.src = team.logo;
   });
+
   firestoreDB.getStats(teamID, gameID).then(function(statsData) {
     var goals = 0;
     var shotsOnGoal = 0;
     var cornerKicks = 0;
     var penalties = 0;
+
     var goalsOp = 0;
     var shotsOnGoalOp = 0;
     var cornerKicksOp = 0;
@@ -56,13 +61,12 @@ function loadGameDetails(){
 
     statsData.forEach(function(doc) {
       var stat = doc.data()['stat'];
-      if (stat.includes("Opponent ")) {
-
+      if (stat.includes("Opponent")) {
         if (stat.includes("shotongoal"))
           shotsOnGoalOp++;
         else if (stat.includes("cornerkick"))
           cornerKicksOp++;
-        else if (stat.includes("penalties"))
+        else if (stat.includes("penalty"))
           penaltiesOp++;
         else if (stat.includes("goal"))
           goalsOp++;
@@ -73,10 +77,25 @@ function loadGameDetails(){
           goals++;
         else if (stat.includes("cornerkick"))
           cornerKicks++;
-        else if (stat.includes("penalties"))
+        else if (stat.includes("penalty"))
           penalties++;
       }
     });
+
+    //Storing the numeric stats
+    firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+      var gameData = game.data();
+      gameData.goals = goals;
+      gameData.shotsOnGoal = shotsOnGoal;
+      gameData.cornerKicks = cornerKicks;
+      gameData.penalties = penalties;
+      gameData.goalsOp = goalsOp;
+      gameData.shotsOnGoalOp = shotsOnGoalOp;
+      gameData.cornerKicks = cornerKicksOp;
+      gameData.penaltiesOp = penaltiesOp;
+      firestoreDB.setTeamGame(teamID,gameID,gameData);
+    });
+
     var gamesdetails_goals = document.getElementById('gamesdetails_goals');
     gamesdetails_goals.innerHTML = goals;
     var gamesdetails_shotsongoals = document.getElementById('gamesdetails_shotsongoals');
@@ -130,11 +149,58 @@ function deleteGame(){
     var gameID = state.gameID;
     firestoreDB.getTeamGame(teamID, gameID).then(function(game){
       var gameData = game.data();
+      if(gameData.complete){
+        var goals = gameData.goals;
+        var goalsOp = gameData.goalsOp;
+        firestoreDB.getTeam(teamID).then(function(team){
+          if(goals > goalsOp){
+            firestoreDB.updateTeamWins(teamID, --teamData.wins);
+          }
+          else if(goals < goalsOp){
+            firestoreDB.updateTeamLosses(teamID, --teamData.losses);
+          }
+        }); 
+      }
+
       gameData.active = false;
       firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
         window.location = 'schedule.html';
       });
     });
   }
+}
 
+function markGameComplete(checkbox){
+  var teamID = mainState.getState().teamID;
+  var gameID = mainState.getState().gameID;
+  firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+    var gameData = game.data();
+    var goals = gameData.goals;
+    var goalsOp = gameData.goalsOp;
+    // console.log(goals + ", " + goalsOp);
+    firestoreDB.getTeam(teamID).then(function(team){
+      var teamData = team.data();
+      if(checkbox.checked){
+        firestoreDB.markGameComplete(teamID, gameID, true);
+        console.log(gameData);
+        if(goals > goalsOp){
+          console.log('why');
+          firestoreDB.updateTeamWins(teamID, ++teamData.wins);
+        }
+        else if(goals < goalsOp){
+          firestoreDB.updateTeamLosses(teamID, ++teamData.losses);
+        }
+      }
+      else{
+        firestoreDB.markGameComplete(teamID, gameID, false);
+        console.log(gameData);
+        if(goals > goalsOp){
+          firestoreDB.updateTeamWins(teamID, --teamData.wins);
+        }
+        else if(goals < goalsOp){
+          firestoreDB.updateTeamLosses(teamID, --teamData.losses);
+        }
+      }
+    });
+  }); 
 }

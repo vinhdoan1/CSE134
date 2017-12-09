@@ -5,9 +5,10 @@ function loadDashboard(){
   //get the team to diplay on the dashboard from db
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
+    console.log(team);
     document.getElementById("h1").innerHTML = team.name;
-    document.getElementById("wins").innerHTML += "5";
-    document.getElementById("loss").innerHTML += "0";
+    document.getElementById("wins").innerHTML += team.wins;
+    document.getElementById("loss").innerHTML += team.losses;
     document.getElementById("goalsfor").innerHTML += "14";
     document.getElementById("goalsagainst").innerHTML += "4";
     document.getElementById("teamimglogo").src = team.logo;
@@ -23,8 +24,13 @@ function getUpcomingGame(){
     if(game.exists){
       var gameData = game.data();
       gameData.id = game.id;
-      console.log(gameData);
-      createGameButtonDetail(gameData, 'upcominggamecontainer');
+      // console.log(gameData);
+      if(gameData.active){
+        createGameButtonDetail(gameData, 'upcominggamecontainer');
+      }
+      else{
+        document.getElementById('upcominggame_empty').style.fontSize="1rem";
+      }
     }
     else{
       document.getElementById('upcominggame_empty').style.fontSize="1rem";

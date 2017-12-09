@@ -63,6 +63,8 @@ var enablePersistenceOn = false;
     return (db.collection("teams").add({
       name: name,
       logo: logo,
+      wins: 0,
+      losses: 0
     }));
   }
 
@@ -75,6 +77,20 @@ var enablePersistenceOn = false;
     var db = await getDB();
     return db.collection("teams").doc(teamID).set(teamData);
   }
+
+  firestoreDB.updateTeamWins = async function(teamID, wins){
+    var db = await getDB();
+    var teamref = db.collection("teams").doc(teamID);
+    return teamref.update({wins: wins});
+  }
+
+  firestoreDB.updateTeamLosses = async function(teamID, losses){
+    var db = await getDB();
+    var teamref = db.collection("teams").doc(teamID);
+    return teamref.update({losses: losses});
+  }
+
+ 
 
   // OPPONENTS
   firestoreDB.addOpponent = async function(teamID, opName, logo) {
@@ -128,18 +144,20 @@ var enablePersistenceOn = false;
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).set(game);
   }
 
-
   firestoreDB.addNewGame = async function(teamID, game){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").add(game)
   }
 
   firestoreDB.updateGame = async function(teamID, gameID, game){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
     .doc(gameID).set(game)
+  }
+
+  firestoreDB.markGameComplete = async function(teamID, gameID, isComplete){
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("games").doc(gameID).set({complete: isComplete},{ merge: true });
   }
 
   // PLAYERS
