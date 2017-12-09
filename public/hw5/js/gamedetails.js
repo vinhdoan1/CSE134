@@ -21,7 +21,10 @@ function loadGameDetails(){
     var ampm = date.getHours() >= 12 ? "PM" : "AM";
 
     var gamedetails_date = document.getElementById('gamedetails_date');
-    gamedetails_date.innerHTML = schedule.months_long[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear();
+    var dateNum = date.getMonth()-1;
+    if (date.getMonth() == 0)
+      dateNum = 11;
+    gamedetails_date.innerHTML = schedule.months_long[dateNum] + " " + date.getDate() + ", " + date.getFullYear();
     var gamedetails_time = document.getElementById('gamedetails_time');
     gamedetails_time.innerHTML = hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm;
     var gamedetails_location = document.getElementById('gamedetails_location');
