@@ -143,8 +143,6 @@ var enablePersistenceOn = false;
     .doc(gameID).set(game)
   }
 
-  // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
-
   // PLAYERS
   firestoreDB.getTeamPlayers = async function(teamID) {
     var db = await getDB();

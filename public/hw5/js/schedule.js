@@ -32,12 +32,7 @@ function validateGameForm(form, action){
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
 
-<<<<<<< HEAD
   var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
-  console.log(error_msg);
-=======
-  var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
->>>>>>> 65668d9bccaace6dec6a0479a029e918812f3e0e
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
     //error_msg.style.display = 'block';
@@ -139,36 +134,13 @@ function loadAddForm(){
 
 //preload the edit form
 function loadEditForm(){
-<<<<<<< HEAD
-  // var state = mainState.getState();
-  // var gameID = state.gameID;
-  // var teamID = state.teamID;
-  // var game = firedatabase.getTeamGame(teamID, gameID)
-  // var games = Object.values(game)
-=======
+
   var state = mainState.getState();
   var gameID = state.gameID;
   var teamID = state.teamID;
   var game = firestoreDB.getTeamGame(teamID, gameID)
   var games = Object.values(game)
->>>>>>> 65668d9bccaace6dec6a0479a029e918812f3e0e
 
-//  populateOpponentSelect('editgameopponent');
-
-  // var gameopponent = document.getElementById('editgameopponent');
-  // var gamelocation = document.getElementById('editgamelocation');
-  // var gamedate = document.getElementById('editgamedate');
-  // var gametime = document.getElementById('editgametime');
-
-<<<<<<< HEAD
-  // firedatabase.getTeamGame(teamID, gameID).then(function(game){
-
-  //   setSelectedIndex(gameopponent, game.val().opponent);
-  //   gamelocation.value = game.val().location;
-  //   gamedate.value = game.val().date;
-  //   gametime.value = game.val().time;
-  // });
-=======
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
     setSelectedIndex(gameopponent, game.data().opponent);
@@ -177,7 +149,6 @@ function loadEditForm(){
     gamedate.value = game.data().date;
     gametime.value = game.data().time;
   });
->>>>>>> 65668d9bccaace6dec6a0479a029e918812f3e0e
 
   loadOpponentImage('editgameopponent', 'editgameopimg')
 }
