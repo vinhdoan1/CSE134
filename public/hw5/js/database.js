@@ -98,6 +98,46 @@ var config = {
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
   }
 
+  firestoreDB.getStats = function(teamID, gameID){
+
+    return db.collection("teams").doc(teamID).collection("games")
+      .doc(gameID).collection("stats").get()
+  }
+
+
+  firestoreDB.setStat = function(teamID, gameID, stat){
+
+    return db.collection("teams").doc(teamID).collection("games")
+    .doc(gameID).collection("stats").set(stat)
+  }
+
+
+  firestoreDB.getTeamGames = function(teamID){
+
+    return db.collection("teams").doc(teamID).collection("games").get()
+  }
+
+  firestoreDB.getTeamGame = function(teamID, gameID){
+
+    return db.collection("teams").doc(teamID).collection("games").doc(gameID).get()
+  }
+
+
+  firestoreDB.addNewGame = function(teamID, game){
+
+    console.log(game)
+    console.log(teamID)
+
+    return db.collection("teams").doc(teamID).collection("games").add(game)
+  }
+
+  firestoreDB.updateGame = function(teamID, gameID, game){
+
+    return db.collection("teams").doc(teamID).collection("games")
+    .doc(gameID).set(game)
+  }
+
+  // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
   // PLAYERS
   firestoreDB.getTeamPlayers = async function(teamID) {

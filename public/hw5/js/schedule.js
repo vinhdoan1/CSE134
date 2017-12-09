@@ -20,8 +20,10 @@ function validateGameForm(form, action){
     active: true
   }
   game.opponent = form.elements['gameopponent'].value;
-  //incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-  incomplete = game.opponent == "Lions";
+
+  // TODO:
+  incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
+  //incomplete = game.opponent == "Lions";
   game.location = form.elements['gamelocation'].value;
   incomplete = incomplete || game.location == "";
   game.date = form.elements['gamedate'].value;
@@ -56,50 +58,50 @@ function updateGame(game, action){
 
 
   //var exists = gamesList.gameID
-  var exists = false
+  var exists = false;
   if(exists){
     var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
     duplicate_msg.style.display = 'block';
+    console.log("here")
   }
   else{
     var returnTo="";
     if(action == "edit"){
 
-      console.log("Here" + Object.values(game))
-      firedatabase.updateGame(teamID, gameID, game);
-      returnTo = 'gamedetails.html';
+      console.log(gameID)
+      console.log(game)
+      firestoreDB.updateGame(teamID, gameID, game).
+      then(window.location='gamedetails.html');
     }
     else if(action == "add"){
-      firedatabase.addNewGame(teamID, game)
-      returnTo = 'schedule.html';
+      firestoreDB.addNewGame(teamID, game).then(window.location='schedule.html');
     }
-    window.location= returnTo;
   }
 }
 
 function loadSchedule(){
   var state = mainState.getState();
-  var gamesList = firedatabase.getTeamGames(state.teamID).then(function(games){
-    return games.val()
-  });
+  var gamesList = firestoreDB.getTeamGames(state.teamID).then(function(games){
+    var emptyschedule = document.getElementById('emptyschedule');
+    if(!games){
+      emptyschedule.style.display = 'block';
+    }
+    else{
+      emptyschedule.style.display = 'none';
 
-  var emptyschedule = document.getElementById('emptyschedule');
-  if(gamesList.length === null){
-    emptyschedule.style.display = 'block';
-  }
-  else{
-    emptyschedule.style.display = 'none';
-    gamesList.then(function(game){
+      var values = []
+      games.forEach(function(game){
 
-      var keys = Object.keys(game)
-      var values = Object.values(game)
+        values.push({
 
-      for (var i = 0; i < values.length; i++){
+          id: game.id,
+          ...game.data()
+        })
+      });
 
-        values[i].id = keys[i]
-      }
+
       values.sort(function(a,b){
-        return new Date(a.date) - new Date(b.date);
+          return new Date(a.date) - new Date(b.date);
       });
 
       for (var i = 0 ; i < values.length; i++){
@@ -109,8 +111,8 @@ function loadSchedule(){
           document.getElementById('schedulecontainer').appendChild(btn);
         }
       }
-    });
-  }
+    }
+  });
 }
 
 function populateOpponentSelect(selectcontainer){
@@ -145,7 +147,7 @@ function loadEditForm(){
   var state = mainState.getState();
   var gameID = state.gameID;
   var teamID = state.teamID;
-  var game = firedatabase.getTeamGame(teamID, gameID)
+  var game = firestoreDB.getTeamGame(teamID, gameID)
   var games = Object.values(game)
 
   populateOpponentSelect('editgameopponent');
@@ -155,12 +157,13 @@ function loadEditForm(){
   var gamedate = document.getElementById('editgamedate');
   var gametime = document.getElementById('editgametime');
 
-  firedatabase.getTeamGame(teamID, gameID).then(function(game){
+  firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
-    setSelectedIndex(gameopponent, game.val().opponent);
-    gamelocation.value = game.val().location;
-    gamedate.value = game.val().date;
-    gametime.value = game.val().time;
+    setSelectedIndex(gameopponent, game.data().opponent);
+    console.log(gamelocation.value = game.data().location)
+    gamelocation.value = game.data().location;
+    gamedate.value = game.data().date;
+    gametime.value = game.data().time;
   });
 
   loadOpponentImage('editgameopponent', 'editgameopimg')
