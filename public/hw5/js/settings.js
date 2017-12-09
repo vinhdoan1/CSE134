@@ -11,8 +11,20 @@ function populateUserInformation(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       document.getElementById('newemail').value=user.email;
+      document.getElementById('teamidinvite').innerHTML= mainState.getState().teamID;
     }
   });
+}
+
+function copyTeamIDToClipboard(){
+  var textArea = document.createElement("textarea");
+  textArea.value = document.getElementById("teamidinvite").innerHTML;
+  textArea.style.opacity = 0;
+  document.body.appendChild(textArea);
+  // var copyText = document.getElementById("teamidinvite");
+  textArea.select();
+  document.execCommand("Copy");
+  console.log("copied");
 }
 
 function updateTeam(){
