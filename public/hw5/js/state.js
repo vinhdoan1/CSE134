@@ -25,8 +25,14 @@ function getState() {
 
 function checkLoggedIn() {
   var state = mainState.getState();
-  if (!state.loggedIn) {
-    window.location='login.html';
+  if (window.location.href.includes("login.html")) {
+    if (state.loggedIn) {
+      window.location='team.html';
+    }
+  } else {
+    if (!state.loggedIn) {
+      window.location='login.html';
+    }
   }
 }
 

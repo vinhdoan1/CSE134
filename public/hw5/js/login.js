@@ -17,6 +17,7 @@ function authenticate(form) {
       firestoreDB.getUser(user.uid).then(function(user) {
         mainState.setState("teamID", user.data().team);
         mainState.setState("admin", user.data().admin);
+        mainState.setState('loggedIn', true);
         window.location='team.html';
       });
     }
@@ -99,20 +100,17 @@ function checkTeam(){
     firestoreDB.getTeam(teamID).then(function(team){
       if(team.exists){
         var teamData = team.data();
-        console.log("FOUND");
         validTeam = true;
         document.getElementById("signupinv_teamname").innerHTML="<b>" + teamData.name +"</b>";
         document.getElementById("signupinv_teamlogo").src=teamData.logo;
         document.getElementById('hiddendiv').hidden = false;
       }
       else{
-        console.log("NOT FOUND");
-        displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");    
+        displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");
       }
 
     }).catch(function(error){
-      console.log(error);
-      displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");      
+      displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");
     });
   }
 }
@@ -122,7 +120,7 @@ function signUpNonAdmin(){
     displayMessage("signupinvmsg", "error", "Please verify your team above");
   }
   else{
-    var incomplete = false; 
+    var incomplete = false;
     var teamForm = document.getElementById('signupform_inv');
     var email = teamForm.elements['invemail'].value;
     var pass1 = teamForm.elements['invpass1'].value;
@@ -150,13 +148,11 @@ function signUpNonAdmin(){
             });
           }
           else{
-            console.log("NOT FOUND");
             displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");
           }
-    
+
         }).catch(function(error){
-          console.log(error);
-          displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");    
+          displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");
         });
       }
     }
