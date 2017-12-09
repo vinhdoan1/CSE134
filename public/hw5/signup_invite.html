@@ -30,20 +30,14 @@
     <p>Enter a Team ID</p>
     <div id="teaminputcontainer">
       <input type="text" id="inviteinput" placeholder="TeamID"/>
-      <button id="checkbutton" type="button" onclick="show()">Check</button>
-      <script>
-          function show() {
-            document.getElementById('hiddendiv').hidden = false;
-            document.getElementById('check').hidden = false;
-          }
-        </script>
-      <img id="check" src="images/check.png" hidden>
+      <button id="checkbutton" type="button" onclick="checkTeam()">Check</button>
+      <div class="message" id="checkinvmsg">  </div>
     </div>
     <div id="hiddendiv" hidden>
         <p>You are signing up to watch:</p>
-        <p id="signupinv_teamname"><b>Philadelphia Pigs</b>!</p>
+        <p id="signupinv_teamname"><b>Team Name</b>!</p>
         <div class="teamimgcontainer">
-          <img class="teamimg" id="signupinv_teamlogo" src="images/pig.jpg" alt="Team Logo">
+          <img class="teamimg" id="signupinv_teamlogo" src="" alt="Team Logo">
         </div>
     </div>
     <form id="signupform_inv" name="signupform" action="team.html">
@@ -51,7 +45,7 @@
       <!-- <input type="text" class="forminput" placeholder="Username" id="invpass1"/> -->
       <input type="password" class="forminput" placeholder="Password" id="invpass1"/>
       <input type="password" class="forminput" placeholder="Confirm Password" id="invpass2"/>
-      <input type="submit" class="formbutton" value="Sign Up" onclick="window.location='team.html';"/>
+      <input type="button" class="formbutton" value="Sign Up" onclick="signUpNonAdmin()"/>
       <div class="message" id="signupinvmsg"> </div>
     </form>
   </div>

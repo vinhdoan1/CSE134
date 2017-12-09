@@ -181,6 +181,7 @@ function displayMessage(elementid, type, message){
 }
 
 function hideMessage(elementid){
+  document.getElementById(elementid).innerHTML = "";
   document.getElementById(elementid).style.opacity = "0";
 }
 

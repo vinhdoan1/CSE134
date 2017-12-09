@@ -84,17 +84,79 @@ function createTeam() {
       }
     });
   }
+}
 
-  function signUpNonAdmin(){
-    var incomplete = false;
+var validTeam = false;
+function checkTeam(){
+  document.getElementById('hiddendiv').hidden = true;
+  hideMessage("checkinvmsg");
+  var teamID = document.getElementById('inviteinput').value;
+  if(teamID == ""){
+    displayMessage("checkinvmsg", "error", "Please enter a valid Team ID");
+  }
+  else{
+    firestoreDB.getTeam(teamID).then(function(team){
+      if(team.exists){
+        var teamData = team.data();
+        console.log("FOUND");
+        validTeam = true;
+        document.getElementById("signupinv_teamname").innerHTML="<b>" + teamData.name +"</b>";
+        document.getElementById("signupinv_teamlogo").src=teamData.logo;
+        document.getElementById('hiddendiv').hidden = false;
+      }
+      else{
+        console.log("NOT FOUND");
+        displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");    
+      }
+
+    }).catch(function(error){
+      console.log(error);
+      displayMessage("checkinvmsg", "error", "Couldn't find team with that ID");      
+    });
+  }
+}
+
+function signUpNonAdmin(){
+  if(!validTeam){
+    displayMessage("signupinvmsg", "error", "Please verify your team above");
+  }
+  else{
+    var incomplete = false; 
     var teamForm = document.getElementById('signupform_inv');
-    var teamIDInv = document.getElementById('inviteinput');
     var email = teamForm.elements['invemail'].value;
     var pass1 = teamForm.elements['invpass1'].value;
     var pass2 = teamForm.elements['invpass2'].value;
     incomplete = name == "" || email == "" || pass1 == "" || pass2 == "";
     if(incomplete){
       displayMessage("signupinvmsg", "error", "Please fill out all fields");
+    }
+    else{
+      //check team
+      var teamID = document.getElementById('inviteinput').value;
+      if(teamID == ""){
+        displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");
+      }
+      else{
+        firestoreDB.getTeam(teamID).then(function(team){
+          if(team.exists){
+            //create user
+            firebase.auth().createUserWithEmailAndPassword(email, pass1).then(function (user) {
+              firestoreDB.addUser(user.uid, teamID, false).then(function(userKey) {
+                  mainState.setState("teamID", teamID);
+                  window.location='team.html';
+              });
+            });
+          }
+          else{
+            console.log("NOT FOUND");
+            displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");
+          }
+    
+        }).catch(function(error){
+          console.log(error);
+          displayMessage("signupinvmsg", "error", "Please enter a valid Team ID");    
+        });
+      }
     }
   }
 }
