@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>HW 4</title>
+  <title>HW 5</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/homepage.css">
 </head>
@@ -51,6 +51,9 @@
           <h2>Links</h2>
           <ul>
             <li>
+              <a href="./build/index.html">TeamWatch (minified)</a>
+            </li>
+            <li>
               <a href="./build/index.html">TeamWatch</a>
             </li>
           </ul>
@@ -62,9 +65,9 @@
     <div class="row">
       <div class="col">
         <article>
-          <h2>Login Details</h2>
+          <h2>App Details</h2>
           <p>
-            Users are given three options to sign up with: as a coach, as a player, or as a fan.
+            TeamWatch is provides users with a convenient solution for managing soccer teams. Coaches are able to create an account with their team. They are then able to add their respective players and games with their opponents. They would be able to also edit their players and games. The app is able to consolidates the stats and shows each of the games stats. Coaches would also be given an access code which they could distribute to players and fans, so they too could also track the team’s progress and stats.
           </p>
         </article>
       </div>
@@ -74,13 +77,171 @@
     <div class="row">
       <div class="col">
         <article>
-          <h2>Coding and Solution Approach</h2>
+          <h2>Login Details</h2>
           <p>
-            Users are given three options to sign up with: as a coach, as a player, or as a fan.
+            Users are given three options to sign up with: as a coach, as a player, or as a fan. When you sign up as a coach, you are also creating a team in which you are the coach of. As a coach you are given access, to all the CRUD operations, as you are able to add, edit, and delete players, games, game statistics, and opponents. When you are creating an account as a player or a fan, you must enter an access code of a team, and you are able to view the team data.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Data Management</h2>
+          <div class="datastructure">
+            <p>
+              Our database is organized as:
+            </p>
+            <p>users/</p>
+            <p>&emsp;team</p>
+            <p>&emsp;admin</p>
+            <p>teams/</p>
+            <p>&emsp;name</p>
+            <p>&emsp;logo</p>
+            <p>&emsp;games/</p>
+            <p>&emsp;&emsp;active</p>
+            <p>&emsp;&emsp;date</p>
+            <p>&emsp;&emsp;location</p>
+            <p>&emsp;&emsp;opponent</p>
+            <p>&emsp;&emsp;time</p>
+            <p>&emsp;stats/</p>
+            <p>&emsp;&emsp;stat</p>
+            <p>&emsp;players/</p>
+            <p>&emsp;&emsp;name</p>
+            <p>&emsp;&emsp;number</p>
+            <p>&emsp;&emsp;position</p>
+            <p>&emsp;&emsp;image</p>
+            <p>&emsp;&emsp;stats</p>
+            <p>&emsp;opponents/</p>
+            <p>&emsp;&emsp;logo</p>
+            <p>&emsp;&emsp;name</p>
+          </div>
+          <p>
+            We used Firebase for our authentication, and database using Firestore. When users create accounts they we use FirebaseAuth to authenticate and create their accounts. When a user account is created, a user account is created in the database with a team and admin field. The team’s of the user accounts contain the team name, its logo, and a collection of games, players, and opponents. Games contains whether it is active, the date, location, opponent, time, and a collection of stats. Players has the name, number, position, image, and their stats such as goals scored and yellow cards. Lastly the opponent collection only stores the logo and name of the opponent, which is used to display the versus page.
           </p>
           <p>
-            Users are given three options to sign up with: as a coach, as a player, or as a fan.
+            We decided to go with this approach, because each of the users have their individual teams that they follow.  In addition, the way firestore organizes data, allows us to query the individual properties of each of the collections, without returning the subcollections. This allows us to make minimal network calls to get what we want when we need it.
           </p>
+          <p>
+            By using firestore, we were able to able allow for offline persistence, which allows for offline CRUD.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>PWA</h2>
+          <p>
+            We used webwork to generate the service worker. The service worker caches all the html, css, and javascript files. For the more dynamic pages, we used network first because the user needs to see the more recent data on those pages. Our app passes the Lighthouse test for PWA.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Optimizations</h2>
+          <p>
+            In addition to using service workers with workbox and offline persistence with Firestore, we also use minification and image compression. For minification, we used a gulp-minifier, which  uses html-minifier, UglifyJS, and Clean CSS. We used Optimizilla to compress our images, which significantly reduced the file sizes.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Load Time and Size Analysis:</h2>
+          <table>
+            <tr>
+              <th>Page</th>
+              <th>Load Time</th>
+              <th>Page Size</th>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/login.html">Login</a></td>
+              <td>6.55 s</td>
+              <td>48.5 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/signup.html">Sign Up</a></td>
+              <td>6.85 s</td>
+              <td>47.5 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/signup_invite.html">Coach Sign Up</a></td>
+              <td>7.05 s</td>
+              <td>72.7 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/signup_new.html">Player Sign Up</a></td>
+              <td>6.86s</td>
+              <td>71.4 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/team.html">Home Page</a></td>
+              <td>7.10 s</td>
+              <td>55.7 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/schedule.html">Schedule</a></td>
+              <td>7.05 s</td>
+              <td>53.8 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/gamedetails.html">Game Detail</a></td>
+              <td>7.18 s</td>
+              <td>56.8 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/addgame.html">Add Game</a></td>
+              <td>7.13 s</td>
+              <td>55.0KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/editgame.html">Edit Game</a></td>
+              <td>7.12 s</td>
+              <td>55.0 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/addevent.html">Add Event</a></td>
+              <td>6.96 s</td>
+              <td>51.9 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/players.html">Players</a></td>
+              <td>7.06 s</td>
+              <td>53.1 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/addplayer.html">Add Player</a></td>
+              <td>7.12 s</td>
+              <td>56.8 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/editplayer.html">Edit Player</a></td>
+              <td>7.17 s</td>
+              <td>58.0 KB</td>
+            </tr>
+            <tr>
+              <td><a href="https://cse134-bfd99.firebaseapp.com/build/playerdetails.html">Player Details</a></td>
+              <td>7.10 s</td>
+              <td>56.4 KB</td>
+            </tr>
+          </table>
+          <p>We ran our performance analysis on a device running Android 5.1.1. We used the Chrome DevTools to emulate the device running on a Slow 3G network.
+            </p>
+            <p>
+            On average, pages took about 7.00 seconds to fulfill all the requests on the page. What we found was that the majority of that time was from the stall before the download of our webfonts.
+            </p>
         </article>
       </div>
     </div>
