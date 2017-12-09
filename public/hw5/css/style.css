@@ -54,19 +54,9 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   width: 8rem;
 }
 
-#upcominggame_empty{
-  height: 0;
-}
-
 #liveGame #corner{
-  margin-left: auto;
-  margin-right: auto;
-  height: .8rem;
+  margin: 0 auto;
   font-size: .8rem;
-}
-#corner p{
-
-  text-align: left;
 }
 
 .gamebutton, .gamedetailbutton{
@@ -76,6 +66,14 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   display: block;
   height: 2rem;
 }
+
+.gamebutton:hover{
+  cursor: pointer;
+}
+
+/* .gamebutton:hover, .gamedetailbutton:hover{
+  cursor: pointer;
+} */
 
 .gamebuttondetail{
   margin: 0.5rem auto;
@@ -200,12 +198,11 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   display: none;
 }
 
-#emptyschedule, #emptyeventfeed{
+#emptyschedule, #emptyeventfeed, #upcominggame_empty{
   color: grey;
   margin-top: 0.7rem;
   font-size: 0rem;
   margin: auto;
-  /* display: none; */
 }
 
 #eventfeedcontainer{
@@ -736,10 +733,6 @@ input[type="number"]
   font-size: 0;
 }
 
-/* .opListElement{
-  background-color: 
-} */
-
 .opListElement{
   border-radius: 5px;
   border: 0px;
@@ -770,8 +763,9 @@ input[type="number"]
 }
 
 
-.opListElement:hover{
+.opListElement:hover,.gamebuttonElement:hover{
   background-color: #378fd4;
+  cursor: pointer;
 }
 
 .opListName{

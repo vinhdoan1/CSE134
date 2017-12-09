@@ -2,7 +2,6 @@
 //loads the homePage with some data
 function loadDashboard(){
   var state = mainState.getState();
-
   //get the team to diplay on the dashboard from db
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
@@ -19,25 +18,22 @@ function loadDashboard(){
 //getting the next game to be displayed
 function getUpcomingGame(){
   var state = mainState.getState();
+  document.getElementById('upcominggame_empty').style.fontSize="0rem";
    firestoreDB.getTeamGame(state.teamID, state.upcomingGame).then(function(game){
     if(game.exists){
       var gameData = game.data();
+      gameData.id = game.id;
+      console.log(gameData);
       createGameButtonDetail(gameData, 'upcominggamecontainer');
     }
     else{
+      document.getElementById('upcominggame_empty').style.fontSize="1rem";
       console.log("No upcoming game");
     }
   }).catch(function(){
+    document.getElementById('upcominggame_empty').style.fontSize="1rem";
     console.log("No upcoming game");
   });
-  // var gamesList = api.getTeamGames(state.teamID);
-  // var nextGame = gamesList.find(function(game){
-  //   game.active == true;
-  // });
-  // if(nextGame){
-  //   // let btn = createGameButtonDetail(game, 'upcominggamecontainer');
-  //   // document.getElementById('upcominggamecontainer').appendChild(btn);
-  // }
 }
 
 //when gets called redirects user to game details page

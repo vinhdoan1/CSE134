@@ -77,10 +77,8 @@ function updateUpcomingGame(){
       }
       if(values[j].active){
         mainState.setState("upcomingGame", values[j].id);
-        console.log("FOUND");
       } else{
         mainState.setState("upcomingGame", "hello");
-        console.log("NOT FOUND");
       }
     }
   });
