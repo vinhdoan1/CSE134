@@ -3,6 +3,7 @@ schedule.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept
 schedule.months_long = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 schedule.parseDateAndTime = parseDateAndTime;
 
+//parser for the date and time entries
 function parseDateAndTime(datestr, timestr){
   var datearry = datestr.split("-");
   var timearry = timestr.split(":");
@@ -10,16 +11,20 @@ function parseDateAndTime(datestr, timestr){
 }
 
 function validateGameForm(form, action){
+
+  //sanity check for validgame form
   var incomplete = false;
+
+  //game form to be addded to the database
   var game = {
     opponent:"",
     location: "",
     date: "",
     time: "",
-    stats: [],
     active: true
   }
 
+  //checking the form for validations
   game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
   game.location = form.elements['gamelocation'].value;
@@ -30,14 +35,12 @@ function validateGameForm(form, action){
   incomplete = incomplete || game.time == "";
 
   var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
-  // console.log(error_msg);
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
-    //error_msg.style.display = 'block';
   }
   else{
-    //hideMessage(error_msg);
-    //error_msg.style.display = 'none';
+
+    //check for adding or editing game
     if(action == "add"){
       game.active = true;
     }
@@ -80,18 +83,26 @@ function updateUpcomingGame(){
   });
 }
 
+//update the game by calling firebase
 function updateGame(game, action){
   var state = mainState.getState();
   var teamID = state.teamID;
-  var gameID = state.gameID;
+  var gameID = state.gameID
+
+  //check for different action add or edit a game
   if(action == "edit"){
+
+    //call to CRUD for editing the game
     firestoreDB.updateGame(teamID, gameID, game).then(function(){
       window.location='gamedetails.html';
     });
   }
   else if(action == "add"){
+
+    //call to CRUD for adding a new game
     firestoreDB.addNewGame(teamID, game).then(function(){
       window.location='schedule.html';
+
     });
   }
   updateUpcomingGame();
@@ -114,6 +125,7 @@ function loadSchedule(){
     }
     else{
       var values = []
+      //go through all games and get the data for displaying
       games.forEach(function(game){
         values.push({
           id: game.id,
@@ -121,16 +133,27 @@ function loadSchedule(){
         });
       });
 
+<<<<<<< HEAD
+=======
+
+      //sort the schedule of the game by date of occurance
+>>>>>>> b8fc1074e9194a018a71b1719968e311b12e92e8
       values.sort(function(a,b){
           return new Date(a.date) - new Date(b.date);
       });
 
+      //traverse the schedule objects and create a button for display
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
+<<<<<<< HEAD
           console.log(values[i]);
           mainState.setState('gameID', values[i].id);
           var btn = createGameButtonDetail(values[i], 'schedulecontainer');
           // document.getElementById('schedulecontainer').appendChild(btn);
+=======
+          mainState.setState('gameID', values[i].id)
+          createGameButtonDetail(values[i]);
+>>>>>>> b8fc1074e9194a018a71b1719968e311b12e92e8
           gamesCount++;
         }
       }
@@ -146,8 +169,11 @@ function loadSchedule(){
   });
 }
 
+//populates the list of opponnets to be displayed in the drop downs
 function populateOpponentSelect(selectcontainer){
   var teamID = mainState.getState().teamID;
+
+  //get the list of opponents from db
   firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
     snapshot.forEach(function(opponent) {
       var opt = document.createElement("option");
@@ -158,6 +184,7 @@ function populateOpponentSelect(selectcontainer){
   });
 }
 
+//load the add game form
 function loadAddForm(){
   populateOpponentSelect('addgameopponent');
 }
@@ -169,6 +196,7 @@ function loadEditForm(){
   var gameID = state.gameID;
   var teamID = state.teamID;
 
+  //get the opponents list in the dropdown
   populateOpponentSelect('editgameopponent');
 
   var gameopponent = document.getElementById('editgameopponent');
@@ -176,6 +204,7 @@ function loadEditForm(){
   var gamedate = document.getElementById('editgamedate');
   var gametime = document.getElementById('editgametime');
 
+  //get the game that should be updated and display as a form
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
     setSelectedIndex(gameopponent, game.data().opponent);
