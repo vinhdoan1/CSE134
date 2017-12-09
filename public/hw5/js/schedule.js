@@ -49,31 +49,52 @@ function validateGameForm(form, action){
   }
 }
 
+function updateUpcomingGame(){
+  var state = mainState.getState();
+  firestoreDB.getTeamGames(state.teamID).then(function(games){
+    if(!games){
+    }
+    else{
+      var values = []
+      games.forEach(function(game){
+        values.push({
+          id: game.id,
+          ...game.data()
+        });
+      });
+
+      values.sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
+      });
+
+      var j = 0;
+      while(!values[j].active){
+        j++;
+      }
+      if(values[j].active){
+        mainState.setState("upcomingGame", values[i].id);
+      } else{
+        mainState.setState("upcomingGame", "");
+      }
+    }
+  });
+}
+
 function updateGame(game, action){
   var state = mainState.getState();
   var teamID = state.teamID;
-  var gameID = state.gameID
-
-
-  var exists = false;
-  if(exists){
-    var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
-    duplicate_msg.style.display = 'block';
+  var gameID = state.gameID;
+  if(action == "edit"){
+    firestoreDB.updateGame(teamID, gameID, game).then(function(){
+      window.location='gamedetails.html';
+    });
   }
-  else{
-    var returnTo="";
-    if(action == "edit"){
-      firestoreDB.updateGame(teamID, gameID, game).then(function(){
-        window.location='gamedetails.html';
-      });
-    }
-    else if(action == "add"){
-      firestoreDB.addNewGame(teamID, game).then(function(){
-        window.location='schedule.html';
-
-      });
-    }
+  else if(action == "add"){
+    firestoreDB.addNewGame(teamID, game).then(function(){
+      window.location='schedule.html';
+    });
   }
+  updateUpcomingGame();
 }
 
 function loadSchedulePage(){
@@ -90,20 +111,15 @@ function loadSchedule(){
   firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
-      // emptyschedule.style.display = 'block';
     }
     else{
-      // emptyschedule.style.display = 'none';
-
       var values = []
       games.forEach(function(game){
         values.push({
-
           id: game.id,
           ...game.data()
         });
       });
-
 
       values.sort(function(a,b){
           return new Date(a.date) - new Date(b.date);
@@ -111,12 +127,15 @@ function loadSchedule(){
 
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
-          mainState.setState('gameID', values[i].id)
-          let btn = createGameButtonDetail(values[i]);
-          document.getElementById('schedulecontainer').appendChild(btn);
+          console.log(values[i]);
+          mainState.setState('gameID', values[i].id);
+          var btn = createGameButtonDetail(values[i], 'schedulecontainer');
+          // document.getElementById('schedulecontainer').appendChild(btn);
           gamesCount++;
         }
       }
+
+      console.log(gamesCount);
       if(gamesCount == 0){
         emptyschedule.style.fontSize="1rem";
       }

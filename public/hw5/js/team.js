@@ -9,18 +9,30 @@ function loadDashboard(){
     document.getElementById("goalsagainst").innerHTML += "4";
     document.getElementById("teamimglogo").src = team.logo;
   });
+  getUpcomingGame();
 }
 
 function getUpcomingGame(){
   var state = mainState.getState();
-  var gamesList = api.getTeamGames(state.teamID);
-  var nextGame = gamesList.find(function(game){
-    game.active == true;
+   firestoreDB.getTeamGame(state.teamID, state.upcomingGame).then(function(game){
+    if(game.exists){
+      var gameData = game.data();
+      createGameButtonDetail(gameData, 'upcominggamecontainer');
+    }
+    else{
+      console.log("No upcoming game");
+    }
+  }).catch(function(){
+    console.log("No upcoming game");
   });
-  if(nextGame){
-    let btn = createGameButtonDetail(game);
-    document.getElementById('upcominggamecontainer').appendChild(btn);
-  }
+  // var gamesList = api.getTeamGames(state.teamID);
+  // var nextGame = gamesList.find(function(game){
+  //   game.active == true;
+  // });
+  // if(nextGame){
+  //   // let btn = createGameButtonDetail(game, 'upcominggamecontainer');
+  //   // document.getElementById('upcominggamecontainer').appendChild(btn);
+  // }
 }
 
 function funToGameDetails(gameID){
@@ -30,12 +42,10 @@ function funToGameDetails(gameID){
   }
 }
 
-function createGameButtonDetail(game){
-
+function createGameButtonDetail(game, container){
   let state = mainState.getState();
   teamID = state.teamID;
   let opponent = firestoreDB.getOpponent(teamID, game.opponent).then(function(opp){
-
     var date = parseDateAndTime(game.date, game.time);
     var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
     var ampm = date.getHours() >= 12 ? "PM" : "AM";
@@ -46,7 +56,7 @@ function createGameButtonDetail(game){
     btn.innerHTML = "<p class='gamebuttondetail'>" +
     date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
     + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + opp.data().name + "</p>";
-    document.getElementById('schedulecontainer').appendChild(btn);
+    document.getElementById(container).appendChild(btn);
   });
 
 }

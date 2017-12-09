@@ -102,7 +102,6 @@ var enablePersistenceOn = false;
   }
 
   firestoreDB.getStats = async function(teamID, gameID){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).collection("stats").get()
   }
