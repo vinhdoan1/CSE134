@@ -37,23 +37,16 @@ var config = {
     return db.collection("teams").doc(teamID).get();
   }
 
+  firestoreDB.setTeam = function(teamID, teamData){
+    return db.collection("teams").doc(teamID).set(teamData);
+  }
+
   // OPPONENTS
   firestoreDB.addOpponent = function(teamID, opName, logo) {
-    // console.log(teamID);
     return db.collection("teams").doc(teamID).collection("opponents").add({
       name: opName,
       logo: logo
     });
-    // teamRef.get().then(function(team) {
-    //   if(team.exists) {
-    //     var teamData = team.data();
-    //   }
-    //   else{
-    //     console.log("Couldn't find team");
-    //   }
-    // }).catch(function(error) {
-    //   console.log(error);
-    // });
   }
 
   // ------------------ OLD FIREBASE STUFF HERE ------------------------------//

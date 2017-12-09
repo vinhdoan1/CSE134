@@ -10,10 +10,10 @@ function changeTeamLogo(newLogo){
 
 function populateTeamInformation(){
   var teamID = mainState.getState().teamID;
-  firedatabase.getTeam(teamID).then(function(teamData){
-    var team = teamData.val();
-    document.getElementById('newteamname').value = team.name;
-    document.getElementById('editteam_teamimg').src = team.logo;
+  firestoreDB.getTeam(teamID).then(function(team){
+    var teamData = team.data();
+    document.getElementById('newteamname').value = teamData.name;
+    document.getElementById('editteam_teamimg').src = teamData.logo;
   });
 }
 
@@ -27,33 +27,89 @@ function populateUserInformation(){
 
 function updateTeam(){
   var teamID = mainState.getState().teamID;
-  firedatabase.getTeam(teamID).then(function(teamData){
-    var team = teamData.val();
+  firestoreDB.getTeam(teamID).then(function(team){
+    var teamData = team.data();
     var newTeamName = document.getElementById('newteamname').value;
     newTeamName = newTeamName.replace(/\s+/g, '');
+
     var changesMade = false;
-    // console.log("Curr team name: " + team.name);
-    if(newTeamName != team.name && newTeamName != ""){
-      team.name = newTeamName;
+    if(newTeamName != teamData.name && newTeamName != ""){
+      teamData.name = newTeamName;
       changesMade = true;
     }
     var newTeamLogo = document.getElementById('editteam_teamimg').src;
-    if(newTeamLogo != team.logo){
-      team.logo = newTeamLogo;
+    if(newTeamLogo != teamData.logo){
+      teamData.logo = newTeamLogo;
       changesMade = true;
     }
-    // console.log("changes made: " + changesMade);
     if(newTeamName == ""){
       displayMessage("editteammsg", "error", "Team name cannot be empty");
     }
     else{
       hideMessage('editteammsg');
       if(changesMade){
-        firedatabase.setTeam(teamID, team);
+        firestoreDB.setTeam(teamID, teamData);
         displayMessage("editteammsg", "confirm", "Team information updated");
       }
     }  
   });
+
+  // var teamID = mainState.getState().teamID;
+  // firestoreDB.getTeam(teamID).then(function(teamRef){
+  //   teamRef.get().then(function(team){
+  //     var teamData = team.data();
+  //     var newTeamName = document.getElementById('newteamname').value;
+  //     newTeamName = newTeamName.replace(/\s+/g, '');
+  
+  //     var changesMade = false;
+  //     if(newTeamName != teamData.name && newTeamName != ""){
+  //       team.name = newTeamName;
+  //       changesMade = true;
+  //     }
+  //     var newTeamLogo = document.getElementById('editteam_teamimg').src;
+  //     if(newTeamLogo != teamData.logo){
+  //       team.logo = newTeamLogo;
+  //       changesMade = true;
+  //     }
+  //     if(newTeamName == ""){
+  //       displayMessage("editteammsg", "error", "Team name cannot be empty");
+  //     }
+  //     else{
+  //       hideMessage('editteammsg');
+  //       if(changesMade){
+  //         firedatabase.setTeam(teamID, team);
+  //         displayMessage("editteammsg", "confirm", "Team information updated");
+  //       }
+  //     }  
+  //   });
+  // });
+  
+  // firedatabase.getTeam(teamID).then(function(teamData){
+  //   var team = teamData.val();
+    
+  //   var changesMade = false;
+  //   // console.log("Curr team name: " + team.name);
+  //   if(newTeamName != team.name && newTeamName != ""){
+  //     team.name = newTeamName;
+  //     changesMade = true;
+  //   }
+  //   var newTeamLogo = document.getElementById('editteam_teamimg').src;
+  //   if(newTeamLogo != team.logo){
+  //     team.logo = newTeamLogo;
+  //     changesMade = true;
+  //   }
+  //   // console.log("changes made: " + changesMade);
+  //   if(newTeamName == ""){
+  //     displayMessage("editteammsg", "error", "Team name cannot be empty");
+  //   }
+  //   else{
+  //     hideMessage('editteammsg');
+  //     if(changesMade){
+  //       firedatabase.setTeam(teamID, team);
+  //       displayMessage("editteammsg", "confirm", "Team information updated");
+  //     }
+  //   }  
+  // });
 }
 
 var needsReauth = false;
