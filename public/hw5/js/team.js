@@ -25,7 +25,7 @@ function getUpcomingGame(){
   }
 }
 
-function funcToGameDetails(gameID){
+function funToGameDetails(gameID){
   return function() {
     mainState.setState("gameID", gameID);
     window.location='gamedetails.html';
@@ -40,7 +40,7 @@ function createGameButtonDetail(game){
   btn.setAttribute("type", "button");
   btn.setAttribute("class", "gamebutton");
   // btn.setAttribute("onclick", "window.location='gamedetails.html';");
-  btn.onclick = funcToGameDetails(game.id);
+  btn.onclick = funToGameDetails(game.id);
   btn.innerHTML = "<p class='gamebuttondetail'>" +
   date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
   + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";

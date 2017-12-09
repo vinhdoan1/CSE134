@@ -26,28 +26,6 @@ function validateAddOpponentForm(){
 function addOpponent(opponent){
   var teamID = mainState.getState().teamID;
   firestoreDB.addOpponent(teamID, opponent.name, opponent.logo);
-  // var state = mainState.getState();
-  // var teamID = state.teamID;
-  // var opponentList = api.getOpponents(teamID);
-  // var duplicate_msg = document.getElementById('addop_duplicate');
-  
-  // var exists = opponentList.some(function(other){
-  //   return other.name == opponent.name;
-  // });
-  // if(exists){
-  //   duplicate_msg.style.display = 'block';
-  // }
-  // else{
-  //   duplicate_msg.style.display = 'none';
-
-  //   var logo = document.getElementById('oplogoimg');
-  //   if(logo.src != ""){
-  //     opponent.logo = logo.src;
-  //   }
-  //   opponentList.push(opponent);
-  //   api.setOpponents(teamID, opponentList);
-  //   window.location = localStorage.getItem("back");
-  // }
 }
 
 function loadOpponents(){
@@ -55,8 +33,8 @@ function loadOpponents(){
   db.collection("teams").doc(teamID).collection("opponents").get().then(function(snapshot) {
     var numOps = 0;
     snapshot.forEach(function(opponent) {
-        console.log(opponent.id, " => ", opponent.data().name);
-        var opListElement = createOpponentElement(opponent.data().name, opponent.data().logo);
+        // console.log(opponent.id, " => ", opponent.data().name);
+        var opListElement = createOpponentElement(opponent.id, opponent.data().name, opponent.data().logo);
         document.getElementById('opponentscontainer').appendChild(opListElement);
         numOps++;
     });
@@ -66,19 +44,70 @@ function loadOpponents(){
   });
 }
 
-function createOpponentElement(opName, opLogo){
+function createOpponentElement(opID, opName, opLogo){
   var div = document.createElement("div");
   div.setAttribute("class", "opListElement");
+  div.onclick= funToEditOpponent(opID);
+
   var logo = document.createElement('img');
   logo.setAttribute("src", opLogo);
   logo.setAttribute("class", "opListImg");
   var name = document.createElement('div');
   name.setAttribute("class", "opListName")
   name.innerHTML = opName;
-  // btn.onclick =;
+  // div.onclick = toEditOpponent(opID);
+
   div.appendChild(logo);
   div.appendChild(name);
   return div;
+}
+
+function funToEditOpponent(opID){
+  return function() {
+    mainState.setState("opID", opID);
+    window.location = 'editopponent.html';
+  }
+}
+
+function populateOpponentData(){
+  var opID = mainState.getState().opID;
+  var teamID = mainState.getState().teamID;
+  firestoreDB.getOpponent(teamID, opID).then(function(opponent){
+    var opData = opponent.data();
+    document.getElementById('newopname').value = opData.name;
+    document.getElementById('editop_teamimg').src = opData.logo;
+  });
+}
+
+function updateOpponent(){
+  var opID = mainState.getState().opID;
+  var teamID = mainState.getState().teamID;
+  firestoreDB.getOpponent(teamID, opID).then(function(opponent){
+    var opData = opponent.data();
+    var newOpName = document.getElementById('newopname').value;
+    newOpName = newOpName.replace(/\s+/g, '');
+    
+    var changesMade = false;
+    if(newOpName != opData.name && newOpName != ""){
+      opData.name = newOpName;
+      changesMade = true;
+    }
+    var newOpLogo = document.getElementById('editop_teamimg').src;
+    if(newOpLogo != opData.logo){
+      opData.logo = newOpLogo;
+      changesMade = true;
+    }
+    if(newOpName == ""){
+      displayMessage("editopmsg", "error", "Opponent team name cannot be empty");
+    }
+    else{
+      hideMessage('editopmsg');
+      if(changesMade){
+        firestoreDB.setOpponent(teamID, opID, opData);
+        displayMessage("editopmsg", "confirm", "Opponent information updated");
+      }
+    }  
+  });
 }
 
 function deleteOpponent(opponent){}

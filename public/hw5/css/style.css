@@ -701,7 +701,7 @@ input[type="number"]
   font-size: 0rem;
 }
 
-.settingsmsg, .editteammsg, .addopmsg{
+.message{
   display: block;
   font-size: 0.8rem;
   transition: opacity 0.5s linear;

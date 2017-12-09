@@ -167,5 +167,3 @@ function setSelectedIndex(s, v) {
     }
   }
 }
-
-// MOVE THIS ELSEWHERE LATER

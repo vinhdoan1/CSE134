@@ -49,6 +49,14 @@ var config = {
     });
   }
 
+  firestoreDB.getOpponent = function(teamID, opID){
+    return db.collection("teams").doc(teamID).collection("opponents").doc(opID).get();
+  }
+
+  firestoreDB.setOpponent = function(teamID, opID, opponent){
+    return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
+  }
+
   // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
   // PLAYERS

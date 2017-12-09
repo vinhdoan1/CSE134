@@ -20,9 +20,9 @@
   <script src="./js/image.js"></script>
   <script src="./js/settings.js"></script>
 </head>
-<body onload=populateTeamInformation()>
+<body onload="populateOpponentData()">
   <header>
-      <p class="headertext" id="backheadertext" onclick="window.location='settings.html';">&lt; Back</p>
+      <p class="headertext" id="backheadertext" onclick="window.location='manageopponents.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
       <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
       <p id="logoheadertext">TeamWatch</p>
@@ -30,23 +30,23 @@
     <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
   </header>
   <div class="outercontainer2">
-    <h2 id="h2">Edit Team Information</h2>
+    <h2 id="h2">Edit Opponent Information</h2>
     <div id="changenamecontainer">
-      <p>Team Name:</p>
-      <input type="text" id="newteamname" class="settingsinput" placeholder="Team Name"/>
+      <p>Opponent Name:</p>
+      <input type="text" id="newopname" class="settingsinput" placeholder="Opponent Name"/>
     </div>
     <div id="changelogocontainer">
-      <p>Team Logo:</p>
+      <p>Opponent Logo:</p>
       <div class="fileuploadcontainer">
-        <input class="logoupload" id="editteam_logoupload" type="file"/>
-        <input type="button" value="Upload" onclick="uploadLogo('editteam_logoupload','editteam_teamimg');"/>
+        <input class="logoupload" id="editop_logoupload" type="file"/>
+        <input type="button" value="Upload" onclick="uploadLogo('editop_logoupload','editop_teamimg');"/>
       </div>
       <div class="teamimgcontainer">
-        <img class="teamimg" id="editteam_teamimg" src="images/default.jpg" alt="Team Logo">
+        <img class="teamimg" id="editop_teamimg" src="images/default.jpg" alt="Team Logo">
       </div>
     </div>
-    <input type="button" class="settingsbutton" value="Update Team Information" onclick="updateTeam()"/>
-    <div class="message" id="editteammsg">Hello</div>
+    <input type="button" class="settingsbutton" value="Update Team Information" onclick="updateOpponent()"/>
+    <div class="message" id="editopmsg">Hello</div>
   </div>
   <script src="./js/serviceworker.js"></script>
 </body>
