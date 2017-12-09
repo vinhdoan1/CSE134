@@ -7,7 +7,8 @@ schedule.parseDateAndTime = parseDateAndTime;
 function parseDateAndTime(datestr, timestr){
   var datearry = datestr.split("-");
   var timearry = timestr.split(":");
-  return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
+  console.log(datearry);
+  return new Date(datearry[0], datearry[1]-1, datearry[2], timearry[0], timearry[1], 0, 0);
 }
 
 function validateGameForm(form, action){
@@ -133,11 +134,7 @@ function loadSchedule(){
         });
       });
 
-<<<<<<< HEAD
-=======
-
       //sort the schedule of the game by date of occurance
->>>>>>> b8fc1074e9194a018a71b1719968e311b12e92e8
       values.sort(function(a,b){
           return new Date(a.date) - new Date(b.date);
       });
@@ -145,20 +142,14 @@ function loadSchedule(){
       //traverse the schedule objects and create a button for display
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
-<<<<<<< HEAD
           console.log(values[i]);
           mainState.setState('gameID', values[i].id);
-          var btn = createGameButtonDetail(values[i], 'schedulecontainer');
+          createGameButtonDetail(values[i], 'schedulecontainer');
           // document.getElementById('schedulecontainer').appendChild(btn);
-=======
-          mainState.setState('gameID', values[i].id)
-          createGameButtonDetail(values[i]);
->>>>>>> b8fc1074e9194a018a71b1719968e311b12e92e8
           gamesCount++;
         }
       }
-
-      console.log(gamesCount);
+      // console.log(gamesCount);
       if(gamesCount == 0){
         emptyschedule.style.fontSize="1rem";
       }

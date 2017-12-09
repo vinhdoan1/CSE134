@@ -59,13 +59,17 @@ function createGameButtonDetail(game, container){
     var date = parseDateAndTime(game.date, game.time);
     var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
     var ampm = date.getHours() >= 12 ? "PM" : "AM";
-    let btn = document.createElement("button");
-    btn.setAttribute("type", "button");
-    btn.setAttribute("class", "gamebutton");
+    let btn = document.createElement("div");
+    // btn.setAttribute("role", "button");
+    btn.setAttribute("class", "gamebuttonElement");
     btn.onclick = funToGameDetails(game.id);
-    btn.innerHTML = "<p class='gamebuttondetail'>" +
-    date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
-    + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + opp.data().name + "</p>";
+    var btninner = document.createElement("div");
+    console.log(date.getMonth());
+    btninner.innerHTML = "<span>" + schedule.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
+    btn.appendChild(btninner);
+    // btn.innerHTML = "<span class='gamebuttondetail'>" +
+    // date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
+    // + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
     document.getElementById(container).appendChild(btn);
   });
 
@@ -151,23 +155,18 @@ addStat = () => {
 
   //check what type of stat it is
   if (player === "" || type === "Choose Event" || type === ""){
-
     return false
   }
   else if (type === 'cornerkick' || type === 'shotongoal'){
-
     stat = player + " took a " + type
   }
   else if (type === 'yellowcard' || type === 'redcard') {
-
     stat = player + " received a " + type
   }
   else if (type === 'goal'){
-
     stat = player + " scored a " + type
   }
   else {
-
     stat = player + " made a " + type
   }
 
@@ -178,7 +177,6 @@ addStat = () => {
     window.location='addevent.html';
 
   });
-
 }
 
 function getOpTeamLogo(teamname){

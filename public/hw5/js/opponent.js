@@ -51,7 +51,6 @@ function createOpponentElement(opID, opName, opLogo){
   var div = document.createElement("div");
   div.setAttribute("class", "opListElement");
   div.onclick= funToEditOpponent(opID);
-
   var logo = document.createElement('img');
   logo.setAttribute("src", opLogo);
   logo.setAttribute("class", "opListImg");

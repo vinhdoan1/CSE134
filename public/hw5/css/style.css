@@ -72,9 +72,14 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
 .gamebutton, .gamedetailbutton{
   text-align: center;
   width: 16rem;
-  margin: .5rem auto 0 auto;
+  margin: 0.5rem auto 0 auto;
   display: block;
   height: 2rem;
+}
+
+.gamebuttondetail{
+  margin: 0.5rem auto;
+  padding: 0.5rem auto;
 }
 
 .settingsdiv{
@@ -748,6 +753,20 @@ input[type="number"]
   /* padding: 0.2rem 1rem 0.2rem 1rem; */
   text-align: left;
   padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.gamebuttonElement{
+  border-radius: 5px;
+  border: 0px;
+  background-color: #68b7f5;
+  font-family: 'Lato', sans-serif;
+  font-size: .75rem;
+  color: white;
+  width: 15rem;
+  margin: 0.5rem auto;
+  text-align: center;
+  padding: 0.5rem 0;
+}
 }
 
 .opListElement:hover{
