@@ -98,41 +98,46 @@ var config = {
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
   }
 
-  firestoreDB.getStats = function(teamID, gameID){
+  firestoreDB.getStats = async function(teamID, gameID){
 
-    return db.collection("teams").doc(teamID).collection("games")
-      .doc(gameID).collection("stats").get()
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("games").doc(gameID).collection("stats").get()
   }
 
 
-  firestoreDB.setStat = function(teamID, gameID, stat){
+  firestoreDB.setStat = async function(teamID, gameID, stat){
 
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
     .doc(gameID).collection("stats").set(stat)
   }
 
 
-  firestoreDB.getTeamGames = function(teamID){
+  firestoreDB.getTeamGames = async function(teamID){
 
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").get()
   }
 
-  firestoreDB.getTeamGame = function(teamID, gameID){
+  firestoreDB.getTeamGame = async function(teamID, gameID){
 
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).get()
   }
 
 
-  firestoreDB.addNewGame = function(teamID, game){
+  firestoreDB.addNewGame = async function(teamID, game){
 
     console.log(game)
     console.log(teamID)
 
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").add(game)
   }
 
-  firestoreDB.updateGame = function(teamID, gameID, game){
+  firestoreDB.updateGame = async function(teamID, gameID, game){
 
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
     .doc(gameID).set(game)
   }

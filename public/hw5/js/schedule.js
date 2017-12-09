@@ -22,8 +22,9 @@ function validateGameForm(form, action){
   game.opponent = form.elements['gameopponent'].value;
 
   // TODO:
-  incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-  //incomplete = game.opponent == "Lions";
+  //incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
+  incomplete = game.opponent == "Lions";
+  game.opponent = "Lions";
   game.location = form.elements['gamelocation'].value;
   incomplete = incomplete || game.location == "";
   game.date = form.elements['gamedate'].value;
@@ -32,14 +33,13 @@ function validateGameForm(form, action){
   incomplete = incomplete || game.time == "";
 
   var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
-  console.log(error_msg);
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
-    // error_msg.style.display = 'block';
+    //error_msg.style.display = 'block';
   }
   else{
     hideMessage(error_msg);
-    // error_msg.style.display = 'none';
+    //error_msg.style.display = 'none';
     if(action == "add"){
       game.active = true;
     }
@@ -67,14 +67,15 @@ function updateGame(game, action){
   else{
     var returnTo="";
     if(action == "edit"){
-
-      console.log(gameID)
-      console.log(game)
-      firestoreDB.updateGame(teamID, gameID, game).
-      then(window.location='gamedetails.html');
+      firestoreDB.updateGame(teamID, gameID, game).then(function(){
+        window.location='gamedetails.html';
+      });
     }
     else if(action == "add"){
-      firestoreDB.addNewGame(teamID, game).then(window.location='schedule.html');
+      firestoreDB.addNewGame(teamID, game).then(function(){
+        window.location='schedule.html';
+
+      });
     }
   }
 }
@@ -139,7 +140,7 @@ function populateOpponentSelect(selectcontainer){
 }
 
 function loadAddForm(){
-  populateOpponentSelect('addgameopponent');
+  //populateOpponentSelect('addgameopponent');
 }
 
 //preload the edit form
@@ -150,7 +151,7 @@ function loadEditForm(){
   var game = firestoreDB.getTeamGame(teamID, gameID)
   var games = Object.values(game)
 
-  populateOpponentSelect('editgameopponent');
+//  populateOpponentSelect('editgameopponent');
 
   var gameopponent = document.getElementById('editgameopponent');
   var gamelocation = document.getElementById('editgamelocation');
