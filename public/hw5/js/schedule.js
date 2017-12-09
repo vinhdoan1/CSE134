@@ -7,7 +7,7 @@ schedule.parseDateAndTime = parseDateAndTime;
 function parseDateAndTime(datestr, timestr){
   var datearry = datestr.split("-");
   var timearry = timestr.split(":");
-  console.log(datearry);
+  // console.log(datearry);
   return new Date(datearry[0], datearry[1]-1, datearry[2], timearry[0], timearry[1], 0, 0);
 }
 

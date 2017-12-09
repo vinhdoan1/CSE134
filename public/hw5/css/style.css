@@ -97,9 +97,19 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   height: 2rem;
 }
 
+#firstdiv, #seconddiv{
+  width: 40%;
+  display: inline;
+}
+
+#gamedetails_location{
+  margin: 0.5rem auto;
+}
+
 #gamedetails_delete{
   background-color: #b72027;
 }
+
 
 #gamedetails_delete:hover {
   background-color: #771c1a;
@@ -135,7 +145,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
 }
 
 #gamedetails_details div{
-
   display: inline-block;
   width: 45%;
 }
@@ -175,6 +184,14 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   float: left;
   border-left: 1px solid black;
   text-align: left;
+}
+
+#gamedetails_options{
+  margin-top: 1rem;
+}
+
+#gamedetails_checkbox{
+  height: 1rem;
 }
 
 #stats p{
@@ -321,9 +338,8 @@ footer .logofootertextcenter {
   }
 
   #gamedetails_details div{
-
     display: inline-block;
-    width: 45%;
+    width: 35%;
     font-size: .8rem;
   }
 
@@ -345,13 +361,6 @@ footer .logofootertextcenter {
     -webkit-border-radius: 4rem;
     border-radius: 4rem;
 
-  }
-
-  #gamedetailwarpper{
-
-    width: 100%;
-    display: inline-block;
-    font-size: .8rem;
   }
 
 }
