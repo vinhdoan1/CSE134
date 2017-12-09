@@ -156,21 +156,35 @@ function deleteGame(){
     var gameID = state.gameID;
     firestoreDB.getTeamGame(teamID, gameID).then(function(game){
       var gameData = game.data();
+      gameData.active = false;
+
       if(gameData.complete){
-        var goals = gameData.goals;
-        var goalsOp = gameData.goalsOp;
         firestoreDB.getTeam(teamID).then(function(team){
           var teamData = team.data();
           if(!gameData.draw && gameData.win){
-            firestoreDB.updateTeamWins(teamID, --teamData.wins);
+            firestoreDB.updateTeamWins(teamID, --teamData.wins).then(function(){
+              firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+                window.location = 'schedule.html';
+              });
+            });
           }
           else if(!gameData.draw && gameData.lose){
-            firestoreDB.updateTeamLosses(teamID, --teamData.losses);
+            firestoreDB.updateTeamLosses(teamID, --teamData.losses).then(function(){
+              firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+                window.location = 'schedule.html';
+              });
+            });
           }
-          gameData.active = false;
-          firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
-            window.location = 'schedule.html';
-          });
+          else{
+            firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+              window.location = 'schedule.html';
+            });
+          }
+        });
+      }
+      else{
+        firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+          window.location = 'schedule.html';
         });
       }
     });
