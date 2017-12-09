@@ -102,19 +102,15 @@ var enablePersistenceOn = false;
   }
 
   firestoreDB.getStats = async function(teamID, gameID){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).collection("stats").get()
   }
 
-
   firestoreDB.setStat = async function(teamID, gameID, stat){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
     .doc(gameID).collection("stats").add({stat})
   }
-
 
   firestoreDB.getTeamGames = async function(teamID){
 
@@ -123,9 +119,13 @@ var enablePersistenceOn = false;
   }
 
   firestoreDB.getTeamGame = async function(teamID, gameID){
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).get()
+  }
+
+  firestoreDB.setTeamGame = async function(teamID, gameID, game){
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("games").doc(gameID).set(game);
   }
 
 

@@ -2,7 +2,6 @@
 //loads the homePage with some data
 function loadDashboard(){
   var state = mainState.getState();
-
   //get the team to diplay on the dashboard from db
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
@@ -13,19 +12,28 @@ function loadDashboard(){
     document.getElementById("goalsagainst").innerHTML += "4";
     document.getElementById("teamimglogo").src = team.logo;
   });
+  getUpcomingGame();
 }
 
 //getting the next game to be displayed
 function getUpcomingGame(){
   var state = mainState.getState();
-  var gamesList = api.getTeamGames(state.teamID);
-  var nextGame = gamesList.find(function(game){
-    game.active == true;
+  document.getElementById('upcominggame_empty').style.fontSize="0rem";
+   firestoreDB.getTeamGame(state.teamID, state.upcomingGame).then(function(game){
+    if(game.exists){
+      var gameData = game.data();
+      gameData.id = game.id;
+      console.log(gameData);
+      createGameButtonDetail(gameData, 'upcominggamecontainer');
+    }
+    else{
+      document.getElementById('upcominggame_empty').style.fontSize="1rem";
+      console.log("No upcoming game");
+    }
+  }).catch(function(){
+    document.getElementById('upcominggame_empty').style.fontSize="1rem";
+    console.log("No upcoming game");
   });
-  if(nextGame){
-    let btn = createGameButtonDetail(game);
-    document.getElementById('upcominggamecontainer').appendChild(btn);
-  }
 }
 
 //when gets called redirects user to game details page
@@ -36,9 +44,7 @@ function funToGameDetails(gameID){
   }
 }
 
-//this is used to create buttons that display the game snapshot on schedule page
-function createGameButtonDetail(game){
-
+function createGameButtonDetail(game, container){
   let state = mainState.getState();
   teamID = state.teamID;
 
@@ -49,16 +55,15 @@ function createGameButtonDetail(game){
     var date = parseDateAndTime(game.date, game.time);
     var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
     var ampm = date.getHours() >= 12 ? "PM" : "AM";
-    let btn = document.createElement("button");
-    btn.setAttribute("type", "button");
-    btn.setAttribute("class", "gamebutton");
+    let btn = document.createElement("div");
+    // btn.setAttribute("role", "button");
+    btn.setAttribute("class", "gamebuttonElement");
     btn.onclick = funToGameDetails(game.id);
-    btn.innerHTML = "<p class='gamebuttondetail'>" +
-    date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
-    + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + opp.data().name + "</p>";
-
-    //append the button to the element of html
-    document.getElementById('schedulecontainer').appendChild(btn);
+    var btninner = document.createElement("div");
+    console.log(date.getMonth());
+    btninner.innerHTML = "<span>" + schedule.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
+    btn.appendChild(btninner);
+    document.getElementById(container).appendChild(btn);
   });
 
 }
@@ -143,23 +148,18 @@ addStat = () => {
 
   //check what type of stat it is
   if (player === "" || type === "Choose Event" || type === ""){
-
     return false
   }
   else if (type === 'cornerkick' || type === 'shotongoal'){
-
     stat = player + " took a " + type
   }
   else if (type === 'yellowcard' || type === 'redcard') {
-
     stat = player + " received a " + type
   }
   else if (type === 'goal'){
-
     stat = player + " scored a " + type
   }
   else {
-
     stat = player + " made a " + type
   }
 
@@ -170,7 +170,6 @@ addStat = () => {
     window.location='addevent.html';
 
   });
-
 }
 
 function getOpTeamLogo(teamname){

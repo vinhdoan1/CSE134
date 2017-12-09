@@ -7,7 +7,8 @@ schedule.parseDateAndTime = parseDateAndTime;
 function parseDateAndTime(datestr, timestr){
   var datearry = datestr.split("-");
   var timearry = timestr.split(":");
-  return new Date(datearry[0], datearry[1], datearry[2], timearry[0], timearry[1], 0, 0);
+  console.log(datearry);
+  return new Date(datearry[0], datearry[1]-1, datearry[2], timearry[0], timearry[1], 0, 0);
 }
 
 function validateGameForm(form, action){
@@ -52,6 +53,37 @@ function validateGameForm(form, action){
   }
 }
 
+function updateUpcomingGame(){
+  var state = mainState.getState();
+  firestoreDB.getTeamGames(state.teamID).then(function(games){
+    if(!games){
+    }
+    else{
+      var values = []
+      games.forEach(function(game){
+        values.push({
+          id: game.id,
+          ...game.data()
+        });
+      });
+
+      values.sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
+      });
+
+      var j = 0;
+      while(!values[j].active){
+        j++;
+      }
+      if(values[j].active){
+        mainState.setState("upcomingGame", values[j].id);
+      } else{
+        mainState.setState("upcomingGame", "hello");
+      }
+    }
+  });
+}
+
 //update the game by calling firebase
 function updateGame(game, action){
   var state = mainState.getState();
@@ -74,6 +106,7 @@ function updateGame(game, action){
 
     });
   }
+  updateUpcomingGame();
 }
 
 function loadSchedulePage(){
@@ -90,21 +123,16 @@ function loadSchedule(){
   firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
-      // emptyschedule.style.display = 'block';
     }
     else{
-      // emptyschedule.style.display = 'none';
-
       var values = []
       //go through all games and get the data for displaying
       games.forEach(function(game){
         values.push({
-
           id: game.id,
           ...game.data()
         });
       });
-
 
       //sort the schedule of the game by date of occurance
       values.sort(function(a,b){
@@ -114,11 +142,14 @@ function loadSchedule(){
       //traverse the schedule objects and create a button for display
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
-          mainState.setState('gameID', values[i].id)
-          createGameButtonDetail(values[i]);
+          console.log(values[i]);
+          mainState.setState('gameID', values[i].id);
+          createGameButtonDetail(values[i], 'schedulecontainer');
+          // document.getElementById('schedulecontainer').appendChild(btn);
           gamesCount++;
         }
       }
+      // console.log(gamesCount);
       if(gamesCount == 0){
         emptyschedule.style.fontSize="1rem";
       }
