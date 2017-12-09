@@ -23,8 +23,10 @@ function copyTeamIDToClipboard(){
   document.body.appendChild(textArea);
   // var copyText = document.getElementById("teamidinvite");
   textArea.select();
-  document.execCommand("Copy");
-  console.log("copied");
+  var successful = document.execCommand('copy');
+  if(successful){
+    displayMessage("invitemsg", "confirm", "Team ID Copied!");
+  }
 }
 
 function updateTeam(){

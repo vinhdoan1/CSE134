@@ -83,32 +83,44 @@ var config = {
     });
   }
 
-  firestoreDB.getOpponent = function(teamID, opID){
+  firestoreDB.getOpponent = async function(teamID, opID){
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).get();
   }
 
-  firestoreDB.setOpponent = function(teamID, opID, opponent){
+  firestoreDB.getAllOpponents = async function(teamID){
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("opponents").get();
+  }
+
+  firestoreDB.setOpponent = async function(teamID, opID, opponent){
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
   }
 
-  // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
   // PLAYERS
-  firestoreDB.getTeamPlayers = function(teamID) {
+  firestoreDB.getTeamPlayers = async function(teamID) {
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("players").get();
   }
 
-  firestoreDB.getTeamPlayer = function(teamID, playerID) {
+  firestoreDB.getTeamPlayer = async function(teamID, playerID) {
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("players").doc(playerID).get();
   }
 
-  firestoreDB.addNewPlayer = function(teamID, player) {
+  firestoreDB.addNewPlayer = async function(teamID, player) {
+    var db = await getDB();
     return (db.collection("teams").doc(teamID).collection("players").add(player));
   }
 
-  firestoreDB.updatePlayer = function(teamID, playerID, player) {
+  firestoreDB.updatePlayer = async function(teamID, playerID, player) {
+    var db = await getDB();
     return (db.collection("teams").doc(teamID).collection("players").doc(playerID).update(player));
   }
+
+   // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
   var firedatabase = {}; // not necessary just to make it more obvious
   // firedatabase.generateID = generateID;
