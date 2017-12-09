@@ -77,7 +77,7 @@ function loadPlayerPage(players) {
     var playerDiv = playerButton.querySelector("img");
     playerDiv.alt = player.name;
     if (player.image == "") {
-      playerDiv.src = "images/anonymous.png"
+      playerDiv.src = "gs://cse134-bfd99.appspot.com/anonymous.png"
     } else {
       playerDiv.src = player.image;
     }
@@ -186,7 +186,7 @@ function populatePlayerDetails() {
     playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
     var playerImage = document.getElementById('playerImage');
     if (player.image == "") {
-      playerImage.src = "images/anonymous.png"
+      playerImage.src = "gs://cse134-bfd99.appspot.com/anonymous.png"
     } else {
       playerImage.src = player.image;
 

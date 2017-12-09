@@ -37,6 +37,11 @@ function addOpponent(opponent){
 
 function loadOpponents(){
   var teamID = mainState.getState().teamID;
+  if(mainState.getState().admin){
+    //show team management settings
+    document.getElementById('addopponentbutton').style.display = "inline";
+  }
+  
   firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
     var numOps = 0;
     snapshot.forEach(function(opponent) {
