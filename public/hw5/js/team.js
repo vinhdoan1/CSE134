@@ -21,7 +21,7 @@ function getUpcomingGame(){
     if(game.exists){
       var gameData = game.data();
       gameData.id = game.id;
-      if(gameData.active){
+      if(gameData.active && !gameData.complete){
         createGameButtonDetail(gameData, 'upcominggamecontainer');
       }
       else{
@@ -163,7 +163,7 @@ addStat = () => {
   let teamID = state.teamID
   let gameID = state.gameID
   let type = document.getElementById("selectStat").value
-  let player = document.getElementById("eventplayername").value
+  let player = document.getElementById("eventplayername").value;
 
   //check what type of stat it is
   if (player === "" || type === "Choose Event" || type === ""){
@@ -182,17 +182,16 @@ addStat = () => {
     stat = player + " made a " + type
   }
 
-  var playerObj = state.players[player];
-  playerObj[type] += 1;
-  if (!gameSet) {
-    gameSet = true;
-    playerObj.gamesPlayed += 1;
+  if(!player.includes("Opponent")){
+    var playerObj = state.players[player];
+    playerObj[type] += 1;
+    if (!gameSet) {
+      gameSet = true;
+      playerObj.gamesPlayed += 1;
+    }
+    firestoreDB.updatePlayer(teamID, playerObj.playerID, playerObj).then(function (){});
   }
-  firestoreDB.updatePlayer(teamID, playerObj.playerID, playerObj).then(function (){
-
-
-  })
-
+  
   //reset the add event form
   //document.getElementById('addeventform').reset();
 

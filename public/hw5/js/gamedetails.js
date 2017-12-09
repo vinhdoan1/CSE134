@@ -82,6 +82,10 @@ function loadGameDetails(){
       }
     });
 
+    var win = goals > goalsOp;
+    var lose = goals < goalsOp;
+    var draw = goals == goalsOp;
+
     //Storing the numeric stats
     firestoreDB.getTeamGame(teamID, gameID).then(function(game){
       var gameData = game.data();
@@ -93,6 +97,9 @@ function loadGameDetails(){
       gameData.shotsOnGoalOp = shotsOnGoalOp;
       gameData.cornerKicks = cornerKicksOp;
       gameData.penaltiesOp = penaltiesOp;
+      gameData.win = win;
+      gameData.lose = lose;
+      gameData.draw = draw;
       firestoreDB.setTeamGame(teamID,gameID,gameData);
     });
 
@@ -129,7 +136,7 @@ function loadOpponentImage(selectid, logoid){
 
   var logo = document.getElementById(logoid);
   logo.src = opponent.logo;
-  logo.style.height = "5 rem";
+  logo.style.height = "5rem";
 }
 
 var deleteState = 0; // for delete game confirmation
@@ -153,19 +160,19 @@ function deleteGame(){
         var goals = gameData.goals;
         var goalsOp = gameData.goalsOp;
         firestoreDB.getTeam(teamID).then(function(team){
-          if(goals > goalsOp){
+          var teamData = team.data();
+          if(!gameData.draw && gameData.win){
             firestoreDB.updateTeamWins(teamID, --teamData.wins);
           }
-          else if(goals < goalsOp){
+          else if(!gameData.draw && gameData.lose){
             firestoreDB.updateTeamLosses(teamID, --teamData.losses);
           }
-        }); 
+          gameData.active = false;
+          firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+            window.location = 'schedule.html';
+          });
+        });
       }
-
-      gameData.active = false;
-      firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
-        window.location = 'schedule.html';
-      });
     });
   }
 }
@@ -175,25 +182,24 @@ function markGameComplete(checkbox){
   var gameID = mainState.getState().gameID;
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
     var gameData = game.data();
-    var goals = gameData.goals;
-    var goalsOp = gameData.goalsOp;
     firestoreDB.getTeam(teamID).then(function(team){
       var teamData = team.data();
       if(checkbox.checked){
         firestoreDB.markGameComplete(teamID, gameID, true);
-        if(goals > goalsOp){
+        (gameData.draw + ", " + gameData.win + ", " + gameData.lose);
+        if(!gameData.draw && gameData.win){
           firestoreDB.updateTeamWins(teamID, ++teamData.wins);
         }
-        else if(goals < goalsOp){
+        else if(!gameData.draw && gameData.lose){
           firestoreDB.updateTeamLosses(teamID, ++teamData.losses);
         }
       }
       else{
         firestoreDB.markGameComplete(teamID, gameID, false);
-        if(goals > goalsOp){
+        if(!gameData.draw && gameData.win){
           firestoreDB.updateTeamWins(teamID, --teamData.wins);
         }
-        else if(goals < goalsOp){
+        else if(!gameData.draw && gameData.lose){
           firestoreDB.updateTeamLosses(teamID, --teamData.losses);
         }
       }
