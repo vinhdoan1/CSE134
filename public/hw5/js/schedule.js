@@ -12,17 +12,16 @@ function parseDateAndTime(datestr, timestr){
 function validateGameForm(form, action){
   var incomplete = false;
   var game = {
-    opponent: "",
+    opponent:"",
     location: "",
     date: "",
     time: "",
     stats: [],
     active: true
   }
-  game.opponent = form.elements['gameopponent'].value;
 
+  game.opponent = form.elements['gameopponent'].value;
   incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-  game.opponent = "Lions";
   game.location = form.elements['gamelocation'].value;
   incomplete = incomplete || game.location == "";
   game.date = form.elements['gamedate'].value;
