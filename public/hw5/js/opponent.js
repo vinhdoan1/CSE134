@@ -19,13 +19,16 @@ function validateAddOpponentForm(){
   }
   else{
     hideMessage("addopmsg");
-    addOpponent(opponent);
+    addOpponent(opponent).then(function(){
+      window.location='manageopponents.html';
+    });
+
   }
 }
 
 function addOpponent(opponent){
   var teamID = mainState.getState().teamID;
-  firestoreDB.addOpponent(teamID, opponent.name, opponent.logo);
+  return firestoreDB.addOpponent(teamID, opponent.name, opponent.logo);
 }
 
 function loadOpponents(){
@@ -116,9 +119,14 @@ function deleteOpponent(opponent){}
 function loadOpponentImage(selectid, logoid){
   // console.log('loadopponentimg');
   var op = document.getElementById(selectid);
-  var opname = op.value;
-  var imgsrc = getOpTeamLogo(opname)
-  var logo = document.getElementById(logoid);
-  logo.src = imgsrc;
-  logo.style.height = "5 rem";
+  var teamID = mainState.getState().teamID;
+  var opID = op.value;
+  firestoreDB.getOpponent(teamID, opID).then(function(opponent){
+    var imgsrc = opponent.data().logo;
+    var logo = document.getElementById(logoid);
+    logo.src = imgsrc;
+    logo.style.height = "5 rem";
+  });
+  // var imgsrc = getOpponentTeamLogo(mainState.getState().teamID, opID);
+  
 }
