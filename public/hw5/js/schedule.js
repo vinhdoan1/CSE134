@@ -80,7 +80,7 @@ function updateGame(game, action){
 
 function loadSchedule(){
   var state = mainState.getState();
-  var gamesList = firestoreDB.getTeamGames(state.teamID).then(function(games){
+  firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
       emptyschedule.style.display = 'block';
