@@ -37,3 +37,15 @@ function uploadLogo(imagefilenameid, teamlogoimgid) {
     // imageSet = true;
   }, true);
 }
+
+function getTeamLogo(teamID){
+  firestoreDB.getTeam(teamID).then(function(team){
+    return team.data().logo;
+  });
+}
+
+function getOpponentTeamLogo(teamID, opID){
+  firestoreDB.getOpponent(teamID, opID).then(function(opponent){
+    return opponent.data().logo;
+  });
+}

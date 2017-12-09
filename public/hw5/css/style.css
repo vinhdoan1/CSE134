@@ -228,7 +228,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
 
 .gameform .gameformbutton {
   width: 12rem;
-  margin: 1rem auto 1rem auto;
+  margin: 0.5rem auto 0.5rem auto;
 }
 
 .gameform select {
@@ -701,7 +701,7 @@ input[type="number"]
   font-size: 0rem;
 }
 
-.settingsmsg, .editteammsg, .addopmsg{
+.message{
   display: block;
   font-size: 0.8rem;
   transition: opacity 0.5s linear;
@@ -709,7 +709,7 @@ input[type="number"]
   opacity: 0;
 }
 
-#addopmsg{
+#addopmsg, #addgamemsg, #editgamemsg{
   margin-top: 0.5rem;
 }
 

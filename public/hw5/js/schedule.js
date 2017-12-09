@@ -29,12 +29,15 @@ function validateGameForm(form, action){
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
 
-  var error_msg = action == "add" ? document.getElementById('addgame_error') : document.getElementById('editgame_error');
+  var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
+  console.log(error_msg);
   if(incomplete){
-    error_msg.style.display = 'block';
+    displayMessage(error_msg, "error", "Please fill out all fields");
+    // error_msg.style.display = 'block';
   }
   else{
-    error_msg.style.display = 'none';
+    hideMessage(error_msg);
+    // error_msg.style.display = 'none';
     if(action == "add"){
       game.active = true;
     }
@@ -110,9 +113,17 @@ function loadSchedule(){
   }
 }
 
-
-// TODO: Not done yet as the opponent is not complete
 function populateOpponentSelect(selectcontainer){
+  var teamID = mainState.getState().teamID;
+  db.collection("teams").doc(teamID).collection("opponents").get().then(function(snapshot) {
+    snapshot.forEach(function(opponent) {
+      var opt = document.createElement("option");
+      opt.value = opponent.id;
+      opt.text = opponent.data().name;
+      document.getElementById(selectcontainer).appendChild(opt);
+    });
+  });
+
   var state = mainState.getState();
   var teamID = state.teamID;
   var opponentList =firedatabase.getOpponents(teamID);
@@ -139,7 +150,6 @@ function loadEditForm(){
 
   populateOpponentSelect('editgameopponent');
 
-
   var gameopponent = document.getElementById('editgameopponent');
   var gamelocation = document.getElementById('editgamelocation');
   var gamedate = document.getElementById('editgamedate');
@@ -153,9 +163,6 @@ function loadEditForm(){
     gametime.value = game.val().time;
   });
 
-
-
-  // TODO: This still needs to be done with opponent complete
   loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 
@@ -167,5 +174,3 @@ function setSelectedIndex(s, v) {
     }
   }
 }
-
-// MOVE THIS ELSEWHERE LATER
