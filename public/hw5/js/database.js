@@ -9,40 +9,74 @@ var config = {
   };
   firebase.initializeApp(config);
 
-  var db = firebase.firestore();
 
+  /*
+  Obtains reference to firestore database. On first call, it enables offline
+  persistence, and then gets firestore directly on other occasions.
+  */
+  async function getDB() {
+    if (sessionStorage.getItem('offline')) {
+      return firebase.firestore();
+    } else {
+      var db;
+      await firebase.firestore().enablePersistence()
+        .then(function() {
+            // Initialize Cloud Firestore through firebase
+            db = firebase.firestore();
+            sessionStorage.setItem('offline', true);
+        })
+        .catch(function(err) {
+            if (err.code == 'failed-precondition') {
+                // Multiple tabs open, persistence can only be enabled
+                // in one tab at a a time.
+                // ...
+            } else if (err.code == 'unimplemented') {
+                // The current browser does not support all of the
+                // features required to enable persistence
+                // ...
+            }
+        });
+      return db;
+    }
+  }
   var firestoreDB = {};
 
   // USERS
-  firestoreDB.addUser = function(userID, team, admin) {
+  firestoreDB.addUser = async function(userID, team, admin) {
+    var db = await getDB();
     return (db.collection("users").doc(userID).set({
       team: team,
       admin: admin,
     }))
   }
 
-  firestoreDB.getUser = function(userID) {
+  firestoreDB.getUser = async function(userID) {
+    var db = await getDB();
     return db.collection("users").doc(userID).get();
   }
 
   // TEAMS
-  firestoreDB.addTeam = function(name, logo) {
+  firestoreDB.addTeam = async function(name, logo) {
+    var db = await getDB();
     return (db.collection("teams").add({
       name: name,
       logo: logo,
     }));
   }
 
-  firestoreDB.getTeam = function(teamID) {
+  firestoreDB.getTeam = async function(teamID) {
+    var db = await getDB();
     return db.collection("teams").doc(teamID).get();
   }
 
-  firestoreDB.setTeam = function(teamID, teamData){
+  firestoreDB.setTeam = async function(teamID, teamData){
+    var db = await getDB();
     return db.collection("teams").doc(teamID).set(teamData);
   }
 
   // OPPONENTS
-  firestoreDB.addOpponent = function(teamID, opName, logo) {
+  firestoreDB.addOpponent = async function(teamID, opName, logo) {
+    var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").add({
       name: opName,
       logo: logo
