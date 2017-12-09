@@ -612,6 +612,8 @@ input[type="number"]
 
 .forminput{
   margin: 0.7rem auto 0 auto;
+  display: block;
+  width: 15rem;
 }
 
 .formbutton{
@@ -714,7 +716,7 @@ input[type="number"]
   opacity: 0;
 }
 
-#addopmsg, #addgamemsg, #editgamemsg{
+#addopmsg, #addgamemsg, #editgamemsg, #checkinvmsg, #signupinvmsg{
   margin-top: 0.5rem;
 }
 

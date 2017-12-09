@@ -29,8 +29,8 @@ function validateGameForm(form, action){
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
 
-
-  var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
+  var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
+  console.log(error_msg);
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
     //error_msg.style.display = 'block';
