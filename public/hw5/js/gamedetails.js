@@ -1,3 +1,12 @@
+function loadGameDetailsPage(){
+  //show admin functions
+  if(mainState.getState().admin){
+    document.getElementById('gamedetails_edit').style.display="block";
+    document.getElementById('gamedetails_delete').style.display="block";
+  }
+  populateGameDetails();
+}
+
 function populateGameDetails(){
   loadGameDetails();
   loadGameStats();

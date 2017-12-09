@@ -46,6 +46,15 @@ function createGameButtonDetail(game){
   return btn;
 }
 
+function loadAddEventPage(){
+  document.getElementById('emptyeventfeed').style.fontSize="0rem";
+  //show admin stuffs
+  if(mainState.getState().admin){
+    document.getElementById('addeventcontainer').style.display = 'block';
+  }
+  loadStats();
+}
+
 loadStats = () => {
   const state = mainState.getState()
   let teamID = state.teamID
@@ -64,6 +73,7 @@ loadStats = () => {
     });
   });
 
+  var numEvents = 0;
   firestoreDB.getStats(teamID,gameID).then(function(stats){
 
     stats.forEach(function(stat){
@@ -73,7 +83,14 @@ loadStats = () => {
       btn.setAttribute("class", "eventfeedbutton")
       btn.innerHTML = "<span>" + stat.data().stat + "</span>"
       divSection.appendChild(btn)
+      numEvents++;
     });
+    if(numEvents == 0){
+      document.getElementById('emptyeventfeed').style.fontSize="1rem";
+    }
+    else{
+      document.getElementById('emptyeventfeed').style.fontSize="0rem";
+    }
   });
 }
 

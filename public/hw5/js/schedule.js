@@ -31,7 +31,7 @@ function validateGameForm(form, action){
   incomplete = incomplete || game.time == "";
 
   var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
-  console.log(error_msg);
+  // console.log(error_msg);
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
     //error_msg.style.display = 'block';
@@ -77,24 +77,32 @@ function updateGame(game, action){
   }
 }
 
+function loadSchedulePage(){
+  if(mainState.getState().admin){
+    document.getElementById('addgamebutton').style.display = 'initial';
+  }
+  loadSchedule();
+}
+
 function loadSchedule(){
+  emptyschedule.style.fontSize="0rem";
   var state = mainState.getState();
+  var gamesCount= 0;
   firestoreDB.getTeamGames(state.teamID).then(function(games){
     var emptyschedule = document.getElementById('emptyschedule');
     if(!games){
-      emptyschedule.style.display = 'block';
+      // emptyschedule.style.display = 'block';
     }
     else{
-      emptyschedule.style.display = 'none';
+      // emptyschedule.style.display = 'none';
 
       var values = []
       games.forEach(function(game){
-
         values.push({
 
           id: game.id,
           ...game.data()
-        })
+        });
       });
 
 
@@ -107,7 +115,14 @@ function loadSchedule(){
           mainState.setState('gameID', values[i].id)
           let btn = createGameButtonDetail(values[i]);
           document.getElementById('schedulecontainer').appendChild(btn);
+          gamesCount++;
         }
+      }
+      if(gamesCount == 0){
+        emptyschedule.style.fontSize="1rem";
+      }
+      else{
+        emptyschedule.style.fontSize="0rem";
       }
     }
   });

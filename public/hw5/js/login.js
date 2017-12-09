@@ -68,6 +68,7 @@ function createTeam() {
         var teamKey = teamData.id;
         firestoreDB.addUser(user.uid, teamKey, true).then(function(userKey) {
           mainState.setState("teamID", teamKey);
+          mainState.setState("admin", true);
           window.location='team.html';
         });
       });
@@ -143,6 +144,7 @@ function signUpNonAdmin(){
             firebase.auth().createUserWithEmailAndPassword(email, pass1).then(function (user) {
               firestoreDB.addUser(user.uid, teamID, false).then(function(userKey) {
                   mainState.setState("teamID", teamID);
+                  mainState.setState("admin", false);
                   window.location='team.html';
               });
             });
