@@ -29,7 +29,7 @@ function validateGameForm(form, action){
   game.time = form.elements['gametime'].value;
   incomplete = incomplete || game.time == "";
 
-  var error_msg = (action == "add") ? "addgamemsg" : "editgamemsg";
+  var error_msg = (action == "add") ? 'addgamemsg' : 'editgamemsg';
   console.log(error_msg);
   if(incomplete){
     displayMessage(error_msg, "error", "Please fill out all fields");
@@ -115,7 +115,7 @@ function loadSchedule(){
 
 function populateOpponentSelect(selectcontainer){
   var teamID = mainState.getState().teamID;
-  db.collection("teams").doc(teamID).collection("opponents").get().then(function(snapshot) {
+  firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
     snapshot.forEach(function(opponent) {
       var opt = document.createElement("option");
       opt.value = opponent.id;
@@ -123,17 +123,6 @@ function populateOpponentSelect(selectcontainer){
       document.getElementById(selectcontainer).appendChild(opt);
     });
   });
-
-  var state = mainState.getState();
-  var teamID = state.teamID;
-  var opponentList =firedatabase.getOpponents(teamID);
-  for(var i = 0; i< opponentList.length; i++){
-    var opp = opponentList[i];
-    var opt = document.createElement("option");
-    opt.value = opp.name;
-    opt.text = opp.name;
-    document.getElementById(selectcontainer).appendChild(opt);
-  }
 }
 
 function loadAddForm(){
@@ -142,26 +131,26 @@ function loadAddForm(){
 
 //preload the edit form
 function loadEditForm(){
-  var state = mainState.getState();
-  var gameID = state.gameID;
-  var teamID = state.teamID;
-  var game = firedatabase.getTeamGame(teamID, gameID)
-  var games = Object.values(game)
+  // var state = mainState.getState();
+  // var gameID = state.gameID;
+  // var teamID = state.teamID;
+  // var game = firedatabase.getTeamGame(teamID, gameID)
+  // var games = Object.values(game)
 
   populateOpponentSelect('editgameopponent');
 
-  var gameopponent = document.getElementById('editgameopponent');
-  var gamelocation = document.getElementById('editgamelocation');
-  var gamedate = document.getElementById('editgamedate');
-  var gametime = document.getElementById('editgametime');
+  // var gameopponent = document.getElementById('editgameopponent');
+  // var gamelocation = document.getElementById('editgamelocation');
+  // var gamedate = document.getElementById('editgamedate');
+  // var gametime = document.getElementById('editgametime');
 
-  firedatabase.getTeamGame(teamID, gameID).then(function(game){
+  // firedatabase.getTeamGame(teamID, gameID).then(function(game){
 
-    setSelectedIndex(gameopponent, game.val().opponent);
-    gamelocation.value = game.val().location;
-    gamedate.value = game.val().date;
-    gametime.value = game.val().time;
-  });
+  //   setSelectedIndex(gameopponent, game.val().opponent);
+  //   gamelocation.value = game.val().location;
+  //   gamedate.value = game.val().date;
+  //   gametime.value = game.val().time;
+  // });
 
   loadOpponentImage('editgameopponent', 'editgameopimg')
 }

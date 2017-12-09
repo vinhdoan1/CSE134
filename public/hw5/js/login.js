@@ -57,7 +57,7 @@ function createTeam() {
   if(incomplete){
     signup_error.innerText = "Please fill out all fields."
   } else if (pass1 != pass2) {
-    signup_error.innerText = "Passwords do not match."
+    signup_error.innerText =  "Passwords do not match."
   }
   else{
     firebase.auth().createUserWithEmailAndPassword(email, pass1)
@@ -83,22 +83,18 @@ function createTeam() {
         signup_error.innerText = "Password not valid."
       }
     });
-    /*
-    if (api.userExists(username)){
-      addteam_error.style.display = 'none';
-      accountexists_error.display = 'block';
-      password_error.style.display = 'none';
+  }
 
-      break;
+  function signUpNonAdmin(){
+    var incomplete = false;
+    var teamForm = document.getElementById('signupform_inv');
+    var teamIDInv = document.getElementById('inviteinput');
+    var email = teamForm.elements['invemail'].value;
+    var pass1 = teamForm.elements['invpass1'].value;
+    var pass2 = teamForm.elements['invpass2'].value;
+    incomplete = name == "" || email == "" || pass1 == "" || pass2 == "";
+    if(incomplete){
+      displayMessage("signupinvmsg", "error", "Please fill out all fields");
     }
-    addteam_error.style.display = 'none';
-    accountexists_error.display = 'none';
-    password_error.style.display = 'none';
-    var userID = api.addUser(username, pass1, email);
-    api.addTeam(userID, name, picture);
-    mainState.setState("loggedIn", true);
-    mainState.setState("teamID", userID);
-    window.location='team.html';
-    */
   }
 }
