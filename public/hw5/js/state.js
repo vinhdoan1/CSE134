@@ -43,6 +43,5 @@ function goTo(wheredidyoucomefrom, wheredidyougo){
 
 function goBack(){
   var state = mainState.getState();
-  console.log(state.back);
   window.location = state.back;
 }

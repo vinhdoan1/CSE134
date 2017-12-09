@@ -1,3 +1,8 @@
+function loadEditOpponentPage(){
+  checkLoggedIn(); 
+  populateOpponentData();
+}
+
 function validateAddOpponentForm(){
   var incomplete = false;
   var opponent = {
@@ -7,7 +12,6 @@ function validateAddOpponentForm(){
   opponent.name = document.getElementById('opteaminput').value;
   incomplete = opponent.name == "";
 
-  //logo check later?
   var opLogo = document.getElementById('opponent_teamimg').src;
   if(opLogo != ""){
     opponent.logo = opLogo;
@@ -36,7 +40,6 @@ function loadOpponents(){
   firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
     var numOps = 0;
     snapshot.forEach(function(opponent) {
-        // console.log(opponent.id, " => ", opponent.data().name);
         var opListElement = createOpponentElement(opponent.id, opponent.data().name, opponent.data().logo);
         document.getElementById('opponentscontainer').appendChild(opListElement);
         numOps++;
@@ -57,7 +60,6 @@ function createOpponentElement(opID, opName, opLogo){
   var name = document.createElement('div');
   name.setAttribute("class", "opListName")
   name.innerHTML = opName;
-  // div.onclick = toEditOpponent(opID);
 
   div.appendChild(logo);
   div.appendChild(name);
@@ -112,11 +114,18 @@ function updateOpponent(){
   });
 }
 
-function deleteOpponent(opponent){}
+function deleteOpponent(){
+  var opID = mainState.getState().opID;
+  console.log(opID);
+  firestoreDB.deleteOpponent(opID).then(function(){
+    // window.location='manageopponents.html';
+  }).catch(function(error){
+    displayMessage("editopmsg", "error", "There was a problem trying to delete opponent");
+  });
+}
 
 //Loads opponent image for game details
 function loadOpponentImage(selectid, logoid){
-  // console.log('loadopponentimg');
   var op = document.getElementById(selectid);
   var teamID = mainState.getState().teamID;
   var opID = op.value;
@@ -126,6 +135,4 @@ function loadOpponentImage(selectid, logoid){
     logo.src = imgsrc;
     logo.style.height = "5 rem";
   });
-  // var imgsrc = getOpponentTeamLogo(mainState.getState().teamID, opID);
-  
 }

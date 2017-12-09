@@ -7,7 +7,6 @@ schedule.parseDateAndTime = parseDateAndTime;
 function parseDateAndTime(datestr, timestr){
   var datearry = datestr.split("-");
   var timearry = timestr.split(":");
-  // console.log(datearry);
   return new Date(datearry[0], datearry[1]-1, datearry[2], timearry[0], timearry[1], 0, 0);
 }
 
@@ -142,14 +141,11 @@ function loadSchedule(){
       //traverse the schedule objects and create a button for display
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
-          console.log(values[i]);
           mainState.setState('gameID', values[i].id);
           createGameButtonDetail(values[i], 'schedulecontainer');
-          // document.getElementById('schedulecontainer').appendChild(btn);
           gamesCount++;
         }
       }
-      // console.log(gamesCount);
       if(gamesCount == 0){
         emptyschedule.style.fontSize="1rem";
       }

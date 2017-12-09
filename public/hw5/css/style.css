@@ -27,7 +27,7 @@ ul{
 
 h1, h2, logo{
   font-family: 'Roboto Slab', serif;
-  margin: 0 0 0 0.5rem;
+  margin: 0 ;
 }
 
 h3{
@@ -106,12 +106,11 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   margin: 0.5rem auto;
 }
 
-#gamedetails_delete{
+#gamedetails_delete, #deleteopponentbtn{
   background-color: #b72027;
 }
 
-
-#gamedetails_delete:hover {
+#gamedetails_delete:hover, #deleteopponentbtn:hover{
   background-color: #771c1a;
 }
 
@@ -215,9 +214,19 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   display: none;
 }
 
+#addeventbttn:disabled{
+  color: rgb(84, 84, 84);
+  background-color: lightgrey;
+}
+
+#disabledaddeventmsg{
+  font-size: 0rem;
+  text-align: center;
+}
+
 #emptyschedule, #emptyeventfeed, #upcominggame_empty{
   color: grey;
-  margin-top: 0.7rem;
+  margin-top: 1rem;
   font-size: 0rem;
   margin: auto;
 }
@@ -231,7 +240,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   overflow-y: auto;
   max-height: 28rem;
 }
-
 
 .error-text {
   color: red;
@@ -467,14 +475,16 @@ header #logoutheadertext {
   width: 1.8rem;
 }
 
+
 #playersort select {
     display: block;
     border: 1px solid #ccc;
     width: 18rem;
     height: 2rem;
     border-radius: 5px;
-    margin: auto auto 0 auto;
+    margin: 1rem auto 0 auto;
 }
+
 
 .playerbutton {
   text-align: left;
@@ -517,7 +527,7 @@ header #logoutheadertext {
 
 .playerdetails {
   list-style-type: none;
-  width: 18rem;
+  width: 15rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -531,17 +541,18 @@ header #logoutheadertext {
 
 .playerform input{
   display: block;
-  width: 18rem;
+  width: 15rem;
   height: 2rem;
   border-radius: 5px;
-  margin-top: .5rem;
+  /* margin-top: .5rem; */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 0.5rem auto;
 }
 
 .playerform .addplayerbutton {
-  width: 12rem;
+  width: 15rem;
   margin: 1rem auto 1rem auto;
 }
 
@@ -551,9 +562,10 @@ header #logoutheadertext {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: .5rem;
+  width: 15rem;
 }
 
-#deletePlayer {
+#deletePlayer{
   background-color: #b72027;
 }
 
@@ -583,7 +595,7 @@ body{
 
 h1, h2, logo{
   font-family: 'Roboto Slab', serif;
-  margin: 0 0 0 0.5rem;
+  margin: 0;
   text-align: center;
 }
 

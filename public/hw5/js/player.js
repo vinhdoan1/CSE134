@@ -34,6 +34,11 @@ function refreshPlayers(fromSort) {
 // load players and display to screen
 function loadPlayers(fromSort) {
   var state = mainState.getState();
+  //setadmin
+  if(state.admin){
+    document.getElementById('addplayerbutton').style.display="initial";
+  }
+
   if (fromSort) {
     loadPlayerPage(state.players);
     return;
@@ -150,6 +155,11 @@ function validatePlayerForm() {
 
 function populatePlayerDetails() {
   var state = mainState.getState();
+  if(state.admin){
+    document.getElementById('editPlayer').style.visibility = "visible";
+    document.getElementById('deletePlayer').style.visibility = "visible";
+  }
+  
   firestoreDB.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
     var player = playerData.data();
     var playerName = document.getElementById('playerName');
