@@ -20,11 +20,12 @@ var enablePersistenceOn = false;
       return firebase.firestore();
     } else {
       var db;
+      enablePersistenceOn = true;
       await firebase.firestore().enablePersistence()
         .then(function() {
             // Initialize Cloud Firestore through firebase
             db = firebase.firestore();
-            enablePersistenceOn = true;
+
         })
         .catch(function(err) {
             if (err.code == 'failed-precondition') {
