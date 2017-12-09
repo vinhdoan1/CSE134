@@ -193,7 +193,7 @@ function deletePlayer() {
     var state = mainState.getState();
     var player = state.player;
     player.deleted = true;
-    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
+    firestoreDB.updatePlayer(state.teamID, state.playerID, player).then(function() {
       window.location='players.html';
     });
   }
