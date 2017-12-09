@@ -13,12 +13,11 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/database.js"></script>
-  <script src="./js/api.js"></script>
   <script src="./js/state.js"></script>
   <script src="./js/image.js"></script>
   <script src="js/settings.js"></script>
 </head>
-<body onload="populateUserInformation()">
+<body onload="loadSettingsPage()">
   <header>
     <p class="headertext" id="backheadertext" onclick="window.location='team.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -44,7 +43,7 @@
       <input type="button" class="settingsbutton" value="Change Password" onclick="updatePassword()"/>
       <div class="message" id="settingsmsg_newpassword"> </div>
     </div>
-    <div id="teammanagementsettings" class="settingsdiv">
+    <div id="teammanagementsettings" class="settingsdiv" style="display: none;">
       <h3>Team Management Settings</h3>
       <input type="button" class="settingsbutton" value="Edit Team Information" onclick="window.location='editteam.html';"/>
       <input type="button" class="settingsbutton" value="Manage Opponents List" onclick="window.location='manageopponents.html';"/>

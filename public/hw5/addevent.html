@@ -16,7 +16,7 @@
   <script src="./js/team.js"></script>
   <script src="./js/state.js"></script>
 </head>
-<body onload=loadStats()>
+<body onload=loadAddEventPage()>
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='gamedetails.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -26,6 +26,7 @@
     <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
   </header>
   <div class="outercontainer">
+    <div id="addeventcontainer" style="display:none">
       <h2>Add Event</h2>
       <form id="addeventform" name="addeventform">
           <select id="selectStat" name="eventdetail" class="addeventformfield" required>
@@ -43,10 +44,13 @@
           <input type="button" class="addeventbutton" value="Add Event" onclick=addStat()>
       </form>
       <hr />
+    </div>
+    <div id="eventfeedcontainer">
       <h2>Event Feed</h2>
+      <p id="emptyeventfeed">There are no events to show</p>
       <div id="dynamicevents">
-
       </div>
+    </div>
   </div>
   <script src="./js/serviceworker.js"></script>
 </body>

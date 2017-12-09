@@ -86,6 +86,7 @@ var enablePersistenceOn = false;
   }
 
   firestoreDB.getOpponent = async function(teamID, opID){
+
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).get();
   }

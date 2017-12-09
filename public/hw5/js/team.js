@@ -2,7 +2,6 @@ function loadDashboard(){
   var state = mainState.getState();
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
-    //getUpcomingGame(); commented out for now
     document.getElementById("h1").innerHTML = team.name;
     document.getElementById("wins").innerHTML += "5";
     document.getElementById("loss").innerHTML += "0";
@@ -32,18 +31,33 @@ function funToGameDetails(gameID){
 }
 
 function createGameButtonDetail(game){
-  var date = parseDateAndTime(game.date, game.time);
-  var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
-  var ampm = date.getHours() >= 12 ? "PM" : "AM";
-  let btn = document.createElement("button");
-  btn.setAttribute("type", "button");
-  btn.setAttribute("class", "gamebutton");
-  // btn.setAttribute("onclick", "window.location='gamedetails.html';");
-  btn.onclick = funToGameDetails(game.id);
-  btn.innerHTML = "<p class='gamebuttondetail'>" +
-  date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
-  + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
-  return btn;
+
+  let state = mainState.getState();
+  teamID = state.teamID;
+  let opponent = firestoreDB.getOpponent(teamID, game.opponent).then(function(opp){
+
+    var date = parseDateAndTime(game.date, game.time);
+    var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
+    var ampm = date.getHours() >= 12 ? "PM" : "AM";
+    let btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.setAttribute("class", "gamebutton");
+    btn.onclick = funToGameDetails(game.id);
+    btn.innerHTML = "<p class='gamebuttondetail'>" +
+    date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
+    + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + opp.data().name + "</p>";
+    document.getElementById('schedulecontainer').appendChild(btn);
+  });
+
+}
+
+function loadAddEventPage(){
+  document.getElementById('emptyeventfeed').style.fontSize="0rem";
+  //show admin stuffs
+  if(mainState.getState().admin){
+    document.getElementById('addeventcontainer').style.display = 'block';
+  }
+  loadStats();
 }
 
 loadStats = () => {
@@ -64,6 +78,7 @@ loadStats = () => {
     });
   });
 
+  var numEvents = 0;
   firestoreDB.getStats(teamID,gameID).then(function(stats){
 
     stats.forEach(function(stat){
@@ -73,7 +88,14 @@ loadStats = () => {
       btn.setAttribute("class", "eventfeedbutton")
       btn.innerHTML = "<span>" + stat.data().stat + "</span>"
       divSection.appendChild(btn)
+      numEvents++;
     });
+    if(numEvents == 0){
+      document.getElementById('emptyeventfeed').style.fontSize="1rem";
+    }
+    else{
+      document.getElementById('emptyeventfeed').style.fontSize="0rem";
+    }
   });
 }
 

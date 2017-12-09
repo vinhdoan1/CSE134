@@ -18,7 +18,7 @@
   <script src="./js/team.js"></script>
   <script src="./js/gamedetails.js"></script>
 </head>
-<body onload="populateGameDetails()">
+<body onload="loadGameDetailsPage()">
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='schedule.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -82,8 +82,8 @@
 
       <div id="gamedetails_options">
         <input type="button" id="gamedetails_collectstats" class="gamedetailbutton" value="View Event Feed" onclick="window.location='addevent.html';"/>
-        <input type="button" id="gamedetails_edit" class="gamedetailbutton" value="Edit Game Details" onclick="window.location = 'editgame.html';"/>
-        <input type="button" id="gamedetails_delete" class="gamedetailbutton" value="Delete Game" onclick="deleteGame()"/>
+        <input type="button" id="gamedetails_edit" class="gamedetailbutton" value="Edit Game Details" onclick="window.location = 'editgame.html';" style="display:none;"/>
+        <input type="button" id="gamedetails_delete" class="gamedetailbutton" value="Delete Game" onclick="deleteGame()" style="display:none;"/>
       </div>
   </div>
   <script src="./js/serviceworker.js"></script>

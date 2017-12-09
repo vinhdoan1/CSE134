@@ -1,3 +1,11 @@
+function loadSettingsPage(){
+  if(mainState.getState().admin){
+    //show team management settings
+    document.getElementById('teammanagementsettings').style.display = "block";
+  }
+  populateUserInformation();
+}
+
 function populateTeamInformation(){
   var teamID = mainState.getState().teamID;
   firestoreDB.getTeam(teamID).then(function(team){
