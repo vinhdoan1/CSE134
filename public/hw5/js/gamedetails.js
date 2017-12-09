@@ -49,16 +49,33 @@ function loadGameDetails(){
     var shotsOnGoal = 0;
     var cornerKicks = 0;
     var penalties = 0;
+    var goalsOp = 0;
+    var shotsOnGoalOp = 0;
+    var cornerKicksOp = 0;
+    var penaltiesOp = 0;
+
     statsData.forEach(function(doc) {
       var stat = doc.data()['stat'];
-      if (stat.includes("goal"))
-        goals++;
-      else if (stat.includes("shotongoal"))
-        shotsOnGoal++;
-      else if (stat.includes("cornerkick"))
-        cornerKicks++;
-      else if (stat.includes("penalties"))
-        penalties++;
+      if (stat.includes("Opponent ")) {
+
+        if (stat.includes("shotongoal"))
+          shotsOnGoalOp++;
+        else if (stat.includes("cornerkick"))
+          cornerKicksOp++;
+        else if (stat.includes("penalties"))
+          penaltiesOp++;
+        else if (stat.includes("goal"))
+          goalsOp++;
+      } else {
+        if (stat.includes("shotongoal"))
+          shotsOnGoal++;
+        else if (stat.includes("goal"))
+          goals++;
+        else if (stat.includes("cornerkick"))
+          cornerKicks++;
+        else if (stat.includes("penalties"))
+          penalties++;
+      }
     });
     var gamesdetails_goals = document.getElementById('gamesdetails_goals');
     gamesdetails_goals.innerHTML = goals;
@@ -68,6 +85,16 @@ function loadGameDetails(){
     gamesdetails_cornerkicks.innerHTML = cornerKicks;
     var gamesdetails_penalties = document.getElementById('gamesdetails_penalties');
     gamesdetails_penalties.innerHTML = penalties;
+
+    var gamesdetails_goalsop = document.getElementById('gamesdetails_goalsop');
+    gamesdetails_goalsop.innerHTML = goalsOp;
+    var gamesdetails_shotsongoalsop = document.getElementById('gamesdetails_shotsongoalsop');
+    gamesdetails_shotsongoalsop.innerHTML = shotsOnGoalOp;
+    var gamesdetails_cornerkicksop = document.getElementById('gamesdetails_cornerkicksop');
+    gamesdetails_cornerkicksop.innerHTML = cornerKicksOp;
+    var gamesdetails_penaltiesop = document.getElementById('gamesdetails_penaltiesop');
+    gamesdetails_penaltiesop.innerHTML = penaltiesOp;
+
   });
 }
 
