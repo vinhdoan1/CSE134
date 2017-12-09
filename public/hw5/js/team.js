@@ -96,6 +96,16 @@ loadStats = () => {
     });
   });
 
+  firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+
+    firestoreDB.getOpponent(teamID, game.data().opponent).then(function(opp){
+
+      var option = document.createElement("option");
+      option.value = "Opponent " + opp.data().name;
+      datalist.appendChild(option)
+    });
+  });
+
   var numEvents = 0;
 
   //get the stats from the db to be displayed as a button on the page
