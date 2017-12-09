@@ -41,8 +41,9 @@
           <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames" required>
           <datalist id="playernames">
           </datalist>
-          <input type="button" class="addeventbutton" value="Add Event" onclick=addStat()>
-      </form>
+          <input type="button" class="addeventbutton" id="addeventbttn" value="Add Event" onclick=addStat()>
+          <p id="disabledaddeventmsg">Event adding disabled -- game already marked complete.</p>
+        </form>
       <hr />
     </div>
     <div id="eventfeedcontainer">

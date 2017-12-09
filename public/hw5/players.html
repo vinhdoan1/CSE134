@@ -27,7 +27,7 @@
   </header>
   <div class="outercontainer">
       <h2>Players</h2>
-      <button type="button" id="addplayerbutton" onclick="window.location='addplayer.html';">+</button>
+      <button type="button" id="addplayerbutton" onclick="window.location='addplayer.html';" style="display:none;">+</button>
       <form id="playersort" name="playersort" onchange="sortSelect()">
           <select name="playersortselect" id="playersortselect">
             <option selected disabled="disabled">Sort by...</option>
@@ -36,10 +36,8 @@
             <option value="shotongoal">Number</option>
           </select>
       </form>
-
       <output id="playerButtons">
       </output>
-
       <template id="playerButtonTemplate">
         <div role="button" class="playerbutton">
             <img class="playerbuttonimg" src="images/jeffface.jpg" alt=""></img>

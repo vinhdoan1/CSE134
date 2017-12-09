@@ -9,8 +9,8 @@ function loadDashboard(){
     document.getElementById("h1").innerHTML = team.name;
     document.getElementById("wins").innerHTML += team.wins;
     document.getElementById("loss").innerHTML += team.losses;
-    document.getElementById("goalsfor").innerHTML += "14";
-    document.getElementById("goalsagainst").innerHTML += "4";
+    // document.getElementById("goalsfor").innerHTML += "14";
+    // document.getElementById("goalsagainst").innerHTML += "4";
     document.getElementById("teamimglogo").src = team.logo;
   });
   getUpcomingGame();
@@ -76,11 +76,30 @@ function createGameButtonDetail(game, container){
 
 //load the add event page
 function loadAddEventPage(){
+  var teamID = mainState.getState().teamID;
+  var gameID = mainState.getState().gameID;
   document.getElementById('emptyeventfeed').style.fontSize="0rem";
   //show admin stuffs
   if(mainState.getState().admin){
     document.getElementById('addeventcontainer').style.display = 'block';
   }
+
+  firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+    if(game.data().complete){
+      // console.log(game.data().complete);
+      document.getElementById('addeventbttn').disabled = true;
+      document.getElementById('selectStat').disabled = true;
+      document.getElementById('playernames').disabled = true;
+      document.getElementById('disabledaddeventmsg').style.fontSize = "0.8rem";
+    }
+    else{
+      document.getElementById('addeventbttn').disabled = false;
+      document.getElementById('selectStat').disabled = false;
+      document.getElementById('playernames').disabled = false;
+      document.getElementById('disabledaddeventmsg').style.fontSize = "0rem";
+    }
+  });
+
   loadStats();
 }
 
