@@ -121,9 +121,10 @@ function updateOpponent(){
 
 function deleteOpponent(){
   var opID = mainState.getState().opID;
+  var teamID = mainState.getState().teamID;
   console.log(opID);
-  firestoreDB.deleteOpponent(opID).then(function(){
-    // window.location='manageopponents.html';
+  firestoreDB.deleteOpponent(teamID,opID).then(function(){
+    window.location='manageopponents.html';
   }).catch(function(error){
     displayMessage("editopmsg", "error", "There was a problem trying to delete opponent");
   });

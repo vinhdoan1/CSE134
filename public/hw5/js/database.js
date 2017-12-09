@@ -91,7 +91,6 @@ var enablePersistenceOn = false;
   }
 
  
-
   // OPPONENTS
   firestoreDB.addOpponent = async function(teamID, opName, logo) {
     var db = await getDB();
@@ -116,11 +115,14 @@ var enablePersistenceOn = false;
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
   }
 
-  firestoreDB.deleteOpponent = async function(opID){
+  firestoreDB.deleteOpponent = async function(teamID, opID){
     var db = await getDB();
-    console.log("deleted");
-    
-    return db.collection("opponents").doc(opID).delete();
+    return db.collection("teams").doc(teamID).collection("opponents").doc(opID).delete();
+  }
+
+  firestoreDB.setInactive = async function(opID){
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set({active: false},{merge: true});
   }
 
   //STATS 

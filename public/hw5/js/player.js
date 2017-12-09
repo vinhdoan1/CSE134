@@ -77,7 +77,7 @@ function loadPlayerPage(players) {
     var playerDiv = playerButton.querySelector("img");
     playerDiv.alt = player.name;
     if (player.image == "") {
-      playerDiv.src = "gs://cse134-bfd99.appspot.com/anonymous.png"
+      playerDiv.src = "https://firebasestorage.googleapis.com/v0/b/cse134-bfd99.appspot.com/o/anonymous.png?alt=media&token=ca24586f-2e60-425d-9cc7-6ed2c7276c4c"
     } else {
       playerDiv.src = player.image;
     }
@@ -186,7 +186,7 @@ function populatePlayerDetails() {
     playerGamesPlayed.innerText = "Games Played: " + player.gamesPlayed;
     var playerImage = document.getElementById('playerImage');
     if (player.image == "") {
-      playerImage.src = "gs://cse134-bfd99.appspot.com/anonymous.png"
+      playerImage.src = "https://firebasestorage.googleapis.com/v0/b/cse134-bfd99.appspot.com/o/anonymous.png?alt=media&token=ca24586f-2e60-425d-9cc7-6ed2c7276c4c"
     } else {
       playerImage.src = player.image;
 
