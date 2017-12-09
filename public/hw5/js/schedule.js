@@ -49,11 +49,8 @@ function validateGameForm(form, action){
 function updateGame(game, action){
   var state = mainState.getState();
   var teamID = state.teamID;
+  var gameID = state.gameID
 
-  var gamesList = firedatabase.getTeamGames(teamID);
-  if(gamesList == null){
-    gamesList = {};
-  }
 
   //var exists = gamesList.gameID
   var exists = false
@@ -64,29 +61,18 @@ function updateGame(game, action){
   else{
     var returnTo="";
     if(action == "edit"){
+
+      console.log("Here" + Object.values(game))
       firedatabase.updateGame(teamID, gameID, game);
-      gamesList = firedatabase.getTeamGames(teamID);
       returnTo = 'gamedetails.html';
     }
     else if(action == "add"){
       firedatabase.addNewGame(teamID, game)
       returnTo = 'schedule.html';
     }
-    // TODO: sort the gamesList
-    //gamesList.sort(function(a,b){
-      //return new Date(a.date) - new Date(b.date);
-    //});
-    //api.setTeamGames(state.teamID, gamesList);
     window.location= returnTo;
   }
 }
-
-//for debugging purposes
-//function clearSchedule(){
-  //var state = mainState.getState();
-  //api.setTeamGames(state.teamID, new Array());
-  //location.reload();
-//}
 
 function loadSchedule(){
   var state = mainState.getState();
@@ -124,6 +110,8 @@ function loadSchedule(){
   }
 }
 
+
+// TODO: Not done yet as the opponent is not complete
 function populateOpponentSelect(selectcontainer){
   var state = mainState.getState();
   var teamID = state.teamID;
@@ -144,9 +132,10 @@ function loadAddForm(){
 //preload the edit form
 function loadEditForm(){
   var state = mainState.getState();
-  //var gameID = state.gameID;
+  var gameID = state.gameID;
   var teamID = state.teamID;
-  var game = firedatabase.getTeamGame(teamID, gameID);
+  var game = firedatabase.getTeamGame(teamID, gameID)
+  var games = Object.values(game)
 
   populateOpponentSelect('editgameopponent');
 
@@ -156,11 +145,17 @@ function loadEditForm(){
   var gamedate = document.getElementById('editgamedate');
   var gametime = document.getElementById('editgametime');
 
-  setSelectedIndex(gameopponent, game.opponent);
-  gamelocation.value = game.location;
-  gamedate.value = game.date;
-  gametime.value = game.time;
+  firedatabase.getTeamGame(teamID, gameID).then(function(game){
 
+    setSelectedIndex(gameopponent, game.val().opponent);
+    gamelocation.value = game.val().location;
+    gamedate.value = game.val().date;
+    gametime.value = game.val().time;
+  });
+
+
+
+  // TODO: This still needs to be done with opponent complete
   loadOpponentImage('editgameopponent', 'editgameopimg')
 }
 

@@ -41,7 +41,9 @@ function createGameButtonDetail(game){
   btn.setAttribute("class", "gamebutton");
   // btn.setAttribute("onclick", "window.location='gamedetails.html';");
   btn.onclick = funcToGameDetails(game.id);
-  btn.innerHTML = "<p class='gamebuttondetail'>" + schedule.months[date.getMonth()-1] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
+  btn.innerHTML = "<p class='gamebuttondetail'>" +
+  date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
+  + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " - Pigs vs. " + game.opponent + "</p>";
   return btn;
 }
 
