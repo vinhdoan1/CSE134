@@ -128,12 +128,13 @@ function deleteGame(){
     var state = mainState.getState();
     var teamID = state.teamID;
     var gameID = state.gameID;
-    var currGame = getTeamGame(teamID, gameID);
-    var games = api.getTeamGames(teamID);
-    currGame.active = false;
-    api.setTeamGame(teamID, gameID, currGame);
-    window.location = 'schedule.html';
-    console.log("DELETED")
+    firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+      var gameData = game.data();
+      gameData.active = false;
+      firestoreDB.setTeamGame(teamID, gameID, gameData).then(function(){
+        window.location = 'schedule.html';
+      });
+    });
   }
 
 }
