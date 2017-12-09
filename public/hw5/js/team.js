@@ -39,7 +39,7 @@ function createGameButtonDetail(game){
   let btn = document.createElement("button");
   btn.setAttribute("type", "button");
   btn.setAttribute("class", "gamebutton");
-  btn.setAttribute("onclick", "window.location='gamedetails.html';");
+  // btn.setAttribute("onclick", "window.location='gamedetails.html';");
   btn.onclick = funcToGameDetails(game.id);
   btn.innerHTML = "<p class='gamebuttondetail'>" +
   date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]

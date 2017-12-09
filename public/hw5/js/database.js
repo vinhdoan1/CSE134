@@ -37,6 +37,20 @@ var config = {
     return db.collection("teams").doc(teamID).get();
   }
 
+  firestoreDB.setTeam = function(teamID, teamData){
+    return db.collection("teams").doc(teamID).set(teamData);
+  }
+
+  // OPPONENTS
+  firestoreDB.addOpponent = function(teamID, opName, logo) {
+    return db.collection("teams").doc(teamID).collection("opponents").add({
+      name: opName,
+      logo: logo
+    });
+  }
+
+  // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
+
   // PLAYERS
   firestoreDB.getTeamPlayers = function(teamID) {
     return db.collection("teams").doc(teamID).collection("players").get();
@@ -55,7 +69,7 @@ var config = {
   }
 
   var firedatabase = {}; // not necessary just to make it more obvious
-  firedatabase.generateID = generateID;
+  // firedatabase.generateID = generateID;
   firedatabase.getUsers = getUsers;
   firedatabase.addUser = addUser;
   firedatabase.getUser = getUser;
@@ -83,10 +97,6 @@ var config = {
   // firedatabase.getStats = getStats
   firedatabase.addNewPlayer = addNewPlayer;
   firedatabase.updatePlayer = updatePlayer;
-
-  function generateID() {
-    return Date.now().toString(36);
-  }
 
   // USERS
   function saveUsers(users) {

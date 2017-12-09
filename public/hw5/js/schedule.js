@@ -80,7 +80,6 @@ function loadSchedule(){
     return games.val()
   });
 
-
   var emptyschedule = document.getElementById('emptyschedule');
   if(gamesList.length === null){
     emptyschedule.style.display = 'block';

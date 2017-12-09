@@ -1,13 +1,4 @@
-function goToAddOpponent(back){
-  localStorage.setItem("back", back);
-  window.location = 'addopponent.html';
-}
-
-function goBack(){
-  window.location = localStorage.getItem("back");
-}
-
-function validateOppForm(){
+function validateAddOpponentForm(){
   var incomplete = false;
   var opponent = {
     name: "",
@@ -15,57 +6,84 @@ function validateOppForm(){
   }
   opponent.name = document.getElementById('opteaminput').value;
   incomplete = opponent.name == "";
-  //logo check later? 
+
+  //logo check later?
+  var opLogo = document.getElementById('opponent_teamimg').src;
+  if(opLogo != ""){
+    opponent.logo = opLogo;
+  }
 
   var error_msg = document.getElementById('addop_error');
   if(incomplete){
-    error_msg.style.display = 'block';
+    displayMessage("addopmsg", "error", "Please fill out a team name");
   }
   else{
-    error_msg.style.display = 'none';
+    hideMessage("addopmsg");
     addOpponent(opponent);
   }
 }
 
 function addOpponent(opponent){
-  var state = mainState.getState();
-  var teamID = state.teamID;
-  var opponentList = api.getOpponents(teamID);
-  var duplicate_msg = document.getElementById('addop_duplicate');
+  var teamID = mainState.getState().teamID;
+  firestoreDB.addOpponent(teamID, opponent.name, opponent.logo);
+  // var state = mainState.getState();
+  // var teamID = state.teamID;
+  // var opponentList = api.getOpponents(teamID);
+  // var duplicate_msg = document.getElementById('addop_duplicate');
   
-  var exists = opponentList.some(function(other){
-    return other.name == opponent.name;
-  });
-  if(exists){
-    duplicate_msg.style.display = 'block';
-  }
-  else{
-    duplicate_msg.style.display = 'none';
+  // var exists = opponentList.some(function(other){
+  //   return other.name == opponent.name;
+  // });
+  // if(exists){
+  //   duplicate_msg.style.display = 'block';
+  // }
+  // else{
+  //   duplicate_msg.style.display = 'none';
 
-    var logo = document.getElementById('oplogoimg');
-    if(logo.src != ""){
-      opponent.logo = logo.src;
-    }
-
-    opponentList.push(opponent);
-    api.setOpponents(teamID, opponentList);
-    window.location = localStorage.getItem("back");
-  }
+  //   var logo = document.getElementById('oplogoimg');
+  //   if(logo.src != ""){
+  //     opponent.logo = logo.src;
+  //   }
+  //   opponentList.push(opponent);
+  //   api.setOpponents(teamID, opponentList);
+  //   window.location = localStorage.getItem("back");
+  // }
 }
 
-// function uploadOpLogo() {
-//   var logoForm = document.getElementById('oplogoupload');
-//   if (logoForm.files.length <= 0) {
-//     return;
-//   }
-//   image.readImageAndResize(logoForm.files[0], 300, function(result) {
-//     var oplogo = document.getElementById('oplogoimg');
-//     oplogo.style.visibility = "visible";
-//     oplogo.src = result;
-//     imageSet = true;
-//   }, true);
-// }
+function loadOpponents(){
+  var teamID = mainState.getState().teamID;
+  db.collection("teams").doc(teamID).collection("opponents").get().then(function(snapshot) {
+    var numOps = 0;
+    snapshot.forEach(function(opponent) {
+        console.log(opponent.id, " => ", opponent.data().name);
+        var opListElement = createOpponentElement(opponent.data().name, opponent.data().logo);
+        document.getElementById('opponentscontainer').appendChild(opListElement);
+        numOps++;
+    });
+    if(numOps == 0){
+      document.getElementById('emptyopponents').style.fontSize = "1rem";
+    }
+  });
+}
 
+function createOpponentElement(opName, opLogo){
+  var div = document.createElement("div");
+  div.setAttribute("class", "opListElement");
+  var logo = document.createElement('img');
+  logo.setAttribute("src", opLogo);
+  logo.setAttribute("class", "opListImg");
+  var name = document.createElement('div');
+  name.setAttribute("class", "opListName")
+  name.innerHTML = opName;
+  // btn.onclick =;
+  div.appendChild(logo);
+  div.appendChild(name);
+  return div;
+}
+
+function deleteOpponent(opponent){}
+
+//Loads opponent image for game details
 function loadOpponentImage(selectid, logoid){
   // console.log('loadopponentimg');
   var op = document.getElementById(selectid);

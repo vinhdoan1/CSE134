@@ -13,14 +13,14 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/database.js"></script>
-  <script src="./js/opponent.js"></script>
-  <script src="./js/image.js"></script>
+  <script src="./js/schedule.js"></script>
+  <script src="./js/team.js"></script>
   <script src="./js/state.js"></script>
-  <script src="js/settings.js"></script>
+  <script src="js/opponent.js"></script>
 </head>
-<body>
+<body onload="loadOpponents()">
   <header>
-      <p class="headertext" id="backheadertext" onclick="goBack();">&lt; Back</p>
+      <p class="headertext" id="backheadertext" onclick="window.location='settings.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
       <img id="logoheaderimg" src="images/soccerball.png" alt="TeamWatch Logo">
       <p id="logoheadertext">TeamWatch</p>
@@ -28,19 +28,11 @@
     <p class="headertext" id="logoutheadertext" onclick="logout()">Logout</p>
   </header>
   <div class="outercontainer2">
-    <h1>Add Opponent Team</h1>
-    <h3>Enter the opponent team's name:</h3>
-    <input type="text" id="opteaminput" placeholder="Team Name"/>
-    <div class="fileuploadcontainer">
-      <span>Upload Logo:</span> <input class="logoupload" id="opponent_logoupload" type="file"/>
-      <input type="button" value="Upload" onclick="uploadLogo('opponent_logoupload', 'opponent_teamimg')">
+    <h2>Manage Opponents</h2>
+    <p id="emptyopponents">There are no opponents added yet.</p>
+    <div id="opponentscontainer">
     </div>
-    <div class="teamimgcontainer">
-      <img class="teamimg" id="opponent_teamimg" src="images/default.jpg" alt="Team Logo">
-    </div>
-    <input type="button" class="formbutton" value="Add Team" onclick="validateAddOpponentForm()"/>
-    <div class="addopmsg" id="addopmsg">Hello</div>
-    <!-- <input type="button" class="formbutton" value="Cancel" onclick="goBack()"/> -->
+    <button type="button" id="addopponentbutton" onclick="goTo('manageopponents.html','addopponent.html')">+</button>
   </div>
   <script src="./js/serviceworker.js"></script>
 </body>
