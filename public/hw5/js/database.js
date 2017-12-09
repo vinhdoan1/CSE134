@@ -10,7 +10,7 @@ var config = {
   firebase.initializeApp(config);
 
   var db = firebase.firestore();
-  
+
   var firestoreDB = {};
 
   // USERS
@@ -38,6 +38,21 @@ var config = {
   }
 
   // PLAYERS
+  firestoreDB.getTeamPlayers = function(teamID) {
+    return db.collection("teams").doc(teamID).collection("players").get();
+  }
+
+  firestoreDB.getTeamPlayer = function(teamID, playerID) {
+    return db.collection("teams").doc(teamID).collection("players").doc(playerID).get();
+  }
+
+  firestoreDB.addNewPlayer = function(teamID, player) {
+    return (db.collection("teams").doc(teamID).collection("players").add(player));
+  }
+
+  firestoreDB.updatePlayer = function(teamID, playerID, player) {
+    return (db.collection("teams").doc(teamID).collection("players").doc(playerID).update(player));
+  }
 
   var firedatabase = {}; // not necessary just to make it more obvious
   firedatabase.generateID = generateID;
