@@ -56,9 +56,11 @@ loadStats = () => {
 
     players.forEach(function(player){
 
-      var option = document.createElement("option");
-      option.value = player.data().name;
-      datalist.appendChild(option)
+      if(!player.data().deleted){
+        var option = document.createElement("option");
+        option.value = player.data().name;
+        datalist.appendChild(option)
+      }
     });
   });
 
