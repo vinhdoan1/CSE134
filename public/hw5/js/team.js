@@ -97,14 +97,17 @@ loadStats = () => {
   //get the players from the db for the dropdown menu
   firestoreDB.getTeamPlayers(teamID).then(function(players){
 
+    var playersObj = {};
     players.forEach(function(player){
-
       if(!player.data().deleted){
         var option = document.createElement("option");
         option.value = player.data().name;
-        datalist.appendChild(option)
+        playersObj[player.data().name] = player.data();
+        playersObj[player.data().name].playerID = player.id;
+        datalist.appendChild(option);
       }
     });
+    mainState.setState('players', playersObj)
   });
 
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
@@ -141,6 +144,7 @@ loadStats = () => {
   });
 }
 
+var gameSet = false;
 //adding stats to the db when created
 addStat = () => {
 
@@ -151,30 +155,39 @@ addStat = () => {
   let type = document.getElementById("selectStat").value
   let player = document.getElementById("eventplayername").value
 
-
   //check what type of stat it is
   if (player === "" || type === "Choose Event" || type === ""){
     return false
   }
-  else if (type === 'cornerkick' || type === 'shotongoal'){
+  else if (type === 'cornerKicks' || type === 'shotsOnGoal'){
     stat = player + " took a " + type
   }
-  else if (type === 'yellowcard' || type === 'redcard') {
+  else if (type === 'yellowCards' || type === 'redCards') {
     stat = player + " received a " + type
   }
-  else if (type === 'goal'){
+  else if (type === 'goals'){
     stat = player + " scored a " + type
   }
   else {
     stat = player + " made a " + type
   }
 
+  var playerObj = state.players[player];
+  playerObj[type] += 1;
+  if (!gameSet) {
+    gameSet = true;
+    playerObj.gamesPlayed += 1;
+  }
+  firestoreDB.updatePlayer(teamID, playerObj.playerID, playerObj).then(function (){
+
+
+  })
+
   //reset the add event form
-  document.getElementById('addeventform').reset();
+  //document.getElementById('addeventform').reset();
 
   firestoreDB.setStat(teamID, gameID, stat).then(function(){
     window.location='addevent.html';
-
   });
 }
 

@@ -16,7 +16,7 @@
   <script src="./js/team.js"></script>
   <script src="./js/state.js"></script>
 </head>
-<body onload="checkLoggedIn();loadAddEventPage()"">
+<body onload="checkLoggedIn();loadAddEventPage()">
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='gamedetails.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -31,12 +31,12 @@
       <form id="addeventform" name="addeventform">
           <select id="selectStat" name="eventdetail" class="addeventformfield" required>
             <option selected disabled="disabled">Choose Event</option>
-            <option value="goal">Goal</option>
-            <option value="penalty">Penalty</option>
-            <option value="shotongoal">Shot on Goal</option>
-            <option value="cornerkick">Corner Kick</option>
-            <option value="redcard">Red Card</option>
-            <option value="yellowcard">Yellow Card</option>
+            <option value="goals">Goal</option>
+            <option value="penalties">Penalty</option>
+            <option value="shotsOnGoal">Shot on Goal</option>
+            <option value="cornerKicks">Corner Kick</option>
+            <option value="redCards">Red Card</option>
+            <option value="yellowCards">Yellow Card</option>
           </select>
           <input type="text" id="eventplayername" class="addeventformfield" placeholder="Enter Player Name" list="playernames" required>
           <datalist id="playernames">
