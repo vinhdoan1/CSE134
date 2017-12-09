@@ -60,7 +60,6 @@ function updateGame(game, action){
   if(exists){
     var duplicate_msg = action == "add" ? document.getElementById('addgame_duplicate') : document.getElementById('editgame_duplicate');
     duplicate_msg.style.display = 'block';
-    console.log("here")
   }
   else{
     var returnTo="";
@@ -147,7 +146,6 @@ function loadEditForm(){
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
 
     setSelectedIndex(gameopponent, game.data().opponent);
-    console.log(gamelocation.value = game.data().location)
     gamelocation.value = game.data().location;
     gamedate.value = game.data().date;
     gametime.value = game.data().time;

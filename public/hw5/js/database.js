@@ -130,9 +130,6 @@ var enablePersistenceOn = false;
 
   firestoreDB.addNewGame = async function(teamID, game){
 
-    console.log(game)
-    console.log(teamID)
-
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").add(game)
   }

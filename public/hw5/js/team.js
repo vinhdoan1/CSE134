@@ -66,7 +66,6 @@ loadStats = () => {
 
     stats.forEach(function(stat){
 
-      console.log(stat.data().stat)
       let btn = document.createElement("button")
       btn.setAttribute("type", "button")
       btn.setAttribute("class", "eventfeedbutton")
