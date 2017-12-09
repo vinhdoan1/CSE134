@@ -104,8 +104,8 @@ function loadSchedule(){
       for (var i = 0 ; i < values.length; i++){
         if(values[i].active){
           mainState.setState('gameID', values[i].id)
-          let btn = createGameButtonDetail(values[i]);
-          document.getElementById('schedulecontainer').appendChild(btn);
+          createGameButtonDetail(values[i]);
+          //document.getElementById('schedulecontainer').appendChild(btn);
         }
       }
     }
