@@ -76,9 +76,11 @@ function updateUpcomingGame(){
         j++;
       }
       if(values[j].active){
-        mainState.setState("upcomingGame", values[i].id);
+        mainState.setState("upcomingGame", values[j].id);
+        console.log("FOUND");
       } else{
-        mainState.setState("upcomingGame", "");
+        mainState.setState("upcomingGame", "hello");
+        console.log("NOT FOUND");
       }
     }
   });

@@ -67,9 +67,6 @@ function createGameButtonDetail(game, container){
     console.log(date.getMonth());
     btninner.innerHTML = "<span>" + schedule.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
     btn.appendChild(btninner);
-    // btn.innerHTML = "<span class='gamebuttondetail'>" +
-    // date.getMonth() < 11 ? schedule.months[date.getMonth()-1] : schedule.months[date.getMonth() + 11]
-    // + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
     document.getElementById(container).appendChild(btn);
   });
 
