@@ -38,12 +38,19 @@ function loadPlayers(fromSort) {
     loadPlayerPage(state.players);
     return;
   }
-  firedatabase.getTeamPlayers(state.teamID).then(function (playersData) {
-    var playersObj = playersData.val();
-    if (!playersObj) {
+  firestoreDB.getTeamPlayers(state.teamID).then(function (playersData) {
+    if (!playersData) {
       return;
     }
-    var players = Object.keys(playersObj).map(function (key) { return playersObj[key]; });
+
+    var players = [];
+    playersData.forEach(function(doc) {
+      players.push({
+        id: doc.id,
+        ...doc.data(),
+      })
+    });
+
     mainState.setState('players', players);
     loadPlayerPage(players);
   })
@@ -100,7 +107,6 @@ function createToPlayerFunction(player) {
 
 function validatePlayerForm() {
   var player = {
-    id: api.generateID(),
     name: "",
     position: "",
     image: "",
@@ -131,24 +137,16 @@ function validatePlayerForm() {
   else{
     addplayer_error.style.display = 'none';
     var state = mainState.getState();
-    firedatabase.addNewPlayer(state.teamID, player).then(function() {
+    firestoreDB.addNewPlayer(state.teamID, player).then(function() {
       window.location='players.html';
     });
   }
 }
 
-function addPlayer(player) {
-  var state = mainState.getState();
-  var players = api.getTeamPlayers(state.teamID);
-  players.push(player);
-  api.setTeamPlayers(state.teamID, players);
-  window.location='players.html';
-}
-
 function populatePlayerDetails() {
   var state = mainState.getState();
-  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
-    var player = playerData.val();
+  firestoreDB.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.data();
     var playerName = document.getElementById('playerName');
     playerName.innerText = player.name + " #" + player.number;
     var playerPosition = document.getElementById('playerPosition');
@@ -195,7 +193,7 @@ function deletePlayer() {
     var state = mainState.getState();
     var player = state.player;
     player.deleted = true;
-    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
+    firestoreDB.updatePlayer(state.teamID, state.playerID, player).then(function() {
       window.location='players.html';
     });
   }
@@ -203,8 +201,8 @@ function deletePlayer() {
 
 function populateEditPlayer() {
   var state = mainState.getState();
-  firedatabase.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
-    var player = playerData.val();
+  firestoreDB.getTeamPlayer(state.teamID, state.playerID).then(function (playerData) {
+    var player = playerData.data();
     mainState.setState('player', player);
     var playerForm = document.getElementById('editplayerform');
     playerForm.elements['playername'].value = player.name;
@@ -218,7 +216,7 @@ function populateEditPlayer() {
 
 function validatePlayerEditForm() {
   var state = mainState.getState();
-  var player = state.player
+  var player = state.player;
   var incomplete = false;
   var playerForm = document.getElementById('editplayerform');
   player.name = playerForm.elements['playername'].value;
@@ -234,7 +232,7 @@ function validatePlayerEditForm() {
   }
   else{
     addplayer_error.style.display = 'none';
-    firedatabase.updatePlayer(state.teamID, state.playerID, player).then(function() {
+    firestoreDB.updatePlayer(state.teamID, state.playerID, player).then(function() {
       window.location='players.html';
     });
   }

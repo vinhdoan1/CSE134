@@ -26,6 +26,13 @@
           <input type="button" class="formbutton" value="Sign Up" onclick="window.location='signup.html';"/>
       </form>
   </div>
+  <script>
+  window.onkeypress = function(e) {
+    if (e.code === "Enter") {
+      authenticate(document.getElementById('loginform'));
+    }
+  }
+  </script>
   <script src="./js/serviceworker.js"></script>
 </body>
 </html>
