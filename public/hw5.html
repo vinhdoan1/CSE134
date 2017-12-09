@@ -54,7 +54,7 @@
               <a href="./build/index.html">TeamWatch (minified)</a>
             </li>
             <li>
-              <a href="./build/index.html">TeamWatch</a>
+              <a href="./build-uncompact/index.html">TeamWatch</a>
             </li>
           </ul>
         </article>
@@ -150,6 +150,18 @@
           <h2>Optimizations</h2>
           <p>
             In addition to using service workers with workbox and offline persistence with Firestore, we also use minification and image compression. For minification, we used a gulp-minifier, which  uses html-minifier, UglifyJS, and Clean CSS. We used Optimizilla to compress our images, which significantly reduced the file sizes.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <article>
+          <h2>Assessment</h2>
+          <p>
+            While we believe we added a fair amount of features in our application, there were a few things that did not work and we think could have been improved on. In general, our code quality is not consistent, as each of the team members did their respective parts and we did not have a consolidated pattern or guideline to follow. This applies to the JS and CSS, as both could be better written, but we lacked to time to organize it. In addition, we feel we may have included some additional network calls to retrieve the data for the pages. We could have reformatted the organizational structure of the data,  figured better, more efficient ways to query things on a page, or looked more into caching. Thus, our performance takes a bit of a hit on the pages in which we have to make multiple network calls. While our app was able to pass Lighthouse’s PWA test, we found that the add to home page and the splash screen did not seem to work. Also, while we used Firestore for offline persistence, we found that it did not seem to work too well with adding/editing things in the database while offline. There would be network errors that would appear in the console, though the data would be added when the page is refreshed. Lastly we found that minifying the page caused problems with registering the service worker.
           </p>
         </article>
       </div>
