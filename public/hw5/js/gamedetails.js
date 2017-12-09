@@ -177,14 +177,11 @@ function markGameComplete(checkbox){
     var gameData = game.data();
     var goals = gameData.goals;
     var goalsOp = gameData.goalsOp;
-    // console.log(goals + ", " + goalsOp);
     firestoreDB.getTeam(teamID).then(function(team){
       var teamData = team.data();
       if(checkbox.checked){
         firestoreDB.markGameComplete(teamID, gameID, true);
-        console.log(gameData);
         if(goals > goalsOp){
-          console.log('why');
           firestoreDB.updateTeamWins(teamID, ++teamData.wins);
         }
         else if(goals < goalsOp){
@@ -193,7 +190,6 @@ function markGameComplete(checkbox){
       }
       else{
         firestoreDB.markGameComplete(teamID, gameID, false);
-        console.log(gameData);
         if(goals > goalsOp){
           firestoreDB.updateTeamWins(teamID, --teamData.wins);
         }

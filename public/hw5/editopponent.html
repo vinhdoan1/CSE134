@@ -20,7 +20,7 @@
   <script src="./js/image.js"></script>
   <script src="./js/settings.js"></script>
 </head>
-<body onload="checkLoggedIn();populateOpponentData()">
+<body onload="checkLoggedIn(); populateOpponentData();">
   <header>
       <p class="headertext" id="backheadertext" onclick="window.location='manageopponents.html';">&lt; Back</p>
     <div class="headerlogo" onclick="window.location='team.html';">
@@ -46,6 +46,7 @@
       </div>
     </div>
     <input type="button" class="settingsbutton" value="Update Opponent Information" onclick="updateOpponent()"/>
+    <input type="button" class="settingsbutton" id="deleteopponentbtn" value="Delete Opponent" onclick="deleteOpponent()"/>
     <div class="message" id="editopmsg">Hello</div>
   </div>
   <script src="./js/serviceworker.js"></script>

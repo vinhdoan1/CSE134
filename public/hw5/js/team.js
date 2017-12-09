@@ -5,12 +5,9 @@ function loadDashboard(){
   //get the team to diplay on the dashboard from db
   firestoreDB.getTeam(state.teamID).then(function (teamData){
     var team = teamData.data();
-    console.log(team);
     document.getElementById("h1").innerHTML = team.name;
     document.getElementById("wins").innerHTML += team.wins;
     document.getElementById("loss").innerHTML += team.losses;
-    // document.getElementById("goalsfor").innerHTML += "14";
-    // document.getElementById("goalsagainst").innerHTML += "4";
     document.getElementById("teamimglogo").src = team.logo;
   });
   getUpcomingGame();
@@ -24,7 +21,6 @@ function getUpcomingGame(){
     if(game.exists){
       var gameData = game.data();
       gameData.id = game.id;
-      // console.log(gameData);
       if(gameData.active){
         createGameButtonDetail(gameData, 'upcominggamecontainer');
       }
@@ -34,11 +30,9 @@ function getUpcomingGame(){
     }
     else{
       document.getElementById('upcominggame_empty').style.fontSize="1rem";
-      console.log("No upcoming game");
     }
   }).catch(function(){
     document.getElementById('upcominggame_empty').style.fontSize="1rem";
-    console.log("No upcoming game");
   });
 }
 
@@ -62,11 +56,9 @@ function createGameButtonDetail(game, container){
     var hours = date.getHours() % 12 == 0 ? 12 : date.getHours() % 12;
     var ampm = date.getHours() >= 12 ? "PM" : "AM";
     let btn = document.createElement("div");
-    // btn.setAttribute("role", "button");
     btn.setAttribute("class", "gamebuttonElement");
     btn.onclick = funToGameDetails(game.id);
     var btninner = document.createElement("div");
-    console.log(date.getMonth());
     btninner.innerHTML = "<span>" + schedule.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +  hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + opp.data().name + "</span>";
     btn.appendChild(btninner);
     document.getElementById(container).appendChild(btn);
@@ -86,7 +78,6 @@ function loadAddEventPage(){
 
   firestoreDB.getTeamGame(teamID, gameID).then(function(game){
     if(game.data().complete){
-      // console.log(game.data().complete);
       document.getElementById('addeventbttn').disabled = true;
       document.getElementById('selectStat').disabled = true;
       document.getElementById('playernames').disabled = true;
