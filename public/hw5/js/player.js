@@ -132,14 +132,19 @@ function validatePlayerForm() {
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
-    addplayer_error.style.display = 'block';
+    addplayer_error.innerText = "Please fill out all fields."
   }
   else{
-    addplayer_error.style.display = 'none';
+    addplayer_error.innerText = ""
     var state = mainState.getState();
-    firestoreDB.addNewPlayer(state.teamID, player).then(function() {
-      window.location='players.html';
-    });
+    firestoreDB.addNewPlayer(state.teamID, player)
+      .catch(function(e) {
+        console.log(e);
+      })
+      .then(function() {
+        window.location='players.html';
+      });
+
   }
 }
 
@@ -228,13 +233,17 @@ function validatePlayerEditForm() {
   incomplete = player.name == "" || player.number == "" ||  player.position == "";
   var addplayer_error = document.getElementById('addplayer_error');
   if(incomplete){
-    addplayer_error.style.display = 'block';
+    addplayer_error.innerText = "Please fill out all fields."
   }
   else{
-    addplayer_error.style.display = 'none';
-    firestoreDB.updatePlayer(state.teamID, state.playerID, player).then(function() {
+    addplayer_error.innerText = "";
+    firestoreDB.updatePlayer(state.teamID, state.playerID, player)
+      .then(function() {
       window.location='players.html';
-    });
+      })
+      .catch(function(e) {
+        console.log(e);
+      });
   }
 }
 

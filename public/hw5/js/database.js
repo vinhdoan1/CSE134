@@ -9,13 +9,14 @@ var config = {
   };
   firebase.initializeApp(config);
 
+var enablePersistenceOn = false;
 
   /*
   Obtains reference to firestore database. On first call, it enables offline
   persistence, and then gets firestore directly on other occasions.
   */
   async function getDB() {
-    if (sessionStorage.getItem('offline')) {
+    if (enablePersistenceOn) {
       return firebase.firestore();
     } else {
       var db;
@@ -23,7 +24,7 @@ var config = {
         .then(function() {
             // Initialize Cloud Firestore through firebase
             db = firebase.firestore();
-            sessionStorage.setItem('offline', true);
+            enablePersistenceOn = true;
         })
         .catch(function(err) {
             if (err.code == 'failed-precondition') {
@@ -83,32 +84,40 @@ var config = {
     });
   }
 
-  firestoreDB.getOpponent = function(teamID, opID){
+  firestoreDB.getOpponent = async function(teamID, opID){
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).get();
   }
 
-  firestoreDB.setOpponent = function(teamID, opID, opponent){
+  firestoreDB.setOpponent = async function(teamID, opID, opponent){
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set(opponent);
+  }
+
+  // PLAYERS
+  firestoreDB.getTeamPlayers = async function(teamID) {
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("players").get();
+  }
+
+  firestoreDB.getTeamPlayer = async function(teamID, playerID) {
+    var db = await getDB();
+    return db.collection("teams").doc(teamID).collection("players").doc(playerID).get();
+  }
+
+  firestoreDB.addNewPlayer = async function(teamID, player) {
+    var db = await getDB();
+    return (db.collection("teams").doc(teamID).collection("players").add(player).catch(function(e) {
+      console.log("LOL");
+      console.log(e);
+    }));
+  }
+
+  firestoreDB.updatePlayer = async function(teamID, playerID, player) {
+    var db = await getDB();
+    return (db.collection("teams").doc(teamID).collection("players").doc(playerID).update(player));
   }
 
   // ------------------ OLD FIREBASE STUFF HERE ------------------------------//
 
-  // PLAYERS
-  firestoreDB.getTeamPlayers = function(teamID) {
-    return db.collection("teams").doc(teamID).collection("players").get();
-  }
-
-  firestoreDB.getTeamPlayer = function(teamID, playerID) {
-    return db.collection("teams").doc(teamID).collection("players").doc(playerID).get();
-  }
-
-  firestoreDB.addNewPlayer = function(teamID, player) {
-    return (db.collection("teams").doc(teamID).collection("players").add(player));
-  }
-
-  firestoreDB.updatePlayer = function(teamID, playerID, player) {
-    return (db.collection("teams").doc(teamID).collection("players").doc(playerID).update(player));
-  }
 
   var firedatabase = {}; // not necessary just to make it more obvious
   // firedatabase.generateID = generateID;
