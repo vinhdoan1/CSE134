@@ -111,7 +111,7 @@ var enablePersistenceOn = false;
 
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games")
-    .doc(gameID).collection("stats").set(stat)
+    .doc(gameID).collection("stats").add({stat})
   }
 
 
