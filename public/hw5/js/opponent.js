@@ -33,7 +33,7 @@ function addOpponent(opponent){
 
 function loadOpponents(){
   var teamID = mainState.getState().teamID;
-  db.collection("teams").doc(teamID).collection("opponents").get().then(function(snapshot) {
+  firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
     var numOps = 0;
     snapshot.forEach(function(opponent) {
         // console.log(opponent.id, " => ", opponent.data().name);

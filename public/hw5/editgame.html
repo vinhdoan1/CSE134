@@ -17,6 +17,7 @@
   <script src="./js/team.js"></script>
   <script src="./js/opponent.js"></script>
   <script src="./js/state.js"></script>
+  <script src="js/settings.js"></script>
 </head>
 <body onload="loadEditForm()">
   <header>
@@ -41,10 +42,10 @@
         <input type="text" name="gamelocation" id="editgamelocation" class="gameformfield" placeholder="Location">
         <input type="date" name="gamedate" id="editgamedate" class="gameformfield" placeholder="Date">
         <input type="time" name="gametime" id="editgametime" class="gameformfield" placeholder="Time">
+        <span class="errortext" id="editgame_error">Please fill out all fields.</span>
+        <input type="button" class="gameformbutton" value="Edit Game" onclick="validateGameForm(this.form, 'edit');"/>
         <div class="message" id="editgamemsg">Hello</div>
-        
-        <!-- <span class="errortext" id="editgame_error">Please fill out all fields.</span> -->
-    </form>
+      </form>
   </div>
   <script src="./js/serviceworker.js"></script>
 </body>

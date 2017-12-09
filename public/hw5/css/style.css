@@ -16,6 +16,11 @@ body{
   padding-top: 10%;
 }
 
+ul{
+  list-style: none;
+  padding-left: 1rem;;
+}
+
 .outercontainer2{
   text-align: center;
 }
