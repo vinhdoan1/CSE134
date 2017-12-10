@@ -22,21 +22,22 @@ var enablePersistenceOn = false;
       var db;
       enablePersistenceOn = true;
       await firebase.firestore().enablePersistence()
-        .then(function() {
-            // Initialize Cloud Firestore through firebase
-            db = firebase.firestore();
-
-        })
         .catch(function(err) {
             if (err.code == 'failed-precondition') {
                 // Multiple tabs open, persistence can only be enabled
                 // in one tab at a a time.
+                enablePersistenceOn= false ;
                 // ...
             } else if (err.code == 'unimplemented') {
                 // The current browser does not support all of the
                 // features required to enable persistence
                 // ...
             }
+        })
+        .then(function() {
+          // Initialize Cloud Firestore through firebase
+          db = firebase.firestore();
+
         });
       return db;
     }
