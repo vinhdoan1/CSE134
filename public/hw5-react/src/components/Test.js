@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './../css/App.css';
+import Header from './Header';
 
 class Test extends Component {
   render() {
     return (
       <div className="App">
+        <Header history={this.props.history} backButton homeLink="/" logout/>
         <p className="App-intro">
           LMAOOOO
         </p>
