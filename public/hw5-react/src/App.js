@@ -11,6 +11,7 @@ import EditPlayer from './components/EditPlayer';
 import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
 import Settings from './components/Settings';
+import EditTeam from './components/EditTeam';
 
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
@@ -36,7 +37,8 @@ class App extends React.Component {
           <Route exact path='/editplayer' component={EditPlayer} />
 
           {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
-          
+          <Route exact path='/editteam' component={EditTeam} />
+
         </div>
       </BrowserRouter>
     )
