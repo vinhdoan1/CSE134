@@ -1,3 +1,6 @@
+import firebase from '@firebase/app';
+import '@firebase/firestore'
+
 var config = {
     apiKey: "AIzaSyC5ELIjf0XaLwgtOHKPjijx_p9Ihcg2fWA",
     firedatabaseKey: "AIzaSyC5ELIjf0XaLwgtOHKPjijx_p9Ihcg2fWA",
@@ -7,9 +10,11 @@ var config = {
     storageBucket: "cse134-bfd99.appspot.com",
     messagingSenderId: "793962632230"
   };
-  firebase.initializeApp(config);
+
 
 var enablePersistenceOn = false;
+
+firebase.initializeApp(config);
 
   /*
   Obtains reference to firestore database. On first call, it enables offline
@@ -23,12 +28,12 @@ var enablePersistenceOn = false;
       enablePersistenceOn = true;
       await firebase.firestore().enablePersistence()
         .catch(function(err) {
-            if (err.code == 'failed-precondition') {
+            if (err.code === 'failed-precondition') {
                 // Multiple tabs open, persistence can only be enabled
                 // in one tab at a a time.
                 enablePersistenceOn= false ;
                 // ...
-            } else if (err.code == 'unimplemented') {
+            } else if (err.code === 'unimplemented') {
                 // The current browser does not support all of the
                 // features required to enable persistence
                 // ...
@@ -91,7 +96,7 @@ var enablePersistenceOn = false;
     return teamref.update({losses: losses});
   }
 
- 
+
   // OPPONENTS
   firestoreDB.addOpponent = async function(teamID, opName, logo) {
     var db = await getDB();
@@ -121,12 +126,12 @@ var enablePersistenceOn = false;
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).delete();
   }
 
-  firestoreDB.setInactive = async function(opID){
+  firestoreDB.setInactive = async function(teamID, opID){
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").doc(opID).set({active: false},{merge: true});
   }
 
-  //STATS 
+  //STATS
   firestoreDB.getStats = async function(teamID, gameID){
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("games").doc(gameID).collection("stats").get()
@@ -192,3 +197,4 @@ var enablePersistenceOn = false;
     return (db.collection("teams").doc(teamID).collection("players").doc(playerID).update(player));
   }
 
+export default firestoreDB;
