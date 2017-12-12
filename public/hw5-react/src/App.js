@@ -2,6 +2,9 @@ import React from 'react';
 import Home from './components/Home';
 import Test from './components/Test';
 import Login from './components/Login';
+import Signup from './components/Signup'
+import SignupCoach from './components/SignupCoach';
+import SignupFan from './components/SignupFan';
 import Team from './components/Team';
 import AddPlayer from './components/AddPlayer';
 import Players from './components/Players';
@@ -19,8 +22,11 @@ class App extends React.Component {
         <div className='app-container'>
           <Route exact path='/' component={Home} />
           <Route exact path='/test' component={Test} />
+          <Route exact path='/login' component={Login}/>
+          <Route exact path='/signup' component={Signup}/>
+          <Route exact path='/signupcoach' component={SignupCoach}/>
+          <Route exact path='/signupfan' component={SignupFan}/>
           <Route exact path='/team' component={Team} />
-          <Route exact path='/login' component={Login} />
           <Route exact path='/players' component={Players} />
           <Route exact path='/playerdetails' component={PlayerDetails} />
           <Route exact path='/addplayer' component={AddPlayer} />

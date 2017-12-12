@@ -3,19 +3,23 @@ import { connect } from "react-redux";
 import firebase from '../js/firebase.js'
 import firestoreDB from '../js/database';
 import helper from '../js/helper.js';
+//Assets
+import logo from './../images/soccerball.png';
+import './../css/style.css';
+//Components
+import Header from'./Header';
 import { login } from "../actions/";
 
-//assets
-import logo from './../images/soccerball.png';
 
 const stateMap = (store) => {
   return {
     userProfile: store.user
   };
 };
+
 class Login extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
     };
     this.authenticate = this.authenticate.bind(this);
@@ -30,7 +34,7 @@ class Login extends Component {
               <input type="email" id="username" name="username" className="forminput" placeholder="Email"/>
               <input type="password" id="password" name="password" className="forminput" placeholder="Password"/>
               <input type="button" className="formbutton" value="Log In" onClick={()=> this.authenticate()}/>
-              <input type="button" className="formbutton" value="Sign Up"/>
+              <input type="button" className="formbutton" value="Sign Up" onClick={()=> this.props.history.push('/signup')}/>
           </form>
           <div className="message" id="loginmsg"> </div>
         </div>
