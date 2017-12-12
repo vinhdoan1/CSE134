@@ -126,7 +126,7 @@ class Players extends Component {
     var playerButtons = this.generatePlayerButtons(sortedPlayers);
     return (
       <div className="team-container">
-        <Header history={this.props.history} backButton homeLink="/" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout/>
         <div className="outercontainer">
             <h2>Players</h2>
             <button type="button" id="addplayerbutton" onClick={() => {window.location='addplayer';}} hidden={!this.state.admin}>+</button>

@@ -82,7 +82,7 @@ class EditPlayer extends Component {
   render() {
     return (
       <div className="team-container">
-        <Header history={this.props.history} backButton homeLink="/" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout/>
         <div className="outercontainer">
             <div className="playerpreview">
               <h2>Edit Player</h2>

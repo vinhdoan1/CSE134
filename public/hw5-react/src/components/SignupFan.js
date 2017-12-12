@@ -18,7 +18,7 @@ class SignupFan extends Component {
   render(){
     return(
       <div>
-        <Header history={this.props.history} backButton homeLink="/" logout/>
+        <Header history={this.props.history} backButton homeLink="/login" logout/>
         <div id="teaminputcontainer">
           <h1>Sign Up</h1>
           <p>Enter a Team ID</p>
@@ -71,7 +71,7 @@ class SignupFan extends Component {
       }.bind(this));
     }
   }
-  
+
   signUpNonAdmin(){
     if(!this.state.validTeam){
       helper.displayMessage("signupinvmsg", "error", "Please verify your team above");
