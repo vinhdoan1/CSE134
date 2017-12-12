@@ -67,15 +67,6 @@ class Settings extends Component {
     );
   }
 
-  populateSettingsPage(userProfile){
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        document.getElementById('newemail').value=user.email;
-        document.getElementById('teamidinvite').innerHTML = userProfile.teamID;
-      }
-    });
-  }
-
   componentDidMount() {
     this.setState({hidden: !this.props.userProfile.admin});
     this.populateSettingsPage(this.props.userProfile);
@@ -86,6 +77,15 @@ class Settings extends Component {
       this.setState({hidden: !nextProps.userProfile.admin});
       this.populateSettingsPage(nextProps.userProfile);
     }
+  }
+
+  populateSettingsPage(userProfile){
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        document.getElementById('newemail').value=user.email;
+        document.getElementById('teamidinvite').innerHTML = userProfile.teamID;
+      }
+    });
   }
   
   copyTeamIDToClipboard(){
