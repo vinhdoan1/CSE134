@@ -10,6 +10,7 @@ const user = (state = stateStart, action) => {
   switch (action.type) {
     case 'LOGIN': {
       return {
+          ...state,
           loggedIn: true,
           teamID: action.teamID,
           admin: action.admin,
@@ -22,6 +23,7 @@ const user = (state = stateStart, action) => {
     }
     case 'SETPLAYER': {
       return {
+          ...state,
           player: action.player,
         }
     }

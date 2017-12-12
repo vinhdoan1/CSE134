@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import { connect } from "react-redux";
+import firestoreDB from '../js/database';
+
+var deleteState = 0;
 
 const stateMap = (store) => {
   return {
@@ -24,6 +27,7 @@ class PlayerDetails extends Component {
       playerThrowIns: 0,
       playerGamesPlayed: 0,
     };
+    this.deletePlayer = this.deletePlayer.bind(this);
   }
 
   reduxLoaded(userProfile) {
@@ -60,7 +64,24 @@ class PlayerDetails extends Component {
   }
 
   deletePlayer() {
-    console.log("LOL")
+    var deleteButton = document.getElementById('deletePlayer');
+    if (deleteState === 0) {
+      deleteButton.value = "Press again to confirm";
+      deleteState = 1;
+      setTimeout(function() {
+        deleteState = 0;
+        deleteButton.value = "Delete Player";
+      }, 1000);
+    } else {
+      var player = this.props.userProfile.player;
+      player.deleted = true;
+      console.log(this.props.userProfile);
+      console.log(this.props.userProfile.teamID);
+      console.log(this.props.userProfile.player);
+      firestoreDB.updatePlayer(this.props.userProfile.teamID, this.props.userProfile.player.id, player).then(function() {
+        this.props.history.push('/players');
+      }.bind(this));
+    }
   }
 
   render() {
