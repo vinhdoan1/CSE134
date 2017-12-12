@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import { connect } from "react-redux";
+import firestoreDB from '../js/database';
+
+var deleteState = 0;
 
 const stateMap = (store) => {
   return {
@@ -24,6 +27,7 @@ class PlayerDetails extends Component {
       playerThrowIns: 0,
       playerGamesPlayed: 0,
     };
+    this.deletePlayer = this.deletePlayer.bind(this);
   }
 
   reduxLoaded(userProfile) {
@@ -60,13 +64,27 @@ class PlayerDetails extends Component {
   }
 
   deletePlayer() {
-    console.log("LOL")
+    var deleteButton = document.getElementById('deletePlayer');
+    if (deleteState === 0) {
+      deleteButton.value = "Press again to confirm";
+      deleteState = 1;
+      setTimeout(function() {
+        deleteState = 0;
+        deleteButton.value = "Delete Player";
+      }, 1000);
+    } else {
+      var player = this.props.userProfile.player;
+      player.deleted = true;
+      firestoreDB.updatePlayer(this.props.userProfile.teamID, this.props.userProfile.player.id, player).then(function() {
+        this.props.history.push('/players');
+      }.bind(this));
+    }
   }
 
   render() {
     return (
       <div className="team-container">
-        <Header history={this.props.history} backButton homeLink="/" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout/>
         <div className="outercontainer">
             <div className="playerpreview">
               <img id="playerImage" src={this.state.playerImage} alt="Player"></img>
@@ -85,7 +103,7 @@ class PlayerDetails extends Component {
               <li id="playerThrowIns">Throw ins: {this.state.playerThrowIns}</li>
               <li id="playerGamesPlayed">Games Played: {this.state.playerGamesPlayed}</li>
             </ul>
-            <input type="button" id="editPlayer" className="editplayerbuttons" value="Edit Player" onClick={() => {window.location='editplayer.html';}} hidden={!this.state.admin}/>
+            <input type="button" id="editPlayer" className="editplayerbuttons" value="Edit Player" onClick={() => {window.location='editplayer';}} hidden={!this.state.admin}/>
             <input type="button" id="deletePlayer" className="editplayerbuttons" value="Delete Player" onClick={() => this.deletePlayer()} hidden={!this.state.admin}/>
         </div>
       </div>

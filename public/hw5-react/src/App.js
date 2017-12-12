@@ -6,6 +6,8 @@ import Signup from './components/Signup'
 import SignupCoach from './components/SignupCoach';
 import SignupFan from './components/SignupFan';
 import Team from './components/Team';
+import AddPlayer from './components/AddPlayer';
+import EditPlayer from './components/EditPlayer';
 import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
 import Settings from './components/Settings';
@@ -30,6 +32,11 @@ class App extends React.Component {
           <Route exact path='/players' component={Players} />
           <Route exact path='/playerdetails' component={PlayerDetails} />
           <Route exact path='/settings' component={Settings}/>
+          <Route exact path='/addplayer' component={AddPlayer} />
+          <Route exact path='/editplayer' component={EditPlayer} />
+
+          {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
+          
         </div>
       </BrowserRouter>
     )

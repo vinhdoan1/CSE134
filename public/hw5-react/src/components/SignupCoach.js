@@ -25,12 +25,16 @@ class SignupCoach extends Component {
   render(){
     return(
       <div>
+<<<<<<< HEAD
         <Header history={this.props.history} backButton homeLink="/team" logout/>
+=======
+        <Header history={this.props.history} backButton homeLink="/login" logout/>
+>>>>>>> 26248edf8fefcc2b4978cc800e33650214524219
         <h1>Sign Up</h1>
         <h3>Enter your team's name:</h3>
         <input type="text" id="teaminput" placeholder="Team Name"/>
         <div className="fileuploadcontainer">
-          <p>Upload Logo:</p> 
+          <p>Upload Logo:</p>
           <input className="logoupload" id="newteam_logoupload" type="file"/>
           <input type="button" value="Upload" onClick={()=> helper.uploadLogo('newteam_logoupload','newteam_teamimg')}/>
         </div>

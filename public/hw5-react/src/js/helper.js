@@ -1,10 +1,8 @@
-import firestoreDB from '../js/database.js';
-
 var helper={};
 
 helper.displayMessage = function displayMessage(elementid, type, message){
   var msg = document.getElementById(elementid);
-  msg.style.color = (type === "error") ? "red" : "blue";
+  msg.style.color = (type === "error") ? "#900000" : "#68b7f5";
   msg.innerHTML = message;
   document.getElementById(elementid).style.opacity="1";
   if(type === "confirm"){
@@ -56,4 +54,13 @@ helper.uploadLogo = function uploadLogo(imageFileName, teamLogoContainer) {
   }, true);
 }
 
+<<<<<<< HEAD
 export default helper;
+=======
+helper.hideMessage = function hideMessage(elementid){
+  document.getElementById(elementid).innerHTML = "";
+  document.getElementById(elementid).style.opacity = "0";
+}
+
+export default helper;
+>>>>>>> 26248edf8fefcc2b4978cc800e33650214524219

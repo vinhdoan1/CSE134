@@ -6,7 +6,6 @@ import helper from '../js/helper.js';
 //Assets
 import logo from './../images/soccerball.png';
 //Components
-import Header from'./Header';
 import { login } from "../actions/";
 
 
