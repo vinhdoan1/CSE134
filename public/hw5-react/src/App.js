@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Test from './components/Test';
 import Login from './components/Login';
 import Team from './components/Team';
+import AddPlayer from './components/AddPlayer';
 import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
 
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Route exact path='/login' component={Login} />
           <Route exact path='/players' component={Players} />
           <Route exact path='/playerdetails' component={PlayerDetails} />
+          <Route exact path='/addplayer' component={AddPlayer} />
         </div>
       </BrowserRouter>
     )

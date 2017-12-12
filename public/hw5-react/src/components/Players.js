@@ -127,9 +127,9 @@ class Players extends Component {
     return (
       <div className="team-container">
         <Header history={this.props.history} backButton homeLink="/" logout/>
-        <div className="outercontainer">
+        <div class="outercontainer">
             <h2>Players</h2>
-            <button type="button" id="addplayerbutton" onClick={() => {window.location='addplayer.html';}} hidden={!this.state.admin}>+</button>
+            <button type="button" id="addplayerbutton" onClick={() => {window.location='addplayer';}} hidden={!this.state.admin}>+</button>
             <form id="playersort" name="playersort" onChange={this.onSortChosen}>
                 <select name="playersortselect" id="playersortselect" defaultValue="default">
                   <option disabled="disabled" value="default">Sort by...</option>

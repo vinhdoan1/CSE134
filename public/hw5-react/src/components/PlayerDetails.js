@@ -75,9 +75,6 @@ class PlayerDetails extends Component {
     } else {
       var player = this.props.userProfile.player;
       player.deleted = true;
-      console.log(this.props.userProfile);
-      console.log(this.props.userProfile.teamID);
-      console.log(this.props.userProfile.player);
       firestoreDB.updatePlayer(this.props.userProfile.teamID, this.props.userProfile.player.id, player).then(function() {
         this.props.history.push('/players');
       }.bind(this));
