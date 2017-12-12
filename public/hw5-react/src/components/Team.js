@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header';
 import firestoreDB from '../js/database';
 
-
 class Team extends Component {
   constructor(props) {
     super(props);
