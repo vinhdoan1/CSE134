@@ -20,7 +20,9 @@ class Header extends Component {
       firebase.auth().signOut();
     }
     */
-    window.location='index.html';
+    this.props.history.push({
+      pathname: 'login',
+    });
   }
 
   backClick() {
