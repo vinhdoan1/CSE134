@@ -31,7 +31,6 @@ h1, h2, logo{
   font-family: 'Roboto Slab', serif;
   margin: 0 ;
   text-align: center;
-  display: block;
 }
 
 h3{
@@ -87,6 +86,11 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   border-bottom: 1px solid grey;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+  text-align: center;
+}
+
+#changenamecontainer, #changelogocontainer{
+  text-align: center;
 }
 
 #inviteusers{
@@ -675,12 +679,6 @@ input[type="number"]
   margin: auto;
 }
 
-#teaminputcontainer{
-  text-align: center;
-  margin: 0;
-  display: block;
-}
-
 #inviteinput{
   height: 2.5rem;
   width: 9rem;
@@ -699,7 +697,6 @@ input[type="number"]
 
 .fileuploadcontainer{
   margin: 0.5rem auto 0 auto;
-  text-align: center;
 }
 
 .logoupload{
@@ -709,7 +706,6 @@ input[type="number"]
 
 #hiddendiv{
   margin-top: 0.5rem;
-  text-align: center;
 }
 
 #hiddendiv p{

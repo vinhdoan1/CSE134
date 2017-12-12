@@ -16,9 +16,14 @@ helper.displayMessage = function displayMessage(elementid, type, message){
   document.getElementById(elementid).style.opacity="1";
   if(type === "confirm"){
     setTimeout(function(){
-      document.getElementById(elementid).style.opacity="0";
+      helper.hideMessage(elementid);
     }, 4000);
   }
+}
+
+helper.hideMessage = function hideMessage(elementid){
+  document.getElementById(elementid).innerHTML = "";
+  document.getElementById(elementid).style.opacity = "0";
 }
 
 helper.readImageAndResize = function readImageAndResize(imageFile, sideLength, callback, png) {
@@ -56,11 +61,6 @@ helper.uploadLogo = function uploadLogo(imageFileName, teamLogoContainer) {
     playerImage.style.visibility = "visible";
     playerImage.src = result;
   }, true);
-}
-
-helper.hideMessage = function hideMessage(elementid){
-  document.getElementById(elementid).innerHTML = "";
-  document.getElementById(elementid).style.opacity = "0";
 }
 
 export default helper;

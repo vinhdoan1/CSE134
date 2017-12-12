@@ -12,7 +12,6 @@ import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
 import Schedule from './components/Schedule';
 import GameDetails from './components/GameDetails';
-
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
@@ -32,10 +31,13 @@ class App extends React.Component {
           <Route exact path='/team' component={Team} />
           <Route exact path='/players' component={Players} />
           <Route exact path='/playerdetails' component={PlayerDetails} />
+          <Route exact path='/settings' component={Settings}/>
           <Route exact path='/addplayer' component={AddPlayer} />
           <Route exact path='/editplayer' component={EditPlayer} />
           <Route exact path='/schedule' component={Schedule} />
           <Route exact path='/gamedetails' component={GameDetails} />
+          {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
+          <Route exact path='/editteam' component={EditTeam} />
         </div>
       </BrowserRouter>
     )
