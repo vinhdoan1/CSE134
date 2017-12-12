@@ -54,13 +54,4 @@ helper.uploadLogo = function uploadLogo(imageFileName, teamLogoContainer) {
   }, true);
 }
 
-<<<<<<< HEAD
 export default helper;
-=======
-helper.hideMessage = function hideMessage(elementid){
-  document.getElementById(elementid).innerHTML = "";
-  document.getElementById(elementid).style.opacity = "0";
-}
-
-export default helper;
->>>>>>> 26248edf8fefcc2b4978cc800e33650214524219
