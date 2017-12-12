@@ -194,6 +194,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
 
 #gamedetails_checkbox{
   height: 1rem;
+  vertical-align:'middle';
 }
 
 #stats p{

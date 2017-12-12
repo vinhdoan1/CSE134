@@ -27,6 +27,12 @@ const user = (state = stateStart, action) => {
           player: action.player,
         }
     }
+    case 'SETGAME': {
+      return {
+          ...state,
+          game: action.game,
+        }
+    }
     default:
     {
       return state

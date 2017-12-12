@@ -63,7 +63,7 @@ class Team extends Component {
   render() {
     return (
       <div className="team-container">
-        <Header history={this.props.history} homeLink="/" logout/>
+        <Header history={this.props.history} homeLink="/team" logout/>
         <div className="outercontainer2">
           <div id="teamimgcontainerteam">
             <img id="teamimglogo" src={this.state.teamLogo} alt="Team Logo"></img>

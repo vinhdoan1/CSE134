@@ -12,3 +12,8 @@ export const setPlayer = (player) => ({
   type: 'SETPLAYER',
   player: player,
 })
+
+export const setGame = (game) => ({
+  type: 'SETGAME',
+  game: game,
+})
