@@ -8,7 +8,7 @@ import logo from './../images/soccerball.png';
 //Import Components
 import Header from'./Header';
 import './../css/style.css';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   constructor(){
@@ -20,10 +20,11 @@ class Login extends Component {
   }
 
   render() {
-    if(this.state.signedIn){
-      return <Redirect to="/team"/>
-    }
-    else{
+    // if(this.state.signedIn){
+    //   this.props.history.push('/team');
+    //   return null;
+    // }
+    // else{
       return (
         <div className="Login">
           <Header history={this.props.history} backButton homeLink="/" logout/>
@@ -38,7 +39,7 @@ class Login extends Component {
           <div className="message" id="loginmsg"> </div>
         </div>
       );
-    }
+    // }
     
   }
 
@@ -70,7 +71,7 @@ class Login extends Component {
     })
     .then(function(user) {
       if(user){
-        this.setState({signedIn: true});
+        this.props.history.push('/team');
       }
       
       // if (user) {
