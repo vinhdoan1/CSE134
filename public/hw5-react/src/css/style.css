@@ -226,7 +226,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
 #emptyschedule, #emptyeventfeed, #upcominggame_empty{
   color: grey;
   margin-top: 1rem;
-  font-size: 0rem;
+  font-size: 1rem;
   margin: auto;
 }
 

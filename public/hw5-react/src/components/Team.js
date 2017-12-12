@@ -2,24 +2,43 @@ import React, { Component } from 'react';
 import Header from './Header';
 import firestoreDB from '../js/database';
 
-
 class Team extends Component {
   constructor(props) {
     super(props);
     this.state = {
       teamName: "",
       teamLogo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
+      teamWins: 0,
+      teamLosses: 0,
+      upcomingGames: "There are no upcoming games.",
     };
   }
 
   componentDidMount(){
     firestoreDB.getTeam("KTz7ok6zAsc7Xio6pTbV").then(function(teamData) {
       var team = teamData.data();
+      var wins = 0;
+      if (team.wins) {
+        wins = team.wins;
+      }
+      var losses = 0;
+      if (team.losses) {
+        losses = team.losses;
+      }
       this.setState({
         teamName: team.name,
         teamLogo: team.logo,
+        teamWins: wins,
+        teamLosses: losses,
       });
     }.bind(this));
+
+    // change to check for actual upcoming game
+    if(false) {
+      this.setState({
+        upcomingGames: "",
+      });
+    }
   }
 
   render() {
@@ -33,10 +52,10 @@ class Team extends Component {
           <h1 id="h1">{this.state.teamName}&nbsp;</h1>
           <div id="stats">
             <p id="wins">
-              Wins:
+              {"Wins: " + this.state.teamWins}
             </p>
             <p id="loss">
-              Losses:
+              {"Losses: " + this.state.teamLosses}
             </p>
           </div>
           <hr />
@@ -45,7 +64,7 @@ class Team extends Component {
                 Upcoming Game:
               </p>
             <div id="upcominggamecontainer">
-              <p id="upcominggame_empty">There are no upcoming games.</p>
+              <p id="upcominggame_empty">{this.state.upcomingGames}</p>
             </div>
           </div>
           <hr />
