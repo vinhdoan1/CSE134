@@ -17,3 +17,8 @@ export const setOpponent = (opponent) => ({
   type: 'SETOPPONENT',
   opponent: opponent,
 })
+
+export const setGame = (game) => ({
+  type: 'SETGAME',
+  game: game,
+})

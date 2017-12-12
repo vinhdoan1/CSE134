@@ -33,6 +33,11 @@ const user = (state = stateStart, action) => {
         ...state,
         opponent: action.opponent,
       }
+    case 'SETGAME': {
+      return {
+          ...state,
+          game: action.game,
+        }
     }
     default:
     {

@@ -1,5 +1,14 @@
 var helper={};
 
+helper.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+helper.months_long = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+helper.parseDateAndTime = function(datestr, timestr){
+  var datearry = datestr.split("-");
+  var timearry = timestr.split(":");
+  return new Date(datearry[0], datearry[1]-1, datearry[2], timearry[0], timearry[1], 0, 0);
+}
+
 helper.displayMessage = function displayMessage(elementid, type, message){
   var msg = document.getElementById(elementid);
   msg.style.color = (type === "error") ? "#900000" : "#68b7f5";

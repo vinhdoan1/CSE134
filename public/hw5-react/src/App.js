@@ -12,10 +12,12 @@ import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
 import Settings from './components/Settings';
 import EditTeam from './components/EditTeam';
-
+import Schedule from './components/Schedule';
+import GameDetails from './components/GameDetails';
 
 // CARMEN's CODE BELOW THIS
 import ManageOpponents from './components/ManageOpponents';
+
 
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
@@ -39,7 +41,8 @@ class App extends React.Component {
           <Route exact path='/settings' component={Settings}/>
           <Route exact path='/addplayer' component={AddPlayer} />
           <Route exact path='/editplayer' component={EditPlayer} />
-
+          <Route exact path='/schedule' component={Schedule} />
+          <Route exact path='/gamedetails' component={GameDetails} />
           {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
           <Route exact path='/editteam' component={EditTeam} />
           <Route exact path='/manageopponents' component={ManageOpponents} />
