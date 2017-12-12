@@ -17,8 +17,7 @@ class Settings extends Component {
     super(props);
     this.state = {
       needsReauth: false,
-      hidden: true,
-      userEmail: "",
+      isAdmin: false,
     }
     this.populateSettingsPage = this.populateSettingsPage.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
@@ -50,10 +49,10 @@ class Settings extends Component {
             </form>
             <div className="message" id="settingsmsg_newpassword"> </div>
           </div>
-          <div id="teammanagementsettings" className="settingsdiv" hidden={this.state.hideAdmin}>
+          <div id="teammanagementsettings" className="settingsdiv" hidden={!this.state.isAdmin}>
             <h3>Team Management Settings</h3>
             <input type="button" className="settingsbutton" value="Edit Team Information" onClick={()=> this.props.history.push('/editteam')}/>
-            <input type="button" className="settingsbutton" value="Manage Opponents List" onClick={()=> this.props.history.push('/editopponents')}/>
+            <input type="button" className="settingsbutton" value="Manage Opponents List" onClick={()=> this.props.history.push('/manageopponents')}/>
           </div>
           <div id="inviteusers" className="settingsdiv">
             <h3>Invite Users</h3>
@@ -68,13 +67,13 @@ class Settings extends Component {
   }
 
   componentDidMount() {
-    this.setState({hidden: !this.props.userProfile.admin});
+    this.setState({isAdmin: this.props.userProfile.admin});
     this.populateSettingsPage(this.props.userProfile);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.userProfile !== nextProps.userProfile) {
-      this.setState({hidden: !nextProps.userProfile.admin});
+      this.setState({isAdmin: nextProps.userProfile.admin});
       this.populateSettingsPage(nextProps.userProfile);
     }
   }

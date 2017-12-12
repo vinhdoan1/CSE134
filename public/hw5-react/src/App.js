@@ -13,6 +13,10 @@ import PlayerDetails from './components/PlayerDetails';
 import Settings from './components/Settings';
 import EditTeam from './components/EditTeam';
 
+
+// CARMEN's CODE BELOW THIS
+import ManageOpponents from './components/ManageOpponents';
+
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
@@ -38,7 +42,7 @@ class App extends React.Component {
 
           {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
           <Route exact path='/editteam' component={EditTeam} />
-
+          <Route exact path='/manageopponents' component={ManageOpponents} />
         </div>
       </BrowserRouter>
     )

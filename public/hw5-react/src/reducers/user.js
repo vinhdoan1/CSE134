@@ -4,6 +4,7 @@ var stateStart = {
   teamID: "",
   player: undefined,
   game: undefined,
+  opponent: undefined,
 }
 
 const user = (state = stateStart, action) => {
@@ -26,6 +27,12 @@ const user = (state = stateStart, action) => {
           ...state,
           player: action.player,
         }
+    }
+    case 'SETOPPONENT': {
+      return{
+        ...state,
+        opponent: action.opponent,
+      }
     }
     default:
     {
