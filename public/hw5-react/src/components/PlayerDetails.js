@@ -103,7 +103,7 @@ class PlayerDetails extends Component {
               <li id="playerThrowIns">Throw ins: {this.state.playerThrowIns}</li>
               <li id="playerGamesPlayed">Games Played: {this.state.playerGamesPlayed}</li>
             </ul>
-            <input type="button" id="editPlayer" className="editplayerbuttons" value="Edit Player" onClick={() => {window.location='editplayer.html';}} hidden={!this.state.admin}/>
+            <input type="button" id="editPlayer" className="editplayerbuttons" value="Edit Player" onClick={() => {window.location='editplayer';}} hidden={!this.state.admin}/>
             <input type="button" id="deletePlayer" className="editplayerbuttons" value="Delete Player" onClick={() => this.deletePlayer()} hidden={!this.state.admin}/>
         </div>
       </div>

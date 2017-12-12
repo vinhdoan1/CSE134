@@ -1,10 +1,8 @@
-import firestoreDB from '../js/database.js';
-
 var helper={};
 
 helper.displayMessage = function displayMessage(elementid, type, message){
   var msg = document.getElementById(elementid);
-  msg.style.color = (type === "error") ? "red" : "blue";
+  msg.style.color = (type === "error") ? "#900000" : "#68b7f5";
   msg.innerHTML = message;
   document.getElementById(elementid).style.opacity="1";
   if(type === "confirm"){

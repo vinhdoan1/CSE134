@@ -11,7 +11,7 @@ const stateMap = (store) => {
     userProfile: store.user
   };
 };
-class AddPlayer extends Component {
+class EditPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,29 +22,41 @@ class AddPlayer extends Component {
     this.validatePlayerForm = this.validatePlayerForm.bind(this);
   }
 
+  reduxLoaded(userProfile) {
+    if (userProfile.player) {
+      var player = userProfile.player;
+      var playerForm = document.getElementById('editplayerform');
+      playerForm.elements['playername'].value = player.name;
+      playerForm.elements['playernumber'].value = player.number;
+      playerForm.elements['playerposition'].value = player.position;
+      if (player.image !== "") {
+        document.getElementById('playerbuttonimg').src = player.image;
+      }
+    }
+    this.setState({
+      admin: userProfile.admin,
+    });
+  }
+
+  componentDidMount() {
+    this.reduxLoaded(this.props.userProfile);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userProfile !== nextProps.userProfile) {
+      this.reduxLoaded(nextProps.userProfile);
+    }
+  }
+
   uploadImage() {
     helper.uploadLogo('playerimagefield','playerbuttonimg');
     imageSet = true;
   }
 
   validatePlayerForm() {
-    var player = {
-      name: "",
-      position: "",
-      image: "",
-      number: 0,
-      goals: 0,
-      fouls: 0,
-      yellowCards: 0,
-      redCards: 0,
-      shotsOnGoal: 0,
-      cornerKicks: 0,
-      penalties: 0,
-      throwIns: 0,
-      gamesPlayed: 0,
-    };
+    var player = this.props.userProfile.player;
     var incomplete = false;
-    var playerForm = document.getElementById('addplayerform');
+    var playerForm = document.getElementById('editplayerform');
     player.name = playerForm.elements['playername'].value;
     player.number = playerForm.elements['playernumber'].value;
     player.position = playerForm.elements['playerposition'].value;
@@ -53,11 +65,11 @@ class AddPlayer extends Component {
     }
     incomplete = player.name === "" || player.number === "" ||  player.position === "";
     if(incomplete){
-      helper.displayMessage("addplayer_error", "error", "Please fill out all fields.");
+      helper.displayMessage("editplayer_error", "error", "Please fill out all fields.");
     }
     else{
-      helper.displayMessage("addplayer_error", "confirm", "Adding player...");
-      firestoreDB.addNewPlayer(this.props.userProfile.teamID, player)
+      helper.displayMessage("editplayer_error", "confirm", "Editing player...");
+      firestoreDB.updatePlayer(this.props.userProfile.teamID, player.id, player)
         .catch(function(e) {
         })
         .then(function() {
@@ -73,7 +85,7 @@ class AddPlayer extends Component {
         <Header history={this.props.history} backButton homeLink="/" logout/>
         <div className="outercontainer">
             <div className="playerpreview">
-              <h2>Add Player</h2>
+              <h2>Edit Player</h2>
               <p>Upload a Picture:</p>
               <form id="addplayerpictureform">
                 <input type="file" name="playerpic" accept="image/*" id="playerimagefield"></input>
@@ -81,12 +93,12 @@ class AddPlayer extends Component {
               </form>
               <img id="playerbuttonimg" src={this.state.playerImage} alt="Player"></img>
             </div>
-            <form className="playerform" id="addplayerform" name="addeventform">
+            <form className="playerform" id="editplayerform" name="addeventform">
                 <input type="text" id="playername" className="addplayerformfield" placeholder="Enter Player Name"></input>
                 <input type="number" id="playernumber" className="addplayerformfield" placeholder="Enter Player Number"></input>
                 <input type="text" id="playerposition" className="addplayerformfield" placeholder="Enter Player Position"></input>
-                <input type="button" className="addplayerbutton" value="Add Player" onClick={() => {this.validatePlayerForm()}}></input>
-                <span className="message" id="addplayer_error"></span>
+                <input type="button" className="addplayerbutton" value="Edit Player" onClick={() => {this.validatePlayerForm()}}></input>
+                <span className="message" id="editplayer_error"></span>
             </form>
           </div>
       </div>
@@ -94,4 +106,4 @@ class AddPlayer extends Component {
   }
 }
 
-export default connect(stateMap)(AddPlayer);
+export default connect(stateMap)(EditPlayer);
