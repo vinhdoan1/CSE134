@@ -1,38 +1,60 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import firestoreDB from '../js/database';
+import { connect } from "react-redux";
+import { setPlayer } from "../actions/";
 
-
+const stateMap = (store) => {
+  return {
+    userProfile: store.user
+  };
+};
 class Players extends Component {
   constructor(props) {
     super(props);
     this.state = {
       players: [],
       sortFunc: 0,
+      admin: false,
     };
     this.generatePlayerButtons = this.generatePlayerButtons.bind(this);
     this.onSortChosen = this.onSortChosen.bind(this);
     this.sortByFunc = this.sortByFunc.bind(this);
   }
 
-  componentDidMount(){
-    firestoreDB.getTeamPlayers("KTz7ok6zAsc7Xio6pTbV").then(function (playersData) {
-      if (!playersData) {
-        return;
-      }
+  reduxLoaded(userProfile) {
+    if (userProfile.teamID !== "") {
+      firestoreDB.getTeamPlayers(userProfile.teamID).then(function (playersData) {
+        if (!playersData) {
+          return;
+        }
 
-      var players = [];
-      playersData.forEach(function(doc) {
-        players.push({
-          id: doc.id,
-          ...doc.data(),
-        })
-      });
+        var players = [];
+        playersData.forEach(function(doc) {
+          players.push({
+            id: doc.id,
+            ...doc.data(),
+          })
+        });
 
-      this.setState({
-        players: players,
-      });
-    }.bind(this));
+        this.setState({
+          players: players,
+        });
+      }.bind(this));
+    }
+    this.setState({
+      admin: userProfile.admin,
+    });
+  }
+
+  componentDidMount() {
+    this.reduxLoaded(this.props.userProfile);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userProfile !== nextProps.userProfile) {
+      this.reduxLoaded(nextProps.userProfile);
+    }
   }
 
   onSortChosen(e) {
@@ -55,7 +77,14 @@ class Players extends Component {
 
   generatePlayerButtons(players) {
     return players.map(function(player, i) {
-      return (<div role="button" className="playerbutton" key={i}>
+      var playerButtonClick = function() {
+        this.props.dispatch(setPlayer(player));
+        this.props.history.push({
+          pathname: 'playerdetails',
+        });
+      }.bind(this);
+
+      return (<div role="button" className="playerbutton" key={i} onClick={playerButtonClick}>
                 <img className="playerbuttonimg" src={player.image} alt={player.name}></img>
                 <ul className="playerdetails">
                   <li>{player.name + " #" + player.number}</li>
@@ -63,7 +92,7 @@ class Players extends Component {
                   <li>{"Goals: " + player.goals}</li>
                 </ul>
               </div>);
-    });
+    }.bind(this));
   }
 
   sortByFunc(players) {
@@ -100,7 +129,7 @@ class Players extends Component {
         <Header history={this.props.history} backButton homeLink="/" logout/>
         <div className="outercontainer">
             <h2>Players</h2>
-            <button type="button" id="addplayerbutton" onClick={() => {window.location='addplayer.html';}}>+</button>
+            <button type="button" id="addplayerbutton" onClick={() => {window.location='addplayer.html';}} hidden={!this.state.admin}>+</button>
             <form id="playersort" name="playersort" onChange={this.onSortChosen}>
                 <select name="playersortselect" id="playersortselect" defaultValue="default">
                   <option disabled="disabled" value="default">Sort by...</option>
@@ -116,4 +145,4 @@ class Players extends Component {
   }
 }
 
-export default Players;
+export default connect(stateMap)(Players);

@@ -7,6 +7,7 @@ import SignupCoach from './components/SignupCoach';
 import SignupFan from './components/SignupFan';
 import Team from './components/Team';
 import Players from './components/Players';
+import PlayerDetails from './components/PlayerDetails';
 
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
@@ -26,6 +27,7 @@ class App extends React.Component {
           <Route exact path='/signupfan' component={SignupFan}/>
           <Route exact path='/team' component={Team} />
           <Route exact path='/players' component={Players} />
+          <Route exact path='/playerdetails' component={PlayerDetails} />
         </div>
       </BrowserRouter>
     )
