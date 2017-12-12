@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import Test from './components/Test';
+import Login from './components/Login';
 import Team from './components/Team';
 import Players from './components/Players';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
         <div className='app-container'>
           <Route exact path='/' component={Home} />
           <Route exact path='/test' component={Test} />
+          <Route exact path='/login' component={Login}/>
           <Route exact path='/team' component={Team} />
           <Route exact path='/players' component={Players} />
         </div>
