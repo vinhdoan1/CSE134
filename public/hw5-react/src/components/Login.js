@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import firebase from '../js/firebase.js'
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
-//assets
+//Assets
 import logo from './../images/soccerball.png';
-
-//Import Components
-import Header from'./Header';
 import './../css/style.css';
-// import { Redirect } from 'react-router-dom';
-
+//Components
+import Header from'./Header';
 class Login extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       signedIn : false
     };
@@ -26,7 +23,7 @@ class Login extends Component {
     // }
     // else{
       return (
-        <div className="Login">
+        <div className="page">
           <Header history={this.props.history} backButton homeLink="/" logout/>
           <h1 className="logo">TeamWatch</h1>
           <img id="logoimg" src={logo} alt="TeamWatch Logo"/>
@@ -34,7 +31,7 @@ class Login extends Component {
               <input type="email" id="username" name="username" className="forminput" placeholder="Email"/>
               <input type="password" id="password" name="password" className="forminput" placeholder="Password"/>
               <input type="button" className="formbutton" value="Log In" onClick={()=> this.authenticate()}/>
-              <input type="button" className="formbutton" value="Sign Up"/>
+              <input type="button" className="formbutton" value="Sign Up" onClick={()=> this.props.history.push('/signup')}/>
           </form>
           <div className="message" id="loginmsg"> </div>
         </div>

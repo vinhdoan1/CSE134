@@ -30,10 +30,14 @@ ul{
 h1, h2, logo{
   font-family: 'Roboto Slab', serif;
   margin: 0 ;
+  text-align: center;
+  display: block;
 }
 
 h3{
   margin: 0.5rem 0 0.5rem 0;
+  text-align: center;
+  display: block;
 }
 
 button, [type="button"], [type="submit"], [role="button"]{
@@ -665,6 +669,15 @@ input[type="number"]
 #teaminput, #opteaminput{
   height: 2rem;
   width: 15rem;
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+
+#teaminputcontainer{
+  text-align: center;
+  margin: 0;
+  display: block;
 }
 
 #inviteinput{
@@ -684,8 +697,8 @@ input[type="number"]
 }
 
 .fileuploadcontainer{
-  display: block;
   margin: 0.5rem auto 0 auto;
+  text-align: center;
 }
 
 .logoupload{
@@ -695,6 +708,7 @@ input[type="number"]
 
 #hiddendiv{
   margin-top: 0.5rem;
+  text-align: center;
 }
 
 #hiddendiv p{
