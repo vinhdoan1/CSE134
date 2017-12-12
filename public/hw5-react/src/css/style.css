@@ -87,6 +87,7 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   border-bottom: 1px solid grey;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 #inviteusers{
@@ -739,18 +740,6 @@ input[type="number"]
 
 #newemail{
   margin-bottom: 0;
-}
-
-#reauth_pw{
-  height: 0;
-  border: 0;
-  margin: 0;
-  padding-top: 0;
-  padding-bottom:0;
-}
-
-#reauth_msg{
-  font-size: 0rem;
 }
 
 .message{

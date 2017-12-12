@@ -5,7 +5,6 @@ import firestoreDB from '../js/database';
 import helper from '../js/helper.js';
 //Assets
 import logo from './../images/soccerball.png';
-import './../css/style.css';
 //Components
 import Header from'./Header';
 import { login } from "../actions/";

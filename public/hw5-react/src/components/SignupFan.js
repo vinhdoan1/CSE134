@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { login } from "../actions/";
 import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 //Components
 import Header from './Header';
+
+const stateMap = (store) => {
+  return {
+    userProfile: store.user
+  };
+};
 
 class SignupFan extends Component {
   constructor(props){
@@ -122,8 +130,10 @@ class SignupFan extends Component {
               .then(function (user) {
                 if(user){
                   firestoreDB.addUser(user.uid, teamID, false).then(function(userKey) {
-                    // mainState.setState("teamID", teamID);
-                    // mainState.setState("admin", false);
+                    var userProf = {};
+                    userProf.teamID = teamID;
+                    userProf.admin = false;
+                    this.props.dispatch(login(userProf)); 
                     this.props.history.push('/team');
                   }.bind(this));
                 }

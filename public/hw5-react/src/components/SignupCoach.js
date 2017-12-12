@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { login } from "../actions/";
 import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
@@ -6,6 +8,13 @@ import helper from '../js/helper.js';
 import defaultLogo from '../images/default.jpg';
 //Components
 import Header from './Header';
+
+
+const stateMap = (store) => {
+  return {
+    userProfile: store.user
+  };
+};
 
 class SignupCoach extends Component {
   constructor(props){
@@ -16,7 +25,7 @@ class SignupCoach extends Component {
   render(){
     return(
       <div>
-        <Header history={this.props.history} backButton homeLink="/" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout/>
         <h1>Sign Up</h1>
         <h3>Enter your team's name:</h3>
         <input type="text" id="teaminput" placeholder="Team Name"/>
@@ -76,12 +85,12 @@ class SignupCoach extends Component {
         // successful account creation
         helper.hideMessage("signupcoachmsg");
         firestoreDB.addTeam(name, picture).then(function(teamData) {
-          var teamKey = teamData.id;
-          firestoreDB.addUser(user.uid, teamKey, true).then(function(userKey) {
-            // mainState.setState("teamID", teamKey);
-            // mainState.setState("admin", true);
-            // window.location='team.html';
-            console.log("sign up success");
+          var teamID = teamData.id;
+          firestoreDB.addUser(user.uid, teamID, true).then(function(userKey) {
+            var userProf = {};
+            userProf.teamID = teamID;
+            userProf.admin = true;
+            this.props.dispatch(login(userProf));
             this.props.history.push('/team');
           }.bind(this));
         }.bind(this));
