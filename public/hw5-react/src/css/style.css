@@ -696,6 +696,8 @@ input[type="number"]
 
 .fileuploadcontainer{
   margin: 0.5rem auto 0 auto;
+  text-align: center;
+  display: block;
 }
 
 .logoupload{

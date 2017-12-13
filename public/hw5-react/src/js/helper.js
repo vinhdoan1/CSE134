@@ -1,4 +1,5 @@
 var helper={};
+helper.defaultLogo = "https://firebasestorage.googleapis.com/v0/b/cse134-bfd99.appspot.com/o/default.jpg?alt=media&token=34e94837-fa16-41fa-915a-038e53c01cd0";
 
 helper.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 helper.months_long = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -53,6 +54,7 @@ helper.readImageAndResize = function readImageAndResize(imageFile, sideLength, c
 //teamLogoContainer : the img element that contains the logo
 helper.uploadLogo = function uploadLogo(imageFileName, teamLogoContainer) {
   var logoForm = document.getElementById(imageFileName);
+  console.log(logoForm);
   if (logoForm.files.length <= 0) {
     return;
   }

@@ -4,8 +4,6 @@ import { login } from "../actions/";
 import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
-//Assets
-import defaultLogo from '../images/default.jpg';
 //Components
 import Header from './Header';
 
@@ -35,7 +33,7 @@ class SignupCoach extends Component {
           <input type="button" value="Upload" onClick={()=> helper.uploadLogo('newteam_logoupload','newteam_teamimg')}/>
         </div>
         <div className="teamimgcontainer">
-          <img className="teamimg" id="newteam_teamimg" src={defaultLogo} alt="Team Logo"/>
+          <img className="teamimg" id="newteam_teamimg" src={helper.defaultLogo} alt="Team Logo"/>
         </div>
         <form id="signupform" name="signupform">
           <input type="email" className="forminput" placeholder="E-mail" id="teamEmail"/>
@@ -98,4 +96,4 @@ class SignupCoach extends Component {
     }
   }
 }
-export default SignupCoach;
+export default connect(stateMap)(SignupCoach);

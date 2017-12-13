@@ -5,7 +5,6 @@ import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
-import defaultLogo from '../images/default.jpg';
 
 const stateMap = (store) => {
   return {
@@ -36,7 +35,7 @@ class EditTeam extends Component{
             <input type="button" value="Upload" onClick={()=>helper.uploadLogo('editteam_logoupload','editteam_teamimg')}/>
           </div>
           <div className="teamimgcontainer">
-            <img className="teamimg" id="editteam_teamimg" src={defaultLogo} alt="Team Logo"/>
+            <img className="teamimg" id="editteam_teamimg" src={helper.defaultLogo} alt="Team Logo"/>
           </div>
         </div>
         <input type="button" className="settingsbutton" value="Update Team Information" onClick={()=>this.updateTeam()}/>
@@ -68,23 +67,23 @@ class EditTeam extends Component{
 
   updateTeam(){
     var teamID = this.props.userProfile.teamID;
-    if(teamID != ""){
+    if(teamID !== ""){
       firestoreDB.getTeam(teamID).then(function(team){
         var teamData = team.data();
         var newTeamName = document.getElementById('newteamname').value;
         newTeamName = newTeamName.replace(/\s+/g, '');
     
         var changesMade = false;
-        if(newTeamName != teamData.name && newTeamName != ""){
+        if(newTeamName !== teamData.name && newTeamName != ""){
           teamData.name = newTeamName;
           changesMade = true;
         }
         var newTeamLogo = document.getElementById('editteam_teamimg').src;
-        if(newTeamLogo != teamData.logo){
+        if(newTeamLogo !== teamData.logo){
           teamData.logo = newTeamLogo;
           changesMade = true;
         }
-        if(newTeamName == ""){
+        if(newTeamName === ""){
           helper.displayMessage("editteammsg", "error", "Team name cannot be empty");
         }
         else{
