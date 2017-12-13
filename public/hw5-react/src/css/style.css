@@ -219,7 +219,6 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   right: 1.5rem;
   font-size: 20px;
   width: 1.8rem;
-  display: none;
 }
 
 #addeventbttn:disabled{
@@ -697,6 +696,8 @@ input[type="number"]
 
 .fileuploadcontainer{
   margin: 0.5rem auto 0 auto;
+  text-align: center;
+  display: block;
 }
 
 .logoupload{

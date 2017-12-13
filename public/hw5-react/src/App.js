@@ -18,6 +18,7 @@ import GameDetails from './components/GameDetails';
 // CARMEN's CODE BELOW THIS
 import ManageOpponents from './components/ManageOpponents';
 import EditOpponent from './components/EditOpponent';
+import AddOpponent from './components/AddOpponent';
 
 
 var ReactRouter = require('react-router-dom');
@@ -48,6 +49,7 @@ class App extends React.Component {
           <Route exact path='/editteam' component={EditTeam} />
           <Route exact path='/manageopponents' component={ManageOpponents} />
           <Route exact path='/editopponent' component={EditOpponent} />
+          <Route exact path="/addopponent" component={AddOpponent}/>
         </div>
       </BrowserRouter>
     )

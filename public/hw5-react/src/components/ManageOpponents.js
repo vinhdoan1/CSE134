@@ -27,6 +27,7 @@ class ManageOpponents extends Component {
   }
 
   render() {
+    console.log(!this.state.isAdmin);
     var opponentsElementsList = this.loadOpponentsList(this.state.opponents);
     return (
       <div className="App">
@@ -36,7 +37,7 @@ class ManageOpponents extends Component {
        <div id="opponentscontainer">
         {opponentsElementsList}
        </div>
-       <button type="button" id="addopponentbutton" onClick={()=>console.log('hi')} hidden={!this.state.isAdmin}>+</button>
+       <button type="button" id="addopponentbutton" onClick={()=>this.props.history.push('/addopponent')} hidden={!this.state.isAdmin}>+</button>
       </div>
     );
   }
@@ -65,7 +66,7 @@ class ManageOpponents extends Component {
       }
     }
     this.setState({
-      isAdmin: userProfile.admin
+      isAdmin: userProfile.admin,
     });
   }
 
