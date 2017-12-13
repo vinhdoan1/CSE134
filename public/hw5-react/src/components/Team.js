@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header';
 import firestoreDB from '../js/database';
 import { connect } from "react-redux";
+import helper from '../js/helper.js';
+import {setGame} from '../actions';
 
 const stateMap = (store) => {
   return {
@@ -16,8 +18,9 @@ class Team extends Component {
       teamLogo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
       teamWins: 0,
       teamLosses: 0,
-      upcomingGames: "There are no upcoming games.",
       loaded: false,
+      upcomingGame: {},
+      opponentName: "",
     };
   }
 
@@ -41,12 +44,55 @@ class Team extends Component {
         });
       }.bind(this));
 
-      // change to check for actual upcoming game
-      if(false) {
-        this.setState({
-          upcomingGames: "",
-        });
-      }
+      //get the upcoming game
+      firestoreDB.getTeamGames(userProfile.teamID).then(function(games){
+        if(games){
+          var gamesArray = [];
+          games.forEach(function(gameData){
+            gamesArray.push({
+              id: gameData.id,
+              ...gameData.data()
+            });
+          });
+
+          if(gamesArray.length > 0){
+            gamesArray.sort(function(a,b){
+                  return new Date(a.date) - new Date(b.date);
+            });
+
+            var j = 0;
+            while(!gamesArray[j].active){
+              j++;
+            }
+            if(gamesArray[j].active){
+              this.setState({upcomingGame: gamesArray[j]});
+              firestoreDB.getOpponent(this.props.userProfile.teamID, gamesArray[j].opponent).then(function(opponent){
+                var opData = opponent.data();
+                // this.setState({opponentName: opData.name});
+                var newGame = {
+                  opponent: {
+                    id: opponent.id,
+                    name: opData.name,
+                    logo: opData.logo
+                  },
+                  id: gamesArray[j].id,
+                  active: gamesArray[j].active,
+                  date: gamesArray[j].date,
+                  time: gamesArray[j].time,
+                  location: gamesArray[j].location
+                };
+                this.setState({upcomingGame: newGame});
+              }.bind(this))
+              .catch(function(error){
+                console.log(error);
+              });
+            }
+            else{
+              this.setState({upcomingGame: {}});
+            }
+          }
+        }
+      }.bind(this));
     }
   }
 
@@ -60,7 +106,42 @@ class Team extends Component {
     }
   }
 
+  createUpcomingGameButton(){
+    var game = this.state.upcomingGame;
+    // console.log(game);
+    console.log(game.id);
+    if(game.id!==undefined){
+      var date = helper.parseDateAndTime(game.date, game.time);
+      var hours = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
+      var ampm = date.getHours() >= 12 ? "PM" : "AM";
+  
+      var gameButtonClick = function() {
+        this.props.dispatch(setGame(game));
+        this.props.history.push({
+          pathname: 'gamedetails',
+        });
+      }.bind(this);
+
+      var oppName = game.opponent.name;
+
+      return(
+        <div role="button" className="gamebuttonElement" onClick={gameButtonClick}>
+        <div>
+          <span>{helper.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +
+            hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + oppName}
+          </span>
+        </div>
+       </div>
+      );
+    }
+    else{
+      return(<p id="upcominggame_empty">There are no upcoming games.</p>);
+    }
+
+  }
+
   render() {
+    var upcomingGame = this.createUpcomingGameButton();
     return (
       <div className="team-container">
         <Header history={this.props.history} homeLink="/team" logout/>
@@ -83,7 +164,7 @@ class Team extends Component {
                 Upcoming Game:
               </p>
             <div id="upcominggamecontainer">
-              <p id="upcominggame_empty">{this.state.upcomingGames}</p>
+              {upcomingGame}
             </div>
           </div>
           <hr />

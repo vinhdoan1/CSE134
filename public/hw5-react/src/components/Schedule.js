@@ -46,10 +46,14 @@ class Schedule extends Component {
           })
 
           var gameOpponent = function(opponentID, i) {
+            console.log(opponentID);
             firestoreDB.getOpponent(userProfile.teamID, opponentID).then(function(opp){
-              var stateGames = this.state.games;
-              stateGames[i].opponent = opp.data();
-              this.setState({games: stateGames});
+              if(opp.exists){
+                var stateGames = this.state.games;
+                stateGames[i].opponent = opp.data();
+                this.setState({games: stateGames});
+              }
+              
             }.bind(this));
           }.bind(this);
 
@@ -102,13 +106,15 @@ class Schedule extends Component {
       if (game.opponent.name) {
         oppName = game.opponent.name;
       }
-      return (<div role="button" className="gamebuttonElement" key={i} onClick={gameButtonClick}>
-                <div>
-                  <span>{helper.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +
-                    hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + oppName}
-                  </span>
-                </div>
-              </div>);
+      return (
+        <div role="button" className="gamebuttonElement" key={i} onClick={gameButtonClick}>
+          <div>
+            <span>{helper.months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " @ " +
+              hours + ":" + (date.getMinutes() <10 ?'0':'') + date.getMinutes() + ampm + " -  vs. " + oppName}
+            </span>
+          </div>
+        </div>
+      );
     }.bind(this));
   }
 

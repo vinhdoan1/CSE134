@@ -84,13 +84,13 @@ class AddGame extends Component {
 
     //checking the form for validations
     game.opponent = form.elements['gameopponent'].value;
-    incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
+    incomplete = game.opponent === "Choose Opponent" || game.opponent === "" || game.opponent === "default";
     game.location = form.elements['gamelocation'].value;
-    incomplete = incomplete || game.location == "";
+    incomplete = incomplete || game.location === "";
     game.date = form.elements['gamedate'].value;
-    incomplete = incomplete ||  game.date == "";
+    incomplete = incomplete ||  game.date === "";
     game.time = form.elements['gametime'].value;
-    incomplete = incomplete || game.time == "";
+    incomplete = incomplete || game.time === "";
 
     var error_msg = 'addgamemsg';
     if(incomplete){

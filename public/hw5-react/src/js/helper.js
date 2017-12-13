@@ -17,7 +17,7 @@ helper.displayMessage = function displayMessage(elementid, type, message){
   document.getElementById(elementid).style.opacity="1";
   if(type === "confirm"){
     setTimeout(function(){
-      helper.hideMessage(elementid);
+      document.getElementById(elementid).style.opacity = "0";
     }, 4000);
   }
 }
@@ -54,7 +54,7 @@ helper.readImageAndResize = function readImageAndResize(imageFile, sideLength, c
 //teamLogoContainer : the img element that contains the logo
 helper.uploadLogo = function uploadLogo(imageFileName, teamLogoContainer) {
   var logoForm = document.getElementById(imageFileName);
-  console.log(logoForm);
+  // console.log(logoForm);
   if (logoForm.files.length <= 0) {
     return;
   }

@@ -49,7 +49,6 @@ class ManageOpponents extends Component {
       if(teamID !== ""){
         firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
           snapshot.forEach(function(opponent) {
-              // console.log(opponent.data());
               if(opponent.data().active){
                 opponents.push({
                   opID: opponent.id,
