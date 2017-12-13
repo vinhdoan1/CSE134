@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
-import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
-import { userInfo } from 'os';
-import { firestore } from 'firebase';
-import {setOpponent } from '../actions';
 
 const stateMap = (store) => {
   return {
@@ -42,9 +37,9 @@ class AddOpponent extends Component{
         <div className="message" id="addopmsg"></div>
       </div>
     );
-   
+
   }
-  
+
   validateAddOpponentForm(){
     var incomplete = false;
     var opponent = {
@@ -53,10 +48,10 @@ class AddOpponent extends Component{
       active: true
     }
     opponent.name = document.getElementById('opteaminput').value;
-    incomplete = opponent.name == "";
+    incomplete = opponent.name === "";
 
     var opLogo = document.getElementById('opponent_teamimg').src;
-    if(opLogo != ""){
+    if(opLogo !== ""){
       opponent.logo = opLogo;
     }
     if(incomplete){

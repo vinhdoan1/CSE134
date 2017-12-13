@@ -88,7 +88,7 @@ class GameDetails extends Component {
 
         var win = goals > goalsOp;
         var lose = goals < goalsOp;
-        var draw = goals == goalsOp;
+        var draw = goals === goalsOp;
 
         this.setState({
           gamesdetails_goals: goals,
@@ -99,6 +99,22 @@ class GameDetails extends Component {
           gamesdetails_shotsongoalsop: shotsOnGoalOp,
           gamesdetails_cornerkicksop: cornerKicksOp,
           gamesdetails_penaltiesop: penaltiesOp,
+        });
+
+        firestoreDB.getTeamGame(userProfile.teamID, userProfile.game.id).then(function(game){
+          var gameData = game.data();
+          gameData.goals = goals;
+          gameData.shotsOnGoal = shotsOnGoal;
+          gameData.cornerKicks = cornerKicks;
+          gameData.penalties = penalties;
+          gameData.goalsOp = goalsOp;
+          gameData.shotsOnGoalOp = shotsOnGoalOp;
+          gameData.cornerKicks = cornerKicksOp;
+          gameData.penaltiesOp = penaltiesOp;
+          gameData.win = win;
+          gameData.lose = lose;
+          gameData.draw = draw;
+          firestoreDB.setTeamGame(userProfile.teamID, userProfile.game.id,gameData);
         });
       }.bind(this));
 

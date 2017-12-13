@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
-import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
-import { userInfo } from 'os';
-import { firestore } from 'firebase';
 import {setOpponent } from '../actions';
 
 const stateMap = (store) => {
@@ -49,7 +45,7 @@ class EditOpponent extends Component{
         <div className="message" id="editopmsg"> </div>
       </div>
     );
-   
+
   }
 
   componentDidMount() {
@@ -72,8 +68,8 @@ class EditOpponent extends Component{
       document.getElementById('editop_teamimg').src = opponent.logo;
     }
   }
-  
-  
+
+
   updateOpponent(){
     var changesMade = false;
     var newOpName = document.getElementById('newopname').value;
@@ -84,12 +80,19 @@ class EditOpponent extends Component{
     if(this.state.opponent){
       console.log(this.state.opponent.name);
       // console.log(this.state.opponent.logo);
-      if(newOpName != this.state.opponent.name){
-        this.state.opponent.name  = newOpName;
+      var stateOpponent = this.state.opponent;
+      if(newOpName !== this.state.opponent.name){
+        stateOpponent.name = newOpName;
+        this.setState({
+          opponent: stateOpponent
+        })
         changesMade = true;
       }
-      if(newOpLogo != this.state.opponent.logo){
-        this.state.opponent.logo = newOpLogo;
+      if(newOpLogo !== this.state.opponent.logo){
+        stateOpponent.logo = newOpLogo;
+        this.setState({
+          opponent: stateOpponent
+        })
         changesMade = true;
       }
       if(newOpName === ""){
@@ -111,7 +114,7 @@ class EditOpponent extends Component{
       console.log(changesMade);
     }
   }
-  
+
   deleteOpponent(){
     var opID = this.state.opponent.opID;
     var teamID = this.props.userProfile.teamID;

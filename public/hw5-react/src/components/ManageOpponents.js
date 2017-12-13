@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
-import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
-import helper from '../js/helper.js';
 import Header from './Header';
-import { userInfo } from 'os';
-import { firestore } from 'firebase';
 import {setOpponent } from '../actions';
 
 const stateMap = (store) => {
@@ -43,7 +38,7 @@ class ManageOpponents extends Component {
   }
 
   reduxLoaded(userProfile){
-    if(userProfile.teamID != ""){
+    if(userProfile.teamID !== ""){
       var teamID = userProfile.teamID;
       var opponents = [];
       if(teamID !== ""){
@@ -57,7 +52,7 @@ class ManageOpponents extends Component {
                 });
               }
           });
-          if(opponents.length == 0){
+          if(opponents.length === 0){
             this.setState({isEmpty : true});
           }
           else{
@@ -93,7 +88,7 @@ class ManageOpponents extends Component {
 
       return(
         <div role="button" className="opListElement" key={i} onClick={onClickFunc}>
-          <img className="opListImg" src={opponent.logo}/>
+          <img className="opListImg" src={opponent.logo} alt="Opponent"/>
           <div className="opListName">{opponent.name}</div>
         </div>
       );
@@ -102,4 +97,3 @@ class ManageOpponents extends Component {
 }
 
 export default connect(stateMap)(ManageOpponents);
-

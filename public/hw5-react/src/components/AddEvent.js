@@ -73,10 +73,8 @@ class AddEvent extends Component {
   addStat() {
     let stat = "";
     let teamID = this.props.userProfile.teamID
-    let gameID = this.props.userProfile.game.id
     let type = document.getElementById("selectStat").value
     let player = document.getElementById("eventplayername").value;
-    let playerInd = document.getElementById("eventplayername").key;
     //check what type of stat it is
     if (player === "" || type === "Choose Event" || type === ""){
       return false
