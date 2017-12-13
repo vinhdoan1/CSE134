@@ -58,11 +58,11 @@ class Settings extends Component {
           <div id="inviteusers" className="settingsdiv">
             <h3>Invite Users</h3>
             <p>Share your Team ID:</p>
-            <p style={{color: 'blue'}} id="teamidinvite"></p>
+            <p style={{color: '#68b7f5'}} id="teamidinvite"></p>
             <input type="button" className="settingsbutton" value="Copy TeamID" onClick={()=> this.copyTeamIDToClipboard()}/>
             <div className="message" id="invitemsg"></div>
           </div>
-        </div>  
+        </div>
       </div>
     );
   }
@@ -87,7 +87,7 @@ class Settings extends Component {
       }
     });
   }
-  
+
   copyTeamIDToClipboard(){
     var textArea = document.createElement("textarea");
     textArea.value = document.getElementById("teamidinvite").innerHTML;
@@ -99,7 +99,7 @@ class Settings extends Component {
       helper.displayMessage("invitemsg", "confirm", "Team ID Copied!");
     }
   }
-  
+
   updateEmail(){
     helper.hideMessage('settingsmsg_newemail');
     firebase.auth().onAuthStateChanged(function(user) {
@@ -117,7 +117,7 @@ class Settings extends Component {
           var newEmail = document.getElementById('newemail').value;
           if(newEmail === user.email){
             helper.displayMessage("settingsmsg_newemail", "error", "E-mail is the same as old e-mail")
-          } 
+          }
           else {
             user.updateEmail(newEmail).then(function() {
               helper.displayMessage("settingsmsg_newemail", "confirm", "E-mail updated");
@@ -138,9 +138,9 @@ class Settings extends Component {
           }
         }
       }
-    }.bind(this));  
+    }.bind(this));
   }
-  
+
   updatePassword(){
     helper.hideMessage('settingsmsg_newpassword');
     firebase.auth().onAuthStateChanged(function(user) {
@@ -179,9 +179,9 @@ class Settings extends Component {
           });
         }
       }
-    });  
+    });
   }
-  
+
   reauthenticate(email, password, action){
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
     var msg = (action === "email") ? "settingsmsg_newemail" : "settingsmsg_newpassword";
@@ -212,4 +212,3 @@ class Settings extends Component {
 }
 
 export default connect(stateMap)(Settings);
-

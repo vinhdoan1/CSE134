@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import logo from './../images/soccerball.png';
+import { connect } from "react-redux";
 
+const stateMap = (store) => {
+  return {
+    userProfile: store.user
+  };
+};
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -66,4 +72,4 @@ Header.propTypes = {
   logout: PropTypes.bool, // whether there is a logout button
 };
 
-export default Header;
+export default connect(stateMap)(Header);
