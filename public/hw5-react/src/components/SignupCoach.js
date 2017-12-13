@@ -23,7 +23,7 @@ class SignupCoach extends Component {
   render(){
     return(
       <div>
-        <Header history={this.props.history} backButton homeLink="/team" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout noredirect/>
         <h1>Sign Up</h1>
         <h3>Enter your team's name:</h3>
         <input type="text" id="teaminput" placeholder="Team Name"/>

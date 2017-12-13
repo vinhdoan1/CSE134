@@ -844,3 +844,7 @@ input[type="number"]
   }
 
 }
+
+.centered {
+  text-align: center;
+}

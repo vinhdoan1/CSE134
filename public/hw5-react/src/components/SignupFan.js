@@ -26,13 +26,15 @@ class SignupFan extends Component {
   render(){
     return(
       <div>
-        <Header history={this.props.history} backButton homeLink="/login" logout/>
+        <Header history={this.props.history} backButton homeLink="/login" logout noredirect/>
         <div id="teaminputcontainer">
           <h1>Sign Up</h1>
-          <p>Enter a Team ID</p>
-          <input type="text" id="inviteinput" placeholder="TeamID"/>
-          <button id="checkbutton" type="button" onClick={()=>this.checkTeam()}>Check</button>
-          <div className="message" id="checkinvmsg">  </div>
+          <div className="centered">
+            <p>Enter a Team ID</p>
+            <input type="text" id="inviteinput" placeholder="TeamID"/>
+            <button id="checkbutton" type="button" onClick={()=>this.checkTeam()}>Check</button>
+            <div className="message" id="checkinvmsg">  </div>
+          </div>
         </div>
         <div id="hiddendiv" hidden>
             <p>You are signing up to watch:</p>
@@ -133,7 +135,7 @@ class SignupFan extends Component {
                     var userProf = {};
                     userProf.teamID = teamID;
                     userProf.admin = false;
-                    this.props.dispatch(login(userProf)); 
+                    this.props.dispatch(login(userProf));
                     this.props.history.push('/team');
                   }.bind(this));
                 }

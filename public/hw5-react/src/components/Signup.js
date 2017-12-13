@@ -5,7 +5,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <Header history={this.props.history} backButton homeLink="/team" logout/>
+        <Header history={this.props.history} backButton homeLink="/team" logout noredirect/>
         <div>
           <h1>Sign Up</h1>
           <h3>What type of user are you?</h3>
@@ -24,4 +24,3 @@ class Signup extends Component {
 }
 
 export default Signup;
-

@@ -32,8 +32,9 @@ class Header extends Component {
   }
 
   reduxLoaded(userProfile){
+    console.log(this.props.noredirect);
     if(userProfile.loggedIn !== 'undefined'){
-      if (userProfile.loggedIn === false) {
+      if (!this.props.noredirect && userProfile.loggedIn === false) {
         window.location = 'login';
       }
     }
@@ -89,6 +90,7 @@ Header.propTypes = {
   backButton: PropTypes.bool, // link when back pressed
   homeLink: PropTypes.string, // link when home pressed
   logout: PropTypes.bool, // whether there is a logout button
+  noredirect: PropTypes.bool, // whether to disable redirect
 };
 
 export default connect(stateMap)(Header);

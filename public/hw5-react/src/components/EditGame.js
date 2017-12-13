@@ -126,10 +126,8 @@ class EditGame extends Component{
     var opponent = this.state.opponents.find(function(other){
       return opID === other.opID;
     });
-    game.opponent = opponent.name;
-    console.log(game.opponent);
-    incomplete = game.opponent === "Choose Opponent" || game.opponent === "";
-
+    game.opponent = opID;
+    incomplete = game.opponent === "default" || game.opponent === "";
     game.location = document.getElementById('editgamelocation').value;
     incomplete = incomplete || game.location === "";
     game.date = document.getElementById('editgamedate').value;
@@ -148,10 +146,18 @@ class EditGame extends Component{
   //update the game by calling firebase
   updateGame(game){
     var teamID = this.props.userProfile.teamID;
-    firestoreDB.updateGame(teamID, game.id, game).then(function(){
-      this.props.history.push('/gamedetails');
-    }.bind(this));
+    var gameID = this.props.userProfile.game.id;
+    firestoreDB.getTeamGame(teamID, gameID).then(function(gameData){
+      var newGame = gameData.data();
+      newGame.opponent = game.opponent;
+      newGame.location = game.location;
+      newGame.date = game.date;
+      newGame.time = game.time;
 
+      firestoreDB.updateGame(teamID, this.props.userProfile.game.id, game).then(function(){
+        this.props.history.push('/gamedetails');
+      }.bind(this));
+    }.bind(this));
   }
 
 }

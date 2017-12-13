@@ -38,13 +38,17 @@ class GameDetails extends Component {
   reduxLoaded(userProfile) {
     if (userProfile.game) {
       var game = userProfile.game;
-      this.setState({
-        gamedetails_date: game.date,
-        gamedetails_time: game.time,
-        gamedetails_location: game.location,
-        secondteamimage: game.opponent.logo,
-        secondteam: game.opponent.name,
-      });
+
+      firestoreDB.getTeamGame(userProfile.teamID, userProfile.game.id).then(function (gameData){
+        var gameFromDB = gameData.data();
+        this.setState({
+          gamedetails_date: gameFromDB.date,
+          gamedetails_time: gameFromDB.time,
+          gamedetails_location: gameFromDB.location,
+          secondteamimage: gameFromDB.opponent.logo,
+          secondteam: gameFromDB.opponent.name,
+        });
+      }.bind(this));
       firestoreDB.getTeam(userProfile.teamID).then(function (teamData){
         var team = teamData.data();
         this.setState({
