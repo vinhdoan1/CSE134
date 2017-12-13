@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header';
 import { connect } from "react-redux";
 import firestoreDB from '../js/database';
-import helper from '../js/helper.js';
 
 var deleteState = 0;
 
@@ -19,9 +18,9 @@ class GameDetails extends Component {
       gamedetails_date: "",
       gamedetails_time: "",
       gamedetails_location: "",
-      firstteamimage: helper.defaultLogo,
+      firstteamimage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
       firstteam: "",
-      secondteamimage: helper.defaultLogo,
+      secondteamimage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=",
       secondteam: "",
       gamesdetails_goals: 0,
       gamesdetails_shotsongoals: 0,
@@ -39,75 +38,86 @@ class GameDetails extends Component {
   reduxLoaded(userProfile) {
     if (userProfile.game) {
       var game = userProfile.game;
-      console.log(this.props.userProfile.teamID);
-      console.log(game.opponent);
-      if(this.props.userProfile.teamID !== ""){
+      this.setState({
+        gamedetails_date: game.date,
+        gamedetails_time: game.time,
+        gamedetails_location: game.location,
+        secondteamimage: game.opponent.logo,
+        secondteam: game.opponent.name,
+      });
+      firestoreDB.getTeam(userProfile.teamID).then(function (teamData){
+        var team = teamData.data();
         this.setState({
-          gamedetails_date: game.date,
-          gamedetails_time: game.time,
-          gamedetails_location: game.location,
-          secondteamimage: game.opponent.logo,
-          secondteam: game.opponent.name,
-        });   
+          firstteamimage: team.logo,
+          firstteam: team.name,
+        });
+      }.bind(this));
+      firestoreDB.getStats(userProfile.teamID, userProfile.game.id).then(function(statsData) {
+        var goals = 0;
+        var shotsOnGoal = 0;
+        var cornerKicks = 0;
+        var penalties = 0;
 
-        firestoreDB.getTeam(userProfile.teamID).then(function (teamData){
-          var team = teamData.data();
-          this.setState({
-            firstteamimage: team.logo,
-            firstteam: team.name,
-          });
-        }.bind(this));
-        firestoreDB.getStats(userProfile.teamID, userProfile.game.id).then(function(statsData) {
-          var goals = 0;
-          var shotsOnGoal = 0;
-          var cornerKicks = 0;
-          var penalties = 0;
+        var goalsOp = 0;
+        var shotsOnGoalOp = 0;
+        var cornerKicksOp = 0;
+        var penaltiesOp = 0;
 
-          var goalsOp = 0;
-          var shotsOnGoalOp = 0;
-          var cornerKicksOp = 0;
-          var penaltiesOp = 0;
+        statsData.forEach(function(doc) {
+          var stat = doc.data()['stat'];
+          if (stat.includes("Opponent")) {
+            if (stat.includes("shotongoal"))
+              shotsOnGoalOp++;
+            else if (stat.includes("cornerkick"))
+              cornerKicksOp++;
+            else if (stat.includes("penalt"))
+              penaltiesOp++;
+            else if (stat.includes("goal"))
+              goalsOp++;
+          } else {
+            if (stat.includes("shotongoal"))
+              shotsOnGoal++;
+            else if (stat.includes("goal"))
+              goals++;
+            else if (stat.includes("cornerkick"))
+              cornerKicks++;
+            else if (stat.includes("penalt"))
+              penalties++;
+          }
+        });
 
-          statsData.forEach(function(doc) {
-            var stat = doc.data()['stat'];
-            if (stat.includes("Opponent")) {
-              if (stat.includes("shotongoal"))
-                shotsOnGoalOp++;
-              else if (stat.includes("cornerkick"))
-                cornerKicksOp++;
-              else if (stat.includes("penalt"))
-                penaltiesOp++;
-              else if (stat.includes("goal"))
-                goalsOp++;
-            } else {
-              if (stat.includes("shotongoal"))
-                shotsOnGoal++;
-              else if (stat.includes("goal"))
-                goals++;
-              else if (stat.includes("cornerkick"))
-                cornerKicks++;
-              else if (stat.includes("penalt"))
-                penalties++;
-            }
-          });
+        var win = goals > goalsOp;
+        var lose = goals < goalsOp;
+        var draw = goals === goalsOp;
 
-          var win = goals > goalsOp;
-          var lose = goals < goalsOp;
-          var draw = goals == goalsOp;
+        this.setState({
+          gamesdetails_goals: goals,
+          gamesdetails_shotsongoals: shotsOnGoal,
+          gamesdetails_cornerkicks: cornerKicks,
+          gamesdetails_penalties: penalties,
+          gamesdetails_goalsop: goalsOp,
+          gamesdetails_shotsongoalsop: shotsOnGoalOp,
+          gamesdetails_cornerkicksop: cornerKicksOp,
+          gamesdetails_penaltiesop: penaltiesOp,
+        });
 
-          this.setState({
-            gamesdetails_goals: goals,
-            gamesdetails_shotsongoals: shotsOnGoal,
-            gamesdetails_cornerkicks: cornerKicks,
-            gamesdetails_penalties: penalties,
-            gamesdetails_goalsop: goalsOp,
-            gamesdetails_shotsongoalsop: shotsOnGoalOp,
-            gamesdetails_cornerkicksop: cornerKicksOp,
-            gamesdetails_penaltiesop: penaltiesOp,
-          });
-        }.bind(this));
+        firestoreDB.getTeamGame(userProfile.teamID, userProfile.game.id).then(function(game){
+          var gameData = game.data();
+          gameData.goals = goals;
+          gameData.shotsOnGoal = shotsOnGoal;
+          gameData.cornerKicks = cornerKicks;
+          gameData.penalties = penalties;
+          gameData.goalsOp = goalsOp;
+          gameData.shotsOnGoalOp = shotsOnGoalOp;
+          gameData.cornerKicks = cornerKicksOp;
+          gameData.penaltiesOp = penaltiesOp;
+          gameData.win = win;
+          gameData.lose = lose;
+          gameData.draw = draw;
+          firestoreDB.setTeamGame(userProfile.teamID, userProfile.game.id,gameData);
+        });
+      }.bind(this));
 
-      }
     }
     this.setState({
       admin: userProfile.admin,

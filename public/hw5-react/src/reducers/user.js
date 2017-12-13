@@ -1,5 +1,5 @@
 var stateStart = {
-  loggedIn: false,
+  loggedIn: undefined,
   admin: false,
   teamID: "",
   player: undefined,

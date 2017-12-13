@@ -84,7 +84,11 @@ class AddGame extends Component {
 
     //checking the form for validations
     game.opponent = form.elements['gameopponent'].value;
+<<<<<<< HEAD
     incomplete = game.opponent === "Choose Opponent" || game.opponent === "" || game.opponent === "default";
+=======
+    incomplete = game.opponent === "Choose Opponent" || game.opponent === "";
+>>>>>>> b5b2d898f634ba6dc547523f028a1f942fc1da9d
     game.location = form.elements['gamelocation'].value;
     incomplete = incomplete || game.location === "";
     game.date = form.elements['gamedate'].value;

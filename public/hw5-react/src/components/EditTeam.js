@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
-import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
@@ -72,9 +70,9 @@ class EditTeam extends Component{
         var teamData = team.data();
         var newTeamName = document.getElementById('newteamname').value;
         newTeamName = newTeamName.replace(/\s+/g, '');
-    
+
         var changesMade = false;
-        if(newTeamName !== teamData.name && newTeamName != ""){
+        if(newTeamName !== teamData.name && newTeamName !== ""){
           teamData.name = newTeamName;
           changesMade = true;
         }
@@ -92,7 +90,7 @@ class EditTeam extends Component{
             firestoreDB.setTeam(teamID, teamData);
             helper.displayMessage("editteammsg", "confirm", "Team information updated");
           }
-        }  
+        }
       });
     }
   }
@@ -100,4 +98,3 @@ class EditTeam extends Component{
 }
 
 export default connect(stateMap)(EditTeam);
-

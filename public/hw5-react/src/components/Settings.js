@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
 import firebase from '../js/firebase.js';
-import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
 
@@ -122,7 +120,6 @@ class Settings extends Component {
               helper.displayMessage("settingsmsg_newemail", "confirm", "E-mail updated");
             }).catch(function(error) {
               var errorCode = error.code;
-              var errorMessage = error.message;
               if (errorCode === 'auth/email-already-in-use') {
                 helper.displayMessage("settingsmsg_newemail", "error", "E-mail already linked to an account.");
               } else if (errorCode === 'auth/invalid-email') {
@@ -147,9 +144,9 @@ class Settings extends Component {
         var newPassword = document.getElementById('newpassword').value;
         var confirmNewPassword = document.getElementById('confirmnewpassword').value;
         var oldPassword = document.getElementById('oldpassword').value;
-        if(oldPassword == ""){
+        if(oldPassword === ""){
           helper.displayMessage("settingsmsg_newpassword", "error", "Please enter your old password");
-        } else if(newPassword != confirmNewPassword){
+        } else if(newPassword !== confirmNewPassword){
           helper.displayMessage('settingsmsg_newpassword', "error", "Passwords don't match")
         } else{
           const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
@@ -159,7 +156,6 @@ class Settings extends Component {
               document.getElementById('settings_pwform').reset();
             }).catch(function(error) {
               var errorCode = error.code;
-              var errorMessage = error.message;
               if (errorCode === 'auth/weak-password') {
                 helper.displayMessage("settingsmsg_newpassword", "error", "Password must be at least 6 characters");
               } else if (errorCode === 'auth/requires-recent-login'){
@@ -168,7 +164,6 @@ class Settings extends Component {
             });
           }).catch(function(error){
             var errorCode = error.code;
-            var errorMessage = error.message;
             if (errorCode === 'auth/wrong-password') {
               helper.displayMessage("settingsmsg_newpassword", "error", "Wrong password");
             }
@@ -196,7 +191,6 @@ class Settings extends Component {
           }
         }.bind(this)).catch(function(error) {
           var errorCode = error.code;
-          var errorMessage = error.message;
           if (errorCode === 'auth/wrong-password') {
            helper.displayMessage(msg, "error", "Wrong password");
           }
@@ -204,7 +198,7 @@ class Settings extends Component {
             console.log(error);
             helper.displayMessage(msg, "error", "Something went wrong");
           }
-        }.bind(this));
+        });
       }
     }.bind(this));
   }

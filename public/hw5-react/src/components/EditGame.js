@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/";
-import firebase from '../js/firebase.js';
 import firestoreDB from '../js/database.js';
 import helper from '../js/helper.js';
 import Header from './Header';
-import { userInfo } from 'os';
-import { firestore } from 'firebase';
-import {setOpponent } from '../actions';
 
 const stateMap = (store) => {
   return {
@@ -33,7 +28,7 @@ class EditGame extends Component{
         <Header history={this.props.history} backButton homeLink="/team" logout/>
         <h2 id="h2">Edit Game</h2>
         <div id="editgameopimgcontainer" className="teamimgcontainergame" style={{height:0}}>
-          <img id="editgameopimg" className="teamimggame" src=""/>
+          <img id="editgameopimg" className="teamimggame" src="" alt="Team Logo"/>
         </div>
         <form id="editgameform" className="gameform" name="gameform">
           <select name="gameopponent" id="editgameopponent" defaultValue="default" className="gameformfield" onChange={() => {this.loadOpponentImage('editgameopponent','editgameopimg')}}>
@@ -63,7 +58,7 @@ class EditGame extends Component{
   }
 
   reduxLoaded(userProfile){
-    if(userProfile.teamID != ""){
+    if(userProfile.teamID !== ""){
       var teamID = userProfile.teamID;
       var opponents = [];
       if(teamID !== ""){
@@ -74,7 +69,7 @@ class EditGame extends Component{
                 ...opponent.data(),
               });
           });
-          if(opponents.length == 0){
+          if(opponents.length === 0){
             this.setState({isEmpty : true});
           }
           else{
@@ -82,8 +77,13 @@ class EditGame extends Component{
               opponents: opponents,
             });
           }
+          document.getElementById('editgameopponent').value = userProfile.game.opponent.id;
+          this.loadOpponentImage('editgameopponent','editgameopimg');
         }.bind(this));
       }
+      document.getElementById('editgamelocation').value = userProfile.game.location;
+      document.getElementById('editgamedate').value = userProfile.game.date;
+      document.getElementById('editgametime').value = userProfile.game.time;
     }
     // this.populateOpponentSelect(userProfile);
   }
@@ -93,18 +93,16 @@ class EditGame extends Component{
       return(
         <option key={i} value={opponent.opID}>{opponent.name}</option>
       );
-    }.bind(this));
+    });
   }
 
   loadOpponentImage(selectid, logoid){
     var op = document.getElementById(selectid);
     // console.log(this.state.opponents);
     var opID = op.value;
-    console.log(opID);
     var opponent = this.state.opponents.find(function(other){
       return opID === other.opID;
     });
-    console.log(opponent);
     var logo = document.getElementById(logoid);
     logo.src = opponent.logo;
     logo.style.height = "5rem";
@@ -114,7 +112,7 @@ class EditGame extends Component{
   validateGameForm(form){
     //sanity check for validgame form
     var incomplete = false;
-  
+
     //game form to be addded to the database
     var game = {
       opponent:"",
@@ -130,15 +128,15 @@ class EditGame extends Component{
     });
     game.opponent = opponent.name;
     console.log(game.opponent);
-    incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
+    incomplete = game.opponent === "Choose Opponent" || game.opponent === "";
 
     game.location = document.getElementById('editgamelocation').value;
-    incomplete = incomplete || game.location == "";
+    incomplete = incomplete || game.location === "";
     game.date = document.getElementById('editgamedate').value;
-    incomplete = incomplete ||  game.date == "";
+    incomplete = incomplete ||  game.date === "";
     game.time = document.getElementById('editgametime').value;
-    incomplete = incomplete || game.time == "";
-  
+    incomplete = incomplete || game.time === "";
+
     if(incomplete){
       helper.displayMessage('editgamemsg', "error", "Please fill out all fields");
     }
@@ -150,9 +148,6 @@ class EditGame extends Component{
   //update the game by calling firebase
   updateGame(game){
     var teamID = this.props.userProfile.teamID;
-    console.log(teamID);
-    var game = this.props.userProfile.game;
-    console.log(game);
     firestoreDB.updateGame(teamID, game.id, game).then(function(){
       this.props.history.push('/gamedetails');
     }.bind(this));
