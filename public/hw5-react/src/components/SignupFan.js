@@ -148,4 +148,4 @@ class SignupFan extends Component {
     }
   }
 }
-export default SignupFan;
+export default connect(stateMap)(SignupFan);

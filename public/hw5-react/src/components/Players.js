@@ -84,14 +84,16 @@ class Players extends Component {
         });
       }.bind(this);
 
-      return (<div role="button" className="playerbutton" key={i} onClick={playerButtonClick}>
-                <img className="playerbuttonimg" src={player.image} alt={player.name}></img>
-                <ul className="playerdetails">
-                  <li>{player.name + " #" + player.number}</li>
-                  <li>{player.position}</li>
-                  <li>{"Goals: " + player.goals}</li>
-                </ul>
-              </div>);
+      return (
+        <div role="button" className="playerbutton" key={i} onClick={playerButtonClick}>
+          <img className="playerbuttonimg" src={player.image} alt={player.name}></img>
+          <ul className="playerdetails">
+            <li>{player.name + " #" + player.number}</li>
+            <li>{player.position}</li>
+            <li>{"Goals: " + player.goals}</li>
+          </ul>
+        </div>
+      );
     }.bind(this));
   }
 

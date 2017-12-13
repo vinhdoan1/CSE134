@@ -28,16 +28,17 @@ const user = (state = stateStart, action) => {
           player: action.player,
         }
     }
-    case 'SETOPPONENT': {
-      return{
-        ...state,
-        opponent: action.opponent,
-      }
     case 'SETGAME': {
       return {
           ...state,
           game: action.game,
         }
+    }
+    case 'SETOPPONENT': {
+      return{
+        ...state,
+        opponent: action.opponent,
+      }
     }
     default:
     {
