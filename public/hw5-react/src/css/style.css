@@ -221,6 +221,10 @@ button:hover, [type="button"]:hover, [type="submit"]:hover, [role="button"]:hove
   width: 1.8rem;
 }
 
+#addgameOR{
+  margin: 0.2rem auto;
+}
+
 #addeventbttn:disabled{
   color: rgb(84, 84, 84);
   background-color: lightgrey;
@@ -763,6 +767,11 @@ input[type="number"]
 
 #addopmsg, #addgamemsg, #editgamemsg, #checkinvmsg, #signupinvmsg{
   margin-top: 0.5rem;
+}
+
+#editgameopimgcontainer{
+  display:block;
+  margin: 0.5rem auto;
 }
 
 #emptyopponents{
