@@ -6,26 +6,25 @@ import Signup from './components/Signup'
 import SignupCoach from './components/SignupCoach';
 import SignupFan from './components/SignupFan';
 import Team from './components/Team';
+import EditTeam from './components/EditTeam';
+import Settings from './components/Settings';
 import AddPlayer from './components/AddPlayer';
 import EditPlayer from './components/EditPlayer';
 import Players from './components/Players';
 import PlayerDetails from './components/PlayerDetails';
-import Settings from './components/Settings';
-import EditTeam from './components/EditTeam';
 import Schedule from './components/Schedule';
-import GameDetails from './components/GameDetails';
-
+import GameDetails from './components/GameDetails'
+import AddEvent from './components/AddEvent';
+import AddGame from './components/AddGame';
 // CARMEN's CODE BELOW THIS
 import ManageOpponents from './components/ManageOpponents';
 import EditOpponent from './components/EditOpponent';
 import AddOpponent from './components/AddOpponent';
 import EditGame from './components/EditGame';
 
-
 var ReactRouter = require('react-router-dom');
 var BrowserRouter = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
-
 
 class App extends React.Component {
   render () {
@@ -46,6 +45,8 @@ class App extends React.Component {
           <Route exact path='/editplayer' component={EditPlayer} />
           <Route exact path='/schedule' component={Schedule} />
           <Route exact path='/gamedetails' component={GameDetails} />
+          <Route exact path='/addevent' component={AddEvent} />
+          <Route exact path='/addgame' component={AddGame} />
           {/* HI IM GONNA ADD MY CODE BELOW THIS COMMENT -CARMEN */}
           <Route exact path='/editteam' component={EditTeam} />
           <Route exact path='/manageopponents' component={ManageOpponents} />

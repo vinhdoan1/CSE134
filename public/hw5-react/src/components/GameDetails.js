@@ -32,6 +32,7 @@ class GameDetails extends Component {
       gamesdetails_penaltiesop: 0,
     };
     this.deleteGame = this.deleteGame.bind(this);
+    this.markGameComplete = this.markGameComplete.bind(this);
   }
 
   reduxLoaded(userProfile) {
@@ -43,14 +44,6 @@ class GameDetails extends Component {
         gamedetails_location: game.location,
         secondteamimage: game.opponent.logo,
         secondteam: game.opponent.name,
-        gamesdetails_goals: 0,
-        gamesdetails_shotsongoals: 0,
-        gamesdetails_cornerkicks: 0,
-        gamesdetails_penalties: 0,
-        gamesdetails_goalsop: 0,
-        gamesdetails_shotsongoalsop: 0,
-        gamesdetails_cornerkicksop: 0,
-        gamesdetails_penaltiesop: 0,
       });
       firestoreDB.getTeam(userProfile.teamID).then(function (teamData){
         var team = teamData.data();
@@ -59,6 +52,56 @@ class GameDetails extends Component {
           firstteam: team.name,
         });
       }.bind(this));
+      firestoreDB.getStats(userProfile.teamID, userProfile.game.id).then(function(statsData) {
+        var goals = 0;
+        var shotsOnGoal = 0;
+        var cornerKicks = 0;
+        var penalties = 0;
+
+        var goalsOp = 0;
+        var shotsOnGoalOp = 0;
+        var cornerKicksOp = 0;
+        var penaltiesOp = 0;
+
+        statsData.forEach(function(doc) {
+          var stat = doc.data()['stat'];
+          if (stat.includes("Opponent")) {
+            if (stat.includes("shotongoal"))
+              shotsOnGoalOp++;
+            else if (stat.includes("cornerkick"))
+              cornerKicksOp++;
+            else if (stat.includes("penalt"))
+              penaltiesOp++;
+            else if (stat.includes("goal"))
+              goalsOp++;
+          } else {
+            if (stat.includes("shotongoal"))
+              shotsOnGoal++;
+            else if (stat.includes("goal"))
+              goals++;
+            else if (stat.includes("cornerkick"))
+              cornerKicks++;
+            else if (stat.includes("penalt"))
+              penalties++;
+          }
+        });
+
+        var win = goals > goalsOp;
+        var lose = goals < goalsOp;
+        var draw = goals == goalsOp;
+
+        this.setState({
+          gamesdetails_goals: goals,
+          gamesdetails_shotsongoals: shotsOnGoal,
+          gamesdetails_cornerkicks: cornerKicks,
+          gamesdetails_penalties: penalties,
+          gamesdetails_goalsop: goalsOp,
+          gamesdetails_shotsongoalsop: shotsOnGoalOp,
+          gamesdetails_cornerkicksop: cornerKicksOp,
+          gamesdetails_penaltiesop: penaltiesOp,
+        });
+      }.bind(this));
+
     }
     this.setState({
       admin: userProfile.admin,
@@ -94,6 +137,37 @@ class GameDetails extends Component {
     }
   }
 
+  markGameComplete(){
+    var checkbox = document.getElementById('gamedetails_checkbox');
+    var teamID = this.props.userProfile.teamID;
+    var gameID = this.props.userProfile.game.id;
+    firestoreDB.getTeamGame(teamID, gameID).then(function(game){
+      var gameData = game.data();
+      firestoreDB.getTeam(teamID).then(function(team){
+        var teamData = team.data();
+        if(checkbox.checked){
+          firestoreDB.markGameComplete(teamID, gameID, true);
+          (gameData.draw + ", " + gameData.win + ", " + gameData.lose);
+          if(!gameData.draw && gameData.win){
+            firestoreDB.updateTeamWins(teamID, ++teamData.wins);
+          }
+          else if(!gameData.draw && gameData.lose){
+            firestoreDB.updateTeamLosses(teamID, ++teamData.losses);
+          }
+        }
+        else{
+          firestoreDB.markGameComplete(teamID, gameID, false);
+          if(!gameData.draw && gameData.win){
+            firestoreDB.updateTeamWins(teamID, --teamData.wins);
+          }
+          else if(!gameData.draw && gameData.lose){
+            firestoreDB.updateTeamLosses(teamID, --teamData.losses);
+          }
+        }
+      });
+    });
+  }
+
   render() {
     return (
       <div className="team-container">
@@ -119,7 +193,7 @@ class GameDetails extends Component {
               <div id="gamedetailfirst">
                 <ul>
                   <li>
-                    Goals: <span id="gamesdetails_goals">{this.state.gamesdetails_penalties}</span>
+                    Goals: <span id="gamesdetails_goals">{this.state.gamesdetails_goals}</span>
                   </li>
                   <li>
                     Shots on Goal: <span id="gamesdetails_shotsongoals">{this.state.gamesdetails_shotsongoals}</span>
@@ -150,7 +224,7 @@ class GameDetails extends Component {
               </div>
             </div>
             <div id="gamedetails_options">
-              <input type="checkbox" id="gamedetails_checkbox" onChange={() => {console.log("markGameComplete(this);")}}/><span>Game Complete</span>
+              <input type="checkbox" id="gamedetails_checkbox" onChange={() => {this.markGameComplete()}}/><span>Game Complete</span>
               <input type="button" id="gamedetails_collectstats" className="gamedetailbutton" value="View Event Feed" onClick={() => {window.location='addevent'}}/>
               <input type="button" id="gamedetails_edit" className="gamedetailbutton" value="Edit Game Details" onClick={() => {window.location='editgame'}} hidden={!this.state.admin}/>
               <input type="button" id="gamedetails_delete" className="gamedetailbutton" value="Delete Game" onClick={() => {this.deleteGame()}} hidden={!this.state.admin}/>
