@@ -49,6 +49,7 @@ class Schedule extends Component {
             firestoreDB.getOpponent(userProfile.teamID, opponentID).then(function(opp){
               var stateGames = this.state.games;
               stateGames[i].opponent = opp.data();
+              stateGames[i].opponent.id = opponentID;
               this.setState({games: stateGames});
             }.bind(this));
           }.bind(this);

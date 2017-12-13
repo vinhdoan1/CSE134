@@ -1,6 +1,4 @@
 import React from 'react';
-import Home from './components/Home';
-import Test from './components/Test';
 import Login from './components/Login';
 import Signup from './components/Signup'
 import SignupCoach from './components/SignupCoach';

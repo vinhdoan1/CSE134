@@ -82,8 +82,13 @@ class EditGame extends Component{
               opponents: opponents,
             });
           }
+          document.getElementById('editgameopponent').value = userProfile.game.opponent.id;
+          this.loadOpponentImage('editgameopponent','editgameopimg');
         }.bind(this));
       }
+      document.getElementById('editgamelocation').value = userProfile.game.location;
+      document.getElementById('editgamedate').value = userProfile.game.date;
+      document.getElementById('editgametime').value = userProfile.game.time;
     }
     // this.populateOpponentSelect(userProfile);
   }
@@ -100,11 +105,9 @@ class EditGame extends Component{
     var op = document.getElementById(selectid);
     // console.log(this.state.opponents);
     var opID = op.value;
-    console.log(opID);
     var opponent = this.state.opponents.find(function(other){
       return opID === other.opID;
     });
-    console.log(opponent);
     var logo = document.getElementById(logoid);
     logo.src = opponent.logo;
     logo.style.height = "5rem";
@@ -114,7 +117,7 @@ class EditGame extends Component{
   validateGameForm(form){
     //sanity check for validgame form
     var incomplete = false;
-  
+
     //game form to be addded to the database
     var game = {
       opponent:"",
@@ -123,16 +126,6 @@ class EditGame extends Component{
       time: "",
       active: true
     }
-  
-    //checking the form for validations
-    // game.opponent = form.elements['gameopponent'].value;
-    // incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-    // game.location = form.elements['gamelocation'].value;
-    // incomplete = incomplete || game.location == "";
-    // game.date = form.elements['gamedate'].value;
-    // incomplete = incomplete ||  game.date == "";
-    // game.time = form.elements['gametime'].value;
-    // incomplete = incomplete || game.time == "";
 
     var opID = document.getElementById('editgameopponent').value;
     var opponent = this.state.opponents.find(function(other){
@@ -148,7 +141,7 @@ class EditGame extends Component{
     incomplete = incomplete ||  game.date == "";
     game.time = document.getElementById('editgametime').value;
     incomplete = incomplete || game.time == "";
-  
+
     if(incomplete){
       helper.displayMessage('editgamemsg', "error", "Please fill out all fields");
     }
