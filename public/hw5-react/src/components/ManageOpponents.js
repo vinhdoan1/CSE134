@@ -27,7 +27,7 @@ class ManageOpponents extends Component {
   }
 
   render() {
-    console.log(!this.state.isAdmin);
+    // console.log(!this.state.isAdmin);
     var opponentsElementsList = this.loadOpponentsList(this.state.opponents);
     return (
       <div className="App">
@@ -49,10 +49,13 @@ class ManageOpponents extends Component {
       if(teamID !== ""){
         firestoreDB.getAllOpponents(teamID).then(function(snapshot) {
           snapshot.forEach(function(opponent) {
-              opponents.push({
-                opID: opponent.id,
-                ...opponent.data(),
-              });
+              // console.log(opponent.data());
+              if(opponent.data().active){
+                opponents.push({
+                  opID: opponent.id,
+                  ...opponent.data(),
+                });
+              }
           });
           if(opponents.length == 0){
             this.setState({isEmpty : true});
@@ -81,7 +84,7 @@ class ManageOpponents extends Component {
   }
 
   loadOpponentsList(opponents){
-    console.log(opponents);
+    // console.log(opponents);
     return opponents.map(function(opponent, i){
       var onClickFunc = function(){
         this.props.dispatch(setOpponent(opponent));

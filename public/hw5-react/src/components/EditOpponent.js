@@ -112,12 +112,11 @@ class EditOpponent extends Component{
     }
   }
   
-  
   deleteOpponent(){
     var opID = this.state.opponent.opID;
     var teamID = this.props.userProfile.teamID;
     if(teamID){
-      firestoreDB.deleteOpponent(teamID,opID)
+      firestoreDB.setInactive(teamID,opID)
       .catch(function(error){
         helper.displayMessage("editopmsg", "error", "There was a problem trying to delete opponent");
         console.log(error);

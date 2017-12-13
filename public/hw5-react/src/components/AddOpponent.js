@@ -49,7 +49,8 @@ class AddOpponent extends Component{
     var incomplete = false;
     var opponent = {
       name: "",
-      logo: ""
+      logo: "",
+      active: true
     }
     opponent.name = document.getElementById('opteaminput').value;
     incomplete = opponent.name == "";
@@ -64,7 +65,7 @@ class AddOpponent extends Component{
     else{
       helper.hideMessage("addopmsg");
       this.addOpponent(opponent).then(function(){
-        this.props.history.push('/manageopponents');
+        this.props.history.goBack();
       }.bind(this));
     }
   }
