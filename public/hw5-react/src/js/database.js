@@ -90,7 +90,8 @@ var enablePersistenceOn = false;
     var db = await getDB();
     return db.collection("teams").doc(teamID).collection("opponents").add({
       name: opName,
-      logo: logo
+      logo: logo,
+      active: true
     });
   }
 
