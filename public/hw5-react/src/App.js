@@ -30,8 +30,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className='app-container'>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/test' component={Test} />
+          <Route exact path='/' component={Login} />
           <Route exact path='/login' component={Login}/>
           <Route exact path='/signup' component={Signup}/>
           <Route exact path='/signupcoach' component={SignupCoach}/>
