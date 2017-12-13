@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import logo from './../images/soccerball.png';
 import { connect } from "react-redux";
+import { logout } from "../actions/";
+import firebase from '../js/firebase.js'
 
 const stateMap = (store) => {
   return {
@@ -19,13 +21,30 @@ class Header extends Component {
     this.homeClick = this.homeClick.bind(this);
   }
 
+  componentDidMount(){
+    this.reduxLoaded(this.props.userProfile);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.userProfile !== nextProps.userProfile){
+      this.reduxLoaded(nextProps.userProfile);
+    }
+  }
+
+  reduxLoaded(userProfile){
+    if(userProfile.loggedIn !== 'undefined'){
+      if (userProfile.loggedIn === false) {
+        window.location = 'login';
+      }
+    }
+    // this.populateOpponentSelect(userProfile);
+  }
+
   logout(){
-    /*
-    mainState.setState('loggedIn', false);
+    this.props.dispatch(logout());
     if (firebase.auth().currentUser) {
       firebase.auth().signOut();
     }
-    */
     this.props.history.push({
       pathname: 'login',
     });

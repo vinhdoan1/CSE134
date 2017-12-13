@@ -14,13 +14,29 @@ const stateMap = (store) => {
     userProfile: store.user
   };
 };
-
 class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
     };
     this.authenticate = this.authenticate.bind(this);
+  }
+
+  componentDidMount(){
+    this.reduxLoaded(this.props.userProfile);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.userProfile !== nextProps.userProfile){
+      this.reduxLoaded(nextProps.userProfile);
+    }
+  }
+
+  reduxLoaded(userProfile){
+    if(userProfile.loggedIn){
+      window.location = 'team';
+    }
+    // this.populateOpponentSelect(userProfile);
   }
 
   render() {
