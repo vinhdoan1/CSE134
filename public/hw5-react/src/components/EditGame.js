@@ -123,16 +123,6 @@ class EditGame extends Component{
       time: "",
       active: true
     }
-  
-    //checking the form for validations
-    // game.opponent = form.elements['gameopponent'].value;
-    // incomplete = game.opponent == "Choose Opponent" || game.opponent == "";
-    // game.location = form.elements['gamelocation'].value;
-    // incomplete = incomplete || game.location == "";
-    // game.date = form.elements['gamedate'].value;
-    // incomplete = incomplete ||  game.date == "";
-    // game.time = form.elements['gametime'].value;
-    // incomplete = incomplete || game.time == "";
 
     var opID = document.getElementById('editgameopponent').value;
     var opponent = this.state.opponents.find(function(other){
